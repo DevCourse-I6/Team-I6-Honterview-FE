@@ -1,5 +1,6 @@
 import '../styles/global.css';
 
+import ReactQueryProvider from '@/utils/ReactQueryProvider';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 
@@ -15,12 +16,12 @@ const font = localFont({
 
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <html
-      lang="ko"
-      className={font.className}
-    >
-      <body>{children}</body>
-    </html>
+
+    <ReactQueryProvider>
+      <html lang="ko" className={font.className}>
+        <body>{children}</body>
+      </html>
+    </ReactQueryProvider>
   );
 };
 
