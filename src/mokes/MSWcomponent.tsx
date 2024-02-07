@@ -1,22 +1,29 @@
 'use client';
-
-import { useEffect } from 'react';
-import { initializeMocking } from '.';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 const isMocking = process.env.NEXT_PUBLIC_API_MOCKING === 'enabled';
 
-if (isMocking) {
-  initializeMocking();
-}
+const MSWComponent = ({ children }: PropsWithChildren) => {
+  const [isInitialized, setIsInitialized] = useState(!isMocking);
 
-const MSWComponent = () => {
   useEffect(() => {
-    if (isMocking) {
-      initializeMocking();
-    }
+    const init = async () => {
+      if (isMocking) {
+        const { initializeMocking } = await import('@/mokes');
+
+        await initializeMocking();
+      }
+      setIsInitialized(true);
+    };
+
+    init();
   }, []);
 
-  return null;
+  if (!isInitialized) {
+    return null;
+  }
+
+  return <>{children}</>;
 };
 
 export default MSWComponent;
