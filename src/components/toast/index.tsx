@@ -40,16 +40,16 @@ export const notify = (
 ) => {
   switch (type) {
     case 'error':
-      toast.error(<Toast message={message} />, options && options);
+      toast.error(<Toast message={message} />, options);
       break;
     case 'success':
-      toast.success(<Toast message={message} />, options && options);
+      toast.success(<Toast message={message} />, options);
       break;
     case 'info':
-      toast.info(<Toast message={message} />, options && options);
+      toast.info(<Toast message={message} />, options);
       break;
     case 'warning':
-      toast.warning(<Toast message={message} />, options && options);
+      toast.warning(<Toast message={message} />, options);
       break;
     default:
       break;
