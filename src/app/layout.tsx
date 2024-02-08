@@ -1,8 +1,9 @@
 import '../styles/global.css';
 
-import ReactQueryProvider from '@/utils/ReactQueryProvider';
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
+
+import ReactQueryProvider from '@/utils/ReactQueryProvider';
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -16,9 +17,11 @@ const font = localFont({
 
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
-
     <ReactQueryProvider>
-      <html lang="ko" className={font.className}>
+      <html
+        lang="ko"
+        className={font.className}
+      >
         <body>{children}</body>
       </html>
     </ReactQueryProvider>

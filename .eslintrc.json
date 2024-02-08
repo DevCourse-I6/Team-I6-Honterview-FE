@@ -17,10 +17,7 @@
     "plugin:prettier/recommended",
     "prettier"
   ],
-  "ignorePatterns": [
-    "dist",
-    ".eslintrc.cjs"
-  ],
+  "ignorePatterns": ["dist", ".eslintrc.cjs"],
   "parser": "@typescript-eslint/parser",
   "plugins": [
     "react-refresh",
@@ -44,9 +41,7 @@
         "namedComponents": "arrow-function"
       }
     ],
-    "react/jsx-props-no-spreading": [
-      "warn"
-    ],
+    "react/jsx-props-no-spreading": ["warn"],
     "import/no-cycle": "off",
     "import/prefer-default-export": "off",
     "consistent-return": "off",
