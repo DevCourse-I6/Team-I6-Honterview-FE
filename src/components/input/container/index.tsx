@@ -13,7 +13,7 @@ import { IProps } from './types';
 const Container = ({ children, ...props }: IProps) => {
   return (
     <div
-      className="relative flex h-[50px] w-[350px] flex-col items-stretch justify-center rounded-lg border border-[#BFC3C9] p-6 focus-within:border-[#0041C2]"
+      className="relative flex h-[50px] w-[350px] flex-col items-stretch justify-center rounded-lg border border-text-40 p-6 focus-within:border-primaries-primary"
       style={{ ...props.style }}
     >
       {children}

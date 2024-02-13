@@ -16,7 +16,7 @@ import { IProps } from './types';
 const Text = ({ placeholder, value, onChange, onKeyUp, ...props }: IProps) => {
   return (
     <input
-      className="placeholder-[#BFC3C9] outline-none"
+      className="placeholder-text-40 outline-none "
       value={value}
       placeholder={placeholder}
       onChange={onChange}
