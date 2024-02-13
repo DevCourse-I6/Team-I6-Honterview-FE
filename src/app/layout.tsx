@@ -1,8 +1,9 @@
-import '../styles/global.css';
+import '@/styles/global.css';
 
 import type { Metadata } from 'next';
-import { ToastContainer } from 'react-toastify';
 import localFont from 'next/font/local';
+import { ToastContainer } from 'react-toastify';
+
 import ReactQueryProvider from '@/utils/ReactQueryProvider';
 
 export const metadata: Metadata = {
