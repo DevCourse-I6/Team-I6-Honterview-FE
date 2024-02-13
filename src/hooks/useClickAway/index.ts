@@ -1,10 +1,11 @@
 import { useEffect, useRef } from 'react';
+
 import { TCallback } from './types';
 
 const events = ['mousedown', 'touchstart'];
 
 const useClickAway = (callback: TCallback) => {
-  const ref = useRef(null);
+  const ref = useRef<HTMLElement>(null);
   const saveCallback = useRef(callback);
 
   useEffect(() => {
@@ -12,7 +13,7 @@ const useClickAway = (callback: TCallback) => {
   }, [callback]);
 
   useEffect(() => {
-    const element = ref.current as HTMLElement | null;
+    const element = ref.current;
 
     if (!element) {
       return;
@@ -37,7 +38,7 @@ const useClickAway = (callback: TCallback) => {
         return document.removeEventListener(eventName, eventHandler);
       });
     };
-  }, [events, ref]);
+  }, [ref]);
 
   return ref;
 };
