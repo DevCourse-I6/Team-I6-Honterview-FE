@@ -1,4 +1,4 @@
-import MSWComponent from '@/mokes/MSWcomponent';
+import MSWComponent from '@/mocks/MSWcomponent';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 
 (async () => {
   if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-    const { initializeMocking } = await import('@/mokes');
+    const { initializeMocking } = await import('@/mocks');
 
     await initializeMocking();
   }

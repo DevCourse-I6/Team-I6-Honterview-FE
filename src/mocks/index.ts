@@ -1,11 +1,11 @@
 const initServer = async () => {
-  const { server } = await import('@/mokes/server');
+  const { server } = await import('@/mocks/server');
 
   server.listen();
 };
 
 const initWorker = async () => {
-  const { worker } = await import('@/mokes/browser');
+  const { worker } = await import('@/mocks/browser');
 
   worker.start();
 };
