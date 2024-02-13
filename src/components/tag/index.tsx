@@ -18,6 +18,8 @@ const Tag = ({ label, onClick, ...props }: IProps) => {
       style={{ ...props.style }}
     >
       {label}
+
+      {/* TODO: 추후 ICON으로 수정 */}
       <button
         type="button"
         onClick={onClick}
