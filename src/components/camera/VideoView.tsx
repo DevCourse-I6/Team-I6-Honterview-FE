@@ -1,3 +1,5 @@
+import './VideoView.css';
+
 import { VideoHTMLAttributes } from 'react';
 
 interface VideoViewProps extends VideoHTMLAttributes<HTMLVideoElement> {
