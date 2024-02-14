@@ -8,7 +8,6 @@ const VideoView = ({ videoUrl, width, height }: VideoViewProps) => {
   return (
     <video
       controls
-      autoPlay
       src={videoUrl}
       width={width}
       height={height}
