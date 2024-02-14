@@ -7,21 +7,16 @@ import { IProps } from './types';
 /**
  * @brief Input-Text
  * @description 입력 요소 역할, style 추가 수정 가능
- * @param value
- * @param placeholder
- * @param onChange
- * @param onKeyUp
+ * @param className tailwind 요소
  */
 
-const Text = ({ placeholder, value, onChange, onKeyUp, ...props }: IProps) => {
+const Text = ({ className, ...props }: IProps) => {
   return (
     <input
-      className="placeholder-text-40 outline-none "
-      value={value}
-      placeholder={placeholder}
-      onChange={onChange}
-      onKeyUp={onKeyUp}
+      className={`${className} placeholder-text-40 outline-none`}
       style={{ ...props.style }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     />
   );
 };
