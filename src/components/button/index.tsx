@@ -8,18 +8,11 @@ import { IProps } from './types';
  * @brief Button 컴포넌트
  * @description label 필수, type defalut = 1
  * @param label
- * @param disabled
  * @param type 1(Primary), 2(PrimaryAlternate), 3(Secondary), 4(SecondaryAlternate), 5(Disabled), 6(DisabledAlternate)
  * @param onClick
  */
 
-const Button = ({
-  label,
-  disabled = false,
-  type = 1,
-  onClick,
-  ...props
-}: IProps) => {
+const Button = ({ label, type = 1, onClick, ...props }: IProps) => {
   const baseStyle =
     'relative flex h-[48px] w-[182px] flex-col items-stretch justify-center rounded-lg border';
 
@@ -40,8 +33,9 @@ const Button = ({
       type="button"
       className={buttonClass}
       style={{ ...props.style }}
-      disabled={disabled}
       onClick={onClick}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       {label}
     </button>

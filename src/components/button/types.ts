@@ -1,8 +1,15 @@
 import { FormEvent, HTMLAttributes } from 'react';
 
+enum ButtonType {
+  Type1 = 1,
+  Type2 = 2,
+  Type3 = 3,
+  Type4 = 4,
+  Type5 = 5,
+  Type6 = 6,
+}
 export interface IProps extends HTMLAttributes<HTMLButtonElement> {
   label: string;
-  disabled?: boolean;
-  type?: 1 | 2 | 3 | 4 | 5 | 6;
+  type?: ButtonType;
   onClick?: (() => void) | ((e: FormEvent) => void);
 }
