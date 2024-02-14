@@ -5,4 +5,5 @@ export interface IProps extends SelectHTMLAttributes<HTMLSelectElement> {
   options: string[];
   value: string;
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void;
+  className?: string;
 }

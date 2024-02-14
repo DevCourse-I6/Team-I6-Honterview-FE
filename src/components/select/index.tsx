@@ -11,6 +11,7 @@ import { IProps } from './types';
  * @param options String List
  * @param value
  * @param onChange
+ * @param className tailwind 요소
  */
 
 const Select = ({
@@ -18,6 +19,7 @@ const Select = ({
   options,
   value,
   onChange,
+  className,
   ...props
 }: IProps) => {
   return (
@@ -25,17 +27,21 @@ const Select = ({
       value={value}
       onChange={onChange}
       style={{ ...props.style }}
-      className="relative flex h-[32px] w-[55px] cursor-pointer items-center justify-center rounded-lg border border-primaries-primary bg-text-20 text-primaries-primary outline-none"
+      className={`${className} relative flex h-[32px] w-[55px] cursor-pointer items-center justify-center rounded-lg border border-primaries-primary bg-text-20  text-text-80 outline-none`}
     >
-      {defaultValue && <option value="none">{defaultValue}</option>}
-      {options.map((option) => (
-        <option
-          key={option}
-          value={option}
-        >
-          {option}
-        </option>
-      ))}
+      {options.map((option) => {
+        const isSelected = option === defaultValue;
+
+        return (
+          <option
+            key={option}
+            value={option}
+            selected={isSelected}
+          >
+            {option}
+          </option>
+        );
+      })}
     </select>
   );
 };
