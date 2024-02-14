@@ -12,4 +12,5 @@ export interface IProps extends HTMLAttributes<HTMLButtonElement> {
   label: string;
   type?: ButtonType;
   onClick?: (() => void) | ((e: FormEvent) => void);
+  className?: string;
 }
