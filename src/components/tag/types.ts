@@ -1,6 +1,7 @@
-import { FormEvent, HTMLAttributes } from 'react';
+import { HTMLAttributes, ReactNode } from 'react';
 
 export interface IProps extends HTMLAttributes<HTMLDivElement> {
   label: string;
-  onClick?: (() => void) | ((e: FormEvent) => void);
+  children?: ReactNode;
+  className?: string;
 }
