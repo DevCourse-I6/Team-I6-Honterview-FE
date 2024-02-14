@@ -10,11 +10,11 @@ import { IProps } from './types';
  * @param label
  * @param type 1(Primary), 2(PrimaryAlternate), 3(Secondary), 4(SecondaryAlternate), 5(Disabled), 6(DisabledAlternate)
  * @param onClick
+ * @param className tailwind 요소
  */
 
-const Button = ({ label, type = 1, onClick, ...props }: IProps) => {
-  const baseStyle =
-    'relative flex h-[48px] w-[182px] flex-col items-stretch justify-center rounded-lg border';
+const Button = ({ label, type = 1, onClick, className, ...props }: IProps) => {
+  const baseStyle = `${className} relative flex h-[48px] w-[182px] flex-col items-stretch justify-center rounded-lg border`;
 
   // 각 버튼 타입에 따른 추가 스타일
   const typeStyles = {
