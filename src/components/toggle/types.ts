@@ -2,6 +2,6 @@ export interface IToggle {
   labelText?: string;
   defaultOn?: boolean;
   disabled?: boolean;
-  addStyleClassName?: string;
+  className?: string;
   onChange?: (value: boolean) => void;
 }

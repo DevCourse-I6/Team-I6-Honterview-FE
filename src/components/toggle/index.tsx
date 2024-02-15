@@ -16,7 +16,7 @@ const Toggle = ({
   onChange,
   defaultOn = false,
   disabled = false,
-  addStyleClassName,
+  className,
 }: IToggle) => {
   const [isOn, setIsOn] = useState(defaultOn);
 
@@ -28,6 +28,8 @@ const Toggle = ({
       onChange(newValue);
     }
   };
+
+  
 
   return (
     <label
@@ -42,7 +44,7 @@ const Toggle = ({
         className="peer sr-only"
       />
       <div
-        className={`peer h-6 w-11 rounded-full border border-text-40 bg-text-20 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full  after:bg-text-40 after:transition-all after:content-[''] peer-checked:bg-primaries-primary peer-checked:after:translate-x-full peer-checked:after:bg-text-20 peer-focus:outline-none peer-disabled:bg-text-40 peer-disabled:after:bg-text-60 rtl:peer-checked:after:-translate-x-full ${addStyleClassName}`}
+        className={`peer h-6 w-11 rounded-full border border-text-40 bg-text-20 after:absolute after:start-[2px] after:top-[2px] after:h-5 after:w-5 after:rounded-full  after:bg-text-40 after:transition-all after:content-[''] peer-checked:bg-primaries-primary peer-checked:after:translate-x-full peer-checked:after:bg-text-20 peer-focus:outline-none peer-disabled:bg-text-40 peer-disabled:after:bg-text-60 rtl:peer-checked:after:-translate-x-full ${className}`}
       />
       <span className="ms-3 text-base font-light text-text-80">
         {labelText}
