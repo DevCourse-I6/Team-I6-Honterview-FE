@@ -1,6 +1,6 @@
 'use client';
 
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { IuseIntersectionObserverProps } from './types';
 
@@ -9,14 +9,14 @@ import { IuseIntersectionObserverProps } from './types';
  * @param threshold target의 가시성 퍼센티지 (0.1 = 10%)
  * @param hasNextPage ReactQuery의 useInfiniteQuery에서 받아올 값
  * @param fetchNextPage ReactQuery의 useInfiniteQuery에서 받아올 값
- * @returns 관찰할 요소를 지정하는 setTarget을 반환
+ * @returns 관찰할 요소를 지정할 수 있는 useRef객체 반환
  */
 const useIntersectionObserver = ({
   threshold = 0.1,
   hasNextPage,
   fetchNextPage,
 }: IuseIntersectionObserverProps) => {
-  const [target, setTarget] = useState<HTMLDivElement | null | undefined>(null);
+  const targetRef = useRef<HTMLDivElement | null>(null);
 
   const observerCallback: IntersectionObserverCallback = useCallback(
     (entries) => {
@@ -30,18 +30,19 @@ const useIntersectionObserver = ({
   );
 
   useEffect(() => {
-    if (!target) return;
+    if (!targetRef.current) return;
 
     const observer = new IntersectionObserver(observerCallback, {
       threshold,
     });
 
-    observer.observe(target);
+    observer.observe(targetRef.current);
 
-    return () => observer.unobserve(target);
-  }, [observerCallback, threshold, target]);
+    const temporaryTargetRef = targetRef.current;
+    return () => observer.unobserve(temporaryTargetRef);
+  }, [observerCallback, threshold, targetRef]);
 
-  return { setTarget };
+  return targetRef;
 };
 
 export default useIntersectionObserver;
