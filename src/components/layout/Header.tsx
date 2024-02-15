@@ -39,8 +39,12 @@ const Header = () => {
         ))}
       </ul>
       <div className="flex w-1/3 justify-end gap-6">
-        <button type="button">마이페이지</button>
-        <button type="button">로그아웃</button>
+        <Link href="/">
+          <button type="button">마이페이지</button>
+        </Link>
+        <Link href="/">
+          <button type="button">로그아웃</button>
+        </Link>
       </div>
     </header>
   );
