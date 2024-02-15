@@ -3,6 +3,7 @@
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
+// 브라우저에서만 렌더링 되도록 동적 import
 const Modal = dynamic(() => import('@/components/modal'), { ssr: false });
 
 const ModalDev = () => {
@@ -12,6 +13,8 @@ const ModalDev = () => {
     setVisible((prev) => !prev);
   };
 
+  // 배경 스타일 = wrapperClassName
+  // children 감싸는 컨테이너 스타일 = className
   return (
     <>
       <button type="button">모달 on off 버튼</button>
