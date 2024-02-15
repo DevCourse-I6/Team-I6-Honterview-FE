@@ -1,5 +1,7 @@
 import Link from 'next/link';
 
+import Button from '../button';
+
 const navigation = [
   {
     title: '면접질문',
@@ -38,12 +40,23 @@ const Header = () => {
           </Link>
         ))}
       </ul>
-      <div className="flex w-1/3 justify-end gap-6">
+      <div className="flex w-1/3 items-center justify-end gap-6">
         <Link href="/">
-          <button type="button">마이페이지</button>
+          <Button
+            style={{ height: '40px' }}
+            className=" px-4 py-2"
+          >
+            마이페이지
+          </Button>
         </Link>
         <Link href="/">
-          <button type="button">로그아웃</button>
+          <Button
+            styleType={1}
+            style={{ height: '40px' }}
+            className="border-slate-400 bg-slate-400 px-4 py-2 hover:border-slate-400 hover:bg-slate-500"
+          >
+            로그아웃
+          </Button>
         </Link>
       </div>
     </header>
