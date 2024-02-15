@@ -1,31 +1,17 @@
 'use client';
 
-import { useEffect, useState } from 'react';
 import { useReactMediaRecorder } from 'react-media-recorder';
 
 import MirrorView from '@/components/camera/MirrorView';
 
 import Spinner from '../spinner';
+import useCamera from './useCamera';
 import VideoView from './VideoView';
 
 const Example = () => {
   const { status, startRecording, stopRecording, previewStream, mediaBlobUrl } =
     useReactMediaRecorder({ video: true });
-  const [isRecording, setIsRecording] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-
-  useEffect(() => {
-    if (status === 'acquiring_media') {
-      setIsLoading(true);
-    } else {
-      setIsLoading(false);
-    }
-    if (status === 'recording') {
-      setIsRecording(true);
-    } else {
-      setIsRecording(false);
-    }
-  }, [status]);
+  const { isLoading, isRecording } = useCamera(status);
 
   if (isLoading) {
     return (
