@@ -36,7 +36,6 @@ const Toggle = ({
   const switchFocusClass = 'peer-focus:outline-none';
   const switchDisabledClass =
     'peer-disabled:bg-text-40 peer-disabled:after:bg-text-60';
-  // const switchRTLClass = 'rtl:peer-checked:after:-translate-x-full';
 
   const combinedSwitchClass = `${switchBaseClass} ${switchActiveClass} ${switchFocusClass} ${switchDisabledClass} ${className}`;
 
