@@ -4,6 +4,8 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ToastContainer } from 'react-toastify';
 
+import { Footer, Header } from '@/components/layout';
+
 import ReactQueryProvider from '@/utils/ReactQueryProvider';
 
 export const metadata: Metadata = {
@@ -25,7 +27,9 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
       >
         <body>
           <ToastContainer />
+          <Header />
           {children}
+          <Footer />
         </body>
       </html>
     </ReactQueryProvider>

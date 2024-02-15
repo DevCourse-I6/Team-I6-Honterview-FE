@@ -1,0 +1,34 @@
+'use client';
+
+import React from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
+import { IProps } from './types';
+/**
+ * @brief Select 컴포넌트
+ * @description
+ * @param options String List
+ * @param value
+ * @param className tailwind 요소
+ */
+
+const Select = ({ options, value, className, ...props }: IProps) => {
+  return (
+    <select
+      value={value}
+      style={{ ...props.style }}
+      className={`${className} relative h-[32px] cursor-pointer items-center justify-center rounded-lg border border-primaries-primary bg-text-20  text-text-80 outline-none`}
+    >
+      {options.map((option) => (
+        <option
+          key={uuidv4()}
+          value={option}
+        >
+          {option}
+        </option>
+      ))}
+    </select>
+  );
+};
+
+export default Select;
