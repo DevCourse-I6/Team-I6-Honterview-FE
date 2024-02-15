@@ -17,13 +17,15 @@ const navigation = [
 
 const Header = () => {
   return (
-    <div className="flex h-28 w-screen items-center justify-between bg-white px-10">
-      <Link
-        href="/"
-        className="w-1/3 text-5xl font-bold"
-      >
-        Honterview
-      </Link>
+    <header className="flex h-28 w-screen items-center justify-between bg-white px-10">
+      <div className="w-1/3">
+        <Link
+          href="/"
+          className="text-5xl font-bold"
+        >
+          Honterview
+        </Link>
+      </div>
       <ul className="flex w-1/3 justify-center gap-6 text-base font-bold">
         {navigation.map((item) => (
           <Link
@@ -40,7 +42,7 @@ const Header = () => {
         <button type="button">마이페이지</button>
         <button type="button">로그아웃</button>
       </div>
-    </div>
+    </header>
   );
 };
 
