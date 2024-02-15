@@ -4,6 +4,7 @@ import { notify } from '@/components/toast';
 
 const ToastDev = () => {
   // 세 번째 인수는 선택입니다.
+  // 성공
   const handleSuccessClick = () => {
     notify('success', '~~을 성공 했습니다.', {
       position: 'top-center',
@@ -11,15 +12,15 @@ const ToastDev = () => {
       onClose: () => console.log('닫힌 후 콜백함수'),
     });
   };
-
+  // 에러
   const handleErrorClick = () => {
     notify('error', '~~을 실패 했습니다.');
   };
-
+  // 정보
   const handleInfoClick = () => {
     notify('info', '~~를 했습니다.');
   };
-
+  // 경고
   const handleWarningClick = () => {
     notify('warning', '~~을 경고 했습니다.');
   };
