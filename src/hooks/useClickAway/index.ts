@@ -5,7 +5,7 @@ import { TCallback } from './types';
 const events = ['mousedown', 'touchstart'];
 
 const useClickAway = (callback: TCallback) => {
-  const ref = useRef<HTMLElement>(null);
+  const ref = useRef(null);
   const saveCallback = useRef(callback);
 
   useEffect(() => {
@@ -13,7 +13,7 @@ const useClickAway = (callback: TCallback) => {
   }, [callback]);
 
   useEffect(() => {
-    const element = ref.current;
+    const element = ref.current as unknown as HTMLElement;
 
     if (!element) {
       return;
