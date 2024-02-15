@@ -1,4 +1,7 @@
 /* eslint-disable no-console */
+
+'use client';
+
 import { useState } from 'react';
 
 const useLocalStorage = <T>(key: string, defaultValue: T) => {
