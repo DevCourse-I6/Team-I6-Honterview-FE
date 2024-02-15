@@ -1,0 +1,6 @@
+video {
+  transform: rotateY(180deg);
+}
+video::-webkit-media-controls-panel {
+  transform: rotateY(180deg);
+}
