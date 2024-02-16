@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 
 import { IToggle } from './types';
 
@@ -19,6 +19,7 @@ const Toggle = ({
   className,
 }: IToggle) => {
   const [isOn, setIsOn] = useState(defaultOn);
+  const id = useId();
 
   const handleClick = () => {
     const newValue = !isOn;
@@ -41,11 +42,11 @@ const Toggle = ({
 
   return (
     <label
-      htmlFor="toggle"
+      htmlFor={id}
       className="relative inline-flex cursor-pointer items-center"
     >
       <input
-        id="toggle"
+        id={id}
         onChange={handleClick}
         checked={isOn}
         disabled={disabled}
