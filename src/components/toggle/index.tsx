@@ -47,8 +47,9 @@ const Toggle = ({
       <input
         id="toggle"
         onChange={handleClick}
-        type="checkbox"
+        checked={isOn}
         disabled={disabled}
+        type="checkbox"
         className="peer sr-only"
       />
       <div className={combinedSwitchClass} />
