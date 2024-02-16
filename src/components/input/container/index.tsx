@@ -15,7 +15,8 @@ const Container = ({ className, children, ...props }: IProps) => {
   return (
     <div
       className={`${className} relative flex h-[50px] w-[350px] flex-col items-stretch justify-center rounded-lg border border-text-40 p-6 focus-within:border-primaries-primary`}
-      style={{ ...props.style }}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       {children}
     </div>
