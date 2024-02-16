@@ -6,12 +6,7 @@ import { IRadioProps } from './types';
 const Radio = ({ id, children, ...rest }: IRadioProps) => {
   return (
     <RadioProvider id={id}>
-      <div
-        className="flex gap-2"
-        {...rest}
-      >
-        {children}
-      </div>
+      <div className={`flex gap-2 ${rest.className}`}>{children}</div>
     </RadioProvider>
   );
 };
