@@ -7,17 +7,18 @@ import { IProps } from './types';
 /**
  * @brief Select 컴포넌트
  * @description
- * @param options String List
  * @param value
+ * @param options String List
  * @param className tailwind 요소
  */
 
-const Select = ({ options, value, className, ...props }: IProps) => {
+const Select = ({ value, options, className, ...props }: IProps) => {
   return (
     <select
       value={value}
-      style={{ ...props.style }}
       className={`${className} relative h-[32px] cursor-pointer items-center justify-center rounded-lg border border-primaries-primary bg-text-20  text-text-80 outline-none`}
+      // eslint-disable-next-line react/jsx-props-no-spreading
+      {...props}
     >
       {options.map((option) => (
         <option
