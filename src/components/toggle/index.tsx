@@ -26,7 +26,7 @@ const Toggle = ({
     setIsOn(newValue);
 
     if (onChange) {
-      onChange(newValue);
+      onChange({ newValue, id });
     }
   };
 

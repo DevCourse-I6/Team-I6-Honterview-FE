@@ -1,7 +1,9 @@
+export type TToggleChangeEvent = { newValue: boolean; id: string };
+
 export interface IToggle {
   labelText?: string;
   defaultOn?: boolean;
   disabled?: boolean;
   className?: string;
-  onChange?: (value: boolean) => void;
+  onChange?: ({ newValue, id }: TToggleChangeEvent) => void;
 }
