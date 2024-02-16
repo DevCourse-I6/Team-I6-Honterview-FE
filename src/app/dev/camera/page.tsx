@@ -3,12 +3,11 @@
 import { useReactMediaRecorder } from 'react-media-recorder';
 
 import MirrorView from '@/components/camera/MirrorView';
+import useCamera from '@/components/camera/useCamera';
+import VideoView from '@/components/camera/VideoView';
+import Spinner from '@/components/spinner';
 
-import Spinner from '../spinner';
-import useCamera from './useCamera';
-import VideoView from './VideoView';
-
-const Example = () => {
+const CamerExample = () => {
   const { status, startRecording, stopRecording, previewStream, mediaBlobUrl } =
     useReactMediaRecorder({ video: true });
   const { isLoading, isRecording } = useCamera(status);
@@ -22,7 +21,7 @@ const Example = () => {
   }
 
   return (
-    <div className="flex  h-screen w-screen flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <div className="flex gap-10">
         {isRecording ? (
           <button
@@ -54,4 +53,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default CamerExample;
