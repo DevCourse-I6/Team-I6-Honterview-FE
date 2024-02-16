@@ -29,7 +29,6 @@ const Button = ({ children, styleType = 1, className, ...props }: IProps) => {
     <button
       type="button"
       className={buttonClass}
-      style={{ ...props.style }}
       // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     >
