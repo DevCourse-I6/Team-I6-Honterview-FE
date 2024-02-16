@@ -13,6 +13,7 @@ const Modal = ({
   ...rest
 }: IProps) => {
   const [body, setBody] = useState<HTMLElement | null>(null);
+
   const handleClickAway = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { target, currentTarget } = e;
 
