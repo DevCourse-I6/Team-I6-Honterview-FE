@@ -1,5 +1,6 @@
 'use client';
 
+import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
 
 import { IProps } from './types';
@@ -11,6 +12,7 @@ const Modal = ({
   onClose,
   ...rest
 }: IProps) => {
+  const [body, setBody] = useState<HTMLElement | null>(null);
   const handleClickAway = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { target, currentTarget } = e;
 
@@ -19,14 +21,38 @@ const Modal = ({
     }
   };
 
-  if (!visible) {
+  useEffect(() => {
+    setBody(document.body);
+  }, []);
+
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      const { key } = e;
+
+      if (key === 'Escape') {
+        onClose();
+      }
+    };
+
+    if (visible) {
+      window.addEventListener('keydown', handleKeyDown);
+    }
+
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [visible, onClose]);
+
+  if (!visible || !body) {
     return null;
   }
 
   return createPortal(
     <div
-      role="presentation"
+      role="button"
+      tabIndex={-1}
       onClick={handleClickAway}
+      onKeyDown={() => {}}
       className={`fixed left-0 top-0 z-50 h-screen w-screen cursor-default bg-black/20 ${wrapperClassName || ''}`}
     >
       <div
@@ -35,7 +61,7 @@ const Modal = ({
         {children}
       </div>
     </div>,
-    document.body,
+    body,
   );
 };
 

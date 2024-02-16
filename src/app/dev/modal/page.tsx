@@ -1,10 +1,8 @@
 'use client';
 
-import dynamic from 'next/dynamic';
 import { useState } from 'react';
 
-// 브라우저에서만 렌더링 되도록 동적 import
-const Modal = dynamic(() => import('@/components/modal'), { ssr: false });
+import Modal from '@/components/modal';
 
 const ModalDev = () => {
   const [visible, setVisible] = useState(false);
