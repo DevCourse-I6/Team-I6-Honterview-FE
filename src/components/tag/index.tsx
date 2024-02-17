@@ -6,7 +6,7 @@ import { IProps } from './types';
 
 /**
  * @brief Tag 컴포넌트
- * @description label 필수, style 추가 수정 가능
+ * @description style 추가 수정 가능
  * @param children
  * @param className tailwind 요소
  */
