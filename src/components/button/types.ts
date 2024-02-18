@@ -1,6 +1,6 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
-enum ButtonType {
+export enum ButtonType {
   Type1 = 1,
   Type2 = 2,
   Type3 = 3,
