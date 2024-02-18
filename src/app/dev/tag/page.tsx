@@ -10,6 +10,9 @@ const TagDev = () => {
       <Tag>
         Test <XIcon />
       </Tag>
+      <Tag>
+        <XIcon /> Test <XIcon />
+      </Tag>
     </>
   );
 };
