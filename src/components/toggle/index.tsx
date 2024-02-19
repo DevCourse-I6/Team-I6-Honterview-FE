@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useId, useState } from 'react';
 
 import { IToggle } from './types';
 
@@ -12,20 +12,20 @@ import { IToggle } from './types';
  * @param disabled 토글 disabled 상태
  */
 const Toggle = ({
-  labelText,
   onChange,
   defaultOn = false,
   disabled = false,
   className,
 }: IToggle) => {
   const [isOn, setIsOn] = useState(defaultOn);
+  const id = useId();
 
   const handleClick = () => {
     const newValue = !isOn;
     setIsOn(newValue);
 
     if (onChange) {
-      onChange(newValue);
+      onChange({ newValue, id });
     }
   };
 
@@ -41,20 +41,18 @@ const Toggle = ({
 
   return (
     <label
-      htmlFor="toggle"
-      className="relative inline-flex cursor-pointer items-center"
+      htmlFor={id}
+      className="relative inline-flex w-fit cursor-pointer items-center"
     >
       <input
-        id="toggle"
+        id={id}
         onChange={handleClick}
-        type="checkbox"
+        checked={isOn}
         disabled={disabled}
+        type="checkbox"
         className="peer sr-only"
       />
       <div className={combinedSwitchClass} />
-      <span className="ms-3 text-base font-light text-text-80">
-        {labelText}
-      </span>
     </label>
   );
 };
