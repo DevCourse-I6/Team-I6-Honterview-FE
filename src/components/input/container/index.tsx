@@ -9,7 +9,7 @@ import { IProps } from './types';
 /**
  * @brief Input-Container
  * @description 입력 요소를 감싸는 컨테이너 역할, 입력 요소와 스타일을 적용가능
- * @param children 입력 요소
+ * @param children 입력 요소 (1 - default, 2 - succeess, 3 - Error)
  * @param className tailwind 요소
  */
 
