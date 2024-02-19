@@ -1,29 +1,27 @@
-/* eslint-disable no-console */
-
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+/* eslint-disable no-console */
 
 /**
  * @brief LocalStorage 훅
- * @description 사용할 때 value를 바로 렌더링할 수 없다 (https://nextjs.org/docs/messages/react-hydration-error)<br>
- * 사용처에서 1.상태를 선언 2.useEffect에서 storage value 값으로 상태값 set 3. 해당 상태를 값으로 써야 함(dev page 참고)<br>
- *
+ * @params key : 스토리지 키
+ * @params defaultValue : 기본값
  */
 
 const useLocalStorage = <T>(key: string, defaultValue: T) => {
-  const [value, setValue] = useState<T>(() => {
+  const [value, setValue] = useState<T>();
+
+  useEffect(() => {
     try {
       const storedValue = localStorage.getItem(key);
-      if (storedValue) {
-        return JSON.parse(storedValue);
-      }
+
+      setValue(storedValue ? JSON.parse(storedValue) : defaultValue);
     } catch (e) {
       console.error(e);
+      setValue(defaultValue);
     }
-
-    return defaultValue;
-  });
+  }, [defaultValue, key]);
 
   const setItem = (newValue: T) => {
     try {

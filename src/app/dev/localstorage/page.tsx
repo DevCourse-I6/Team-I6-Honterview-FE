@@ -1,16 +1,11 @@
 'use client';
 
-import { FormEvent, useEffect, useState } from 'react';
+import { FormEvent } from 'react';
 
 import useLocalStorage from '@/hooks/useLocalStorage/useLocalStorage';
 
 const LocalStorageDev = () => {
   const { value, setItem, removeItem } = useLocalStorage('dev_test', '');
-  const [storedValue, setStoredValue] = useState('');
-
-  useEffect(() => {
-    setStoredValue(value);
-  }, [value]);
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,7 +53,7 @@ const LocalStorageDev = () => {
 
       <div>
         <div className="text-3xl">value </div>
-        <div className="h-10">{storedValue}</div>
+        <div className="h-10">{value}</div>
       </div>
     </div>
   );
