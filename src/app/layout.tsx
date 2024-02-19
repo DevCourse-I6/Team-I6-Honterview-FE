@@ -20,8 +20,7 @@ const RootLayout = async ({
   return (
     <html lang="ko">
       <body>
-        <MSWComponent />
-        {children}
+        <MSWComponent>{children}</MSWComponent>
       </body>
     </html>
   );
