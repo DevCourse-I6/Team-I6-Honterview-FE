@@ -14,6 +14,7 @@ const nextConfig = {
         config.resolve.alias['msw/node'] = false;
       }
     }
+
     return config;
   },
 };
