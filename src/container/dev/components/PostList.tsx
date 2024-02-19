@@ -1,16 +1,23 @@
 'use client';
 
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+
 import Spinner from '@/components/spinner';
-import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
 import useGetInfinitePostList from '../hooks/useGetInfinitePostList';
 import { ICharactersResponse } from '../types/Characters';
 
 const PostList = ({ initialData }: { initialData: ICharactersResponse }) => {
-  const { data, hasNextPage, fetchNextPage, isFetching } =
+  const { data, hasNextPage, fetchNextPage, isLoading, isFetching } =
     useGetInfinitePostList({ initialData });
+  const { ref, inView } = useInView({ threshold: 0 });
 
-  const target = useIntersectionObserver({ hasNextPage, fetchNextPage });
+  useEffect(() => {
+    if (inView && hasNextPage && !isLoading) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, hasNextPage, inView, isLoading]);
 
   return (
     <>
@@ -21,8 +28,8 @@ const PostList = ({ initialData }: { initialData: ICharactersResponse }) => {
           alt={page.name}
         />
       ))}
-      <div ref={target} />
-      {isFetching && <Spinner />}
+      <div ref={ref} />
+      {(isLoading || isFetching) && <Spinner />}
     </>
   );
 };
