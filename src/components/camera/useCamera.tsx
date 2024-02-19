@@ -1,6 +1,16 @@
 import { useEffect, useState } from 'react';
+import { useReactMediaRecorder } from 'react-media-recorder';
 
-const useCamera = (status) => {
+const useCamera = () => {
+  const {
+    status,
+    startRecording,
+    stopRecording,
+    previewStream,
+    mediaBlobUrl,
+    clearBlobUrl,
+    error,
+  } = useReactMediaRecorder({ video: true });
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -18,8 +28,15 @@ const useCamera = (status) => {
   }, [status]);
 
   return {
+    status,
+    startRecording,
+    stopRecording,
+    previewStream,
+    mediaBlobUrl,
+    clearBlobUrl,
     isRecording,
     isLoading,
+    error,
   };
 };
 

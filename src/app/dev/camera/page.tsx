@@ -1,21 +1,34 @@
 'use client';
 
-import { useReactMediaRecorder } from 'react-media-recorder';
-
-import MirrorView from '@/components/camera/MirrorView';
-import useCamera from '@/components/camera/useCamera';
-import VideoView from '@/components/camera/VideoView';
+import { MirrorView, useCamera, VideoView } from '@/components/camera';
 import Spinner from '@/components/spinner';
 
 const CamerExample = () => {
-  const { status, startRecording, stopRecording, previewStream, mediaBlobUrl } =
-    useReactMediaRecorder({ video: true });
-  const { isLoading, isRecording } = useCamera(status);
+  const {
+    isLoading,
+    isRecording,
+    startRecording,
+    stopRecording,
+    previewStream,
+    mediaBlobUrl,
+    error,
+  } = useCamera();
 
   if (isLoading) {
     return (
       <div className="flex h-screen w-screen items-center justify-center">
         <Spinner />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex-col items-center justify-center">
+        <div className="flex items-center justify-center">
+          에러가 발생했습니다. 다시 시도해주세요.
+        </div>
+        <div className="flex items-center justify-center">ERROR: {error}</div>
       </div>
     );
   }
