@@ -1,4 +1,4 @@
-import './VideoView.css';
+import './camera.css';
 
 import { VideoHTMLAttributes } from 'react';
 

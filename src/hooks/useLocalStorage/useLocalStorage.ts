@@ -1,22 +1,27 @@
-/* eslint-disable no-console */
-
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+/* eslint-disable no-console */
+
+/**
+ * @brief LocalStorage 훅
+ * @params key : 스토리지 키
+ * @params defaultValue : 기본값
+ */
 
 const useLocalStorage = <T>(key: string, defaultValue: T) => {
-  const [value, setValue] = useState<T>(() => {
+  const [value, setValue] = useState<T>();
+
+  useEffect(() => {
     try {
       const storedValue = localStorage.getItem(key);
-      if (storedValue) {
-        return JSON.parse(storedValue);
-      }
+
+      setValue(storedValue ? JSON.parse(storedValue) : defaultValue);
     } catch (e) {
       console.error(e);
+      setValue(defaultValue);
     }
-
-    return defaultValue;
-  });
+  }, [defaultValue, key]);
 
   const setItem = (newValue: T) => {
     try {

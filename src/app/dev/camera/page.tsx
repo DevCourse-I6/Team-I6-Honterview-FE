@@ -1,17 +1,18 @@
 'use client';
 
-import { useReactMediaRecorder } from 'react-media-recorder';
+import { MirrorView, useCamera, VideoView } from '@/components/camera';
+import Spinner from '@/components/spinner';
 
-import MirrorView from '@/components/camera/MirrorView';
-
-import Spinner from '../spinner';
-import useCamera from './useCamera';
-import VideoView from './VideoView';
-
-const Example = () => {
-  const { status, startRecording, stopRecording, previewStream, mediaBlobUrl } =
-    useReactMediaRecorder({ video: true });
-  const { isLoading, isRecording } = useCamera(status);
+const CamerExample = () => {
+  const {
+    isLoading,
+    isRecording,
+    startRecording,
+    stopRecording,
+    previewStream,
+    mediaBlobUrl,
+    error,
+  } = useCamera();
 
   if (isLoading) {
     return (
@@ -21,8 +22,19 @@ const Example = () => {
     );
   }
 
+  if (error) {
+    return (
+      <div className="flex-col items-center justify-center">
+        <div className="flex items-center justify-center">
+          에러가 발생했습니다. 다시 시도해주세요.
+        </div>
+        <div className="flex items-center justify-center">ERROR: {error}</div>
+      </div>
+    );
+  }
+
   return (
-    <div className="flex  h-screen w-screen flex-col items-center justify-center">
+    <div className="flex flex-col items-center justify-center">
       <div className="flex gap-10">
         {isRecording ? (
           <button
@@ -54,4 +66,4 @@ const Example = () => {
   );
 };
 
-export default Example;
+export default CamerExample;

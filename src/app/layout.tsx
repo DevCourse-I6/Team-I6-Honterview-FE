@@ -1,5 +1,5 @@
+import MSWComponent from '@/mocks/MSWcomponent';
 import '@/styles/global.css';
-
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ToastContainer } from 'react-toastify';
@@ -16,6 +16,14 @@ const font = localFont({
   display: 'swap',
 });
 
+(async () => {
+  if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
+    const { initializeMocking } = await import('@/mocks');
+
+    await initializeMocking();
+  }
+})();
+
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <ReactQueryProvider>
@@ -24,10 +32,12 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         className={font.className}
       >
         <body>
-          <ToastContainer />
-          {/* <Header /> */}
-          {children}
-          {/* <Footer /> */}
+          <MSWComponent>
+            <ToastContainer />
+            {/* <Header /> */}
+            {children}
+            {/* <Footer /> */}
+          </MSWComponent>
         </body>
       </html>
     </ReactQueryProvider>
