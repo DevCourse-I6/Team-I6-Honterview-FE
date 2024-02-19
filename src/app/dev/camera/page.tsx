@@ -1,7 +1,7 @@
 'use client';
 
 import { MirrorView, useCamera, VideoView } from '@/components/camera';
-import Spinner from '@/components/spinner';
+import { SpinnerIcon } from '@/components/icon';
 
 const CamerExample = () => {
   const {
@@ -17,7 +17,7 @@ const CamerExample = () => {
   if (isLoading) {
     return (
       <div className="flex h-screen w-screen items-center justify-center">
-        <Spinner />
+        <SpinnerIcon />
       </div>
     );
   }

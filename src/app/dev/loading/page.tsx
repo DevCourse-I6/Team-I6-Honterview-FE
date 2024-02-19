@@ -8,9 +8,11 @@ const LoadingDev = () => {
   const [isLoading, setIsLoading] = useState(false);
 
   useEffect(() => {
-    setTimeout(() => {
+    const timer = setTimeout(() => {
       setIsLoading(false);
     }, 3000);
+
+    return () => clearTimeout(timer);
   }, [isLoading]);
 
   if (isLoading) {
