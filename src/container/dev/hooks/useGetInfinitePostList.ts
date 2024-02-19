@@ -15,7 +15,9 @@ const useGetInfinitePostList = ({
     initialData: { pages: [initialData], pageParams: [] },
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length + 1;
-      return lastPage.results.length === 0 ? undefined : nextPage;
+      return lastPage.results.length < allPages[0].results.length
+        ? undefined
+        : nextPage;
     },
     select: (selectData) => ({
       pages: selectData?.pages.flatMap((page) => page.results),
