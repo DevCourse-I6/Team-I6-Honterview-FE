@@ -1,4 +1,4 @@
-import { ICharactersResponse } from './types';
+import { ICharactersResponse } from '../types/Characters';
 
 export const fetchPosts = async (
   page: number,

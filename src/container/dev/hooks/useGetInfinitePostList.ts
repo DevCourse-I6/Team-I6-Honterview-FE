@@ -1,7 +1,7 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import { fetchPosts } from './api';
-import { ICharactersResponse } from './types';
+import { fetchPosts } from '../api';
+import { ICharactersResponse } from '../types/Characters';
 
 const useGetInfinitePostList = ({
   initialData,

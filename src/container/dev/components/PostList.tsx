@@ -3,8 +3,8 @@
 import Spinner from '@/components/spinner';
 import useIntersectionObserver from '@/hooks/useIntersectionObserver';
 
-import { ICharactersResponse } from './types';
-import useGetInfinitePostList from './useGetInfinitePostList';
+import useGetInfinitePostList from '../hooks/useGetInfinitePostList';
+import { ICharactersResponse } from '../types/Characters';
 
 const PostList = ({ initialData }: { initialData: ICharactersResponse }) => {
   const { data, hasNextPage, fetchNextPage, isFetching } =

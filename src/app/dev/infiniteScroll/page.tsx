@@ -1,5 +1,5 @@
-import { fetchPosts } from './container/api';
-import PostList from './container/PostList';
+import { fetchPosts } from '@/container/dev/api';
+import PostList from '@/container/dev/components/PostList';
 
 const InfiniteScroll = async () => {
   const initialData = await fetchPosts(1);
