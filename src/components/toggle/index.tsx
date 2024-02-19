@@ -12,7 +12,6 @@ import { IToggle } from './types';
  * @param disabled 토글 disabled 상태
  */
 const Toggle = ({
-  labelText,
   onChange,
   defaultOn = false,
   disabled = false,
@@ -43,7 +42,7 @@ const Toggle = ({
   return (
     <label
       htmlFor={id}
-      className="relative inline-flex cursor-pointer items-center"
+      className="relative inline-flex w-fit cursor-pointer items-center"
     >
       <input
         id={id}
@@ -54,9 +53,6 @@ const Toggle = ({
         className="peer sr-only"
       />
       <div className={combinedSwitchClass} />
-      <span className="ms-3 text-base font-light text-text-80">
-        {labelText}
-      </span>
     </label>
   );
 };
