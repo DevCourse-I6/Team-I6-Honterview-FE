@@ -3,7 +3,7 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import Spinner from '@/components/spinner';
+import { SpinnerIcon } from '@/components/icon';
 
 import useGetInfinitePostList from '../hooks/useGetInfinitePostList';
 import { ICharactersResponse } from '../types/Characters';
@@ -29,7 +29,7 @@ const PostList = ({ initialData }: { initialData: ICharactersResponse }) => {
         />
       ))}
       <div ref={ref} />
-      {(isLoading || isFetching) && <Spinner />}
+      {(isLoading || isFetching) && <SpinnerIcon />}
     </>
   );
 };
