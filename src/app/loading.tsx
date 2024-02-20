@@ -1,14 +1,14 @@
-import Spinner from '@/components/spinner';
+import { SpinnerIcon } from '@/components/icon';
 
-const Loading = () => {
+const PageLoading = () => {
   return (
     <div
       className="flex h-screen w-screen items-center justify-center"
       role="status"
     >
-      <Spinner />
+      <SpinnerIcon />
     </div>
   );
 };
 
-export default Loading;
+export default PageLoading;
