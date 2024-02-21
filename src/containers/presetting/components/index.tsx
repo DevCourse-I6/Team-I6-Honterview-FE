@@ -8,7 +8,7 @@ import Divider from '@/components/divider';
 
 import { StepBar, StepCircle } from './step';
 
-const PreSettingLayout = () => {
+const PreSetting = () => {
   const [currentStep, setCurrentStep] = useState(1);
 
   const handlePrevButton = () => {
@@ -83,4 +83,4 @@ const PreSettingLayout = () => {
   );
 };
 
-export default PreSettingLayout;
+export default PreSetting;

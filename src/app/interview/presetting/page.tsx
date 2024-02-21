@@ -1,7 +1,7 @@
-import PreSettingLayout from '@/containers/presetting/components';
+import PreSetting from '@/containers/presetting/components';
 
-const PreSetting = () => {
-  return <PreSettingLayout />;
+const PreSettingPage = () => {
+  return <PreSetting />;
 };
 
-export default PreSetting;
+export default PreSettingPage;
