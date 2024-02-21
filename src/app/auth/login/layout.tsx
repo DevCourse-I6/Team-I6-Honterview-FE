@@ -8,7 +8,9 @@ export const metadata: Metadata = {
 const AuthLoginLayout = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
-  return <>{children}</>;
+  return (
+    <div className="wrap flex items-center justify-center">{children}</div>
+  );
 };
 
 export default AuthLoginLayout;
