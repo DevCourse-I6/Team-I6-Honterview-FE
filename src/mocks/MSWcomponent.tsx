@@ -1,4 +1,5 @@
 'use client';
+
 import { PropsWithChildren, useEffect, useState } from 'react';
 
 const isMocking = process.env.NEXT_PUBLIC_API_MOCKING === 'enabled';
