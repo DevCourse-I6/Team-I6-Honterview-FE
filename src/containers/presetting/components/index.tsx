@@ -63,7 +63,7 @@ const PreSettingLayout = () => {
         <div className="absolute bottom-0 flex gap-[1rem]">
           <Button
             styleType={ButtonType.Type3}
-            className="bottom-[2.86rem] text-xl"
+            className="bottom-[2.86rem] text-2xl"
             onClick={handlePrevButton}
             style={{ height: '4rem', width: '9rem' }}
           >
@@ -71,7 +71,7 @@ const PreSettingLayout = () => {
           </Button>
           <Button
             type="button"
-            className="bottom-[2.86rem] text-xl"
+            className="bottom-[2.86rem] text-2xl"
             onClick={handleNextButton}
             style={{ height: '4rem', width: '9rem' }}
           >
