@@ -1,6 +1,6 @@
 'use client';
 
-import Input from '@/components/input';
+import Input, { InputType } from '@/components/input';
 
 const InputDev = () => {
   return (
@@ -9,18 +9,15 @@ const InputDev = () => {
         <Input.Text />
       </Input>
       <Input
-        styleType={2}
         className="w-1/5"
+        styleType={InputType.Type2}
       >
         <Input.Text />
       </Input>
-      <Input styleType={3}>
+      <Input styleType={InputType.Type3}>
         <Input.Text />
       </Input>
-      <Input
-        styleType={3}
-        className="w-[200px]"
-      >
+      <Input className="w-[200px]">
         <Input.Text />
       </Input>
     </>

@@ -14,7 +14,6 @@ const Text = ({ className, ...props }: IProps) => {
   return (
     <input
       className={`w-full placeholder-text-40 outline-none ${className}`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
       {...props}
     />
   );
