@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from 'react';
 
 import { useCamera } from '@/components/camera';
+import useStepStore from '@/container/presetting/stores/useStepStore';
 
 const useSettingCameraScene = () => {
   const {
@@ -13,20 +15,26 @@ const useSettingCameraScene = () => {
     pauseRecording,
   } = useCamera();
 
-  useEffect(() => {
-    startRecording();
-  }, [startRecording]);
+  const { setNextButton } = useStepStore();
 
   useEffect(() => {
-    if (isRecording) {
+    startRecording();
+  }, []);
+
+  useEffect(() => {
+    if (isRecording || status === 'paused') {
+      setNextButton(true);
       pauseRecording();
+    } else {
+      setNextButton(false);
     }
-  }, [isRecording, pauseRecording]);
+  }, [isRecording]);
 
   return {
     previewStream,
     isLoading,
     status,
+    error,
   };
 };
 
