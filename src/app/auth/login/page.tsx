@@ -1,4 +1,4 @@
-import { v4 } from 'uuid';
+import { v4 as v4uuid } from 'uuid';
 
 import LoginButtonItem from '@/container/authLogin/components/loginButtonItem';
 import {
@@ -22,7 +22,7 @@ const AuthLoginPage = () => {
         <ul className="mt-20 flex flex-col items-center justify-center gap-12 text-medium">
           {LOGIN_BUTTONS.map((button) => (
             <LoginButtonItem
-              key={v4()}
+              key={v4uuid()}
               {...button}
             />
           ))}
