@@ -1,10 +1,10 @@
 import { ButtonHTMLAttributes, ReactNode } from 'react';
 
 export enum ButtonType {
-  Type1 = 1,
-  Type2 = 2,
-  Type3 = 3,
-  Type4 = 4,
+  Type1 = 'primary',
+  Type2 = 'primaryAlternate',
+  Type3 = 'secondary',
+  Type4 = 'secondaryAlternate',
 }
 export interface IProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;

@@ -1,7 +1,6 @@
 'use client';
 
-import Button from '@/components/button';
-import { ButtonType } from '@/components/button/types';
+import Button, { ButtonType } from '@/components/button';
 
 const ButtonDev = () => {
   return (
