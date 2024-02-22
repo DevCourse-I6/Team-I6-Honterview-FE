@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { IProps } from './types';
 
@@ -14,8 +15,9 @@ import { IProps } from './types';
 const Tag = ({ children, className, ...props }: IProps) => {
   return (
     <div
-      className={`${className} inline-flex items-center justify-center gap-1 rounded-lg border-primaries-primary bg-primaries-primary px-[12px] py-[5px] text-text-20 hover:bg-primaries-hover active:bg-primaries-active`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
+      className={twMerge(
+        `inline-flex h-[3rem] w-[7rem] items-center justify-center gap-1 rounded-lg border-primaries-primary bg-primaries-primary px-[12px] py-[5px] text-text-20 hover:bg-primaries-hover active:bg-primaries-active ${className}`,
+      )}
       {...props}
     >
       {children}
