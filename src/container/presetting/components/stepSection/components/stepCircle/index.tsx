@@ -13,11 +13,11 @@ const StepCircle = ({
   return (
     <div className="flex flex-col items-center justify-center">
       <div
-        className={`border-box text-medium inline-flex h-[4rem] w-[4rem] items-center justify-center rounded-full ${bgColor} ${textColor}`}
+        className={`border-box inline-flex h-[4rem] w-[4rem] items-center justify-center rounded-full text-medium ${bgColor} ${textColor}`}
       >
         {number}
       </div>
-      <p className={`${titleColor} text-medium absolute bottom-0`}>{title}</p>
+      <p className={`${titleColor} absolute bottom-0 text-medium`}>{title}</p>
     </div>
   );
 };
