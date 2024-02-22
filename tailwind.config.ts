@@ -26,14 +26,14 @@ const config: Config = {
           20: '#F0F2F5',
         },
       },
-      size: {
-        extraSmall: '0.75rem',
-        small: '0.875rem',
-        medium: '1rem',
-        large: '1.25rem',
-        extraLarge: '1.875rem',
-        doubleLarge: '2.25rem',
-        tripleLarge: '3rem',
+      fontSize: {
+        extraSmall: '1.2rem',
+        small: '1.4rem',
+        medium: '1.6rem',
+        large: '1.8rem',
+        extraLarge: '2rem',
+        doubleLarge: '3rem',
+        tripleLarge: '3.6rem',
       },
       device: {
         mobile: { max: '480px' },
