@@ -1,8 +1,8 @@
 import { FavoriteIcon } from '@/components/icon';
 
-import { IAnswerProps } from '../types';
+import { IProps } from './types';
 
-const Answer = ({ isBlur }: IAnswerProps) => {
+const Answer = ({ isBlur }: IProps) => {
   return (
     <div className={`${isBlur && 'cursor-pointer select-none blur-[5px]'}`}>
       <div className="mb-5 flex justify-between">
