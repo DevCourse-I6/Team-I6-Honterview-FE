@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { createPortal } from 'react-dom';
+import { twMerge } from 'tailwind-merge';
 
 import { IProps } from './types';
 
@@ -13,6 +14,12 @@ const Modal = ({
   ...rest
 }: IProps) => {
   const [body, setBody] = useState<HTMLElement | null>(null);
+  const wrapperStyle = twMerge(
+    `fixed left-0 top-0 z-50 h-screen w-screen cursor-default bg-black/20 ${wrapperClassName}`,
+  );
+  const containerStyle = twMerge(
+    `fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${rest.className}`,
+  );
 
   const handleClickAway = (e: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     const { target, currentTarget } = e;
@@ -54,13 +61,9 @@ const Modal = ({
       tabIndex={-1}
       onClick={handleClickAway}
       onKeyDown={() => {}}
-      className={`fixed left-0 top-0 z-50 h-screen w-screen cursor-default bg-black/20 ${wrapperClassName || ''}`}
+      className={wrapperStyle}
     >
-      <div
-        className={`fixed left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 ${rest.className || ''}`}
-      >
-        {children}
-      </div>
+      <div className={containerStyle}>{children}</div>
     </div>,
     body,
   );
