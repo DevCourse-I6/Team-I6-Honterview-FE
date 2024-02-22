@@ -1,3 +1,3 @@
 export interface DividerProps {
-  className: string;
+  className?: string;
 }
