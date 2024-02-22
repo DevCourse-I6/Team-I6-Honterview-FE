@@ -1,10 +1,12 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
-  toast,
   Bounce,
+  toast,
   ToastContainer as ToastOption,
   ToastOptions,
 } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { TAlert } from './types';
 
 const ToastContainer = () => {
@@ -28,7 +30,7 @@ const ToastContainer = () => {
 const Toast = ({ message }: { message: string }) => {
   return (
     <article>
-      <h3 className="text-base">{message}</h3>
+      <h3 className="text-medium">{message}</h3>
     </article>
   );
 };
