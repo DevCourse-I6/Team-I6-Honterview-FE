@@ -1,11 +1,21 @@
-import Answer from '@/container/interview-questions/components/Answer';
-import TitleWithInterviewStart from '@/container/interview-questions/components/TitleWithInterviewStart';
+import {
+  AnotherQuestions,
+  Answer,
+  TitleWithInterviewStart,
+} from '@/container/interview-questions/components';
 
 const Page = () => {
   return (
-    <div>
+    <div className="m-auto max-w-[800px]">
       <TitleWithInterviewStart />
-      <Answer />
+      <div className="flex flex-col gap-16">
+        <Answer />
+        <Answer />
+        <Answer />
+        <Answer isBlur />
+      </div>
+      <hr className="my-20" />
+      <AnotherQuestions />
     </div>
   );
 };
