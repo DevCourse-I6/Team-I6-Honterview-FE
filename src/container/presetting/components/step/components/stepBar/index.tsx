@@ -1,4 +1,4 @@
-import { StepBarProps } from './type';
+import { StepBarProps } from '../../type';
 
 const StepBar = ({ isPassed }: StepBarProps) => {
   const bgColor = isPassed ? 'bg-primaries-primary' : 'bg-gray-100';

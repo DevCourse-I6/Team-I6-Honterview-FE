@@ -1,4 +1,4 @@
-import { StepCircleProps } from './type';
+import { StepCircleProps } from '../../type';
 
 const StepCircle = ({
   number,
@@ -13,11 +13,11 @@ const StepCircle = ({
   return (
     <div className="flex flex-col items-center justify-center">
       <div
-        className={`border-box inline-flex h-[4rem] w-[4rem] items-center justify-center rounded-full text-2xl ${bgColor} ${textColor}`}
+        className={`border-box text-medium inline-flex h-[4rem] w-[4rem] items-center justify-center rounded-full ${bgColor} ${textColor}`}
       >
         {number}
       </div>
-      <p className={`${titleColor} absolute bottom-0 text-2xl`}>{title}</p>
+      <p className={`${titleColor} text-medium absolute bottom-0`}>{title}</p>
     </div>
   );
 };

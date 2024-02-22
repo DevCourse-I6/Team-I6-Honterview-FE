@@ -1,4 +1,4 @@
-import PreSetting from '@/containers/presetting/components';
+import PreSetting from '@/container/presetting';
 
 const PreSettingPage = () => {
   return <PreSetting />;
