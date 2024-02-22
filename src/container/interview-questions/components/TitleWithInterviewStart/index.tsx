@@ -3,8 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/button';
 import Tag from '@/components/tag';
 
-const tags = ['JavaScript', 'React', 'JavaScript', 'React'];
-
 const TitleWithInterviewStart = () => {
   return (
     <div>
@@ -13,7 +11,7 @@ const TitleWithInterviewStart = () => {
           어떤 프레임워크를 사용하여 개발했나요? 왜 그 프레임워크를 선택했나요?
         </h1>
         <ul className="flex w-1/2 flex-wrap gap-4">
-          {tags.map((tag) => (
+          {['JavaScript', 'React', 'JavaScript', 'React'].map((tag) => (
             <li key={uuidv4()}>
               <Tag
                 style={{
