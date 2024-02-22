@@ -7,7 +7,9 @@ import {
 const Page = () => {
   return (
     <div className="m-auto max-w-[800px]">
-      <TitleWithInterviewStart />
+      <div className=" mb-20">
+        <TitleWithInterviewStart />
+      </div>
       <div className="flex flex-col gap-16">
         <Answer />
         <Answer />
