@@ -1,3 +1,5 @@
+import { useRouter } from 'next/navigation';
+
 import Button from '@/components/button';
 import { ButtonType } from '@/components/button/types';
 
@@ -6,12 +8,13 @@ import useStepStore from '../../stores/useStepStore';
 const PreSettingButtonSection = () => {
   const { currentStep, increaseStep, decreaseStep, isNextButtonOn } =
     useStepStore();
+  const router = useRouter();
 
   const handlePrevButton = () => {
     if (currentStep > 1) {
       decreaseStep();
     } else {
-      console.log('이전 페이지로 이동');
+      router.back();
     }
   };
 
@@ -19,7 +22,7 @@ const PreSettingButtonSection = () => {
     if (currentStep < 4) {
       increaseStep();
     } else {
-      console.log('면접 페이지로 이동');
+      router.push('/interview'); // TODO: 화상 인터뷰 url로 교체
     }
   };
 
