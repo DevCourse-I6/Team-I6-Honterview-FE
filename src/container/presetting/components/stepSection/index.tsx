@@ -1,7 +1,7 @@
-import { TITLE_LIST } from '../../constants/stepTitle';
 import useStepStore from '../../stores/useStepStore';
 import StepBar from './components/stepBar';
 import StepCircle from './components/stepCircle';
+import { TITLE_LIST } from './constants/stepTitle';
 import { StepNumber } from './type';
 
 const StepSection = () => {
