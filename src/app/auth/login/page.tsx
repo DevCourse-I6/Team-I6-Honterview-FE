@@ -20,12 +20,17 @@ const AuthLoginPage = () => {
       </p>
       <form>
         <ul className="mt-20 flex flex-col items-center justify-center gap-12 text-medium">
-          {LOGIN_BUTTONS.map((button) => (
-            <LoginButtonItem
-              key={v4uuid()}
-              {...button}
-            />
-          ))}
+          {LOGIN_BUTTONS.map((button) => {
+            const { provider } = button;
+
+            return (
+              <LoginButtonItem
+                key={v4uuid()}
+                {...button}
+                className={`${provider === 'google' && 'gap-[2.4rem]'}`}
+              />
+            );
+          })}
         </ul>
       </form>
     </section>
