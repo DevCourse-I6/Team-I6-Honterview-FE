@@ -1,9 +1,10 @@
-import MSWComponent from '@/mocks/MSWcomponent';
 import '@/styles/global.css';
+
 import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ToastContainer } from 'react-toastify';
 
+import MSWComponent from '@/mocks/MSWcomponent';
 import ReactQueryProvider from '@/utils/ReactQueryProvider';
 
 export const metadata: Metadata = {
@@ -35,7 +36,7 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
           <MSWComponent>
             <ToastContainer />
             {/* <Header /> */}
-            {children}
+            <main>{children}</main>
             {/* <Footer /> */}
           </MSWComponent>
         </body>
