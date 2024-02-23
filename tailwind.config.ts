@@ -26,7 +26,7 @@ const config: Config = {
           20: '#F0F2F5',
         },
       },
-      size: {
+      fontSize: {
         extraSmall: '0.75rem',
         small: '0.875rem',
         medium: '1rem',
