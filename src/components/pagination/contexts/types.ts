@@ -6,6 +6,7 @@ export interface IPaginationContext {
   handleSelectPage: (newPage: number) => void;
   handleMovePrevPage: () => void;
   handleMoveNextPage: () => void;
+  createPageButtons: (className?: string) => void;
 }
 
 export interface IPaginationProviderProps {
