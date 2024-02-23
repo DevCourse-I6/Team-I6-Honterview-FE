@@ -22,11 +22,11 @@ const TermsAgreeSection = () => {
   return (
     <label
       htmlFor="agree"
-      className="flex w-full items-center justify-center gap-[1rem]"
+      className="flex w-full items-center justify-center gap-[1rem] font-semibold"
     >
       <input
         type="checkbox"
-        className="h-[1.5rem] w-[1.5rem] font-semibold"
+        className="h-[1.5rem] w-[1.5rem]"
         id="agree"
         onChange={handleCheckChange}
       />
