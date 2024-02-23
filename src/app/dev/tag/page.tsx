@@ -11,7 +11,7 @@ const TagDev = () => {
         Test <XIcon />
       </Tag>
       <Tag>
-        <XIcon /> Test <XIcon />
+        <XIcon className="text-black" /> Test <XIcon className="text-white" />
       </Tag>
     </>
   );
