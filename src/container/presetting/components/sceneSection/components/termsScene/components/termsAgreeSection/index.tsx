@@ -1,24 +1,23 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 import useStepStore from '@/container/presetting/stores/useStepStore';
 
 import { TERMS_AGREE_TEXT } from '../../constants';
 
 const TermsAgreeSection = () => {
-  const [isChecked, setIsChecked] = useState(false);
   const { setNextButton } = useStepStore();
+
+  useEffect(() => {
+    setNextButton(false);
+  }, []);
 
   const handleCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target) {
       return;
     }
     const { checked } = e.target;
-    setIsChecked(checked);
+    setNextButton(checked);
   };
-
-  useEffect(() => {
-    setNextButton(isChecked);
-  }, [isChecked, setNextButton]);
 
   return (
     <label
