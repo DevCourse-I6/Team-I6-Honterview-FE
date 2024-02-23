@@ -18,7 +18,7 @@ const Select = ({ value, options, className, ...props }: IProps) => {
     <select
       value={value}
       className={twMerge(
-        `relative h-[5rem] w-[35rem] cursor-pointer items-center justify-center rounded-lg border border-primaries-primary bg-text-20  text-text-80 outline-none ${className}`,
+        `inline-flex cursor-pointer rounded-lg border border-primaries-primary bg-text-20 px-[1rem] py-[1.2rem] text-left text-[1.6rem] text-text-80 outline-none ${className}`,
       )}
       {...props}
     >
