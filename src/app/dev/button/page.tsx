@@ -20,6 +20,7 @@ const ButtonDev = () => {
         김민수3
       </Button>
       <Button styleType={ButtonType.Type3}>김민수4</Button>
+      <Button styleType={ButtonType.Type4}>김민수4</Button>
     </>
   );
 };
