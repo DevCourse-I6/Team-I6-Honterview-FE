@@ -10,6 +10,7 @@ const useCamera = () => {
     mediaBlobUrl,
     clearBlobUrl,
     error,
+    pauseRecording,
   } = useReactMediaRecorder({ video: true });
   const [isRecording, setIsRecording] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
@@ -30,6 +31,7 @@ const useCamera = () => {
   return {
     status,
     startRecording,
+    pauseRecording,
     stopRecording,
     previewStream,
     mediaBlobUrl,
