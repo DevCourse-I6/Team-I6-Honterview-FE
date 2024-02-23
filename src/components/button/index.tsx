@@ -34,6 +34,8 @@ const Button = ({
     },
     primaryAlternate: {
       base: 'bg-text-20 border-primaries-primary text-primaries-primary',
+      hover: 'hover:text-primaries-hover hover:border-primaries-hover',
+      active: 'active:text-primaries-active active:border-primaries-active',
       disabled: 'disabled:text-text-40 disabled:border-text-40',
     },
     secondary: {
@@ -45,6 +47,8 @@ const Button = ({
     },
     secondaryAlternate: {
       base: 'bg-text-20 border-secondary-primary text-secondary-primary',
+      hover: 'hover:text-secondary-hover hover:border-secondary-hover',
+      active: 'active:text-secondary-active active:border-secondary-active',
       disabled: 'disabled:text-text-40 disabled:border-text-40',
     },
   };
