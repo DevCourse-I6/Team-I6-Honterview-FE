@@ -2,7 +2,7 @@ import {
   AnotherQuestions,
   Answer,
   TitleWithInterviewStart,
-} from '@/container/interview-questions/components';
+} from '@/container/questions/components';
 
 const Page = () => {
   return (
