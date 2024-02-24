@@ -1,10 +1,12 @@
+import 'react-toastify/dist/ReactToastify.css';
+
 import {
-  toast,
   Bounce,
+  toast,
   ToastContainer as ToastOption,
   ToastOptions,
 } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+
 import { TAlert } from './types';
 
 const ToastContainer = () => {

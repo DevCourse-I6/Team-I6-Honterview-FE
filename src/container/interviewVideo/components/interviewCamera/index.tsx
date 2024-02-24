@@ -4,15 +4,7 @@ import { MirrorView, useCamera } from '@/components/camera';
 import { DisabledCamera } from '@/components/icon';
 
 const InterviewCamera = () => {
-  const {
-    isLoading,
-    isRecording,
-    startRecording,
-    stopRecording,
-    previewStream,
-    mediaBlobUrl,
-    error,
-  } = useCamera();
+  const { isLoading, isRecording, previewStream } = useCamera();
 
   // TODO: 반드시 카메라를 켜야 진행이 된다
   if (!isLoading && !isRecording) {
