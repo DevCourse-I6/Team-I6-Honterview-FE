@@ -7,11 +7,11 @@ import QuestionContent from '@/container/interviewVideo/components/questionConte
 
 const InterviewVideoPage = () => {
   return (
-    <section className="fit-wrap flex flex-col gap-8 px-20 py-8 md:p-20">
+    <section className="fit-wrap flex min-w-[40rem] flex-col gap-8 px-20 py-8">
       <AnswerTimerProgressGroup />
-      <div className="flex grow flex-col items-stretch gap-4 md:flex-row">
+      <div className="flex grow flex-col gap-4 md:flex-row">
         <InterviewCamera />
-        <div className="flex grow basis-3/6 flex-col gap-4">
+        <div className="flex h-1/2 flex-col gap-4 md:h-full md:basis-1/2">
           <QuestionContent />
           <AnswerContent />
         </div>

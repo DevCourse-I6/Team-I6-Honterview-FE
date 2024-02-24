@@ -18,7 +18,7 @@ const AnswerTimerProgressGroup = () => {
   ];
 
   return (
-    <ul className="flex h-[1rem] gap-1">
+    <ul className="flex h-[1rem] shrink-0 gap-1">
       {answerData.map(({ limitTime }) => {
         return (
           <AnswerTimerProgress

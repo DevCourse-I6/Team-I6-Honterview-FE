@@ -2,22 +2,22 @@ import Button from '@/components/button';
 
 const QuestionContent = () => {
   const questionText =
-    '왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요왜 지원했나요';
+    '왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜왜지원왜지원왜지원왜지원왜원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원왜지원원왜지원원왜지원원왜지원';
 
   return (
-    <div className="flex basis-3/6 flex-col gap-2">
+    <div className="flex h-1/2 flex-col gap-2">
       <div className="flex items-center justify-between">
-        <h3 className="text-extraLarge font-semibold md:text-tripleLarge">
+        <h3 className="text-large font-semibold md:text-doubleLarge">
           질문 내용
         </h3>
         <Button
-          style={{ width: 'auto', height: 'auto', padding: '0.5rem 1rem' }}
-          className="text-large"
+          style={{ width: 'auto', height: 'auto', padding: '0.5rem 0.5rem' }}
+          className="text-[1rem] md:text-medium"
         >
           현재 꼬리 질문 변경
         </Button>
       </div>
-      <p className="max-h-[11.6rem] grow overflow-y-auto rounded-2xl bg-background-20 p-6 text-large font-medium md:max-h-[25.8rem]">
+      <p className="grow overflow-y-auto rounded-2xl bg-background-20 px-4 py-2 text-medium font-medium">
         {questionText}
       </p>
     </div>
