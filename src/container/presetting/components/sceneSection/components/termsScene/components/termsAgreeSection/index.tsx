@@ -9,6 +9,7 @@ const TermsAgreeSection = () => {
 
   useEffect(() => {
     setNextButton(false);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {

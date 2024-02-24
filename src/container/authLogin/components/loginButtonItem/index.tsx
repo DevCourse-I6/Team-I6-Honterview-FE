@@ -3,6 +3,7 @@ import { twMerge } from 'tailwind-merge';
 import { IProps } from './types';
 
 const LoginButtonItem = ({
+  // eslint-disable-next-line unused-imports/no-unused-vars
   provider,
   name,
   icon,
