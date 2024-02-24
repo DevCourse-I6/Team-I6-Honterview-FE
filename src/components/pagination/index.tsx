@@ -1,5 +1,7 @@
 'use client';
 
+import { twMerge } from 'tailwind-merge';
+
 import { PaginationProvider } from './contexts';
 import NextButton from './nextButton';
 import PageButtons from './pageButtons';
@@ -14,6 +16,8 @@ const Pagination = ({
   children,
   ...rest
 }: IProps) => {
+  const style = twMerge(`flex gap-6 text-large ${rest.className}`);
+
   return (
     <PaginationProvider
       defaultPage={defaultPage}
@@ -21,7 +25,7 @@ const Pagination = ({
       total={total}
       onPageChange={onPageChange}
     >
-      <div className={`flex gap-1 text-lg ${rest.className}`}>{children}</div>
+      <div className={style}>{children}</div>
     </PaginationProvider>
   );
 };

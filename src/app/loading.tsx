@@ -1,14 +1,7 @@
-import { SpinnerIcon } from '@/components/icon';
+import Loading from '@/components/loading';
 
 const PageLoading = () => {
-  return (
-    <div
-      className="flex h-screen w-screen items-center justify-center"
-      role="status"
-    >
-      <SpinnerIcon />
-    </div>
-  );
+  return <Loading className="wrap" />;
 };
 
 export default PageLoading;

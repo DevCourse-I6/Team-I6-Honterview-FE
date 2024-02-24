@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 import { v4 as uuidv4 } from 'uuid';
 
 import { IProps } from './types';
@@ -16,8 +17,9 @@ const Select = ({ value, options, className, ...props }: IProps) => {
   return (
     <select
       value={value}
-      className={`${className} relative h-[32px] cursor-pointer items-center justify-center rounded-lg border border-primaries-primary bg-text-20  text-text-80 outline-none`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
+      className={twMerge(
+        `inline-flex cursor-pointer rounded-lg border border-primaries-primary bg-text-20 px-[1rem] py-[1.2rem] text-left text-[1.6rem] text-text-80 outline-none ${className}`,
+      )}
       {...props}
     >
       {options.map((option) => (

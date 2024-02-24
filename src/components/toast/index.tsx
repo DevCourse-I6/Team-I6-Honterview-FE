@@ -30,7 +30,7 @@ const ToastContainer = () => {
 const Toast = ({ message }: { message: string }) => {
   return (
     <article>
-      <h3 className="text-base">{message}</h3>
+      <h3 className="text-medium">{message}</h3>
     </article>
   );
 };
