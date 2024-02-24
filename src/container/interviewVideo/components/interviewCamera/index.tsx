@@ -19,6 +19,7 @@ const InterviewCamera = () => {
     <MirrorView
       stream={previewStream}
       className="w-ful h-full"
+      isLoading={false}
     />
   );
 };
