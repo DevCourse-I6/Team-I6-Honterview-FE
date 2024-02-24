@@ -1,9 +1,10 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import Spinner from '@/components/spinner';
+import { SpinnerIcon } from '@/components/icon';
 
 import useGetInfinitePostList from '../hooks/useGetInfinitePostList';
 import { ICharactersResponse } from '../types/Characters';
@@ -22,14 +23,14 @@ const PostList = ({ initialData }: { initialData: ICharactersResponse }) => {
   return (
     <>
       {data?.pages.map((page) => (
-        <img
+        <Image
           key={page.id}
           src={page.image}
           alt={page.name}
         />
       ))}
       <div ref={ref} />
-      {(isLoading || isFetching) && <Spinner />}
+      {(isLoading || isFetching) && <SpinnerIcon />}
     </>
   );
 };

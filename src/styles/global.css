@@ -13,3 +13,23 @@ body {
 .wrap {
   min-height: calc(100vh - 7rem - 9rem);
 }
+
+.fit-wrap {
+  height: calc(100vh - 7rem - 9rem);
+}
+
+::-webkit-scrollbar {
+  width: 0.8rem;
+  padding: 0;
+  margin: 0;
+  border: none;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #a5a49e;
+  border-radius: 5px;
+}
