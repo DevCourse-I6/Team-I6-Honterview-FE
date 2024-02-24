@@ -15,7 +15,7 @@ const useSettingCameraScene = () => {
     pauseRecording,
   } = useCamera();
 
-  const { setNextButton } = useStepStore();
+  const { setNextButtonOn, setNextButtonOff } = useStepStore();
 
   useEffect(() => {
     startRecording();
@@ -23,10 +23,10 @@ const useSettingCameraScene = () => {
 
   useEffect(() => {
     if (isRecording || status === 'paused') {
-      setNextButton(true);
+      setNextButtonOn();
       pauseRecording();
     } else {
-      setNextButton(false);
+      setNextButtonOff();
     }
   }, [isRecording]);
 
