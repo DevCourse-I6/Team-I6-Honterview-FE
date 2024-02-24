@@ -11,17 +11,25 @@ const InterviewTypeScene = () => {
   const { setNextButtonOn, setNextButtonOff } = useStepStore();
   const { questionCount, answerTime, interviewType } = usePresettingDataStore();
   const [isTypeVisible, setIsTypeVisible] = useState(!!interviewType);
-  const [isTimeVisible, setIsTimeVisible] = useState(
-    !(answerTime[0] === 0 && answerTime[1] === 0),
-  );
+  const [isTimeVisible, setIsTimeVisible] = useState(!!interviewType);
 
   useEffect(() => {
-    if (questionCount && !(answerTime[0] === 0 && answerTime[1] === 0)) {
+    if (
+      questionCount &&
+      (interviewType === 'chatting' ||
+        !(answerTime[0] === 0 && answerTime[1] === 0))
+    ) {
       setNextButtonOn();
       return;
     }
     setNextButtonOff();
-  }, [answerTime, questionCount, setNextButtonOff, setNextButtonOn]);
+  }, [
+    answerTime,
+    interviewType,
+    questionCount,
+    setNextButtonOff,
+    setNextButtonOn,
+  ]);
 
   return (
     <div className="relative flex h-[50rem] w-[19rem] flex-col gap-[4rem] pt-[5rem]">
