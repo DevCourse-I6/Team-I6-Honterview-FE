@@ -10,7 +10,7 @@ import QuestionCountSection from './components/questionCount';
 const InterviewTypeScene = () => {
   const { setNextButtonOn, setNextButtonOff } = useStepStore();
   const { questionCount, answerTime, interviewType } = usePresettingDataStore();
-  const [isTypeVisible, setIsTypeVisible] = useState(!!interviewType);
+  const [isTypeVisible, setIsTypeVisible] = useState(!!questionCount);
   const [isTimeVisible, setIsTimeVisible] = useState(!!interviewType);
 
   useEffect(() => {
