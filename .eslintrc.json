@@ -28,7 +28,6 @@
     "simple-import-sort"
   ],
   "rules": {
-    "no-console": "off",
     "react/jsx-no-useless-fragment": "off",
     "jsx-a11y/label-has-associated-control": "off",
     "react-refresh/only-export-components": "off",
