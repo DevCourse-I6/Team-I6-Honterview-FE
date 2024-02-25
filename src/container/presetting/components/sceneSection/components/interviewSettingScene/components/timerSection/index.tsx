@@ -3,7 +3,7 @@ import usePresettingDataStore from '@/container/presetting/stores/usePresettingD
 import TimePicker from './components/timePicker';
 import { minuteData, secondData } from './constants';
 
-const AnswerTimeSection = () => {
+const TimerSection = () => {
   const { setAnswerTimeMin, setAnswerTimeSec, interviewType, answerTime } =
     usePresettingDataStore();
 
@@ -36,4 +36,4 @@ const AnswerTimeSection = () => {
   );
 };
 
-export default AnswerTimeSection;
+export default TimerSection;

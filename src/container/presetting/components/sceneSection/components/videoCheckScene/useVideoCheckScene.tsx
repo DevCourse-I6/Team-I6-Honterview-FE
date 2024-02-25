@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { useCamera } from '@/components/camera';
 import useStepStore from '@/container/presetting/stores/useStepStore';
 
-const useSettingCameraScene = () => {
+const useVideoCheckScene = () => {
   const {
     status,
     isLoading,
@@ -38,4 +38,4 @@ const useSettingCameraScene = () => {
   };
 };
 
-export default useSettingCameraScene;
+export default useVideoCheckScene;

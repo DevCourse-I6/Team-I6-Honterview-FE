@@ -3,11 +3,11 @@ import React, { useEffect, useState } from 'react';
 import usePresettingDataStore from '@/container/presetting/stores/usePresettingDataStore';
 import useStepStore from '@/container/presetting/stores/useStepStore';
 
-import AnswerTimeSection from './components/answerTime';
-import InterviewTypeSection from './components/interviewType';
-import QuestionCountSection from './components/questionCount';
+import CountSection from './components/countSection';
+import InterviewTypeSection from './components/interviewTypeSection';
+import TimerSection from './components/timerSection';
 
-const InterviewTypeScene = () => {
+const InterviewSettingScene = () => {
   const { setNextButtonOn, setNextButtonOff } = useStepStore();
   const { questionCount, answerTime, interviewType } = usePresettingDataStore();
   const [isTypeVisible, setIsTypeVisible] = useState(!!questionCount);
@@ -33,13 +33,13 @@ const InterviewTypeScene = () => {
 
   return (
     <div className="relative flex h-[50rem] w-[19rem] flex-col gap-[4rem] pt-[5rem]">
-      <QuestionCountSection setNextItemOn={() => setIsTypeVisible(true)} />
+      <CountSection setNextItemOn={() => setIsTypeVisible(true)} />
       {isTypeVisible && (
         <InterviewTypeSection setNextItemOn={() => setIsTimeVisible(true)} />
       )}
-      {isTimeVisible && <AnswerTimeSection />}
+      {isTimeVisible && <TimerSection />}
     </div>
   );
 };
 
-export default InterviewTypeScene;
+export default InterviewSettingScene;

@@ -1,17 +1,17 @@
 import useStepStore from '../../stores/useStepStore';
-import InterviewTypeScene from './components/interviewTypeScene';
-import QuestionScene from './components/questionScene';
-import SettingCameraScene from './components/settingCameraScene';
+import FirstQuestionScene from './components/firstQuestionScene';
+import InterviewSettingScene from './components/interviewSettingScene';
 import TermsScene from './components/termsScene';
+import VideoCheckScene from './components/videoCheckScene';
 
 const PreSettingSceneSection = () => {
   const { currentStep } = useStepStore();
   return (
     <div className="h-[50rem]">
-      {currentStep === 1 && <QuestionScene />}
-      {currentStep === 2 && <InterviewTypeScene />}
+      {currentStep === 1 && <FirstQuestionScene />}
+      {currentStep === 2 && <InterviewSettingScene />}
       {currentStep === 3 && <TermsScene />}
-      {currentStep === 4 && <SettingCameraScene />}
+      {currentStep === 4 && <VideoCheckScene />}
     </div>
   );
 };

@@ -4,7 +4,7 @@ import usePresettingDataStore from '@/container/presetting/stores/usePresettingD
 import { countData } from './constants';
 import { QuestionCountSectionProps } from './type';
 
-const QuestionCountSection = ({ setNextItemOn }: QuestionCountSectionProps) => {
+const CountSection = ({ setNextItemOn }: QuestionCountSectionProps) => {
   const { setQuestionCount, questionCount } = usePresettingDataStore();
 
   const handleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -32,4 +32,4 @@ const QuestionCountSection = ({ setNextItemOn }: QuestionCountSectionProps) => {
   );
 };
 
-export default QuestionCountSection;
+export default CountSection;
