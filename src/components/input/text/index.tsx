@@ -1,6 +1,7 @@
 'use client';
 
 import React from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { IProps } from './types';
 
@@ -13,8 +14,9 @@ import { IProps } from './types';
 const Text = ({ className, ...props }: IProps) => {
   return (
     <input
-      className={`w-full placeholder-text-40 outline-none ${className}`}
-      // eslint-disable-next-line react/jsx-props-no-spreading
+      className={twMerge(
+        `w-full text-[1.6rem] placeholder-text-40 outline-none ${className}`,
+      )}
       {...props}
     />
   );

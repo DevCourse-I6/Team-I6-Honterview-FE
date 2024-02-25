@@ -3,6 +3,7 @@
 'use client';
 
 import { createContext, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { IPaginationContext, IPaginationProviderProps } from './types';
 
@@ -12,6 +13,7 @@ export const PaginationContext = createContext<IPaginationContext>({
   handleSelectPage: () => {},
   handleMovePrevPage: () => {},
   handleMoveNextPage: () => {},
+  createPageButtons: () => {},
 });
 
 export const PaginationProvider = ({
@@ -41,6 +43,32 @@ export const PaginationProvider = ({
     }
   };
 
+  const createPageButtons = (className?: string) => {
+    return Array.from({ length: totalPages }, (_, index) => index + 1)
+      .filter((page) => {
+        const minPage = Math.floor((currentPage - 1) / 10) * 10 + 1;
+        const maxPage = minPage + 9;
+
+        return page >= minPage && page <= maxPage;
+      })
+      .map((page) => {
+        const style = twMerge(
+          `min-w-[4.5rem] py-4 text-center w-10 rounded-[50%] hover:rounded-[50%] hover:bg-[#E6E8EA] ${currentPage === page && 'bg-[#E6E8EA] font-bold'} ${className}`,
+        );
+
+        return (
+          <button
+            type="button"
+            key={page}
+            onClick={() => handleSelectPage(page)}
+            className={style}
+          >
+            {page}
+          </button>
+        );
+      });
+  };
+
   return (
     <PaginationContext.Provider
       value={{
@@ -49,6 +77,7 @@ export const PaginationProvider = ({
         handleSelectPage,
         handleMoveNextPage,
         handleMovePrevPage,
+        createPageButtons,
       }}
     >
       {children}

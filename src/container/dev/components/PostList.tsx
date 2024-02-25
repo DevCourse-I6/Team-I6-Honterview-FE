@@ -1,5 +1,6 @@
 'use client';
 
+import Image from 'next/image';
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -22,7 +23,7 @@ const PostList = ({ initialData }: { initialData: ICharactersResponse }) => {
   return (
     <>
       {data?.pages.map((page) => (
-        <img
+        <Image
           key={page.id}
           src={page.image}
           alt={page.name}
