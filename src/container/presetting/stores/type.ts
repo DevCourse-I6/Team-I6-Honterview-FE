@@ -11,7 +11,7 @@ export interface StepState {
 }
 
 export interface PresettingDataState {
-  firstQuestionTag: string[];
+  firstQuestionTags: string[];
   firstQuestion: string;
   questionCount: number;
   interviewType?: 'camera' | 'chatting';
