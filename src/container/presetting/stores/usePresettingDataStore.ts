@@ -7,7 +7,7 @@ const usePresettingDataStore = create<PresettingDataState>((set) => ({
   firstQuestion: '',
   questionCount: 0,
   interviewType: undefined,
-  answerTime: [0, 0],
+  answerTime: { minute: 0, second: 0 },
   addFirstQuestionTag: (tag) => {
     set(({ firstQuestionTag }) => {
       firstQuestionTag.push(tag);
@@ -44,14 +44,14 @@ const usePresettingDataStore = create<PresettingDataState>((set) => ({
       interviewType: 'chatting',
     }));
   },
-  setAnswerTimeMin: (min) => {
+  setTimeMinute: (minute) => {
     set(({ answerTime }) => ({
-      answerTime: [min, answerTime[1]],
+      answerTime: { ...answerTime, minute },
     }));
   },
-  setAnswerTimeSec: (sec) => {
+  setTimeSecond: (second) => {
     set(({ answerTime }) => ({
-      answerTime: [answerTime[0], sec],
+      answerTime: { ...answerTime, second },
     }));
   },
 }));

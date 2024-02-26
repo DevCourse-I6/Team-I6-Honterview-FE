@@ -1,6 +1,7 @@
 export interface TimePickerProps {
-  type: 'min' | 'sec';
+  type: 'minute' | 'second';
   timeRange: number[];
+  index: number;
+  isArrowDisabled?: boolean;
   onChange: (num: number) => void;
-  value: number;
 }

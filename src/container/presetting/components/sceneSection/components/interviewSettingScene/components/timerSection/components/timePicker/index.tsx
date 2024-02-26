@@ -1,47 +1,69 @@
 import { useState } from 'react';
 
-import { ArrowDown, ArrowUp } from '@/components/icon';
+import {
+  ArrowDownPrimary,
+  ArrowDownSecondary,
+  ArrowUpPrimary,
+  ArrowUpSecondary,
+} from '@/components/icon';
 
 import { TimePickerProps } from './type';
 
-const TimePicker = ({ type, timeRange, onChange, value }: TimePickerProps) => {
-  const [idx, setIdx] = useState(timeRange.indexOf(value));
+const TimePicker = ({
+  type,
+  timeRange,
+  index,
+  isArrowDisabled,
+  onChange,
+}: TimePickerProps) => {
+  const [isUpLimit, setIsUpLimit] = useState(timeRange.length - 1 === index);
+  const [isDownLimit, setIsDownLimit] = useState(index === 0);
 
   const handleUpButton = () => {
-    if (idx + 1 >= timeRange.length) {
-      return;
+    if (index + 1 === timeRange.length - 1) {
+      setIsUpLimit(true);
     }
-    onChange(timeRange[idx + 1]);
-    setIdx(idx + 1);
+    onChange(timeRange[index + 1]);
+    setIsDownLimit(false);
   };
 
   const handleDownButton = () => {
-    if (idx - 1 < 0) {
-      return;
+    if (index - 1 === 0) {
+      setIsDownLimit(true);
     }
-    onChange(timeRange[idx - 1]);
-    setIdx(idx - 1);
+    onChange(timeRange[index - 1]);
+    setIsUpLimit(false);
   };
 
   return (
     <div className="inline-flex flex-col items-center justify-around">
       <button
         type="button"
-        className="flex cursor-pointer items-center justify-center"
+        className="flex items-center justify-center"
         onClick={handleUpButton}
+        disabled={isUpLimit || isArrowDisabled}
       >
-        <ArrowUp />
+        {isUpLimit || isArrowDisabled ? (
+          <ArrowUpSecondary />
+        ) : (
+          <ArrowUpPrimary />
+        )}
       </button>
       <div className="flex w-[4rem] items-center justify-center text-medium text-zinc-700">
-        {value}
-        {type === 'min' ? '분' : '초'}
+        {timeRange[index]}
+        {type === 'minute' ? '분' : '초'}
       </div>
       <button
         type="button"
-        className="flex cursor-pointer items-center justify-center"
+        className="flex items-center justify-center"
         onClick={handleDownButton}
+        disabled={isDownLimit || isArrowDisabled}
       >
-        <ArrowDown />
+        {isDownLimit || isArrowDisabled ? (
+          <ArrowDownSecondary />
+        ) : (
+          <ArrowDownPrimary />
+        )}
       </button>
     </div>
   );

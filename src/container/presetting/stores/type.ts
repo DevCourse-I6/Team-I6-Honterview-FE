@@ -15,13 +15,13 @@ export interface PresettingDataState {
   firstQuestion: string;
   questionCount: number;
   interviewType?: 'camera' | 'chatting';
-  answerTime: [number, number];
+  answerTime: { minute: number; second: number };
   addFirstQuestionTag: (tag: string) => void;
   removeFirstQuestionTag: (tag: string) => void;
   setFirstQuestion: (question: string) => void;
   setQuestionCount: (count: number) => void;
   setInterviewTypeCamera: () => void;
   setInterviewTypeChatting: () => void;
-  setAnswerTimeMin: (min: number) => void;
-  setAnswerTimeSec: (sec: number) => void;
+  setTimeMinute: (minute: number) => void;
+  setTimeSecond: (second: number) => void;
 }

@@ -14,10 +14,10 @@ const InterviewSettingScene = () => {
   const [isTimeVisible, setIsTimeVisible] = useState(!!interviewType);
 
   useEffect(() => {
+    const { minute, second } = answerTime;
     if (
       questionCount &&
-      (interviewType === 'chatting' ||
-        !(answerTime[0] === 0 && answerTime[1] === 0))
+      (interviewType === 'chatting' || !(minute === 0 && second === 0))
     ) {
       setNextButtonOn();
       return;
