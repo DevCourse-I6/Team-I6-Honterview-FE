@@ -25,7 +25,7 @@ const PreSettingButtonSection = () => {
       increaseStep();
     } else {
       router.push(
-        interviewType === 'camera' ? '/interview/camera' : 'interview/chatting',
+        interviewType === 'camera' ? '/interview/video' : 'interview/chatting',
       );
     }
   };
