@@ -1,3 +1,5 @@
+'use client';
+
 import './style/style.css';
 
 import { useEffect, useState } from 'react';
@@ -59,6 +61,9 @@ const AutoCompleteSearch = ({
         );
         break;
       case 'Enter':
+        if (keyboardIndex < 0) {
+          return;
+        }
         handleSelectItem(autoCompleteList[keyboardIndex].name);
         break;
       default:
@@ -90,7 +95,11 @@ const AutoCompleteSearch = ({
                 className="h-[2rem] text-small"
                 onChange={handleChangeInput}
                 value={inputValue}
-                onClick={() => !!selectedList.length && setIsListVisible(true)}
+                onClick={() =>
+                  !!autoCompleteList.length &&
+                  inputValue &&
+                  setIsListVisible(true)
+                }
                 placeholder="검색어를 입력하세요"
               />
             </div>
