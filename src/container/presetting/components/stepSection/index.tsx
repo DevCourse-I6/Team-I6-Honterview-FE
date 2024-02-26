@@ -1,3 +1,6 @@
+import { useEffect } from 'react';
+
+import usePresettingDataStore from '../../stores/usePresettingDataStore';
 import useStepStore from '../../stores/useStepStore';
 import StepBar from './components/stepBar';
 import StepCircle from './components/stepCircle';
@@ -5,11 +8,21 @@ import { TITLE_LIST } from './constants/stepTitle';
 import { StepNumber } from './type';
 
 const StepSection = () => {
-  const { currentStep } = useStepStore();
+  const { currentStep, totalStep, setCameraStep, setChattingStep } =
+    useStepStore();
+  const { interviewType } = usePresettingDataStore();
+
+  useEffect(() => {
+    if (interviewType === 'camera' || interviewType === undefined) {
+      setCameraStep();
+      return;
+    }
+    setChattingStep();
+  }, [interviewType, setCameraStep, setChattingStep]);
 
   return (
     <div className="relative flex h-[10rem] items-center justify-between gap-[3rem] px-[7rem] font-semibold">
-      {[1, 2, 3, 4].map((step) => (
+      {Array.from({ length: totalStep }, (_, i) => i + 1).map((step) => (
         <div
           key={`step-div-${step}`}
           className="flex flex-row items-center gap-[3rem]"
@@ -21,7 +34,7 @@ const StepSection = () => {
             title={TITLE_LIST[step as StepNumber]}
             isCurrent={currentStep === step}
           />
-          {step !== 4 && (
+          {step !== totalStep && (
             <StepBar
               key={`step-bar-${step}`}
               isPassed={currentStep > step}
