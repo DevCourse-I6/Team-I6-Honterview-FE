@@ -7,7 +7,7 @@ const InterviewResultPage = () => {
       <div className="m-auto w-fit max-w-6xl">
         <div className="mb-5 aspect-video rounded bg-slate-50">영상</div>
         <div className="flex w-full justify-between">
-          <h1 className="text-extraLarge mb-10 font-bold">
+          <h1 className="mb-10 text-extraLarge font-bold">
             브라우저 렌더링 원리에 대해서 설명해보세요.
           </h1>
 
