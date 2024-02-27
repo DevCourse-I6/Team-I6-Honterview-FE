@@ -5,7 +5,7 @@ import Button from '../button';
 const navigation = [
   {
     title: '면접질문',
-    url: '/',
+    url: '/questions/list',
     replace: false,
     scroll: false,
   },

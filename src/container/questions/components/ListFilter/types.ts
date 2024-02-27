@@ -3,3 +3,27 @@ export interface IProps {
   handleTagClick: (tag: string) => void;
   selectedTags: string[];
 }
+
+export interface FilterInputProps {
+  searchQuery: string;
+  setSearchQuery: (searchQuery: string) => void;
+}
+
+export interface ToggleProps {
+  toggle: boolean;
+  setToggle: (toggle: boolean) => void;
+}
+
+export interface UnSelectedTagsProps {
+  filteredData: {
+    name: string;
+    id: string;
+  }[];
+  handleTagClick: (name: string) => void;
+}
+
+export interface SelectedTagsProps {
+  selectedTags: string[];
+  setSelectedTags: (selectedTags: string[]) => void;
+  handleTagClick: (name: string) => void;
+}

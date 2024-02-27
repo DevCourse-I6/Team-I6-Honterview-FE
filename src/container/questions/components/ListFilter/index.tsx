@@ -1,11 +1,34 @@
 import { useState } from 'react';
-import { v4 as uuidv4 } from 'uuid';
 
-import Button, { ButtonType } from '@/components/button';
-import { ArrowDown, ArrowUp, Reset, Search, XIcon } from '@/components/icon';
-import Input from '@/components/input';
-
+import FilterInput from './components/filterInput';
+import SelectedTags from './components/selectedTags';
+import Toggle from './components/toggle';
+import UnSelectedTags from './components/unSelectedTags';
 import { IProps } from './types';
+
+const data = [
+  { name: 'JavaScript', id: '1' },
+  { name: 'Java', id: '2' },
+  { name: 'React', id: '3' },
+  { name: 'TypeScript', id: '4' },
+  { name: 'HTML/CSS', id: '5' },
+  { name: 'SQL', id: '6' },
+  { name: 'MSSQL', id: '7' },
+  { name: 'Vue.js', id: '8' },
+  { name: 'Next.js', id: '9' },
+  { name: 'Spring', id: '10' },
+  { name: 'REST API', id: '11' },
+  { name: 'vanilla-javascript', id: '12' },
+  { name: 'Node.js', id: '13' },
+  { name: 'ES6', id: '14' },
+  { name: 'ES5', id: '15' },
+  { name: 'Python', id: '16' },
+  { name: 'Express', id: '17' },
+  { name: 'Mongo DB', id: '18' },
+  { name: 'Firebase', id: '19' },
+  { name: 'Django', id: '20' },
+  { name: 'jQuery', id: '21' },
+];
 
 const ListFilter = ({
   setSelectedTags,
@@ -15,102 +38,35 @@ const ListFilter = ({
   const [toggle, setToggle] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const handleSearchInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    setSearchQuery(event.target.value);
-  };
-
-  const handleResetClick = () => {
-    setSelectedTags([]);
-  };
+  const filteredData = data.filter((tag) =>
+    tag.name.toLowerCase().includes(searchQuery.toLowerCase()),
+  );
 
   return (
-    <div className="">
+    <div>
       <div
         className="relative flex gap-4 "
         style={toggle ? { overflow: 'hidden' } : { flexWrap: 'wrap' }}
       >
-        <Input className="h-[4rem] w-[20rem] flex-none rounded-[1rem] px-[12px] py-[5px]">
-          <Input.Text
-            onChange={handleSearchInputChange}
-            value={searchQuery}
-            placeholder="기술 검색"
-            className="text-[1.6rem]"
-          />
-          <Search className="cursor-pointer text-[#e5e7eb]" />
-        </Input>
-        <div className="contents gap-4">
-          {[
-            'JavaScript',
-            'Java',
-            'React',
-            'TypeScript',
-            'HTML/CSS',
-            'SQL',
-            'MSSQL',
-            'Vue.js',
-            'Next.js',
-            'Spring',
-            'REST API',
-            'vanilla-javascript',
-            'Node.js',
-            'ES6',
-            'ES5',
-            'Python',
-            'Express',
-            'Mongo DB',
-            'Firebase',
-            'Django',
-            'jQuery',
-          ]
-            .filter((tag) =>
-              tag.toLowerCase().includes(searchQuery.toLowerCase()),
-            )
-            .map((tag) => (
-              <Button
-                className="h-[4rem] flex-none rounded-[1rem] border-text-40 px-2 py-2 text-black"
-                styleType={ButtonType.Type2}
-                key={uuidv4()}
-                onClick={() => handleTagClick(tag)}
-              >
-                {tag}
-              </Button>
-            ))}
-        </div>
-        <div className="absolute right-0 bg-gradient-to-r from-transparent via-white/50 to-white pl-5 ">
-          <Button
-            className="h-[4rem] flex-none rounded-[1rem] px-2 py-2 text-black"
-            styleType={ButtonType.Type2}
-            onClick={() => setToggle(!toggle)}
-          >
-            {toggle ? <ArrowDown /> : <ArrowUp />}
-          </Button>
-        </div>
+        <FilterInput
+          searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+        />
+        <UnSelectedTags
+          filteredData={filteredData}
+          handleTagClick={handleTagClick}
+        />
+        <Toggle
+          toggle={toggle}
+          setToggle={setToggle}
+        />
       </div>
-      <div className="flex flex-wrap gap-4 py-4">
-        {selectedTags.map((tag: string) => (
-          <Button
-            key={uuidv4()}
-            styleType={ButtonType.Type2}
-            className="flex h-[4rem] gap-2 rounded-[1rem] px-2 py-2 text-primaries-primary"
-          >
-            {tag}
-            <XIcon
-              className=""
-              onClick={() => handleTagClick(tag)}
-            />
-          </Button>
-        ))}
-        {selectedTags.length > 0 && (
-          <div className="flex items-center">
-            <Reset
-              onClick={handleResetClick}
-              className="cursor-pointer"
-            />
-          </div>
-        )}
-      </div>
+
+      <SelectedTags
+        selectedTags={selectedTags}
+        setSelectedTags={setSelectedTags}
+        handleTagClick={handleTagClick}
+      />
     </div>
   );
 };
