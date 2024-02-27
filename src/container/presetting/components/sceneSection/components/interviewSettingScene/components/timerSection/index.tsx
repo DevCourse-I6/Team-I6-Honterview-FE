@@ -8,7 +8,9 @@ import { minuteData, secondData } from './constants';
 const TimerSection = () => {
   const { setTimeMinute, setTimeSecond, interviewType, answerTime } =
     usePresettingDataStore();
-  const [isSecondDisabled, setIsSecondDisabled] = useState(false);
+  const [isSecondDisabled, setIsSecondDisabled] = useState(
+    answerTime.minute === minuteData[minuteData.length - 1],
+  );
 
   if (interviewType === 'chatting') {
     return;
