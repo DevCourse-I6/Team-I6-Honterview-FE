@@ -51,6 +51,8 @@ const ListFilter = ({
         <FilterInput
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
+          filteredData={filteredData}
+          handleTagClick={handleTagClick}
         />
         <UnSelectedTags
           filteredData={filteredData}

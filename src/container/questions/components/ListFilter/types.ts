@@ -7,6 +7,11 @@ export interface IProps {
 export interface FilterInputProps {
   searchQuery: string;
   setSearchQuery: (searchQuery: string) => void;
+  handleTagClick: (tag: string) => void;
+  filteredData: {
+    name: string;
+    id: string;
+  }[];
 }
 
 export interface ToggleProps {
