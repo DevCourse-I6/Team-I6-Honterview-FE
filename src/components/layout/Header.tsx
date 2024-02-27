@@ -11,7 +11,7 @@ const navigation = [
   },
   {
     title: '면접연습',
-    url: '/',
+    url: '/interview/presetting',
     replace: false,
     scroll: false,
   },
