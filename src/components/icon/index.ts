@@ -13,4 +13,4 @@ export { default as SpinnerIcon } from './svg/Spinner.svg';
 export { default as SuccessIcon } from './svg/Success.svg';
 export { default as XIcon } from './svg/X.svg';
 
-console.log('..');
+console.log('.');
