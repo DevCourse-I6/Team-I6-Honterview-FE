@@ -1,1 +1,3 @@
-export const handlers = [];
+import interviewsHandlers from './interview';
+
+export const handlers = [...interviewsHandlers];
