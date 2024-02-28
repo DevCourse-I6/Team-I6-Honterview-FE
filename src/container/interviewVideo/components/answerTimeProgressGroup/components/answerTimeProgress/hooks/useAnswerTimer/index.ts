@@ -11,16 +11,16 @@ const useAnswerTimer = ({ defaultTime, timer, enabled, onEnded }: IProps) => {
     }
 
     const intervalId = setInterval(() => {
-      setTime((prevTimer) => {
-        const newTimer = prevTimer + 1;
+      setTime((prevTime) => {
+        const newTime = prevTime + 1;
 
-        if (newTimer >= timer) {
+        if (newTime >= timer) {
           onEnded && onEnded(timer);
           clearInterval(intervalId);
           return timer;
         }
 
-        return newTimer;
+        return newTime;
       });
     }, 1000);
 
