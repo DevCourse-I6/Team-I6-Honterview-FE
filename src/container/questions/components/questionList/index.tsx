@@ -7,7 +7,7 @@ import QuestionTag from './components/questionTag';
 import QuestionTitle from './components/questionTitle';
 import { IProps } from './types';
 
-const ListQuestions = ({ handleTagClick }: IProps) => {
+const QuestionList = ({ handleTagClick }: IProps) => {
   const data = [
     {
       content: '인생이란 무엇일까',
@@ -44,4 +44,4 @@ const ListQuestions = ({ handleTagClick }: IProps) => {
   );
 };
 
-export default ListQuestions;
+export default QuestionList;
