@@ -30,7 +30,7 @@ const data = [
   { name: 'jQuery', id: '21' },
 ];
 
-const ListFilter = ({
+const QuestionFilter = ({
   setSelectedTags,
   handleTagClick,
   selectedTags,
@@ -73,4 +73,4 @@ const ListFilter = ({
   );
 };
 
-export default ListFilter;
+export default QuestionFilter;

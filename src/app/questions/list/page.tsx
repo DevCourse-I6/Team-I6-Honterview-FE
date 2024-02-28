@@ -4,9 +4,9 @@ import { useState } from 'react';
 
 import Pagination from '@/components/pagination';
 import { notify } from '@/components/toast';
-import ListFilter from '@/container/questions/components/ListFilter';
-import ListInput from '@/container/questions/components/listInput';
-import ListQuestions from '@/container/questions/components/ListQuestions';
+import QuestionFilter from '@/container/questions/components/questionFilter';
+import QuestionInput from '@/container/questions/components/questionInput';
+import QuestionList from '@/container/questions/components/questionList';
 
 const QuestionsListPage = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
@@ -26,14 +26,14 @@ const QuestionsListPage = () => {
   return (
     <section>
       <div className="flex min-w-[40rem] flex-col gap-8 px-20 py-8">
-        <ListInput />
+        <QuestionInput />
 
-        <ListFilter
+        <QuestionFilter
           handleTagClick={handleTagClick}
           selectedTags={selectedTags}
           setSelectedTags={setSelectedTags}
         />
-        <ListQuestions handleTagClick={handleTagClick} />
+        <QuestionList handleTagClick={handleTagClick} />
       </div>
       <Pagination
         className="justify-center pb-10"

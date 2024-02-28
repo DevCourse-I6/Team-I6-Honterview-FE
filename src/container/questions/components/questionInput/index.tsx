@@ -1,7 +1,7 @@
 import { Search } from '@/components/icon';
 import Input from '@/components/input';
 
-const ListInput = () => {
+const questionInput = () => {
   return (
     <div className="flex flex-col items-center gap-10 py-10">
       <h1 className="text-tripleLarge font-bold">질문검색</h1>
@@ -15,4 +15,4 @@ const ListInput = () => {
   );
 };
 
-export default ListInput;
+export default questionInput;
