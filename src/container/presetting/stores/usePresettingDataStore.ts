@@ -3,24 +3,24 @@ import { create } from 'zustand';
 import { PresettingDataState } from './type';
 
 const usePresettingDataStore = create<PresettingDataState>((set) => ({
-  firstQuestionTag: [],
-  firstQuestion: '',
+  firstQuestionTags: [],
+  firstQuestion: undefined,
   questionCount: 0,
   interviewType: undefined,
   answerTime: { minute: 0, second: 0 },
   addFirstQuestionTag: (tag) => {
-    set(({ firstQuestionTag }) => {
-      firstQuestionTag.push(tag);
+    set(({ firstQuestionTags }) => {
+      firstQuestionTags.push(tag);
       return {
-        firstQuestionTag,
+        firstQuestionTags,
       };
     });
   },
   removeFirstQuestionTag: (tag) => {
-    set(({ firstQuestionTag }) => {
-      firstQuestionTag.splice(firstQuestionTag.indexOf(tag));
+    set(({ firstQuestionTags }) => {
+      firstQuestionTags.splice(firstQuestionTags.indexOf(tag));
       return {
-        firstQuestionTag,
+        firstQuestionTags,
       };
     });
   },
