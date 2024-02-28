@@ -8,10 +8,11 @@ const TagDev = () => {
     <>
       <Tag>Test</Tag>
       <Tag>
-        Test <XIcon />
+        Test <XIcon className="h-[14px] w-[14px] stroke-white" />
       </Tag>
       <Tag>
-        <XIcon /> Test <XIcon />
+        <XIcon className="h-[14px] w-[14px] stroke-white" /> Test
+        <XIcon className="h-[14px] w-[14px] stroke-white" />
       </Tag>
     </>
   );
