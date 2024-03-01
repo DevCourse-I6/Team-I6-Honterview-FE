@@ -4,9 +4,20 @@ export interface IProps {
   };
 }
 
+export interface IGetQuestionById {
+  message: string;
+  data: IQuestion;
+}
+
+export interface IGetRandomQuestionsByCategories {
+  message: string;
+  data: ITailQuestion[];
+}
+
 export interface IQuestion {
   id: number;
   content: string;
+  categoryNames: string[];
   answers: IAnswerPage;
 }
 

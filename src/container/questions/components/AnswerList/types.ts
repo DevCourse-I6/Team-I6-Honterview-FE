@@ -1,6 +1,6 @@
-import { IAnswer } from '@/container/questions/types';
+import { IGetQuestionById } from '@/container/questions/types';
 
 export interface IProps {
-  initialData: IAnswer[];
+  initialData: IGetQuestionById;
   questionId: string;
 }
