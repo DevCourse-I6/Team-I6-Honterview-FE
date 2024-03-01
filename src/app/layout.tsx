@@ -5,7 +5,7 @@ import localFont from 'next/font/local';
 import { ToastContainer } from 'react-toastify';
 
 import { Footer, Header } from '@/components/layout';
-import MSWComponent from '@/mocks/MSWcomponent';
+import MswProvider from '@/mocks/mswProvider';
 import ReactQueryProvider from '@/utils/ReactQueryProvider';
 
 export const metadata: Metadata = {
@@ -18,14 +18,6 @@ const font = localFont({
   display: 'swap',
 });
 
-(async () => {
-  if (process.env.NEXT_PUBLIC_API_MOCKING === 'enabled') {
-    const { initializeMocking } = await import('@/mocks');
-
-    await initializeMocking();
-  }
-})();
-
 const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
   return (
     <ReactQueryProvider>
@@ -34,12 +26,12 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
         className={font.className}
       >
         <body>
-          <MSWComponent>
+          <MswProvider>
             <ToastContainer />
             <Header />
             <main>{children}</main>
             <Footer />
-          </MSWComponent>
+          </MswProvider>
         </body>
       </html>
     </ReactQueryProvider>
