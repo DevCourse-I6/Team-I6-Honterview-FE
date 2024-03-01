@@ -1,6 +1,7 @@
 export const question = {
   id: 12,
   content: 'JVM의 역할에 대해 설명해주세요.',
+  categoryNames: ['Backend', 'Java'],
   answers: {
     currentPage: 1,
     pageSize: 5,
