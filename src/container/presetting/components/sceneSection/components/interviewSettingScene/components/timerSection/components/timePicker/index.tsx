@@ -1,10 +1,10 @@
 import { useState } from 'react';
 
 import {
-  ArrowDownPrimary,
-  ArrowDownSecondary,
-  ArrowUpPrimary,
-  ArrowUpSecondary,
+  ArrowDownPrimaryIcon,
+  ArrowDownSecondaryIcon,
+  ArrowUpPrimaryIcon,
+  ArrowUpSecondaryIcon,
 } from '@/components/icon';
 
 import { TimePickerProps } from './type';
@@ -44,9 +44,9 @@ const TimePicker = ({
         disabled={isUpLimit || isArrowDisabled}
       >
         {isUpLimit || isArrowDisabled ? (
-          <ArrowUpSecondary />
+          <ArrowUpSecondaryIcon />
         ) : (
-          <ArrowUpPrimary />
+          <ArrowUpPrimaryIcon />
         )}
       </button>
       <div className="flex w-[4rem] items-center justify-center text-medium text-zinc-700">
@@ -60,9 +60,9 @@ const TimePicker = ({
         disabled={isDownLimit || isArrowDisabled}
       >
         {isDownLimit || isArrowDisabled ? (
-          <ArrowDownSecondary />
+          <ArrowDownSecondaryIcon />
         ) : (
-          <ArrowDownPrimary />
+          <ArrowDownPrimaryIcon />
         )}
       </button>
     </div>

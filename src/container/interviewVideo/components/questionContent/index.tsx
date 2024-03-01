@@ -11,8 +11,8 @@ const QuestionContent = () => {
           질문 내용
         </h3>
         <Button
-          style={{ width: 'auto', height: 'auto', padding: '0.5rem 0.5rem' }}
-          className="text-[1rem] md:text-medium"
+          style={{ width: 'auto', height: 'auto', padding: '0.5rem 1rem' }}
+          className="h-auto w-auto px-[0.5] py-4 text-small text-white md:text-medium"
         >
           현재 꼬리 질문 변경
         </Button>
