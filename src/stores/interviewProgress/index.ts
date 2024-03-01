@@ -18,6 +18,15 @@ const useInterviewProgress = create(
         set((state) => ({
           interview: { ...state.interview, ...newInterview },
         })),
+      reset: () =>
+        set(() => ({
+          interview: {
+            id: null,
+            progressingTime: 0,
+            questionContent: '',
+            answerContent: '',
+          },
+        })),
     }),
     {
       name: LOCAL_STORAGE_KEY.INTERVIEW_PROGRESS,

@@ -8,4 +8,5 @@ export interface IInterviewProgress {
 export interface IUseInterviewProgress {
   interview: IInterviewProgress;
   setInterview: (newInterview: Partial<IInterviewProgress>) => void;
+  reset: () => void;
 }
