@@ -1,7 +1,18 @@
+export interface IProps {
+  params: {
+    questionId: string;
+  };
+}
+
 export interface IQuestion {
   id: number;
   content: string;
   answers: IAnswerPage;
+}
+
+export interface ITailQuestion {
+  id: number;
+  content: string;
 }
 
 export interface IAnswer {

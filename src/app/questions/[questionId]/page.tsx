@@ -7,8 +7,9 @@ import {
   getQuestionById,
   getRandomQuestionsByCategories,
 } from '@/container/questions/services';
+import { IProps } from '@/container/questions/types';
 
-const Page = async ({ params }: { params: { questionId: string } }) => {
+const Page = async ({ params }: IProps) => {
   const { questionId } = params;
 
   // getQuestionById

@@ -1,6 +1,5 @@
+import { ITailQuestion } from '../../types';
+
 export interface IProps {
-  tailQuestionData: {
-    id: number;
-    content: string;
-  }[];
+  tailQuestionData: ITailQuestion[];
 }
