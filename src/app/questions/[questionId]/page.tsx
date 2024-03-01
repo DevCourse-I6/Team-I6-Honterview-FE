@@ -1,13 +1,18 @@
 import {
-  AnotherQuestions,
+  TailQuestions,
   TitleWithInterviewStart,
 } from '@/container/questions/components';
 import AnswerList from '@/container/questions/components/AnswerList';
-import { getQuestionById } from '@/container/questions/services';
+import {
+  getQuestionById,
+  getRandomQuestionsByCategories,
+} from '@/container/questions/services';
 
 const Page = async ({ params }: { params: { questionId: string } }) => {
   const { questionId } = params;
-  const initialData = await getQuestionById({
+
+  // getQuestionById
+  const questionInitialData = await getQuestionById({
     questionId,
     page: 1,
     size: 5,
@@ -15,7 +20,11 @@ const Page = async ({ params }: { params: { questionId: string } }) => {
 
   const {
     data: { content: questionTitle },
-  } = initialData;
+  } = questionInitialData;
+
+  // getRandomQuestionsByCategories
+  const { data: tailQuestionData } =
+    await getRandomQuestionsByCategories(questionId);
 
   return (
     <div className="m-auto max-w-[800px]">
@@ -24,12 +33,12 @@ const Page = async ({ params }: { params: { questionId: string } }) => {
       </div>
       <div className="flex flex-col gap-16">
         <AnswerList
-          initialData={initialData}
+          initialData={questionInitialData}
           questionId={questionId}
         />
       </div>
       <hr className="my-20" />
-      <AnotherQuestions />
+      <TailQuestions tailQuestionData={tailQuestionData} />
     </div>
   );
 };
