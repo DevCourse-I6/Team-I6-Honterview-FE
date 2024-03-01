@@ -27,7 +27,7 @@ const TitleWidthModal = () => {
       <Modal
         visible={visible}
         onClose={toggleVisible}
-        className="relative h-[70%] w-[70%] overflow-auto rounded-3xl bg-slate-300 px-16 py-10 shadow-2xl"
+        className="relative h-[70%] w-[70%] rounded-3xl bg-slate-300 px-16 py-10 shadow-2xl"
       >
         <button
           type="button"
@@ -39,9 +39,12 @@ const TitleWidthModal = () => {
         <h1 className="mb-10 text-doubleLarge">
           브라우저 렌더링 원리에 대해서 설명해보세요.
         </h1>
-        <Answer className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl" />
-        <Answer className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl" />
-        <Answer className=" rounded-2xl bg-slate-200 p-10 shadow-xl" />
+        <div className="h-[calc(100%-2.5rem-90px)] overflow-auto">
+          <Answer className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl" />
+          <Answer className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl" />
+          <Answer className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl" />
+          <Answer className=" rounded-2xl bg-slate-200 p-10 shadow-xl" />
+        </div>
       </Modal>
     </>
   );
