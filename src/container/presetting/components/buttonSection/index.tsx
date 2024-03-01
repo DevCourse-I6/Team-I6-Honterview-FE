@@ -3,11 +3,13 @@ import { useRouter } from 'next/navigation';
 import Button from '@/components/button';
 import { ButtonType } from '@/components/button/types';
 
+import usePresettingDataStore from '../../stores/usePresettingDataStore';
 import useStepStore from '../../stores/useStepStore';
 
 const PreSettingButtonSection = () => {
-  const { currentStep, increaseStep, decreaseStep, isNextButtonOn } =
+  const { totalStep, currentStep, increaseStep, decreaseStep, isNextButtonOn } =
     useStepStore();
+  const { interviewType } = usePresettingDataStore();
   const router = useRouter();
 
   const handlePrevButton = () => {
@@ -19,10 +21,12 @@ const PreSettingButtonSection = () => {
   };
 
   const handleNextButton = () => {
-    if (currentStep < 4) {
+    if (currentStep < totalStep) {
       increaseStep();
     } else {
-      router.push('/interview'); // TODO: 화상 인터뷰 url로 교체
+      router.push(
+        interviewType === 'camera' ? '/interview/video' : 'interview/chatting',
+      );
     }
   };
 
@@ -30,19 +34,17 @@ const PreSettingButtonSection = () => {
     <div className="absolute bottom-0 flex gap-[1rem]">
       <Button
         styleType={ButtonType.Type3}
-        className="bottom-[2.86rem]"
+        className="mb-[3rem] h-[4rem] w-[9rem] px-[0rem]"
         onClick={handlePrevButton}
-        style={{ height: '4rem', width: '9rem' }}
       >
         이전
       </Button>
       <Button
-        className="bottom-[2.86rem]"
+        className="mb-[3rem] h-[4rem] w-[9rem] px-[0rem]"
         onClick={handleNextButton}
-        style={{ height: '4rem', width: '9rem' }}
         disabled={!isNextButtonOn}
       >
-        {currentStep === 4 ? '시작' : '다음'}
+        {currentStep === totalStep ? '시작' : '다음'}
       </Button>
     </div>
   );

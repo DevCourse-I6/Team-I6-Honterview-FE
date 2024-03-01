@@ -22,16 +22,16 @@ const MirrorView = ({
     }
   }, [stream]);
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   if (error) {
     return <CameraErrorView error={error} />;
   }
 
   if (!stream) {
     return null;
-  }
-
-  if (isLoading) {
-    return <Loading />;
   }
 
   return (

@@ -5,13 +5,13 @@ import Button from '../button';
 const navigation = [
   {
     title: '면접질문',
-    url: '/',
+    url: '/questions/list',
     replace: false,
     scroll: false,
   },
   {
     title: '면접연습',
-    url: '/',
+    url: '/interview/presetting',
     replace: false,
     scroll: false,
   },

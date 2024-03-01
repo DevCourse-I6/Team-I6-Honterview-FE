@@ -5,19 +5,18 @@ import useStepStore from '@/container/presetting/stores/useStepStore';
 import { TERMS_AGREE_TEXT } from '../../constants';
 
 const TermsAgreeSection = () => {
-  const { setNextButton } = useStepStore();
+  const { setNextButtonOn, setNextButtonOff } = useStepStore();
 
   useEffect(() => {
-    setNextButton(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    setNextButtonOff();
+  }, [setNextButtonOff]);
 
   const handleCheckChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (!e.target) {
       return;
     }
     const { checked } = e.target;
-    setNextButton(checked);
+    checked ? setNextButtonOn() : setNextButtonOff();
   };
 
   return (
