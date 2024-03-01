@@ -19,7 +19,7 @@ const Page = async ({ params }: { params: { questionId: string } }) => {
   });
 
   const {
-    data: { content: questionTitle },
+    data: { content: questionTitle, categoryNames },
   } = questionInitialData;
 
   // getRandomQuestionsByCategories
@@ -29,7 +29,9 @@ const Page = async ({ params }: { params: { questionId: string } }) => {
   return (
     <div className="m-auto max-w-[800px]">
       <div className=" mb-20">
-        <TitleWithInterviewStart>{questionTitle}</TitleWithInterviewStart>
+        <TitleWithInterviewStart categoryNames={categoryNames}>
+          {questionTitle}
+        </TitleWithInterviewStart>
       </div>
       <div className="flex flex-col gap-16">
         <AnswerList

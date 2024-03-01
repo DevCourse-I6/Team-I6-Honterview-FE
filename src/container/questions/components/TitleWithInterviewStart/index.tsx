@@ -5,7 +5,7 @@ import Tag from '@/components/tag';
 
 import { IProps } from './types';
 
-const TitleWithInterviewStart = ({ children }: IProps) => {
+const TitleWithInterviewStart = ({ children, categoryNames }: IProps) => {
   return (
     <div>
       <div className="relative flex flex-col gap-7">
@@ -13,7 +13,7 @@ const TitleWithInterviewStart = ({ children }: IProps) => {
           {children}
         </h1>
         <ul className="flex w-1/2 flex-wrap gap-4">
-          {['JavaScript', 'React', 'JavaScript', 'React'].map((tag) => (
+          {categoryNames.map((category) => (
             <li key={uuidv4()}>
               <Tag
                 style={{
@@ -23,7 +23,7 @@ const TitleWithInterviewStart = ({ children }: IProps) => {
                   fontWeight: '600',
                 }}
               >
-                {tag}
+                {category}
               </Tag>
             </li>
           ))}
