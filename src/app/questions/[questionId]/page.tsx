@@ -3,16 +3,12 @@ import {
   TitleWithInterviewStart,
 } from '@/container/questions/components';
 import AnswerList from '@/container/questions/components/AnswerList';
-import {
-  getQuestionById,
-  getRandomQuestionsByCategories,
-} from '@/container/questions/services';
+import { getQuestionById } from '@/container/questions/services';
 import { IProps } from '@/container/questions/types';
 
 const Page = async ({ params }: IProps) => {
   const { questionId } = params;
 
-  // getQuestionById
   const questionInitialData = await getQuestionById({
     questionId,
     page: 1,
@@ -22,10 +18,6 @@ const Page = async ({ params }: IProps) => {
   const {
     data: { content: questionTitle, categoryNames },
   } = questionInitialData;
-
-  // getRandomQuestionsByCategories
-  const { data: tailQuestionData } =
-    await getRandomQuestionsByCategories(questionId);
 
   return (
     <div className="m-auto max-w-[800px]">
@@ -41,7 +33,7 @@ const Page = async ({ params }: IProps) => {
         />
       </div>
       <hr className="my-20" />
-      <TailQuestions tailQuestionData={tailQuestionData} />
+      <TailQuestions questionId={questionId} />
     </div>
   );
 };
