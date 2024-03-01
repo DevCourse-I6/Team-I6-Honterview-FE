@@ -4,8 +4,7 @@ const AnswerFinishButton = () => {
   return (
     <Button
       type="submit"
-      style={{ width: 'auto', height: 'auto', padding: '0.5rem 1rem' }}
-      className="text-small text-white md:text-medium"
+      className="h-auto w-auto px-[1rem] py-[0.5rem] text-small text-white md:text-medium"
     >
       답변 완료
     </Button>
