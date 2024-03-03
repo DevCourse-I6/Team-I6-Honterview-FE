@@ -50,7 +50,6 @@ const useAutocompleteInput = ({
     inputValue,
     keyboardIndex,
     setKeyboardIndex,
-    setInputValue,
   };
 };
 

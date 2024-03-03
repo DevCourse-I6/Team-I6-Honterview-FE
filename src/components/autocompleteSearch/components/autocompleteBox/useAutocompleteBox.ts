@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect } from 'react';
 
 import { useAutocomplete } from '../../contexts';
 
@@ -12,8 +12,6 @@ const useAutocompleteBox = () => {
     handleItemClick,
     autoItemRef,
   } = useAutocomplete();
-
-  const divRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     setKeyboardIndex(-1);
@@ -70,7 +68,6 @@ const useAutocompleteBox = () => {
     handleKeywordtHighlight,
     handleItemClick,
     handleKeyEvent,
-    divRef,
   };
 };
 
