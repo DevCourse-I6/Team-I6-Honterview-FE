@@ -20,7 +20,7 @@ export interface PresettingDataState {
   answerTime: { minute: number; second: number };
   addFirstQuestionTag: (tag: AutocompleteDataType) => void;
   removeFirstQuestionTag: (tag: AutocompleteDataType) => void;
-  setFirstQuestion: (question: AutocompleteDataType) => void;
+  setFirstQuestion: (question: AutocompleteDataType | undefined) => void;
   setQuestionCount: (count: number) => void;
   setInterviewTypeCamera: () => void;
   setInterviewTypeChatting: () => void;
