@@ -14,7 +14,7 @@ const InterviewVideoPage = async ({ params }: IProps) => {
 
   return (
     <section>
-      <form className="fit-wrap flex min-w-[40rem] flex-col gap-8 px-10 py-8 md:px-[10%]">
+      <form className="fit-wrap flex min-w-[30rem] flex-col gap-8 px-10 py-8 md:px-[10%]">
         <AnswerTimeProgressGroup
           questionCount={questionCount}
           timer={timer}
