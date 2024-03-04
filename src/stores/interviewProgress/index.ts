@@ -33,8 +33,8 @@ const useInterviewProgress = create(
             progressingTime: 0,
             questionContent: '',
             answerContent: '',
-            number: 0,
           },
+          questionChangeCounter: 0,
         })),
     }),
     {
