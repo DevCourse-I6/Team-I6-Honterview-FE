@@ -2,7 +2,7 @@ import { apiClient } from '@/utils/apiClient';
 
 export const getInterviewInfo = async (interviewId: string) => {
   try {
-    const response = await apiClient.get(`interview/${interviewId}`, {
+    const response = await apiClient.get(`api/interview/${interviewId}`, {
       cache: 'no-store',
     });
 

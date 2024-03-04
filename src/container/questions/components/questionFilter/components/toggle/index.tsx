@@ -1,5 +1,5 @@
 import Button, { ButtonType } from '@/components/button';
-import { ArrowDownPrimary, ArrowUpPrimary } from '@/components/icon';
+import { ArrowDownPrimaryIcon, ArrowUpPrimaryIcon } from '@/components/icon';
 
 import { ToggleProps } from '../../types';
 
@@ -11,7 +11,7 @@ const Toggle = ({ toggle, setToggle }: ToggleProps) => {
         styleType={ButtonType.Type2}
         onClick={() => setToggle(!toggle)}
       >
-        {toggle ? <ArrowDownPrimary /> : <ArrowUpPrimary />}
+        {toggle ? <ArrowDownPrimaryIcon /> : <ArrowUpPrimaryIcon />}
       </Button>
     </div>
   );

@@ -10,7 +10,7 @@ import { getInterviewInfo } from '@/libs/services/interview';
 const InterviewVideoPage = async ({ params }: IProps) => {
   const { interviewId } = params;
   const { data } = await getInterviewInfo(interviewId);
-  const { questionCount, timer, questions } = data;
+  const { questionContent, questionCount, timer, questions, categories } = data;
 
   return (
     <section>
@@ -23,7 +23,11 @@ const InterviewVideoPage = async ({ params }: IProps) => {
         <div className="flex grow flex-col gap-4 md:flex-row">
           <InterviewCamera />
           <div className="flex grow basis-3/6 flex-col gap-4">
-            <QuestionContent />
+            <QuestionContent
+              categories={categories}
+              questions={questions}
+              firstQuestion={questionContent}
+            />
             <AnswerContent />
           </div>
         </div>

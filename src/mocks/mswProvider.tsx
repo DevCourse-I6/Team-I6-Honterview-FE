@@ -4,15 +4,15 @@ import { PropsWithChildren, useEffect, useState } from 'react';
 
 const isMocking = process.env.NEXT_PUBLIC_API_MOCKING === 'enabled';
 
-const MSWComponent = ({ children }: PropsWithChildren) => {
+const MswProvider = ({ children }: PropsWithChildren) => {
   const [isInitialized, setIsInitialized] = useState(!isMocking);
 
   useEffect(() => {
     const init = async () => {
       if (isMocking) {
-        const { initializeMocking } = await import('@/mocks');
+        const { initMocks } = await import('@/mocks');
 
-        await initializeMocking();
+        await initMocks();
       }
       setIsInitialized(true);
     };
@@ -23,8 +23,7 @@ const MSWComponent = ({ children }: PropsWithChildren) => {
   if (!isInitialized) {
     return null;
   }
-
   return <>{children}</>;
 };
 
-export default MSWComponent;
+export default MswProvider;
