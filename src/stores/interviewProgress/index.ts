@@ -14,9 +14,17 @@ const useInterviewProgress = create(
         questionContent: '',
         answerContent: '',
       },
+      questionChangeCounter: 0,
+
       setInterview: (newInterview: Partial<IInterviewProgress>) =>
         set((state) => ({
+          ...state,
           interview: { ...state.interview, ...newInterview },
+        })),
+      increaseQuestionChangeCounter: () =>
+        set((state) => ({
+          ...state,
+          questionChangeCounter: state.questionChangeCounter + 1,
         })),
       reset: () =>
         set(() => ({
@@ -25,6 +33,7 @@ const useInterviewProgress = create(
             progressingTime: 0,
             questionContent: '',
             answerContent: '',
+            number: 0,
           },
         })),
     }),
