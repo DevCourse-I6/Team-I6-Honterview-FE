@@ -1,5 +1,5 @@
 import Divider from '@/components/divider';
-import CheckBox from '@/container/interviewResult/components/CheckBox/CheckBox';
+import { CheckBox, TitleWidthModal } from '@/container/interviewResult';
 
 const InterviewResultPage = () => {
   return (
@@ -7,13 +7,10 @@ const InterviewResultPage = () => {
       <div className="m-auto w-fit max-w-6xl">
         <div className="mb-5 aspect-video rounded bg-slate-50">영상</div>
         <div className="flex w-full justify-between">
-          <h1 className="mb-10 text-extraLarge font-bold">
-            브라우저 렌더링 원리에 대해서 설명해보세요.
-          </h1>
-
+          <TitleWidthModal />
           <CheckBox checkId="test" />
         </div>
-        <div className="max-w-6xl rounded-lg bg-[#F2F2F2] px-5 py-14">
+        <div className="max-w-6xl rounded-lg bg-[#F2F2F2] px-11 py-9">
           <p className="text-large ">
             브라우저 렌더링은 HTML, CSS, JavaScript 등의 웹 페이지 자원을
             브라우저가 화면에 그리는 과정을 말합니다. 브라우저 렌더링 원리와

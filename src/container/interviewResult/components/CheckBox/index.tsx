@@ -1,6 +1,7 @@
 'use client';
 
 import React, { ChangeEvent, useState } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 import { IProps } from './types';
 
@@ -32,7 +33,9 @@ const CheckBox = ({ checkId, onChange }: IProps) => {
       />
       <label
         htmlFor={checkId}
-        className={`absolute w-fit cursor-pointer rounded-3xl bg-[#F2F2F2] py-3 pl-14 pr-4 shadow-sm before:content-[''] after:content-[''] ${circle} ${checked && check}`}
+        className={twMerge(
+          `absolute w-fit cursor-pointer rounded-3xl bg-[#F2F2F2] py-3 pl-14 pr-4 shadow-sm before:content-[''] after:content-[''] ${circle} ${checked && check}`,
+        )}
       >
         답변공개
       </label>

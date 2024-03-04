@@ -58,6 +58,9 @@ const useQuestionChange = ({ questions, categories }: IProps) => {
     questions,
     setInterview,
   ]);
+      });
+    }
+  }, [categories, questions, setInterview]);
 
   useEffect(() => {
     if (questions.length !== 0 && !questionContent) {
