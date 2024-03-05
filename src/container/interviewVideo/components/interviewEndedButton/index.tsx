@@ -1,10 +1,15 @@
-import Button from '@/components/button';
+import Link from 'next/link';
 
-const InterviewEndedButton = () => {
+import { IProps } from './types';
+
+const InterviewEndedButton = ({ interviewId }: IProps) => {
   return (
-    <Button className="h-auto w-auto px-[1rem] py-[0.5rem] text-small text-white md:text-medium">
+    <Link
+      className="h-auto w-auto rounded-lg bg-primaries-primary px-[1rem] py-[0.5rem] text-small text-white md:text-medium"
+      href={`/interview/result/${interviewId}`}
+    >
       면접 종료
-    </Button>
+    </Link>
   );
 };
 
