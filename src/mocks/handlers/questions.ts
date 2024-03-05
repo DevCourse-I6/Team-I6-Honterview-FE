@@ -8,7 +8,7 @@ const questionHandlers = [
   // 면접 질문 상세 조회
   http.get(`${API_BASE_URL}questions/:id`, ({ params, request }) => {
     const url = new URL(request.url);
-    const page = +url.searchParams.get('page')!;
+    const page = Number(url.searchParams.get('page'))!;
     const { id } = params;
 
     const answerData = question.answers.data;
