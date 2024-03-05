@@ -1,5 +1,6 @@
 import fetchAPI from '../libs/fetchAPI';
 import {
+  IClickAnswerHeart,
   IClickQuestionHeart,
   IGetQuestionById,
   IGetRandomQuestionsByCategories,
@@ -26,5 +27,12 @@ export const clickQuestionHeart = (
   questionId: string,
 ): Promise<IClickQuestionHeart> => {
   const url = `api/questions/${questionId}/hearts`;
+  return fetchAPI(url, 'post');
+};
+
+export const clickAnswerHeart = (
+  answerId: number,
+): Promise<IClickAnswerHeart> => {
+  const url = `api/answers/${answerId}/hearts`;
   return fetchAPI(url, 'post');
 };

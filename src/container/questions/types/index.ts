@@ -19,8 +19,17 @@ export interface IClickQuestionHeart {
   data: IQuestionHeart;
 }
 
+export interface IClickAnswerHeart {
+  message: string;
+  data: IAnswerHeart;
+}
+
 export interface IQuestionHeart {
   questionHeartCount: number;
+  isHearted: boolean;
+}
+
+export interface IAnswerHeart {
   isHearted: boolean;
 }
 
