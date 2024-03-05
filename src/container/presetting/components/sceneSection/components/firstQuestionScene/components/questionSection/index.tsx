@@ -1,4 +1,5 @@
 import AutocompleteSearch from '@/components/autocompleteSearch';
+import { XIcon } from '@/components/icon';
 import Tag from '@/components/tag';
 import usePresettingDataStore from '@/container/presetting/stores/usePresettingDataStore';
 
@@ -19,6 +20,7 @@ const QuestionSection = () => {
           onSelectItem={(question) => {
             setFirstQuestion(question);
           }}
+          placeholder="예) React의 라이프 사이클에 대해 설명해주세요"
           canCreate
         />
       </div>
@@ -27,6 +29,14 @@ const QuestionSection = () => {
         {firstQuestion && (
           <Tag className="border border-primaries-primary bg-white text-primaries-primary hover:bg-white active:bg-white">
             {firstQuestion.name}
+            <button
+              type="button"
+              onClick={() => {
+                setFirstQuestion(undefined);
+              }}
+            >
+              <XIcon className="h-[1.5rem] stroke-primaries-primary" />
+            </button>
           </Tag>
         )}
       </div>

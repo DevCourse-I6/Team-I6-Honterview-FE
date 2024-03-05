@@ -16,6 +16,8 @@ const AutocompleteContext = createContext<AutocompleteContextProps>({
   autocompleteRef: null,
   autoItemRef: null,
   isListVisible: false,
+  isCreateVisible: false,
+  setIsCreateVisible: () => {},
   setIsListVisible: () => {},
   inputValue: '',
   setInputValue: () => {},
@@ -32,15 +34,17 @@ const AutocompleteProvider = ({
   onSelectItem,
 }: AutocompleteProviderProps) => {
   const [isListVisible, setIsListVisible] = useState(false);
+  const [isCreateVisible, setIsCreateVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const [keyboardIndex, setKeyboardIndex] = useState(-1);
   const [autocompleteList, setAutocompleteList] = useState<
     AutocompleteDataType[]
   >([]);
 
-  const autocompleteRef = useClickAway(() =>
-    setIsListVisible(false),
-  ) as RefObject<HTMLDivElement>;
+  const autocompleteRef = useClickAway(() => {
+    setIsListVisible(false);
+    setIsCreateVisible(false);
+  }) as RefObject<HTMLDivElement>;
 
   const autoItemRef = useRef(null);
 
@@ -62,6 +66,8 @@ const AutocompleteProvider = ({
       keyboardIndex,
       setKeyboardIndex,
       handleItemClick,
+      isCreateVisible,
+      setIsCreateVisible,
     };
   }, [
     autocompleteList,
@@ -70,6 +76,7 @@ const AutocompleteProvider = ({
     isListVisible,
     keyboardIndex,
     onSelectItem,
+    isCreateVisible,
   ]);
 
   return (

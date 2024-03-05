@@ -34,6 +34,7 @@ const TagSection = () => {
             }
             addFirstQuestionTag(tag);
           }}
+          placeholder="예) React"
         />
       </div>
       <div className="flex min-h-[2rem] w-full gap-[1rem]">
