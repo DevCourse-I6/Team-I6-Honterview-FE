@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 
-import { BookMarkBoldIcon, BookmarkIcon } from '@/components/icon';
+import { BookmarkIcon } from '@/components/icon';
 import { clickQuestionHeart } from '@/container/questions/services';
 
 import { IProps } from './types';
@@ -47,14 +47,16 @@ const HeaderButton = ({
           삭제
         </button>
       </div>
-      <div className="flex items-center">
+      <div className="flex items-center gap-1">
         <span className=" text-large">{heartData.questionHeartCount}</span>
 
         <button
           type="button"
           onClick={clickHeart}
         >
-          {heartData.isHearted ? <BookMarkBoldIcon /> : <BookmarkIcon />}
+          <BookmarkIcon
+            className={`${heartData.isHearted ? 'fill-primaries-active' : 'fill-slate-300'}`}
+          />
         </button>
       </div>
     </div>
