@@ -1,0 +1,18 @@
+.autoInput::-webkit-scrollbar,
+.autobox ::-webkit-scrollbar {
+  display: none;
+}
+
+.autoInput,
+.autobox {
+  -ms-overflow-style: none; /* IE and 엣지 */
+  scrollbar-width: none; /* 파이어폭스 */
+}
+
+.create-item-input {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 1;
+}
