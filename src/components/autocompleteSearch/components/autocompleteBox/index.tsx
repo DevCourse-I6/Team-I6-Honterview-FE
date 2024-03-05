@@ -1,18 +1,17 @@
 import { v4 as uuid } from 'uuid';
 
-import { AutocompleteBoxProps } from './type';
 import useAutocompleteBox from './useAutocompleteBox';
 
-const AutocompleteBox = ({ onSelectItem }: AutocompleteBoxProps) => {
+const AutocompleteBox = () => {
   const {
+    autoItemRef,
     isListVisible,
-    autoCompleteList,
+    autocompleteList,
     keyboardIndex,
     handleKeywordtHighlight,
-    handleSelectItem,
-  } = useAutocompleteBox({
-    onSelectItem,
-  });
+    handleItemClick,
+    handleKeyEvent,
+  } = useAutocompleteBox();
 
   if (!isListVisible) {
     return;
@@ -20,18 +19,22 @@ const AutocompleteBox = ({ onSelectItem }: AutocompleteBoxProps) => {
 
   return (
     <div className="relative">
-      <ul className="autobox scroll absolute left-0 top-0 z-10 h-fit max-h-[15.5rem] w-full overflow-scroll border bg-text-20">
-        {autoCompleteList.map((value, index) => {
+      <div className="autobox scroll absolute left-0 top-0 z-10 h-fit max-h-[15rem] w-full overflow-scroll border border-t-0 bg-text-20">
+        {autocompleteList.map((value, index) => {
           const { prevWord, keyword, postWord } = handleKeywordtHighlight(
             value.name,
           );
 
           return (
             <button
+              ref={index === keyboardIndex ? autoItemRef : null}
               type="button"
-              className={`flex h-[3rem] w-full items-center pl-[0.5rem] hover:bg-slate-100 ${keyboardIndex === index && 'bg-slate-100'}`}
+              className={`flex h-[3rem] w-full items-center pl-[0.5rem] hover:bg-slate-100 focus:outline-none ${keyboardIndex === index && 'bg-slate-100'}`}
               key={uuid()}
-              onClick={() => handleSelectItem(value)}
+              onClick={() => handleItemClick(value)}
+              onKeyDown={(e) => {
+                handleKeyEvent(e.key);
+              }}
             >
               <span className="whitespace-pre">{prevWord}</span>
               <span className="whitespace-pre font-bold text-primaries-primary">
@@ -41,7 +44,7 @@ const AutocompleteBox = ({ onSelectItem }: AutocompleteBoxProps) => {
             </button>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };

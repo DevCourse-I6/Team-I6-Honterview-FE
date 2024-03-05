@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { SearchIcon } from '@/components/icon';
 import Input from '@/components/input';
 
@@ -9,26 +7,27 @@ import useAutocompleteInput from './useAutocompleteInput';
 const AutocompleteInput = ({
   totalDatas,
   selectedList,
-  onSelectItem,
 }: AutocompleteInputProps) => {
   const {
     handleChangeInput,
-    handleKeyEvent,
     handleInputClick,
     isListVisible,
     inputValue,
+    setKeyboardIndex,
+    keyboardIndex,
   } = useAutocompleteInput({
     totalDatas,
     selectedList,
-    onSelectItem,
   });
 
   return (
     <div className="flex items-center">
       <Input
-        className="flex h-[3.5rem] w-[40rem] gap-[1rem] pl-[0.5rem] outline-none"
+        className="flex h-[3.5rem] w-full gap-[1rem] pl-[0.5rem] outline-none"
         onKeyDown={(e) => {
-          handleKeyEvent(e.key);
+          if (e.key === 'ArrowDown' && !e.nativeEvent.isComposing) {
+            setKeyboardIndex(keyboardIndex + 1);
+          }
         }}
       >
         <div className="autoInput flex w-full gap-[0.5rem] overflow-x-scroll">

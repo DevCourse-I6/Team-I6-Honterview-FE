@@ -12,6 +12,7 @@ import Pagination from '@/components/pagination';
 
 const PaginationDev = () => {
   const printPageChange = (page: number) => {
+    // eslint-disable-next-line no-console
     console.log(page);
   };
 

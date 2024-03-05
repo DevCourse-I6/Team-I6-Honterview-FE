@@ -1,3 +1,3 @@
-import questionHandlers from './questions';
+import interviewsHandlers from './interview';
 
-export const handlers = [...questionHandlers];
+export const handlers = [...interviewsHandlers, ...questionHandlers];
