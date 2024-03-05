@@ -6,39 +6,16 @@ import Toggle from './components/toggle';
 import UnSelectedTags from './components/unSelectedTags';
 import { IProps } from './types';
 
-const data = [
-  { name: 'JavaScript', id: '1' },
-  { name: 'Java', id: '2' },
-  { name: 'React', id: '3' },
-  { name: 'TypeScript', id: '4' },
-  { name: 'HTML/CSS', id: '5' },
-  { name: 'SQL', id: '6' },
-  { name: 'MSSQL', id: '7' },
-  { name: 'Vue.js', id: '8' },
-  { name: 'Next.js', id: '9' },
-  { name: 'Spring', id: '10' },
-  { name: 'REST API', id: '11' },
-  { name: 'vanilla-javascript', id: '12' },
-  { name: 'Node.js', id: '13' },
-  { name: 'ES6', id: '14' },
-  { name: 'ES5', id: '15' },
-  { name: 'Python', id: '16' },
-  { name: 'Express', id: '17' },
-  { name: 'Mongo DB', id: '18' },
-  { name: 'Firebase', id: '19' },
-  { name: 'Django', id: '20' },
-  { name: 'jQuery', id: '21' },
-];
-
 const QuestionFilter = ({
   setSelectedTags,
   handleTagClick,
   selectedTags,
+  categories,
 }: IProps) => {
   const [toggle, setToggle] = useState(true);
   const [searchQuery, setSearchQuery] = useState('');
 
-  const filteredData = data.filter((tag) =>
+  const filteredData = categories.filter((tag) =>
     tag.name.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 

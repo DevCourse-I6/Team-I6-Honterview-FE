@@ -1,7 +1,10 @@
+import { ICategorie } from '@/types/questionsList/categories';
+
 export interface IProps {
   setSelectedTags: (selectedTags: string[]) => void;
   handleTagClick: (tag: string) => void;
   selectedTags: string[];
+  categories: ICategorie[];
 }
 
 export interface FilterInputProps {

@@ -7,22 +7,13 @@ import QuestionTag from './components/questionTag';
 import QuestionTitle from './components/questionTitle';
 import { IProps } from './types';
 
-const QuestionList = ({ handleTagClick }: IProps) => {
-  const data = [
-    {
-      content: '인생이란 무엇일까',
-      name: ['Next.js', 'JavaScript'],
-      id: 1,
-    },
-    { content: '속도가 아닌 방향성', name: ['JavaScript'], id: 2 },
-  ];
-
+const QuestionList = ({ handleTagClick, questionsList }: IProps) => {
   return (
     <div>
       <QuestionSort />
 
       <div className="my-[6rem]">
-        {data.map(({ content, name }) => (
+        {questionsList.map(({ content, categoryNames }) => (
           <div key={v4uuid()}>
             <div className="my-[3rem]  flex justify-between">
               <QuestionTitle content={content} />
@@ -30,7 +21,7 @@ const QuestionList = ({ handleTagClick }: IProps) => {
                 모의 면접 시작
               </Button>
             </div>
-            {name.map((tag) => (
+            {categoryNames.map((tag) => (
               <QuestionTag
                 key={v4uuid()}
                 handleTagClick={handleTagClick}
