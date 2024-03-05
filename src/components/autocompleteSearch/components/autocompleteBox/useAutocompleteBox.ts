@@ -1,25 +1,27 @@
 import { useEffect } from 'react';
 
-import useAutocompleteSearchStore from '../../store/useAutocompleteSearchStore';
-import { AutocompleteDataType } from '../../type';
-import { AutocompleteBoxProps } from './type';
+import { useAutocomplete } from '../../contexts';
 
-const useAutocompleteBox = ({ onSelectItem }: AutocompleteBoxProps) => {
+const useAutocompleteBox = () => {
   const {
-    autoCompleteList,
-    inputValue,
+    autocompleteList,
     isListVisible,
     keyboardIndex,
-    setListInVisible,
-    setInputValue,
     setKeyboardIndex,
-  } = useAutocompleteSearchStore();
+    inputValue,
+    handleItemClick,
+    autoItemRef,
+  } = useAutocomplete();
 
   useEffect(() => {
-    if (!isListVisible) {
-      setKeyboardIndex(-1);
+    setKeyboardIndex(-1);
+  }, [setKeyboardIndex, inputValue, isListVisible]);
+
+  useEffect(() => {
+    if (keyboardIndex > -1) {
+      autoItemRef?.current?.focus();
     }
-  }, [isListVisible, setKeyboardIndex]);
+  }, [autoItemRef, keyboardIndex]);
 
   const handleKeywordtHighlight = (name: string) => {
     const nameArray = Array.from(name);
@@ -32,18 +34,40 @@ const useAutocompleteBox = ({ onSelectItem }: AutocompleteBoxProps) => {
     return { prevWord, keyword, postWord };
   };
 
-  const handleSelectItem = (value: AutocompleteDataType) => {
-    onSelectItem(value);
-    setInputValue('');
-    setListInVisible();
+  const handleKeyEvent = (key: string) => {
+    if (!isListVisible) {
+      return;
+    }
+    switch (key) {
+      case 'ArrowUp':
+        setKeyboardIndex(
+          keyboardIndex <= 0 ? autocompleteList.length - 1 : keyboardIndex - 1,
+        );
+        break;
+      case 'ArrowDown':
+        setKeyboardIndex(
+          keyboardIndex === autocompleteList.length - 1 ? 0 : keyboardIndex + 1,
+        );
+        break;
+      case 'Enter':
+        if (keyboardIndex < 0) {
+          return;
+        }
+        handleItemClick(autocompleteList[keyboardIndex]);
+        break;
+      default:
+        break;
+    }
   };
 
   return {
-    autoCompleteList,
+    autoItemRef,
+    autocompleteList,
     isListVisible,
     keyboardIndex,
-    handleSelectItem,
     handleKeywordtHighlight,
+    handleItemClick,
+    handleKeyEvent,
   };
 };
 
