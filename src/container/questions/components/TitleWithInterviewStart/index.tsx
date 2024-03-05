@@ -1,33 +1,28 @@
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from '@/components/button';
-import { BookmarkIcon } from '@/components/icon';
 import Tag from '@/components/tag';
 
+import { clickQuestionHeart } from '../../services';
+import HeaderButton from './components/HeaderButton';
 import { IProps } from './types';
 
-const TitleWithInterviewStart = ({ children, categoryNames }: IProps) => {
+const TitleWithInterviewStart = async ({
+  children,
+  categoryNames,
+  questionId,
+}: IProps) => {
+  const {
+    data: { isHearted, questionHeartCount },
+  } = await clickQuestionHeart(questionId);
+
   return (
     <div>
-      <div className="flex justify-between">
-        <div className="flex gap-4">
-          <button
-            type="button"
-            className="rounded-3xl bg-slate-100 px-5 py-2"
-          >
-            수정
-          </button>
-          <button
-            type="button"
-            className="rounded-3xl bg-slate-100 px-5 py-2"
-          >
-            삭제
-          </button>
-        </div>
-        <div>
-          <BookmarkIcon />
-        </div>
-      </div>
+      <HeaderButton
+        questionId={questionId}
+        isHearted={isHearted}
+        questionHeartCount={questionHeartCount}
+      />
       <div className="relative flex flex-col gap-7">
         <h1 className="text-[3.2rem] font-medium leading-tight text-[#3C4654]">
           {children}

@@ -22,7 +22,10 @@ const Page = async ({ params }: IProps) => {
   return (
     <div className="m-auto max-w-[800px]">
       <div className=" mb-20">
-        <TitleWithInterviewStart categoryNames={categoryNames}>
+        <TitleWithInterviewStart
+          categoryNames={categoryNames}
+          questionId={questionId}
+        >
           {questionTitle}
         </TitleWithInterviewStart>
       </div>
