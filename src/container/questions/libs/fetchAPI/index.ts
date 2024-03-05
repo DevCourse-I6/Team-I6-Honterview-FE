@@ -1,10 +1,34 @@
 import { apiClient } from '@/utils/apiClient';
 
-const fetchAPI = async (url: string) => {
+import { TMethod } from './types';
+
+const fetchAPI = async (
+  url: string,
+  method: TMethod = 'get',
+  body = null,
+  options: RequestInit = {},
+) => {
   try {
-    const response = await apiClient.get(url, {
+    let response;
+    const config = {
+      ...options,
+      headers: {
+        'Content-Type': 'application/json',
+        ...(options.headers || {}),
+      },
       cache: 'no-store',
-    });
+    };
+
+    switch (method) {
+      case 'post':
+        response = await apiClient.post(url, JSON.stringify(body), config);
+        break;
+      case 'delete':
+        response = await apiClient.delete(url, config);
+        break;
+      default:
+        response = await apiClient.get(url, config);
+    }
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
