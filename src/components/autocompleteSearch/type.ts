@@ -5,7 +5,8 @@ export interface AutocompleteDataType {
 
 export interface AutocompleteSearchProps {
   totalDatas: AutocompleteDataType[];
-  selectedList?: AutocompleteDataType[];
   onSelectItem: (value: AutocompleteDataType) => void;
+  placeholder?: string;
+  selectedList?: AutocompleteDataType[];
   canCreate?: boolean;
 }

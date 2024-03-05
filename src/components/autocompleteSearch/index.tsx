@@ -11,8 +11,9 @@ import { AutocompleteSearchProps } from './type';
 
 const AutocompleteSearch = ({
   totalDatas,
-  selectedList,
+  placeholder,
   onSelectItem,
+  selectedList,
   canCreate,
 }: AutocompleteSearchProps) => {
   return (
@@ -21,6 +22,7 @@ const AutocompleteSearch = ({
         <AutocompleteInput
           totalDatas={totalDatas}
           selectedList={selectedList}
+          placeholder={placeholder}
         />
         {canCreate && <AutocompleteCreateItem />}
         <AutocompleteBox />
