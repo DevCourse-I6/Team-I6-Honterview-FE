@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 
+import useInterviewProgress from '@/stores/interviewProgress';
+
 import { IProps } from './types';
 
 const useAnswerTimer = ({ defaultTime, timer, enabled, onEnded }: IProps) => {
+  const setInterview = useInterviewProgress((state) => state.setInterview);
   const [time, setTime] = useState(defaultTime);
+  const progressWidth = (time / timer) * 100;
 
   useEffect(() => {
     if (!enabled) {
@@ -29,7 +33,13 @@ const useAnswerTimer = ({ defaultTime, timer, enabled, onEnded }: IProps) => {
     };
   }, [timer, enabled, onEnded]);
 
-  return { time };
+  useEffect(() => {
+    if (enabled) {
+      setInterview({ progressingTime: time });
+    }
+  }, [enabled, setInterview, time]);
+
+  return { progressWidth };
 };
 
 export default useAnswerTimer;

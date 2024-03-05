@@ -10,15 +10,26 @@ import useInterviewProgress from '@/stores/interviewProgress';
 import { IProps } from './types';
 
 const useQuestionChange = ({ questions, categories }: IProps) => {
-  const [isPending, startTransition] = useTransition();
-  const { questionContent, setInterview } = useInterviewProgress((state) => ({
+  const {
+    questionContent,
+    setInterview,
+    questionChangeCounter,
+    increaseQuestionChangeCounter,
+  } = useInterviewProgress((state) => ({
     questionContent: state.interview.questionContent,
     setInterview: state.setInterview,
+    questionChangeCounter: state.questionChangeCounter,
+    increaseQuestionChangeCounter: state.increaseQuestionChangeCounter,
   }));
+  const [isPending, startTransition] = useTransition();
 
   const handleChangeQuestion = useCallback(() => {
     if (questions.length === 0) {
       return notify('warning', '첫 질문은 변경이 불가능 합니다');
+    }
+
+    if (questionChangeCounter >= 1) {
+      return notify('warning', '질문 변경은 최대 1회 입니다.');
     }
 
     const { answerContent } = questions[questions.length - 1];
@@ -28,6 +39,7 @@ const useQuestionChange = ({ questions, categories }: IProps) => {
         const { data } = await changeQuestionByAnswer(answerContent);
 
         setInterview(data);
+        increaseQuestionChangeCounter();
       });
     }
 
@@ -36,9 +48,16 @@ const useQuestionChange = ({ questions, categories }: IProps) => {
         const { data } = await changeQuestionByCategories(categories);
 
         setInterview(data);
+        increaseQuestionChangeCounter();
       });
     }
-  }, [categories, questions, setInterview]);
+  }, [
+    categories,
+    increaseQuestionChangeCounter,
+    questionChangeCounter,
+    questions,
+    setInterview,
+  ]);
 
   useEffect(() => {
     if (questions.length !== 0 && !questionContent) {
