@@ -14,6 +14,16 @@ export interface IGetRandomQuestionsByCategories {
   data: ITailQuestion[];
 }
 
+export interface IClickQuestionHeart {
+  message: string;
+  data: IQuestionHeart;
+}
+
+export interface IQuestionHeart {
+  questionHeartCount: number;
+  isHearted: boolean;
+}
+
 export interface IQuestion {
   id: number;
   content: string;
