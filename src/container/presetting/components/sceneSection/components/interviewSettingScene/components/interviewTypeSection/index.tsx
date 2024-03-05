@@ -22,7 +22,7 @@ const InterviewTypeSection = ({ setNextItemOn }: InterviewTypeSectionProps) => {
 
   return (
     <div>
-      <h1 className="text-large font-semibold">면접 방식</h1>
+      <h1 className="text-large font-semibold">면접 모드</h1>
       <p className="mb-[1rem] text-extraSmall text-text-60">
         연습 진행 방식을 선택해주세요
       </p>
