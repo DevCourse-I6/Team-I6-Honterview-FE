@@ -55,7 +55,7 @@ const HeaderButton = ({
           onClick={clickHeart}
         >
           <BookmarkIcon
-            className={`${heartData.isHearted ? 'fill-primaries-active' : 'fill-slate-300'}`}
+            className={`${heartData.isHearted ? 'fill-primaries-active' : 'fill-slate-300'} hover:fill-blue-300`}
           />
         </button>
       </div>

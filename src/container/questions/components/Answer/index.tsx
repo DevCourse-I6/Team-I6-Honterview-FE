@@ -35,7 +35,7 @@ const Answer = ({
           onClick={() => mutate()}
         >
           <FavoriteIcon
-            className={`${isHearted ? 'fill-primaries-active' : 'fill-slate-300'} `}
+            className={`${isHearted ? 'fill-primaries-active' : 'fill-slate-300'} hover:fill-blue-300`}
           />
         </button>
       </div>
