@@ -16,7 +16,7 @@ const AnswerTimeProgress = ({
   const { time } = useAnswerTimer({ defaultTime, timer, enabled, onEnded });
   const setInterview = useInterviewProgress((state) => state.setInterview);
   const progressWidth = (time / timer) * 100;
-  const commonStyle = 'rounded-2xl bg-primaries-primary';
+  const commonStyle = 'rounded-2xl bg-primaries-primary border';
   const animationStyle = `${enabled ? 'animate-pulse' : ''}`;
 
   useEffect(() => {
