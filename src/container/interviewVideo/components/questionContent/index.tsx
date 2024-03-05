@@ -7,7 +7,7 @@ import { IProps } from './types';
 
 const QuestionContent = ({ questions, firstQuestion, categories }: IProps) => {
   const questionContent = useInterviewProgress(
-    (state) => state.interview.questionContent,
+    (state) => state.questionContent,
   );
   const renderContent =
     questions.length === 0 ? firstQuestion : questionContent;

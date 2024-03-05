@@ -8,18 +8,16 @@ import { IInterviewProgress, IUseInterviewProgress } from './types';
 const useInterviewProgress = create(
   persist<IUseInterviewProgress>(
     (set) => ({
-      interview: {
-        id: null,
-        progressingTime: 0,
-        questionContent: '',
-        answerContent: '',
-      },
+      id: null,
+      progressingTime: 0,
+      questionContent: '',
+      answerContent: '',
       questionChangeCounter: 0,
 
       setInterview: (newInterview: Partial<IInterviewProgress>) =>
         set((state) => ({
           ...state,
-          interview: { ...state.interview, ...newInterview },
+          ...newInterview,
         })),
       increaseQuestionChangeCounter: () =>
         set((state) => ({
@@ -28,12 +26,10 @@ const useInterviewProgress = create(
         })),
       reset: () =>
         set(() => ({
-          interview: {
-            id: null,
-            progressingTime: 0,
-            questionContent: '',
-            answerContent: '',
-          },
+          id: null,
+          progressingTime: 0,
+          questionContent: '',
+          answerContent: '',
           questionChangeCounter: 0,
         })),
     }),

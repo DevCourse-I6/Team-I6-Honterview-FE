@@ -5,7 +5,7 @@ import useInterviewProgress from '@/stores/interviewProgress';
 
 const useSpeechToText = () => {
   const { answerContent, setInterview } = useInterviewProgress((state) => ({
-    answerContent: state.interview.answerContent,
+    answerContent: state.answerContent,
     setInterview: state.setInterview,
   }));
   const [transcript, setTranscript] = useState('');

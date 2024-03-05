@@ -3,10 +3,14 @@ export interface IInterviewProgress {
   progressingTime: number;
   questionContent: string;
   answerContent: string;
+  questionChangeCounter: number;
 }
 
 export interface IUseInterviewProgress {
-  interview: IInterviewProgress;
+  id: string | null;
+  progressingTime: number;
+  questionContent: string;
+  answerContent: string;
   questionChangeCounter: number;
   setInterview: (newInterview: Partial<IInterviewProgress>) => void;
   increaseQuestionChangeCounter: () => void;
