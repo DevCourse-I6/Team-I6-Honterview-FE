@@ -7,13 +7,13 @@ export const getQuestionById = ({
   page,
   size,
 }: IGetQuestionByIdParams): Promise<IGetQuestionById> => {
-  const url = `questions/${questionId}?page=${page}&size=${size}`;
+  const url = `api/questions/${questionId}?page=${page}&size=${size}`;
   return fetchAPI(url);
 };
 
 export const getRandomQuestionsByCategories = (
   questionId: string,
 ): Promise<IGetRandomQuestionsByCategories> => {
-  const url = `questions/${questionId}/random`;
+  const url = `api/questions/${questionId}/random`;
   return fetchAPI(url);
 };
