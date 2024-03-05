@@ -1,15 +1,13 @@
-const initServer = async () => {
-  const { server } = await import('@/mocks/server');
+export const initMocks = async () => {
+  const isServer = typeof window === 'undefined';
 
-  server.listen();
-};
+  if (isServer) {
+    const { server } = await import('@/mocks/server');
 
-const initWorker = async () => {
-  const { worker } = await import('@/mocks/browser');
+    server.listen({ onUnhandledRequest: 'bypass' });
+  } else {
+    const { worker } = await import('@/mocks/browser');
 
-  worker.start();
-};
-
-export const initializeMocking = async () => {
-  typeof window === 'undefined' ? await initServer() : await initWorker();
+    worker.start({ onUnhandledRequest: 'bypass' });
+  }
 };

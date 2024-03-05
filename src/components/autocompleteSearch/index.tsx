@@ -2,34 +2,30 @@
 
 import './style/style.css';
 
-import useClickAway from '@/hooks/useClickAway';
-
 import AutocompleteBox from './components/autocompleteBox';
+import AutocompleteContainer from './components/autocompleteContainer';
+import AutocompleteCreateItem from './components/autocompleteCreateItem';
 import AutocompleteInput from './components/autocompleteInput';
-import useAutocompleteSearchStore from './store/useAutocompleteSearchStore';
+import AutocompleteProvider from './contexts';
 import { AutocompleteSearchProps } from './type';
 
 const AutocompleteSearch = ({
   totalDatas,
   selectedList,
   onSelectItem,
+  canCreate,
 }: AutocompleteSearchProps) => {
-  const { setListInVisible } = useAutocompleteSearchStore();
-
-  const ref = useClickAway(() => setListInVisible());
-
   return (
-    <div
-      className="flex flex-col"
-      ref={ref}
-    >
-      <AutocompleteInput
-        totalDatas={totalDatas}
-        selectedList={selectedList}
-        onSelectItem={onSelectItem}
-      />
-      <AutocompleteBox onSelectItem={onSelectItem} />
-    </div>
+    <AutocompleteProvider onSelectItem={onSelectItem}>
+      <AutocompleteContainer>
+        <AutocompleteInput
+          totalDatas={totalDatas}
+          selectedList={selectedList}
+        />
+        {canCreate && <AutocompleteCreateItem />}
+        <AutocompleteBox />
+      </AutocompleteContainer>
+    </AutocompleteProvider>
   );
 };
 

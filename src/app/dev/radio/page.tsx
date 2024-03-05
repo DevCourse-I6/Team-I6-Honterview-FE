@@ -26,6 +26,7 @@ const RadioDev = () => {
             <Radio.Button
               name={name}
               value={value}
+              // eslint-disable-next-line no-console
               onChange={(e) => console.log(e.target.value)}
             />
             <Radio.Label>{label}</Radio.Label>

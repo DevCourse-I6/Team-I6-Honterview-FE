@@ -1,14 +1,19 @@
 'use client';
 
-import { ChangeEvent, useState } from 'react';
+import { ChangeEvent } from 'react';
+
+import useInterviewProgress from '@/stores/interviewProgress';
+
+import useSpeechToText from './hooks/useSpeechToText';
 
 const AnswerContent = () => {
-  const [answerText, setAnswerText] = useState(
-    '뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼뽑아줍쇼',
-  );
+  const { answerContent, listening } = useSpeechToText();
+  const setInterview = useInterviewProgress((state) => state.setInterview);
 
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    setAnswerText(e.target.value);
+    const { value } = e.target;
+
+    setInterview({ answerContent: value });
   };
 
   return (
@@ -17,7 +22,9 @@ const AnswerContent = () => {
         답변 내용
       </h3>
       <textarea
-        value={answerText}
+        disabled={!listening}
+        placeholder="음성 입력 시 자동으로 텍스트가 입력됩니다."
+        value={answerContent}
         onChange={handleTextChange}
         className="solid grow resize-none overflow-y-auto rounded-2xl bg-background-20 px-4 py-2 text-medium font-medium outline-none"
       />

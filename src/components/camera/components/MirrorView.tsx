@@ -9,10 +9,9 @@ import CameraErrorView from './CameraErrorView';
 
 const MirrorView = ({
   stream,
-  width,
-  height,
   isLoading,
   error,
+  ...rest
 }: VideoPreviewProps) => {
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -37,8 +36,7 @@ const MirrorView = ({
   return (
     <video
       ref={videoRef}
-      width={width}
-      height={height}
+      {...rest}
       autoPlay
     >
       <track kind="captions" />
