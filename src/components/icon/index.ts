@@ -1,5 +1,6 @@
 'use client';
 
+export { default as ArrowDownIcon } from './svg/ArrowDown.svg';
 export { default as ArrowDownPrimaryIcon } from './svg/ArrowDownPrimary.svg';
 export { default as ArrowDownSecondaryIcon } from './svg/ArrowDownSecondary.svg';
 export { default as ArrowUpPrimaryIcon } from './svg/ArrowUpPrimary.svg';
