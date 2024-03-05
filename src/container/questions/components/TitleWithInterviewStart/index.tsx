@@ -3,15 +3,17 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/button';
 import Tag from '@/components/tag';
 
-const TitleWithInterviewStart = () => {
+import { IProps } from './types';
+
+const TitleWithInterviewStart = ({ children, categoryNames }: IProps) => {
   return (
     <div>
       <div className="relative flex flex-col gap-7">
         <h1 className="text-[3.2rem] font-medium leading-tight text-[#3C4654]">
-          어떤 프레임워크를 사용하여 개발했나요? 왜 그 프레임워크를 선택했나요?
+          {children}
         </h1>
         <ul className="flex w-1/2 flex-wrap gap-4">
-          {['JavaScript', 'React', 'JavaScript', 'React'].map((tag) => (
+          {categoryNames.map((category) => (
             <li key={uuidv4()}>
               <Tag
                 style={{
@@ -21,7 +23,7 @@ const TitleWithInterviewStart = () => {
                   fontWeight: '600',
                 }}
               >
-                {tag}
+                {category}
               </Tag>
             </li>
           ))}

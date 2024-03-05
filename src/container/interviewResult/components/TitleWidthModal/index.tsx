@@ -40,10 +40,26 @@ const TitleWidthModal = () => {
           브라우저 렌더링 원리에 대해서 설명해보세요.
         </h1>
         <div className="h-[calc(100%-2.5rem-90px)] overflow-auto">
-          <Answer className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl" />
-          <Answer className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl" />
-          <Answer className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl" />
-          <Answer className=" rounded-2xl bg-slate-200 p-10 shadow-xl" />
+          <Answer
+            nickname="snagmin"
+            content="sfdfsdfdfs"
+            className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
+          />
+          <Answer
+            nickname="snagmin"
+            content="sfdfsdfdfs"
+            className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
+          />
+          <Answer
+            nickname="snagmin"
+            content="sfdfsdfdfs"
+            className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
+          />
+          <Answer
+            nickname="snagmin"
+            content="sfdfsdfdfs"
+            className="rounded-2xl bg-slate-200 p-10 shadow-xl"
+          />
         </div>
       </Modal>
     </>
