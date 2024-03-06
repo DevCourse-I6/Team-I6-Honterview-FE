@@ -23,7 +23,7 @@ const SelectedTags = ({
         >
           {tag}
           <XIcon
-            className=""
+            className="h-[14px] w-[14px] stroke-primaries-primary"
             onClick={() => handleTagClick(tag)}
           />
         </Button>

@@ -8,7 +8,8 @@
     "lint": "eslint --cache .",
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "mock": "npx tsx watch ./src/mocks/http.ts"
   },
   "dependencies": {
     "@tanstack/react-query": "5.18.1",
@@ -24,6 +25,11 @@
     "zustand": "4.5.1"
   },
   "devDependencies": {
+    "@mswjs/http-middleware": "^0.9.1",
+    "@types/cors": "^2.8.15",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "@types/express": "^4.17.20",
     "@svgr/webpack": "8.1.0",
     "@types/node": "20",
     "@types/react": "18",
@@ -47,7 +53,7 @@
     "eslint-plugin-unused-imports": "3.0.0",
     "husky": "^8.0.0",
     "lint-staged": "^15.2.2",
-    "msw": "2.2.1",
+    "msw": "2.2.2",
     "postcss": "8",
     "prettier": "3.2.5",
     "prettier-plugin-tailwindcss": "0.5.11",
