@@ -11,7 +11,9 @@ const Toggle = ({ toggle, setToggle }: ToggleProps) => {
         styleType={ButtonType.Type2}
         onClick={() => setToggle(!toggle)}
       >
-        {toggle ? <ArrowDownPrimaryIcon /> : <ArrowUpPrimaryIcon />}
+        <div className="h-[24px] w-[24px]">
+          {toggle ? <ArrowDownPrimaryIcon /> : <ArrowUpPrimaryIcon />}
+        </div>
       </Button>
     </div>
   );
