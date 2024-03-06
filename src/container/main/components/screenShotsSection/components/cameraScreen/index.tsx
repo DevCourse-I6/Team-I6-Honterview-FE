@@ -7,7 +7,7 @@ const MainCamerScreenSection = () => {
     <div className="flex h-screen w-full  items-center justify-center">
       <div className="flex gap-[3rem]">
         <div className="flex flex-col gap-[0.5rem]">
-          <p className="text-medium text-text-60">모의 면접 - 화상모드</p>
+          <p className="text-small text-text-60">모의 면접 - 화상모드</p>
           <Image
             src={InterviewVideoImage}
             alt=""
