@@ -13,6 +13,7 @@ const HeaderButton = ({
   questionId,
   questionTitle,
   categoryNames,
+  categories,
   isHearted: initialIsHearted,
   questionHeartCount: initialHeartsCount,
 }: IProps) => {
@@ -62,10 +63,12 @@ const HeaderButton = ({
         </button>
       </div>
       <UpdateQuestionModal
+        questionId={questionId}
         questionTitle={questionTitle}
         categoryNames={categoryNames}
         updateModalVisible={updateModalVisible}
         toggleUpdateModalVisible={toggleUpdateModalVisible}
+        categories={categories}
       />
     </div>
   );

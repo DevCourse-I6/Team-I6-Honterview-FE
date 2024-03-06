@@ -3,12 +3,13 @@ import {
   TitleWithInterviewStart,
 } from '@/container/questions/components';
 import AnswerList from '@/container/questions/components/AnswerList';
-import { getQuestionById } from '@/container/questions/services';
+import { getCategories, getQuestionById } from '@/container/questions/services';
 import { IProps } from '@/container/questions/types';
 
 const Page = async ({ params }: IProps) => {
   const { questionId } = params;
   const questionIdAsNumber = Number(questionId);
+  const { data: categories } = await getCategories();
 
   const questionInitialData = await getQuestionById({
     questionId: questionIdAsNumber,
@@ -28,6 +29,7 @@ const Page = async ({ params }: IProps) => {
           categoryNames={categoryNames}
           questionId={questionIdAsNumber}
           heartsCount={heartsCount}
+          categories={categories}
         >
           {questionTitle}
         </TitleWithInterviewStart>

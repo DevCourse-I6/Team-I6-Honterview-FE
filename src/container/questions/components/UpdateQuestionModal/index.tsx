@@ -1,5 +1,6 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -11,15 +12,17 @@ import Modal from '@/components/modal';
 import Tag from '@/components/tag';
 import { notify } from '@/components/toast';
 import { MAX_TAG_COUNT } from '@/container/presetting/components/sceneSection/components/firstQuestionScene/constants';
-import { dummyTags } from '@/container/presetting/components/sceneSection/components/firstQuestionScene/dummydata';
 
+import { patchQuestion } from '../../services';
 import { IProps } from './types';
 
 const UpdateQuestionModal = ({
+  questionId,
   questionTitle,
   categoryNames,
   updateModalVisible,
   toggleUpdateModalVisible,
+  categories,
 }: IProps) => {
   const [selectedList, setSelectedList] = useState<AutocompleteDataType[]>(
     categoryNames.map((category, index) => ({
@@ -28,6 +31,19 @@ const UpdateQuestionModal = ({
     })),
   );
   const [titleInput, setTitleInput] = useState(questionTitle);
+  const { mutate } = useMutation({
+    mutationFn: () =>
+      patchQuestion(questionId, {
+        content: titleInput,
+        categoryIds: selectedList.map((category) => category.id as number),
+      }),
+    onSuccess: () => {
+      notify('success', '질문 수정 완료');
+    },
+    onError: (error) => {
+      notify('error', error.message);
+    },
+  });
 
   return (
     <Modal
@@ -43,7 +59,7 @@ const UpdateQuestionModal = ({
       />
       <div className="flex flex-col gap-4">
         <AutocompleteSearch
-          totalDatas={dummyTags}
+          totalDatas={categories}
           selectedList={selectedList}
           onSelectItem={(tag) => {
             if (selectedList.length >= MAX_TAG_COUNT) {
@@ -75,7 +91,12 @@ const UpdateQuestionModal = ({
         </div>
       </div>
       <div className="mt-[110px] flex gap-5">
-        <Button className="w-1/2">수정하기</Button>
+        <Button
+          className="w-1/2"
+          onClick={() => mutate()}
+        >
+          수정하기
+        </Button>
         <Button
           onClick={toggleUpdateModalVisible}
           styleType={ButtonType.Type2}
