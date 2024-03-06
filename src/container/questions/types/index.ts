@@ -37,6 +37,7 @@ export interface IQuestion {
   id: number;
   content: string;
   categoryNames: string[];
+  heartsCount: number;
   answers: IAnswerPage;
 }
 
@@ -49,6 +50,7 @@ export interface IAnswer {
   id: number;
   content: string;
   nickname: string;
+  heartsCount: number;
 }
 
 export interface IAnswerPage {
