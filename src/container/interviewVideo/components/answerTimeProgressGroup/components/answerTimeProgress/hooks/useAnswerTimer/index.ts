@@ -1,13 +1,14 @@
 import { useEffect, useState } from 'react';
 
-import useInterviewProgress from '@/stores/interviewProgress';
+import { useInterview, useProgressingTime } from '@/stores/interviewProgress';
 
 import { IProps } from './types';
 
-const useAnswerTimer = ({ defaultTime, timer, enabled, onEnded }: IProps) => {
-  const setInterview = useInterviewProgress((state) => state.setInterview);
+const useAnswerTimer = ({ defaultTime, enabled }: IProps) => {
+  const { limitTimer } = useInterview();
+  const { setProgressingTime } = useProgressingTime();
   const [time, setTime] = useState(defaultTime);
-  const progressWidth = (time / timer) * 100;
+  const progressWidth = (time / limitTimer) * 100;
 
   useEffect(() => {
     if (!enabled) {
@@ -18,10 +19,10 @@ const useAnswerTimer = ({ defaultTime, timer, enabled, onEnded }: IProps) => {
       setTime((prevTime) => {
         const newTime = prevTime + 1;
 
-        if (newTime >= timer) {
-          onEnded && onEnded(timer);
+        if (newTime >= limitTimer) {
           clearInterval(intervalId);
-          return timer;
+
+          return limitTimer;
         }
 
         return newTime;
@@ -31,15 +32,13 @@ const useAnswerTimer = ({ defaultTime, timer, enabled, onEnded }: IProps) => {
     return () => {
       clearInterval(intervalId);
     };
-  }, [timer, enabled, onEnded]);
+  }, [enabled, limitTimer]);
 
   useEffect(() => {
-    if (enabled) {
-      setInterview({ progressingTime: time });
-    }
-  }, [enabled, setInterview, time]);
+    setProgressingTime(time);
+  }, [time, setProgressingTime]);
 
-  return { progressWidth };
+  return { time, progressWidth };
 };
 
 export default useAnswerTimer;

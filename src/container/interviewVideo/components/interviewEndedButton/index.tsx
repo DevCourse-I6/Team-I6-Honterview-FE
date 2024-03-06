@@ -1,12 +1,16 @@
+'use client';
+
 import Link from 'next/link';
 
-import { IProps } from './types';
+import { useInterview } from '@/stores/interviewProgress';
 
-const InterviewEndedButton = ({ interviewId }: IProps) => {
+const InterviewEndedButton = () => {
+  const { id } = useInterview();
+
   return (
     <Link
-      className="h-auto w-auto rounded-lg bg-primaries-primary px-[1rem] py-[0.5rem] text-small text-white md:text-medium"
-      href={`/interview/result/${interviewId}`}
+      className="flex h-auto w-auto items-center rounded-lg bg-primaries-primary px-[1rem] py-[0.5rem] text-medium text-white"
+      href={`/interview/result/${id}`}
     >
       면접 종료
     </Link>

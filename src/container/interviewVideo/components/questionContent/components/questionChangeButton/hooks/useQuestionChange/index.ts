@@ -1,34 +1,24 @@
-import { useCallback, useEffect, useTransition } from 'react';
+import { useCallback, useEffect, useState, useTransition } from 'react';
 
 import { notify } from '@/components/toast';
 import {
   changeQuestionByAnswer,
   changeQuestionByCategories,
 } from '@/libs/actions/question';
-import useInterviewProgress from '@/stores/interviewProgress';
+import { useInterview, useQuestionContent } from '@/stores/interviewProgress';
 
-import { IProps } from './types';
-
-const useQuestionChange = ({ questions, categories }: IProps) => {
-  const {
-    questionContent,
-    setInterview,
-    questionChangeCounter,
-    increaseQuestionChangeCounter,
-  } = useInterviewProgress((state) => ({
-    questionContent: state.interview.questionContent,
-    setInterview: state.setInterview,
-    questionChangeCounter: state.questionChangeCounter,
-    increaseQuestionChangeCounter: state.increaseQuestionChangeCounter,
-  }));
+const useQuestionChange = () => {
+  const { questions, categories } = useInterview();
+  const { questionContent, setQuestionContent } = useQuestionContent();
   const [isPending, startTransition] = useTransition();
+  const [changeCounter, setChangeCounter] = useState(-1);
 
   const handleChangeQuestion = useCallback(() => {
     if (questions.length === 0) {
       return notify('warning', '첫 질문은 변경이 불가능 합니다');
     }
 
-    if (questionChangeCounter >= 1) {
+    if (changeCounter >= 1) {
       return notify('warning', '질문 변경은 최대 1회 입니다.');
     }
 
@@ -38,8 +28,8 @@ const useQuestionChange = ({ questions, categories }: IProps) => {
       startTransition(async () => {
         const { data } = await changeQuestionByAnswer(answerContent);
 
-        setInterview(data);
-        increaseQuestionChangeCounter();
+        setQuestionContent(data.questionContent);
+        setChangeCounter((prev) => prev + 1);
       });
     }
 
@@ -47,17 +37,11 @@ const useQuestionChange = ({ questions, categories }: IProps) => {
       startTransition(async () => {
         const { data } = await changeQuestionByCategories(categories);
 
-        setInterview(data);
-        increaseQuestionChangeCounter();
+        setQuestionContent(data.questionContent);
+        setChangeCounter((prev) => prev + 1);
       });
     }
-  }, [
-    categories,
-    increaseQuestionChangeCounter,
-    questionChangeCounter,
-    questions,
-    setInterview,
-  ]);
+  }, [categories, changeCounter, questions, setQuestionContent]);
 
   useEffect(() => {
     if (questions.length !== 0 && !questionContent) {

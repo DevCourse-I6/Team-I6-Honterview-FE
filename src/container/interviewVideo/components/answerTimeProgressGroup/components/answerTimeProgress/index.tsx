@@ -1,20 +1,12 @@
 'use client';
 
+import React from 'react';
+
 import useAnswerTimer from './hooks/useAnswerTimer';
 import { IProps } from './types';
 
-const AnswerTimeProgress = ({
-  defaultTime,
-  timer,
-  enabled,
-  onEnded,
-}: IProps) => {
-  const { progressWidth } = useAnswerTimer({
-    defaultTime,
-    timer,
-    enabled,
-    onEnded,
-  });
+const AnswerTimeProgress = ({ defaultTime, enabled }: IProps) => {
+  const { progressWidth } = useAnswerTimer({ defaultTime, enabled });
   const commonStyle = 'rounded-2xl bg-primaries-primary border';
   const animationStyle = `${enabled ? 'animate-pulse' : ''}`;
 
@@ -28,4 +20,4 @@ const AnswerTimeProgress = ({
   );
 };
 
-export default AnswerTimeProgress;
+export default React.memo(AnswerTimeProgress);

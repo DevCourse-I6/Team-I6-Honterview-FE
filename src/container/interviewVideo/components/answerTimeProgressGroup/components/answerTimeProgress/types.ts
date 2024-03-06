@@ -1,7 +1,4 @@
-import { IInterview } from '@/types/interview';
-
-export interface IProps extends Pick<IInterview, 'timer'> {
+export interface IProps {
   defaultTime: number;
   enabled: boolean;
-  onEnded: () => void;
 }

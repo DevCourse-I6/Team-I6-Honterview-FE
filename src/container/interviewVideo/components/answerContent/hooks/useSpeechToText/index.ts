@@ -1,13 +1,10 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import { notify } from '@/components/toast';
-import useInterviewProgress from '@/stores/interviewProgress';
+import { useAnswerContent } from '@/stores/interviewProgress';
 
 const useSpeechToText = () => {
-  const { answerContent, setInterview } = useInterviewProgress((state) => ({
-    answerContent: state.answerContent,
-    setInterview: state.setInterview,
-  }));
+  const { answerContent, setAnswerContent } = useAnswerContent();
   const [transcript, setTranscript] = useState('');
   const [listening, setListening] = useState(false);
   const [speechRecognition, setSpeechRecognition] =
@@ -64,10 +61,10 @@ const useSpeechToText = () => {
 
   useEffect(() => {
     if (transcript && listening) {
-      setInterview({ answerContent: answerContent + transcript });
+      setAnswerContent(answerContent + transcript);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [setInterview, transcript, listening]);
+  }, [setAnswerContent, transcript, listening]);
 
   useEffect(() => {
     startListening();
