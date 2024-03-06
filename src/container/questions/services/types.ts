@@ -1,5 +1,5 @@
 export interface IGetQuestionByIdParams {
-  questionId: string;
+  questionId: number;
   page: number;
   size: number;
 }

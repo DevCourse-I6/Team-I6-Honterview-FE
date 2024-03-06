@@ -1,3 +1,3 @@
 export interface IProps {
-  questionId: string;
+  questionId: number;
 }

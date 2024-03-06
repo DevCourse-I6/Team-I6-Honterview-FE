@@ -43,21 +43,33 @@ const TitleWidthModal = () => {
           <Answer
             nickname="snagmin"
             content="sfdfsdfdfs"
+            answerId={2}
+            isHearted={false}
+            heartsCount={5}
             className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
           />
           <Answer
             nickname="snagmin"
             content="sfdfsdfdfs"
+            answerId={2}
+            isHearted={false}
+            heartsCount={5}
             className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
           />
           <Answer
             nickname="snagmin"
             content="sfdfsdfdfs"
+            answerId={2}
+            isHearted={false}
+            heartsCount={5}
             className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
           />
           <Answer
             nickname="snagmin"
             content="sfdfsdfdfs"
+            answerId={2}
+            isHearted={false}
+            heartsCount={5}
             className="rounded-2xl bg-slate-200 p-10 shadow-xl"
           />
         </div>

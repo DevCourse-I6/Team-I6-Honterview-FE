@@ -1,5 +1,10 @@
 import fetchAPI from '../libs/fetchAPI';
-import { IGetQuestionById, IGetRandomQuestionsByCategories } from '../types';
+import {
+  IClickAnswerHeart,
+  IClickQuestionHeart,
+  IGetQuestionById,
+  IGetRandomQuestionsByCategories,
+} from '../types';
 import { IGetQuestionByIdParams } from './types';
 
 export const getQuestionById = ({
@@ -12,8 +17,22 @@ export const getQuestionById = ({
 };
 
 export const getRandomQuestionsByCategories = (
-  questionId: string,
+  questionId: number,
 ): Promise<IGetRandomQuestionsByCategories> => {
   const url = `api/questions/${questionId}/random`;
   return fetchAPI(url);
+};
+
+export const clickQuestionHeart = (
+  questionId: number,
+): Promise<IClickQuestionHeart> => {
+  const url = `api/questions/${questionId}/hearts`;
+  return fetchAPI(url, 'post');
+};
+
+export const clickAnswerHeart = (
+  answerId: number,
+): Promise<IClickAnswerHeart> => {
+  const url = `api/answers/${answerId}/hearts`;
+  return fetchAPI(url, 'post');
 };

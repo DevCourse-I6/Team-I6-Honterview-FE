@@ -1,13 +1,27 @@
+import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from '@/components/button';
 import Tag from '@/components/tag';
 
+import HeaderButton from './components/HeaderButton';
 import { IProps } from './types';
 
-const TitleWithInterviewStart = ({ children, categoryNames }: IProps) => {
+const TitleWithInterviewStart = async ({
+  children,
+  categoryNames,
+  questionId,
+  heartsCount,
+}: IProps) => {
+  // TODO: 유저 정보 isHearted 적용하기
+
   return (
     <div>
+      <HeaderButton
+        questionId={questionId}
+        isHearted={false}
+        questionHeartCount={heartsCount}
+      />
       <div className="relative flex flex-col gap-7">
         <h1 className="text-[3.2rem] font-medium leading-tight text-[#3C4654]">
           {children}
@@ -28,12 +42,12 @@ const TitleWithInterviewStart = ({ children, categoryNames }: IProps) => {
             </li>
           ))}
         </ul>
-        <Button
-          className="bottom-0 right-0 text-xl"
-          style={{ position: 'absolute', fontSize: '1.5rem' }}
+        <Link
+          className="absolute bottom-0 right-0 text-[1.5rem] text-xl"
+          href={`/interview/presetting/${questionId}`}
         >
-          모의 면접 시작
-        </Button>
+          <Button>모의 면접 시작</Button>
+        </Link>
       </div>
     </div>
   );
