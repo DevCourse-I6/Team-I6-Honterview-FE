@@ -25,6 +25,9 @@ const fetchAPI = async (
       case 'delete':
         response = await apiClient.delete(url, config);
         break;
+      case 'patch':
+        response = await apiClient.patch(url, config);
+        break;
       default:
         response = await apiClient.get(url, config);
     }

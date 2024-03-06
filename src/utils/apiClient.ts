@@ -40,4 +40,14 @@ const del = (url: string, options: RequestInit = {}) => {
   });
 };
 
-export const apiClient = { get, post, put, delete: del };
+const patch = (url: string, options: RequestInit = {}) => {
+  return fetch(`${API_BASE_URL}${url}`, {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    ...options,
+    method: 'PATCH',
+  });
+};
+
+export const apiClient = { get, post, put, delete: del, patch };
