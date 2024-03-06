@@ -3,4 +3,7 @@ export interface IProps {
   content: string;
   isBlur?: boolean;
   className?: string;
+  answerId: number;
+  isHearted: boolean;
+  heartsCount: number;
 }

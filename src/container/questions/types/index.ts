@@ -14,10 +14,30 @@ export interface IGetRandomQuestionsByCategories {
   data: ITailQuestion[];
 }
 
+export interface IClickQuestionHeart {
+  message: string;
+  data: IQuestionHeart;
+}
+
+export interface IClickAnswerHeart {
+  message: string;
+  data: IAnswerHeart;
+}
+
+export interface IQuestionHeart {
+  questionHeartCount: number;
+  isHearted: boolean;
+}
+
+export interface IAnswerHeart {
+  isHearted: boolean;
+}
+
 export interface IQuestion {
   id: number;
   content: string;
   categoryNames: string[];
+  heartsCount: number;
   answers: IAnswerPage;
 }
 
@@ -30,6 +50,7 @@ export interface IAnswer {
   id: number;
   content: string;
   nickname: string;
+  heartsCount: number;
 }
 
 export interface IAnswerPage {

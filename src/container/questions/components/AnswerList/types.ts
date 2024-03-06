@@ -2,5 +2,5 @@ import { IGetQuestionById } from '@/container/questions/types';
 
 export interface IProps {
   initialData: IGetQuestionById;
-  questionId: string;
+  questionId: number;
 }
