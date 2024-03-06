@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from '@/components/button';
@@ -41,12 +42,12 @@ const TitleWithInterviewStart = async ({
             </li>
           ))}
         </ul>
-        <Button
-          className="bottom-0 right-0 text-xl"
-          style={{ position: 'absolute', fontSize: '1.5rem' }}
+        <Link
+          className="absolute bottom-0 right-0 text-[1.5rem] text-xl"
+          href={`/interview/presetting/${questionId}`}
         >
-          모의 면접 시작
-        </Button>
+          <Button>모의 면접 시작</Button>
+        </Link>
       </div>
     </div>
   );
