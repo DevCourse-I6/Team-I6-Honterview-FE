@@ -5,12 +5,11 @@ import { TMethod } from './types';
 const fetchAPI = async (
   url: string,
   method: TMethod = 'get',
-  body = null,
   options: RequestInit = {},
 ) => {
   try {
     let response;
-    const config = {
+    const config: RequestInit = {
       ...options,
       headers: {
         'Content-Type': 'application/json',
@@ -21,7 +20,7 @@ const fetchAPI = async (
 
     switch (method) {
       case 'post':
-        response = await apiClient.post(url, JSON.stringify(body), config);
+        response = await apiClient.post(url, config);
         break;
       case 'delete':
         response = await apiClient.delete(url, config);
