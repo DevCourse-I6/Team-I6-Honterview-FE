@@ -5,4 +5,5 @@ export interface IProps {
   className?: string;
   answerId: number;
   isHearted: boolean;
+  heartsCount: number;
 }

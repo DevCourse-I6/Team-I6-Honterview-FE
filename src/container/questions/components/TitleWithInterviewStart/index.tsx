@@ -3,7 +3,6 @@ import { v4 as uuidv4 } from 'uuid';
 import Button from '@/components/button';
 import Tag from '@/components/tag';
 
-import { clickQuestionHeart } from '../../services';
 import HeaderButton from './components/HeaderButton';
 import { IProps } from './types';
 
@@ -11,17 +10,16 @@ const TitleWithInterviewStart = async ({
   children,
   categoryNames,
   questionId,
+  heartsCount,
 }: IProps) => {
-  const {
-    data: { isHearted, questionHeartCount },
-  } = await clickQuestionHeart(questionId);
+  // TODO: 유저 정보 isHearted 적용하기
 
   return (
     <div>
       <HeaderButton
         questionId={questionId}
-        isHearted={isHearted}
-        questionHeartCount={questionHeartCount}
+        isHearted={false}
+        questionHeartCount={heartsCount}
       />
       <div className="relative flex flex-col gap-7">
         <h1 className="text-[3.2rem] font-medium leading-tight text-[#3C4654]">

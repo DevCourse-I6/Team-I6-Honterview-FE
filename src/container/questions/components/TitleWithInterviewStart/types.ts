@@ -4,4 +4,5 @@ export interface IProps {
   children: ReactNode;
   categoryNames: string[];
   questionId: string;
+  heartsCount: number;
 }

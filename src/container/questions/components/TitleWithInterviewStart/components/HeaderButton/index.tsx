@@ -1,5 +1,6 @@
 'use client';
 
+import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { BookmarkIcon } from '@/components/icon';
@@ -9,27 +10,19 @@ import { IProps } from './types';
 
 const HeaderButton = ({
   questionId,
-  isHearted,
-  questionHeartCount,
+  isHearted: initialIsHearted,
+  questionHeartCount: initialHeartsCount,
 }: IProps) => {
-  const [heartData, setHeartData] = useState({
-    isHearted,
-    questionHeartCount,
+  const [isHearted, setIsHearted] = useState(initialIsHearted);
+  const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
+
+  const { mutate } = useMutation({
+    mutationFn: () => clickQuestionHeart(questionId),
+    onSuccess: () => {
+      setIsHearted(!isHearted);
+      setHeartsCount(isHearted ? heartsCount - 1 : heartsCount + 1);
+    },
   });
-
-  const clickHeart = async () => {
-    const {
-      data: {
-        isHearted: newIsHearted,
-        questionHeartCount: newQuestionHeartCount,
-      },
-    } = await clickQuestionHeart(questionId);
-
-    setHeartData({
-      isHearted: newIsHearted,
-      questionHeartCount: newQuestionHeartCount,
-    });
-  };
 
   return (
     <div className="flex justify-between">
@@ -48,14 +41,14 @@ const HeaderButton = ({
         </button>
       </div>
       <div className="flex items-center gap-1">
-        <span className=" text-large">{heartData.questionHeartCount}</span>
+        <span className=" text-large">{heartsCount}</span>
 
         <button
           type="button"
-          onClick={clickHeart}
+          onClick={() => mutate()}
         >
           <BookmarkIcon
-            className={`${heartData.isHearted ? 'fill-primaries-active' : 'fill-slate-300'} hover:fill-blue-300`}
+            className={`${isHearted ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300'}`}
           />
         </button>
       </div>

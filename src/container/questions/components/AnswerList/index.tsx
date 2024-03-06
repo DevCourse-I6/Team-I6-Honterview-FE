@@ -39,12 +39,13 @@ const AnswerList = ({ initialData, questionId }: IProps) => {
 
   return (
     <>
-      {data.pages.map(({ nickname, content, id }) => (
+      {data.pages.map(({ nickname, content, id, heartsCount }) => (
         <Answer
           key={uuidv4()}
           answerId={id}
           nickname={nickname}
           content={content}
+          heartsCount={heartsCount}
           isHearted={false}
         />
       ))}

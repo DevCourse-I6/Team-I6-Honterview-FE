@@ -16,7 +16,7 @@ const Page = async ({ params }: IProps) => {
   });
 
   const {
-    data: { content: questionTitle, categoryNames },
+    data: { content: questionTitle, categoryNames, heartsCount },
   } = questionInitialData;
 
   return (
@@ -25,6 +25,7 @@ const Page = async ({ params }: IProps) => {
         <TitleWithInterviewStart
           categoryNames={categoryNames}
           questionId={questionId}
+          heartsCount={heartsCount}
         >
           {questionTitle}
         </TitleWithInterviewStart>
