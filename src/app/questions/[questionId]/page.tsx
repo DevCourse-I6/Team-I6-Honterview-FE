@@ -24,6 +24,7 @@ const Page = async ({ params }: IProps) => {
     <div className="m-auto max-w-[800px]">
       <div className=" mb-20">
         <TitleWithInterviewStart
+          questionTitle={questionTitle}
           categoryNames={categoryNames}
           questionId={questionIdAsNumber}
           heartsCount={heartsCount}

@@ -9,6 +9,7 @@ import { IProps } from './types';
 
 const TitleWithInterviewStart = async ({
   children,
+  questionTitle,
   categoryNames,
   questionId,
   heartsCount,
@@ -21,6 +22,8 @@ const TitleWithInterviewStart = async ({
         questionId={questionId}
         isHearted={false}
         questionHeartCount={heartsCount}
+        questionTitle={questionTitle}
+        categoryNames={categoryNames}
       />
       <div className="relative flex flex-col gap-7">
         <h1 className="text-[3.2rem] font-medium leading-tight text-[#3C4654]">
