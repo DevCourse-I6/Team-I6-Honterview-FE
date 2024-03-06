@@ -8,9 +8,10 @@ import { IProps } from '@/container/questions/types';
 
 const Page = async ({ params }: IProps) => {
   const { questionId } = params;
+  const questionIdAsNumber = Number(questionId);
 
   const questionInitialData = await getQuestionById({
-    questionId,
+    questionId: questionIdAsNumber,
     page: 1,
     size: 5,
   });
@@ -24,7 +25,7 @@ const Page = async ({ params }: IProps) => {
       <div className=" mb-20">
         <TitleWithInterviewStart
           categoryNames={categoryNames}
-          questionId={questionId}
+          questionId={questionIdAsNumber}
           heartsCount={heartsCount}
         >
           {questionTitle}
@@ -33,11 +34,11 @@ const Page = async ({ params }: IProps) => {
       <div className="flex flex-col gap-16">
         <AnswerList
           initialData={questionInitialData}
-          questionId={questionId}
+          questionId={questionIdAsNumber}
         />
       </div>
       <hr className="my-20" />
-      <TailQuestions questionId={questionId} />
+      <TailQuestions questionId={questionIdAsNumber} />
     </div>
   );
 };

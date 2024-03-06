@@ -1,5 +1,5 @@
 export interface IProps {
-  questionId: string;
+  questionId: number;
   isHearted: boolean;
   questionHeartCount: number;
 }
