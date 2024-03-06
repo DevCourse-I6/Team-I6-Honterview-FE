@@ -14,7 +14,7 @@ const MainQuestionListSection = () => {
         네트워크에서 OSI 7계층이란 무엇인가요?
       </ChatBubble>
       <ChatBubble className="chat_bubble3 right-[15rem] top-[10rem]">
-        Spring에서 Autowiring 과정에 대해서 설명해주세요
+        Spring의 Autowiring 과정에 대해서 설명해주세요
       </ChatBubble>
       <ChatBubble className="chat_bubble4 bottom-[5rem] left-[45%]">
         안드로이드의 Thread간 통신방법에 대해 설명해주세요
@@ -24,7 +24,7 @@ const MainQuestionListSection = () => {
       </ChatBubble>
       <h2 className="text-[5rem] font-bold">다양한 개발 분야</h2>
       <div className="flex flex-col gap-[0.5rem]">
-        <p className="text-medium text-text-60">면접 질문</p>
+        <p className="text-small text-text-60">면접 질문</p>
         <Image
           src={QuestionListImage}
           alt=""

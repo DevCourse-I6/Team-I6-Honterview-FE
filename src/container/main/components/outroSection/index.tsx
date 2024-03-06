@@ -22,8 +22,9 @@ const navigation = [
 const MainOutroSection = () => {
   return (
     <div className="flex h-[calc(100vh-9rem)] flex-col items-center justify-center">
-      <p className={`text-[9rem] ${goldenPlainsFont.className}`}>Honterview</p>
-      <h2 className="text-[4rem] font-bold">지금, 경험해보세요</h2>
+      <h2 className="font-mono text-[2rem]">everything is possible,</h2>
+      <p className={`text-[10rem] ${goldenPlainsFont.className}`}>Honterview</p>
+      <h2 className="text-[4rem] font-bold">지금 경험해 보세요</h2>
       <ul className="flex justify-center gap-10 p-[3rem]">
         {navigation.map((item) => (
           <Link
@@ -31,7 +32,7 @@ const MainOutroSection = () => {
             replace={item.replace}
             scroll={item.scroll}
             key={item.title}
-            className="outro_link rounded-full bg-black p-[2rem] text-[2rem] text-white"
+            className="outro_link rounded-xl bg-black p-[2rem] text-[2rem] font-semibold text-white"
           >
             {item.title}
           </Link>

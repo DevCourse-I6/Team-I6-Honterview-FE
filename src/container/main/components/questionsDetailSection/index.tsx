@@ -6,7 +6,7 @@ import ChatBubble from '../chatBubble';
 
 const MainQuestionDetailSection = () => {
   return (
-    <div className="relative flex h-screen items-center justify-center gap-[5rem] bg-gradient-to-b from-pink-50 via-white via-70% to-white">
+    <div className="relative flex h-screen items-center justify-center gap-[5rem] bg-gradient-to-b from-pink-50 to-white">
       <ChatBubble
         className="chat_bubble1 left-[15rem] top-[5rem]"
         isAnswer
@@ -48,10 +48,10 @@ const MainQuestionDetailSection = () => {
           </p>
           모범 답변과
         </h2>
-        <p className=" text-text-40">* 좋아요를 많이 받은 다른 사용자의 답변</p>
+        <p className="text-text-40">* 좋아요를 많이 받은 다른 사용자의 답변</p>
       </div>
       <div className="flex flex-col gap-[0.5rem]">
-        <p className="text-medium text-text-60">면접 질문 상세</p>
+        <p className="text-small text-text-60">면접 질문 상세</p>
         <Image
           src={QuestionDetailImage}
           alt=""
