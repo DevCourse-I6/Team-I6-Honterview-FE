@@ -1,13 +1,9 @@
 import Button from '@/components/button';
 
 import useQuestionChange from './hooks/useQuestionChange';
-import { IProps } from './types';
 
-const QuestionChangeButton = ({ questions, categories }: IProps) => {
-  const { isPending, handleChangeQuestion } = useQuestionChange({
-    questions,
-    categories,
-  });
+const QuestionChangeButton = () => {
+  const { isPending, handleChangeQuestion } = useQuestionChange();
 
   return (
     <Button

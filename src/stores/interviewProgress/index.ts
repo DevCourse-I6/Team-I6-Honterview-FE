@@ -1,47 +1,56 @@
 import { create } from 'zustand';
-import { createJSONStorage, persist } from 'zustand/middleware';
 
-import LOCAL_STORAGE_KEY from '@/constants/localStorageKey';
+import {
+  IAnswerContentStore,
+  IInterviewStore,
+  IIsSubmitStore,
+  IMediaBlobUrlStore,
+  IProgressingTimeStore,
+  IQuestionContentStore,
+} from './types';
 
-import { IInterviewProgress, IUseInterviewProgress } from './types';
+const useInterview = create<IInterviewStore>((set) => ({
+  id: '',
+  questionCount: 0,
+  limitTimer: 0,
+  questions: [],
+  categories: [],
+  setInterview: (partial) => set((state) => ({ ...state, ...partial })),
+}));
 
-const useInterviewProgress = create(
-  persist<IUseInterviewProgress>(
-    (set) => ({
-      interview: {
-        id: null,
-        progressingTime: 0,
-        questionContent: '',
-        answerContent: '',
-      },
-      questionChangeCounter: 0,
+const useIsSubmit = create<IIsSubmitStore>((set) => ({
+  isSubmit: false,
+  setIsSubmit: (value: boolean) => set(() => ({ isSubmit: value })),
+}));
 
-      setInterview: (newInterview: Partial<IInterviewProgress>) =>
-        set((state) => ({
-          ...state,
-          interview: { ...state.interview, ...newInterview },
-        })),
-      increaseQuestionChangeCounter: () =>
-        set((state) => ({
-          ...state,
-          questionChangeCounter: state.questionChangeCounter + 1,
-        })),
-      reset: () =>
-        set(() => ({
-          interview: {
-            id: null,
-            progressingTime: 0,
-            questionContent: '',
-            answerContent: '',
-          },
-          questionChangeCounter: 0,
-        })),
-    }),
-    {
-      name: LOCAL_STORAGE_KEY.INTERVIEW_PROGRESS,
-      storage: createJSONStorage(() => localStorage),
-    },
-  ),
-);
+const useProgressingTime = create<IProgressingTimeStore>((set) => ({
+  progressingTime: 0,
+  setProgressingTime: (newTime: number) =>
+    set(() => ({ progressingTime: newTime })),
+}));
 
-export default useInterviewProgress;
+const useQuestionContent = create<IQuestionContentStore>((set) => ({
+  questionContent: '',
+  setQuestionContent: (content: string) =>
+    set(() => ({ questionContent: content })),
+}));
+
+const useAnswerContent = create<IAnswerContentStore>((set) => ({
+  answerContent: '',
+  setAnswerContent: (content: string) =>
+    set(() => ({ answerContent: content })),
+}));
+
+const useMediaBlobUrl = create<IMediaBlobUrlStore>((set) => ({
+  mediaBlobUrl: '',
+  setMediaBlobUrl: (url: string) => set(() => ({ mediaBlobUrl: url })),
+}));
+
+export {
+  useAnswerContent,
+  useInterview,
+  useIsSubmit,
+  useMediaBlobUrl,
+  useProgressingTime,
+  useQuestionContent,
+};

@@ -2,18 +2,18 @@
 
 import { ChangeEvent } from 'react';
 
-import useInterviewProgress from '@/stores/interviewProgress';
+import { useAnswerContent } from '@/stores/interviewProgress';
 
 import useSpeechToText from './hooks/useSpeechToText';
 
 const AnswerContent = () => {
   const { answerContent, listening } = useSpeechToText();
-  const setInterview = useInterviewProgress((state) => state.setInterview);
+  const { setAnswerContent } = useAnswerContent();
 
   const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
     const { value } = e.target;
 
-    setInterview({ answerContent: value });
+    setAnswerContent(value);
   };
 
   return (
