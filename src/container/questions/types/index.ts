@@ -19,6 +19,21 @@ export interface IClickQuestionHeart {
   data: IQuestionHeart;
 }
 
+export interface IPatchQuestionRequestBody {
+  content: string;
+  categoryIds: number[];
+}
+
+export interface IGetCategories {
+  message: string;
+  data: ICategory[];
+}
+
+export interface ICategory {
+  id: number;
+  name: string;
+}
+
 export interface IClickAnswerHeart {
   message: string;
   data: IAnswerHeart;

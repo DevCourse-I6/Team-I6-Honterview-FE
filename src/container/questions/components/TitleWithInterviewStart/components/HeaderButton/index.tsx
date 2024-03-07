@@ -6,15 +6,20 @@ import { useState } from 'react';
 import { BookmarkIcon } from '@/components/icon';
 import { clickQuestionHeart } from '@/container/questions/services';
 
+import UpdateQuestionModal from '../../../UpdateQuestionModal';
 import { IProps } from './types';
 
 const HeaderButton = ({
   questionId,
+  questionTitle,
+  categoryNames,
+  categories,
   isHearted: initialIsHearted,
   questionHeartCount: initialHeartsCount,
 }: IProps) => {
   const [isHearted, setIsHearted] = useState(initialIsHearted);
   const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
+  const [updateModalVisible, setUpdateModalVisible] = useState(false);
 
   const { mutate } = useMutation({
     mutationFn: () => clickQuestionHeart(questionId),
@@ -24,10 +29,15 @@ const HeaderButton = ({
     },
   });
 
+  const toggleUpdateModalVisible = () => {
+    setUpdateModalVisible((prev) => !prev);
+  };
+
   return (
     <div className="flex justify-between">
       <div className="flex gap-4">
         <button
+          onClick={toggleUpdateModalVisible}
           type="button"
           className="rounded-3xl bg-slate-100 px-5 py-2"
         >
@@ -52,6 +62,14 @@ const HeaderButton = ({
           />
         </button>
       </div>
+      <UpdateQuestionModal
+        questionId={questionId}
+        questionTitle={questionTitle}
+        categoryNames={categoryNames}
+        updateModalVisible={updateModalVisible}
+        toggleUpdateModalVisible={toggleUpdateModalVisible}
+        categories={categories}
+      />
     </div>
   );
 };

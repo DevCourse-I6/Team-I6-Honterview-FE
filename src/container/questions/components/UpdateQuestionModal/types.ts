@@ -1,12 +1,10 @@
-import { ReactNode } from 'react';
-
 import { ICategory } from '../../types';
 
 export interface IProps {
-  children: ReactNode;
+  questionId: number;
   questionTitle: string;
   categoryNames: string[];
-  questionId: number;
-  heartsCount: number;
+  updateModalVisible: boolean;
   categories: ICategory[];
+  toggleUpdateModalVisible: () => void;
 }

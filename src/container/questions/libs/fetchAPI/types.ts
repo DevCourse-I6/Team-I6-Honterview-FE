@@ -1,1 +1,1 @@
-export type TMethod = 'get' | 'post' | 'delete';
+export type TMethod = 'get' | 'post' | 'delete' | 'put' | 'patch';

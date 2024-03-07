@@ -9,9 +9,11 @@ import { IProps } from './types';
 
 const TitleWithInterviewStart = async ({
   children,
+  questionTitle,
   categoryNames,
   questionId,
   heartsCount,
+  categories,
 }: IProps) => {
   // TODO: 유저 정보 isHearted 적용하기
 
@@ -21,6 +23,9 @@ const TitleWithInterviewStart = async ({
         questionId={questionId}
         isHearted={false}
         questionHeartCount={heartsCount}
+        questionTitle={questionTitle}
+        categoryNames={categoryNames}
+        categories={categories}
       />
       <div className="relative flex flex-col gap-7">
         <h1 className="text-[3.2rem] font-medium leading-tight text-[#3C4654]">
