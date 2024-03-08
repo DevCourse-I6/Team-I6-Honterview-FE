@@ -1,11 +1,12 @@
 import { IQuestion } from '@/types/question';
 
 export interface IInterviewStore {
-  id: string;
+  id: number;
   questionCount: number;
   limitTimer: number;
-  questions: IQuestion[];
+  questionsAndAnswers: IQuestion[];
   categories: string[];
+  currentQuestionIndex: number;
   setInterview: (partial: Partial<IInterviewStore>) => void;
 }
 
@@ -30,6 +31,6 @@ export interface IAnswerContentStore {
 }
 
 export interface IMediaBlobUrlStore {
-  mediaBlobUrl: string;
-  setMediaBlobUrl: (url: string) => void;
+  mediaBlobUrl: Blob[];
+  setMediaBlobUrl: (videoChunks: Blob[]) => void;
 }

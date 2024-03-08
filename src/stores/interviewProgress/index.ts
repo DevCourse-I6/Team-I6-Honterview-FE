@@ -10,11 +10,12 @@ import {
 } from './types';
 
 const useInterview = create<IInterviewStore>((set) => ({
-  id: '',
+  id: 0,
   questionCount: 0,
   limitTimer: 0,
-  questions: [],
+  questionsAndAnswers: [],
   categories: [],
+  currentQuestionIndex: 0,
   setInterview: (partial) => set((state) => ({ ...state, ...partial })),
 }));
 
@@ -42,8 +43,9 @@ const useAnswerContent = create<IAnswerContentStore>((set) => ({
 }));
 
 const useMediaBlobUrl = create<IMediaBlobUrlStore>((set) => ({
-  mediaBlobUrl: '',
-  setMediaBlobUrl: (url: string) => set(() => ({ mediaBlobUrl: url })),
+  mediaBlobUrl: [],
+  setMediaBlobUrl: (videoChunks: Blob[]) =>
+    set(() => ({ mediaBlobUrl: videoChunks })),
 }));
 
 export {

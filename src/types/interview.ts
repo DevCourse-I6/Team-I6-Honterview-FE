@@ -1,10 +1,10 @@
 import { IQuestion } from './question';
 
 export interface IInterview {
-  interviewId: string;
-  questionContent: string;
-  questionCount: number;
+  interviewId: number;
   timer: number;
-  questions: IQuestion[];
+  answerType: string;
+  questionCount: number;
+  questionsAndAnswers: IQuestion[];
   categories: string[];
 }
