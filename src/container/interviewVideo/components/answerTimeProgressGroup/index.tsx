@@ -7,17 +7,19 @@ import { useInterview } from '@/stores/interviewProgress';
 import AnswerTimeProgress from './components/answerTimeProgress';
 
 const AnswerTimeProgressGroup = () => {
-  const { questionCount, questions } = useInterview();
+  const { currentQuestionIndex, questionCount, questionsAndAnswers } =
+    useInterview();
   const progressArray = Array.from(
     { length: questionCount },
-    (_, index) => questions[index] && questions[index].progressingTime,
+    (_, index) =>
+      questionsAndAnswers[index] && questionsAndAnswers[index].progressingTime,
   );
 
   return (
     <ul className="flex h-[1rem] gap-1">
       {progressArray.map((progressingTime, index) => {
         const defaultTime = progressingTime || 0;
-        const enabled = questions.length === index;
+        const enabled = currentQuestionIndex === index;
 
         return (
           <AnswerTimeProgress

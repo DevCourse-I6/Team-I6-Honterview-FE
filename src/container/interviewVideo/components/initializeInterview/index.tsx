@@ -2,47 +2,78 @@
 
 import { useEffect } from 'react';
 
-import { useInterview, useQuestionContent } from '@/stores/interviewProgress';
+import {
+  useAnswerContent,
+  useInterview,
+  useQuestionContent,
+} from '@/stores/interviewProgress';
 
 import { IProps } from './types';
 
-const InitializeInterview = ({
-  interviewId,
-  interviewData,
-  children,
-}: IProps) => {
-  const { questionContent, questionCount, timer, questions, categories } =
+const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
+  const { timer, questionCount, questionsAndAnswers, categories } =
     interviewData;
-  const { id, setInterview } = useInterview();
+  const { currentQuestionIndex, setInterview } = useInterview();
   const { setQuestionContent } = useQuestionContent();
+  const { setAnswerContent } = useAnswerContent();
 
   useEffect(() => {
-    if (!id) {
-      setInterview({
-        id: interviewId,
-        questionCount,
-        limitTimer: timer,
-        questions,
-        categories,
-      });
+    const { length } = questionsAndAnswers;
+    const lastQuestion =
+      questionsAndAnswers[length - 1].questionContent ?? undefined;
+    const lastAnswer =
+      questionsAndAnswers[length - 1].answerContent ?? undefined;
+    let currentIndex = 0;
+
+    if (lastQuestion && !lastAnswer) {
+      currentIndex = length - 1;
     }
+
+    if (lastQuestion && lastAnswer) {
+      if (length + 1 <= questionCount) {
+        currentIndex = length;
+      }
+      if (length + 1 > questionCount) {
+        currentIndex = length - 1;
+      }
+    }
+
+    setInterview({
+      id: Number(interviewId),
+      questionCount,
+      limitTimer: timer,
+      questionsAndAnswers,
+      categories,
+      currentQuestionIndex: currentIndex,
+    });
   }, [
-    id,
     interviewId,
     setInterview,
     questionCount,
     timer,
-    questions,
     categories,
+    questionsAndAnswers,
   ]);
 
   useEffect(() => {
-    if (questions.length === 0) {
-      setQuestionContent(questionContent);
-    }
-  }, [questions.length, setQuestionContent, questionContent]);
+    const answer =
+      questionsAndAnswers[currentQuestionIndex].answerContent ?? '';
 
-  return <>{children}</>;
+    if (answer) {
+      setAnswerContent(answer);
+    }
+  }, [currentQuestionIndex, questionsAndAnswers, setAnswerContent]);
+
+  useEffect(() => {
+    const question =
+      questionsAndAnswers[currentQuestionIndex].questionContent ?? '';
+
+    if (question) {
+      setQuestionContent(question);
+    }
+  }, [setQuestionContent, questionsAndAnswers, currentQuestionIndex]);
+
+  return null;
 };
 
 export default InitializeInterview;

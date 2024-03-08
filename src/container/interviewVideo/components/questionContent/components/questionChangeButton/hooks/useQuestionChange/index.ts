@@ -8,13 +8,14 @@ import {
 import { useInterview, useQuestionContent } from '@/stores/interviewProgress';
 
 const useQuestionChange = () => {
-  const { questions, categories } = useInterview();
+  const { id, currentQuestionIndex, questionsAndAnswers, categories } =
+    useInterview();
   const { questionContent, setQuestionContent } = useQuestionContent();
   const [isPending, startTransition] = useTransition();
-  const [changeCounter, setChangeCounter] = useState(-1);
+  const [changeCounter, setChangeCounter] = useState(0);
 
   const handleChangeQuestion = useCallback(() => {
-    if (questions.length === 0) {
+    if (currentQuestionIndex === 0) {
       return notify('warning', '첫 질문은 변경이 불가능 합니다');
     }
 
@@ -22,32 +23,49 @@ const useQuestionChange = () => {
       return notify('warning', '질문 변경은 최대 1회 입니다.');
     }
 
-    const { answerContent } = questions[questions.length - 1];
+    const { questionContent: prevQuestion, answerContent: prevAnswer } =
+      questionsAndAnswers[currentQuestionIndex - 1];
 
-    if (answerContent) {
+    if (prevAnswer) {
       startTransition(async () => {
-        const { data } = await changeQuestionByAnswer(answerContent);
+        const { data } = await changeQuestionByAnswer(
+          id,
+          prevQuestion,
+          prevAnswer,
+        );
 
-        setQuestionContent(data.questionContent);
-        setChangeCounter((prev) => prev + 1);
+        if (questionContent) {
+          setChangeCounter((prev) => prev + 1);
+        }
+        setQuestionContent(data.tailQuestionContent);
       });
     }
 
-    if (!answerContent) {
+    if (!prevAnswer) {
       startTransition(async () => {
         const { data } = await changeQuestionByCategories(categories);
 
+        if (questionContent) {
+          setChangeCounter((prev) => prev + 1);
+        }
         setQuestionContent(data.questionContent);
-        setChangeCounter((prev) => prev + 1);
       });
     }
-  }, [categories, changeCounter, questions, setQuestionContent]);
+  }, [
+    categories,
+    changeCounter,
+    currentQuestionIndex,
+    id,
+    questionContent,
+    questionsAndAnswers,
+    setQuestionContent,
+  ]);
 
   useEffect(() => {
-    if (questions.length !== 0 && !questionContent) {
+    if (currentQuestionIndex > 0 && !questionContent) {
       handleChangeQuestion();
     }
-  }, [handleChangeQuestion, questionContent, questions.length]);
+  }, [currentQuestionIndex, handleChangeQuestion, questionContent]);
 
   return { isPending, handleChangeQuestion };
 };
