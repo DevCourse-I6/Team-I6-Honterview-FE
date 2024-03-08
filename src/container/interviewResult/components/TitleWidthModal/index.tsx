@@ -4,9 +4,15 @@ import { useState } from 'react';
 
 import { XIcon } from '@/components/icon';
 import Modal from '@/components/modal';
-import { Answer } from '@/container/questions/components';
+import AnswerList from '@/container/questions/components/AnswerList';
 
-const TitleWidthModal = () => {
+import { IProps } from './types';
+
+const TitleWidthModal = ({
+  questionContent,
+  questionInitialData,
+  questionId,
+}: IProps) => {
   const [visible, setVisible] = useState(false);
 
   const toggleVisible = () => {
@@ -21,7 +27,7 @@ const TitleWidthModal = () => {
         className="mb-10 inline-block cursor-pointer text-extraLarge font-bold underline decoration-blue-300 hover:decoration-blue-600"
       >
         {/* TODO: 더보기가 존재할 경우 underline, color blue */}
-        브라우저 렌더링 원리에 대해서 설명해보세요.
+        {questionContent}
       </button>
 
       <Modal
@@ -37,40 +43,12 @@ const TitleWidthModal = () => {
           <XIcon className="h-[30px] w-[30px] stroke-white" />
         </button>
         <h1 className="mb-10 text-doubleLarge">
-          브라우저 렌더링 원리에 대해서 설명해보세요.
+          {questionInitialData.data.content}
         </h1>
         <div className="h-[calc(100%-2.5rem-90px)] overflow-auto">
-          <Answer
-            nickname="snagmin"
-            content="sfdfsdfdfs"
-            answerId={2}
-            isHearted={false}
-            heartsCount={5}
-            className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
-          />
-          <Answer
-            nickname="snagmin"
-            content="sfdfsdfdfs"
-            answerId={2}
-            isHearted={false}
-            heartsCount={5}
-            className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
-          />
-          <Answer
-            nickname="snagmin"
-            content="sfdfsdfdfs"
-            answerId={2}
-            isHearted={false}
-            heartsCount={5}
-            className=" mb-5 rounded-2xl bg-slate-200 p-10 shadow-xl"
-          />
-          <Answer
-            nickname="snagmin"
-            content="sfdfsdfdfs"
-            answerId={2}
-            isHearted={false}
-            heartsCount={5}
-            className="rounded-2xl bg-slate-200 p-10 shadow-xl"
+          <AnswerList
+            initialData={questionInitialData}
+            questionId={questionId}
           />
         </div>
       </Modal>

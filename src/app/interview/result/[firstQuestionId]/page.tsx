@@ -1,35 +1,59 @@
+import { v4 as uuidv4 } from 'uuid';
+
 import Divider from '@/components/divider';
 import { CheckBox, TitleWidthModal } from '@/container/interviewResult';
+import { getInterviewResult } from '@/container/interviewResult/services/interviews';
+import { getQuestionById } from '@/container/questions/services';
+import { IGetQuestionById } from '@/container/questions/types';
 
-const InterviewResultPage = () => {
+import { IProps } from './types';
+
+const InterviewResultPage = async ({ params }: IProps) => {
+  const { firstQuestionId } = params;
+  const firstQuestionIdAsNumber = Number(firstQuestionId);
+
+  const {
+    data: { questionsAndAnswers },
+  } = await getInterviewResult(firstQuestionIdAsNumber);
+
+  const questionIdList = questionsAndAnswers.map(
+    (questionAndAnswer) => questionAndAnswer.questionId,
+  );
+
+  const questionsInitialData: IGetQuestionById[] = await Promise.all(
+    questionIdList.map((questionId) =>
+      getQuestionById({ questionId, page: 1, size: 5 }),
+    ),
+  );
+
   return (
-    <div>
-      <div className="m-auto w-fit max-w-6xl">
-        <div className="mb-5 aspect-video rounded bg-slate-50">영상</div>
-        <div className="flex w-full justify-between">
-          <TitleWidthModal />
-          <CheckBox checkId="test" />
-        </div>
-        <div className="max-w-6xl rounded-lg bg-[#F2F2F2] px-11 py-9">
-          <p className="text-large ">
-            브라우저 렌더링은 HTML, CSS, JavaScript 등의 웹 페이지 자원을
-            브라우저가 화면에 그리는 과정을 말합니다. 브라우저 렌더링 원리와
-            순서는 크게 다음과 같은 단계로 구성됩니다. 먼저 DOM을 생성합니다.
-            브라우저는 HTML 문서를 파싱하여 DOM 트리를 생성합니다. 이때, HTML
-            태그를 노드로 변환하고, 노드간의 계층 관계를 형성합니다. 두 번째로
-            CSSOM을 생성합니다. 브라우저는 CSS 파일을 파싱하여 CSSOM 트리를
-            생성합니다. 이때, CSS 속성을 노드로 변환하고, 노드간의 계층 관계를
-            형성합니다. 세 번째로 DOM트리와 CSSOM을 결합하여 렌더 트리를 생성
-            합니다. 이때, 실제 화면에 표시될 요소만을 선택하여 렌더 트리를
-            형성합니다. 이제, 브라우저는 렌더 트리를 이용하여 각 요소의 크기와
-            위치를 계산하는 과정인 레이아웃을 거쳐 화면에 요소를 그리는 페인팅
-            과정을 거치게 됩니다. 이때, 요소의 배경, 테두리, 글자 등을 그리게
-            됩니다.
-          </p>
-        </div>
-      </div>
-      <Divider />
-    </div>
+    <>
+      {questionsAndAnswers.map(
+        ({ questionContent, answerContent, questionId }) => (
+          <div key={uuidv4()}>
+            <div className="m-auto w-fit max-w-6xl">
+              <div className="mb-5 aspect-video rounded bg-slate-50">영상</div>
+              <div className="flex w-full justify-between">
+                <TitleWidthModal
+                  questionContent={questionContent}
+                  questionInitialData={
+                    questionsInitialData.find(
+                      (questionData) => questionData.data.id === questionId,
+                    )!
+                  }
+                  questionId={questionId}
+                />
+                <CheckBox checkId="test" />
+              </div>
+              <div className="max-w-6xl rounded-lg bg-[#F2F2F2] px-11 py-9">
+                <p className="text-large ">{answerContent}</p>
+              </div>
+            </div>
+            <Divider />
+          </div>
+        ),
+      )}
+    </>
   );
 };
 
