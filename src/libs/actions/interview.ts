@@ -1,8 +1,16 @@
+'use server';
+
+import { IRequestInterviewForm } from '@/types/interview';
 import { apiClient } from '@/utils/apiClient';
 
-export const getInterviewInfo = async (interviewId: string) => {
+export const getUploadUrl = async (interviewId: number) => {
   try {
-    const response = await apiClient.get(`api/v1/interviews/${interviewId}`);
+    const response = await apiClient.get(
+      `api/v1/files/upload-url?interviewId=${interviewId}`,
+      {
+        cache: 'no-store',
+      },
+    );
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -20,25 +28,23 @@ export const getInterviewInfo = async (interviewId: string) => {
   }
 };
 
-export const postUploadMediaBlob = async (
-  uploadUrl: string,
-  mediaBlobUrl: Blob[],
+export const postInterview = async (
+  interviewId: number,
+  interviewForm: IRequestInterviewForm,
 ) => {
   try {
-    const videoBlob = new Blob(mediaBlobUrl, { type: 'video/webm' });
-    const formData = new FormData();
-
-    formData.append('video', videoBlob);
-
-    const response = await fetch(uploadUrl, {
-      body: videoBlob,
-      method: 'PUT',
+    const response = await apiClient.post(`api/v1/interviews/${interviewId}`, {
+      body: JSON.stringify(interviewForm),
       cache: 'no-store',
     });
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
+
+    const data = await response.json();
+
+    return data;
   } catch (error) {
     if (error instanceof Error) {
       throw new Error(error.message);

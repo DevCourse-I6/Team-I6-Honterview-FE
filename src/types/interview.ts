@@ -8,3 +8,10 @@ export interface IInterview {
   questionsAndAnswers: IQuestion[];
   categories: string[];
 }
+
+export interface IRequestInterviewForm {
+  questionContent: string;
+  answerContent: string;
+  videoId: number;
+  processingTime: number;
+}
