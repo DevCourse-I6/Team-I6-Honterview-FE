@@ -5,17 +5,20 @@ import { useEffect } from 'react';
 import {
   useAnswerContent,
   useInterview,
+  useMediaBlobUrl,
+  useQuestionChangeCounter,
   useQuestionContent,
 } from '@/stores/interviewProgress';
 
 import { IProps } from './types';
 
 const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
-  const { timer, questionCount, questionsAndAnswers, categories } =
-    interviewData;
-  const { currentQuestionIndex, setInterview } = useInterview();
+  const { timer, questionCount, questionsAndAnswers } = interviewData;
+  const { setInterview } = useInterview();
   const { setQuestionContent } = useQuestionContent();
   const { setAnswerContent } = useAnswerContent();
+  const { setMediaBlobUrl } = useMediaBlobUrl();
+  const { setQuestionChangeCounter } = useQuestionChangeCounter();
 
   useEffect(() => {
     const { length } = questionsAndAnswers;
@@ -38,40 +41,31 @@ const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
       }
     }
 
+    const question = questionsAndAnswers[currentIndex]?.questionContent ?? '';
+    const answer = questionsAndAnswers[currentIndex]?.answerContent ?? '';
+
     setInterview({
       id: Number(interviewId),
       questionCount,
       limitTimer: timer,
       questionsAndAnswers,
-      categories,
       currentQuestionIndex: currentIndex,
     });
+    setMediaBlobUrl([]);
+    setQuestionChangeCounter(0);
+    setQuestionContent(question);
+    setAnswerContent(answer);
   }, [
     interviewId,
-    setInterview,
     questionCount,
-    timer,
-    categories,
     questionsAndAnswers,
+    setAnswerContent,
+    setInterview,
+    setMediaBlobUrl,
+    setQuestionChangeCounter,
+    setQuestionContent,
+    timer,
   ]);
-
-  useEffect(() => {
-    const answer =
-      questionsAndAnswers[currentQuestionIndex].answerContent ?? '';
-
-    if (answer) {
-      setAnswerContent(answer);
-    }
-  }, [currentQuestionIndex, questionsAndAnswers, setAnswerContent]);
-
-  useEffect(() => {
-    const question =
-      questionsAndAnswers[currentQuestionIndex].questionContent ?? '';
-
-    if (question) {
-      setQuestionContent(question);
-    }
-  }, [setQuestionContent, questionsAndAnswers, currentQuestionIndex]);
 
   return null;
 };

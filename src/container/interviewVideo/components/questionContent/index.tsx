@@ -16,7 +16,7 @@ const QuestionContent = () => {
         <QuestionChangeButton />
       </div>
       <p className="grow overflow-y-auto rounded-2xl bg-background-20 px-4 py-2 text-medium font-medium">
-        {questionContent}
+        {questionContent ?? ''}
       </p>
     </div>
   );

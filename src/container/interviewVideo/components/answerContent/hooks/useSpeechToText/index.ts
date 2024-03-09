@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 import { notify } from '@/components/toast';
 import { useAnswerContent } from '@/stores/interviewProgress';
@@ -23,6 +23,12 @@ const useSpeechToText = () => {
       speechRecognition.stop();
     }
   }, [speechRecognition, listening]);
+
+  const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+
+    setAnswerContent(value);
+  };
 
   useEffect(() => {
     if (!('webkitSpeechRecognition' in window)) {
@@ -74,7 +80,7 @@ const useSpeechToText = () => {
     };
   }, [startListening, stopListening]);
 
-  return { answerContent, listening };
+  return { answerContent, listening, handleTextChange };
 };
 
 export default useSpeechToText;
