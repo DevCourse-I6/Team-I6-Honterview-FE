@@ -1,71 +1,50 @@
-import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useTransition } from 'react';
 
 import { notify } from '@/components/toast';
+import { postTailQuestion, rePostTailQuestion } from '@/libs/actions/question';
 import {
-  changeQuestionByAnswer,
-  changeQuestionByCategories,
-} from '@/libs/actions/question';
-import { useInterview, useQuestionContent } from '@/stores/interviewProgress';
+  useInterview,
+  useQuestionChangeCounter,
+  useQuestionContent,
+} from '@/stores/interviewProgress';
 
 const useQuestionChange = () => {
-  const { id, currentQuestionIndex, questionsAndAnswers, categories } =
-    useInterview();
+  const { id, currentQuestionIndex, questionsAndAnswers } = useInterview();
   const { questionContent, setQuestionContent } = useQuestionContent();
   const [isPending, startTransition] = useTransition();
-  const [changeCounter, setChangeCounter] = useState(0);
+  const { questionChangeCounter, increaseQuestionChangeCounter } =
+    useQuestionChangeCounter();
 
-  const handleChangeQuestion = useCallback(() => {
+  const handleChangeQuestion = () => {
     if (currentQuestionIndex === 0) {
       return notify('warning', '첫 질문은 변경이 불가능 합니다');
     }
 
-    if (changeCounter >= 1) {
+    if (questionChangeCounter >= 1) {
       return notify('warning', '질문 변경은 최대 1회 입니다.');
     }
 
+    const { questionContent: prevQuestion } =
+      questionsAndAnswers[currentQuestionIndex - 1];
+
+    startTransition(async () => {
+      const { data } = await rePostTailQuestion(id, prevQuestion);
+
+      increaseQuestionChangeCounter();
+      setQuestionContent(data.tailQuestionContent);
+    });
+  };
+
+  if (questionContent === '') {
     const { questionContent: prevQuestion, answerContent: prevAnswer } =
       questionsAndAnswers[currentQuestionIndex - 1];
 
-    if (prevAnswer) {
-      startTransition(async () => {
-        const { data } = await changeQuestionByAnswer(
-          id,
-          prevQuestion,
-          prevAnswer,
-        );
+    startTransition(async () => {
+      const { data } = await postTailQuestion(id, prevQuestion, prevAnswer);
 
-        if (questionContent) {
-          setChangeCounter((prev) => prev + 1);
-        }
-        setQuestionContent(data.tailQuestionContent);
-      });
-    }
-
-    if (!prevAnswer) {
-      startTransition(async () => {
-        const { data } = await changeQuestionByCategories(categories);
-
-        if (questionContent) {
-          setChangeCounter((prev) => prev + 1);
-        }
-        setQuestionContent(data.questionContent);
-      });
-    }
-  }, [
-    categories,
-    changeCounter,
-    currentQuestionIndex,
-    id,
-    questionContent,
-    questionsAndAnswers,
-    setQuestionContent,
-  ]);
-
-  useEffect(() => {
-    if (currentQuestionIndex > 0 && !questionContent) {
-      handleChangeQuestion();
-    }
-  }, [currentQuestionIndex, handleChangeQuestion, questionContent]);
+      setQuestionContent(data.tailQuestionContent);
+    });
+  }
 
   return { isPending, handleChangeQuestion };
 };

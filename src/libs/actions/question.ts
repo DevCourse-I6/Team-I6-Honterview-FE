@@ -2,10 +2,14 @@
 
 import { apiClient } from '@/utils/apiClient';
 
-export const changeQuestionByAnswer = async (answerContent: string) => {
+export const postTailQuestion = async (
+  interviewId: number,
+  prevQuestion: string,
+  prevAnswer: string,
+) => {
   try {
-    const response = await apiClient.post(`api/question/answer`, {
-      body: JSON.stringify({ answerContent }),
+    const response = await apiClient.post(`api/v1/gpt/${interviewId}`, {
+      body: JSON.stringify({ prevQuestion, prevAnswer }),
       cache: 'no-store',
     });
 
@@ -25,10 +29,13 @@ export const changeQuestionByAnswer = async (answerContent: string) => {
   }
 };
 
-export const changeQuestionByCategories = async (categories: string[]) => {
+export const rePostTailQuestion = async (
+  interviewId: number,
+  prevQuestion: string,
+) => {
   try {
-    const response = await apiClient.post(`api/question/category`, {
-      body: JSON.stringify({ categories }),
+    const response = await apiClient.post(`api/v1/gpt/${interviewId}/new`, {
+      body: JSON.stringify({ prevQuestion }),
       cache: 'no-store',
     });
 
