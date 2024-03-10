@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable unused-imports/no-unused-vars */
+import { cookies } from 'next/headers';
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const getAccessToken = () => {
@@ -10,6 +14,14 @@ const getAccessToken = () => {
 };
 
 const get = (url: string, options: RequestInit = {}) => {
+  let accessToken = null;
+
+  if (typeof window === 'undefined') {
+    const cookieStore = cookies();
+
+    accessToken = cookieStore.get('accessToken');
+  }
+
   return fetch(`${API_BASE_URL}${url}`, {
     ...options,
     method: 'GET',
@@ -23,6 +35,13 @@ const get = (url: string, options: RequestInit = {}) => {
 };
 
 const post = (url: string, options: RequestInit = {}) => {
+  let accessToken = null;
+
+  if (typeof window === 'undefined') {
+    const cookieStore = cookies();
+    accessToken = cookieStore.get('accessToken');
+  }
+
   return fetch(`${API_BASE_URL}${url}`, {
     ...options,
     method: 'POST',
@@ -36,6 +55,13 @@ const post = (url: string, options: RequestInit = {}) => {
 };
 
 const put = (url: string, options: RequestInit = {}) => {
+  let accessToken = null;
+
+  if (typeof window === 'undefined') {
+    const cookieStore = cookies();
+    accessToken = cookieStore.get('accessToken');
+  }
+
   return fetch(`${API_BASE_URL}${url}`, {
     ...options,
     method: 'PUT',
@@ -49,6 +75,13 @@ const put = (url: string, options: RequestInit = {}) => {
 };
 
 const del = (url: string, options: RequestInit = {}) => {
+  let accessToken = null;
+
+  if (typeof window === 'undefined') {
+    const cookieStore = cookies();
+    accessToken = cookieStore.get('accessToken');
+  }
+
   return fetch(`${API_BASE_URL}${url}`, {
     ...options,
     method: 'DELETE',
@@ -62,6 +95,13 @@ const del = (url: string, options: RequestInit = {}) => {
 };
 
 const patch = (url: string, options: RequestInit = {}) => {
+  let accessToken = null;
+
+  if (typeof window === 'undefined') {
+    const cookieStore = cookies();
+    accessToken = cookieStore.get('accessToken');
+  }
+
   return fetch(`${API_BASE_URL}${url}`, {
     ...options,
     method: 'PATCH',
