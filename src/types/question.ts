@@ -1,6 +1,8 @@
 export interface IQuestion {
   questionId: number;
-  content: string;
-  progressingTime: number;
+  questionContent: string;
+  answerId: number;
   answerContent: string;
+  processingTime: number;
+  videoId: number;
 }
