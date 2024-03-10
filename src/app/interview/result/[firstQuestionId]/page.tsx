@@ -9,6 +9,7 @@ import { IProps } from './types';
 // TODO: 서버컴포넌트 api 로직 분리
 // TODO: record, text 영상 처리
 // TODO: Title => Question 으로 이름 변경
+// TODO: 새로고침 메인으로 이동
 
 const InterviewResultPage = async ({ params }: IProps) => {
   const { firstQuestionId } = params;
