@@ -10,6 +10,10 @@ import { Answer } from '..';
 import BlurAnswer from '../BlurAnswer';
 import { IProps } from './types';
 
+// TODO: getNextPageParam 로직 변경 or 백엔드 api에 맞춰서
+// TODO: answer가 modal에서 렌더링 될 경우 경우 css 다르게 처리
+// TODO: answerList 전체적으로 css 변경, 짧은 답변에도 적합한 UI로
+
 const AnswerList = ({ initialData, questionId }: IProps) => {
   const [isInvisible, setIsInvisible] = useState(false);
 
@@ -20,7 +24,6 @@ const AnswerList = ({ initialData, questionId }: IProps) => {
     initialPageParam: 1,
     initialData: { pages: [initialData], pageParams: [] },
     getNextPageParam: (lastPage, allPages) => {
-      // TODO: 백엔드 API에 맞춰서 수정?
       const nextPage = allPages.length + 1;
       return lastPage.data.answers.data.length < 5 ? undefined : nextPage;
     },

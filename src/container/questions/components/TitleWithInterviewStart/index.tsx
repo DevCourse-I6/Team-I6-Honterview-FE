@@ -7,6 +7,10 @@ import Tag from '@/components/tag';
 import HeaderButton from './components/HeaderButton';
 import { IProps } from './types';
 
+// TODO: 북마크 아이콘 하트 아이콘으로 변경 or 추가
+// TODO: 수정 삭제에 대한 권한 UI 적용
+// TODO: 삭제 구현
+
 const TitleWithInterviewStart = async ({
   children,
   questionTitle,
@@ -15,8 +19,6 @@ const TitleWithInterviewStart = async ({
   heartsCount,
   categories,
 }: IProps) => {
-  // TODO: 유저 정보 isHearted 적용하기
-
   return (
     <div>
       <HeaderButton

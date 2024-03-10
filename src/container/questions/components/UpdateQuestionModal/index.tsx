@@ -16,6 +16,8 @@ import { MAX_TAG_COUNT } from '@/container/presetting/components/sceneSection/co
 import { patchQuestion } from '../../services';
 import { IProps } from './types';
 
+// TODO: input 포커싱 적용하기
+
 const UpdateQuestionModal = ({
   questionId,
   questionTitle,
