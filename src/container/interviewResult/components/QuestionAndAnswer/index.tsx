@@ -1,5 +1,6 @@
 import { getQuestionById } from '@/container/questions/services';
 
+import { getInterviewVideoUrl } from '../../services/files';
 import CheckBoxWrapper from '../CheckBoxWrapper';
 import TitleWidthModal from '../TitleWidthModal';
 import VideoPlayer from '../VideoPlayer';
@@ -17,11 +18,14 @@ const QuestionAndAnswer = async ({
     size: 5,
   });
 
+  const interviewVideoUrl =
+    answerType === 'RECORD' && (await getInterviewVideoUrl(videoId!));
+
   return (
     <div>
-      {answerType === 'RECORD' && (
+      {interviewVideoUrl && (
         <div className="mb-5 aspect-video rounded bg-slate-50">
-          <VideoPlayer src={videoId} />
+          <VideoPlayer src={interviewVideoUrl.data.downloadUrl} />
         </div>
       )}
 

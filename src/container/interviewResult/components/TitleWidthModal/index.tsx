@@ -8,6 +8,8 @@ import AnswerList from '@/container/questions/components/AnswerList';
 
 import { IProps } from './types';
 
+// TODO: Title 다른 질문 존재 조건문 처리
+
 const TitleWidthModal = ({
   questionContent,
   questionInitialData,
@@ -26,7 +28,6 @@ const TitleWidthModal = ({
         onClick={toggleVisible}
         className="mb-10 inline-block cursor-pointer text-extraLarge font-bold underline decoration-blue-300 hover:decoration-blue-600"
       >
-        {/* TODO: 더보기가 존재할 경우 underline, color blue */}
         {questionContent}
       </button>
 

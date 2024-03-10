@@ -8,7 +8,6 @@ import { IProps } from './types';
 
 // TODO: 서버컴포넌트 api 로직 분리
 // TODO: record, text 영상 처리
-// TODO: video src 데이터 주입
 // TODO: Title => Question 으로 이름 변경
 
 const InterviewResultPage = async ({ params }: IProps) => {

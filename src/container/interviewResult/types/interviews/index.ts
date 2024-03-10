@@ -18,7 +18,7 @@ export interface IPatchInterviewVisibilityRequestBody {
 export interface IInterviewData {
   interviewId: number;
   timer: number;
-  answerType: 'TEXT';
+  answerType: 'TEXT' | 'RECORD';
   questionCount: number;
   questionsAndAnswers: IInterviewAnswer[];
   categoryNames: string[];
@@ -30,4 +30,5 @@ export interface IInterviewAnswer {
   answerId: number;
   answerContent: string;
   processingTime: number;
+  videoId?: number;
 }
