@@ -1,13 +1,15 @@
+import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import AutocompleteSearch from '@/components/autocompleteSearch';
 import { XIcon } from '@/components/icon';
+import Loading from '@/components/loading';
 import Tag from '@/components/tag';
 import { notify } from '@/components/toast';
 import usePresettingDataStore from '@/container/presetting/stores/usePresettingDataStore';
+import { getCategoryList } from '@/services/presetting';
 
 import { MAX_TAG_COUNT } from '../../constants';
-import { dummyTags } from '../../dummydata';
 
 const TagSection = () => {
   const {
@@ -17,6 +19,17 @@ const TagSection = () => {
     setFirstQuestion,
   } = usePresettingDataStore();
 
+  const [isLoading, setIsLoading] = useState(false);
+  const [categoryList, setCategoryList] = useState([]);
+
+  useEffect(() => {
+    setIsLoading(true);
+    getCategoryList().then(({ data }) => {
+      setCategoryList(data);
+    });
+    setIsLoading(false);
+  }, []);
+
   return (
     <div className="flex w-[40rem] flex-col gap-[1rem]">
       <div className="flex gap-[0.5rem]">
@@ -24,20 +37,24 @@ const TagSection = () => {
         <p className="flex items-end text-extraSmall text-text-60">최대 3개</p>
       </div>
       <div className="h-[4rem] w-full">
-        <AutocompleteSearch
-          totalDatas={dummyTags}
-          selectedList={firstQuestionTags}
-          onSelectItem={(tag) => {
-            if (firstQuestionTags.length >= MAX_TAG_COUNT) {
-              notify('warning', '제한된 태그 개수를 초과하였습니다');
-              return;
-            }
-            addFirstQuestionTag(tag);
-          }}
-          placeholder="예) React"
-        />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <AutocompleteSearch
+            totalDatas={categoryList}
+            selectedList={firstQuestionTags}
+            onSelectItem={(tag) => {
+              if (firstQuestionTags.length >= MAX_TAG_COUNT) {
+                notify('warning', '제한된 태그 개수를 초과하였습니다');
+                return;
+              }
+              addFirstQuestionTag(tag);
+            }}
+            placeholder="예) React"
+          />
+        )}
       </div>
-      <div className="flex min-h-[2rem] w-full gap-[1rem]">
+      <div className="flex h-[3.4rem] w-full gap-[1rem]">
         {firstQuestionTags.map((tag) => (
           <Tag key={uuidv4()}>
             {tag.name}
