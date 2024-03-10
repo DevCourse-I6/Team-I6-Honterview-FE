@@ -16,8 +16,8 @@ import { MAX_TAG_COUNT } from '@/container/presetting/components/sceneSection/co
 import { patchQuestion } from '../../services';
 import { IProps } from './types';
 
-// TODO: input 포커싱 적용하기
-// TODO: question 변경 후 데이터 최신화
+// TODO: sangmin // input 포커싱 적용하기
+// TODO: sangmin // question 변경 후 데이터 최신화
 
 const UpdateQuestionModal = ({
   questionId,

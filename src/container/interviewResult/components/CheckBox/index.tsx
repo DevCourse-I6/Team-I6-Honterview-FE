@@ -5,7 +5,7 @@ import { twMerge } from 'tailwind-merge';
 
 import { IProps } from './types';
 
-// TODO: 체크 모양 PlaceHolder 추가
+// TODO: sangmin // 체크 모양 PlaceHolder 추가
 
 const CheckBox = ({ checkId, onChange }: IProps) => {
   const [checked, setChecked] = useState(false);

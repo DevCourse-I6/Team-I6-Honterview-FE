@@ -8,7 +8,7 @@ import TitleWidthModal from '../TitleWidthModal';
 import VideoPlayer from '../VideoPlayer';
 import { IProps } from './types';
 
-// TODO: interviewVideoUrl 동적 타입 할당
+// TODO: sangmin // interviewVideoUrl 동적 타입 할당
 
 const QuestionAndAnswer = async ({
   questionAndAnswerData,

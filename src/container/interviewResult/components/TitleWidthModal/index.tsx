@@ -8,7 +8,7 @@ import AnswerList from '@/container/questions/components/AnswerList';
 
 import { IProps } from './types';
 
-// TODO: Title 다른 질문 존재 조건문 처리
+// TODO: sangmin // Title 다른 질문 존재 조건문 처리
 
 const TitleWidthModal = ({
   questionContent,

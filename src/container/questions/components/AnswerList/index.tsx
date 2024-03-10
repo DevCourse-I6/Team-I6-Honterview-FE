@@ -10,9 +10,9 @@ import { Answer } from '..';
 import BlurAnswer from '../BlurAnswer';
 import { IProps } from './types';
 
-// TODO: getNextPageParam 로직 변경 or 백엔드 api에 맞춰서
-// TODO: answer가 modal에서 렌더링 될 경우 경우 css 다르게 처리
-// TODO: answerList 전체적으로 css 변경, 짧은 답변에도 적합한 UI로
+// TODO: sangmin // getNextPageParam 로직 변경 or 백엔드 api에 맞춰서
+// TODO: sangmin // answer가 modal에서 렌더링 될 경우 경우 css 다르게 처리
+// TODO: sangmin // answerList 전체적으로 css 변경, 짧은 답변에도 적합한 UI로
 
 const AnswerList = ({ initialData, questionId }: IProps) => {
   const [isInvisible, setIsInvisible] = useState(false);

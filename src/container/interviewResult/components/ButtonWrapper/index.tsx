@@ -10,7 +10,7 @@ import { patchInterviewVisibility } from '../../services/interviews';
 import { useVisibilityCheckStore } from '../../stores';
 import { IProps } from './types';
 
-// TODO: useVisibilityCheckStore 변수명 변경하기 answerId => {id, visibility}를 나타낼 수 있는 이름으로
+// TODO: sangmin // useVisibilityCheckStore 변수명 변경하기 answerId => {id, visibility}를 나타낼 수 있는 이름으로
 
 const ButtonWrapper = ({ firstQuestionId }: IProps) => {
   const router = useRouter();

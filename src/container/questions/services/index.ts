@@ -9,8 +9,8 @@ import {
 } from '../types';
 import { IGetQuestionByIdParams } from './types';
 
-// TODO: 랜덤 질문 조회 api 꼬리질문으로 변경
-// TODO: api 전체적으로 정리, 팀원들과 맞추기
+// TODO: sangmin // 랜덤 질문 조회 api 꼬리질문으로 변경
+// TODO: sangmin // api 전체적으로 정리, 팀원들과 맞추기
 
 export const getQuestionById = ({
   questionId,
