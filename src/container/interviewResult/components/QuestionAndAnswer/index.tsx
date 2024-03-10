@@ -1,10 +1,14 @@
 import { getQuestionById } from '@/container/questions/services';
 
 import { getInterviewVideoUrl } from '../../services/files';
+import { IGetInterviewVideoUrl } from '../../types/files';
 import CheckBoxWrapper from '../CheckBoxWrapper';
+import DownLoadWrapper from '../DownLoadWrapper';
 import TitleWidthModal from '../TitleWidthModal';
 import VideoPlayer from '../VideoPlayer';
 import { IProps } from './types';
+
+// TODO: interviewVideoUrl 동적 타입 할당
 
 const QuestionAndAnswer = async ({
   questionAndAnswerData,
@@ -18,14 +22,16 @@ const QuestionAndAnswer = async ({
     size: 5,
   });
 
-  const interviewVideoUrl =
-    answerType === 'RECORD' && (await getInterviewVideoUrl(videoId!));
+  const isRecord = answerType === 'RECORD';
+  const interviewVideoUrl = isRecord && (await getInterviewVideoUrl(videoId!));
 
   return (
     <div>
-      {interviewVideoUrl && (
+      {isRecord && (
         <div className="mb-5 aspect-video rounded bg-slate-50">
-          <VideoPlayer src={interviewVideoUrl.data.downloadUrl} />
+          <VideoPlayer
+            src={(interviewVideoUrl as IGetInterviewVideoUrl).data.downloadUrl}
+          />
         </div>
       )}
 
@@ -35,7 +41,16 @@ const QuestionAndAnswer = async ({
           questionInitialData={questionInitialData}
           questionId={questionId}
         />
-        <CheckBoxWrapper answerId={answerId} />
+        <div className="flex gap-4">
+          {!isRecord && (
+            <DownLoadWrapper
+              interviewVideoUrl={
+                (interviewVideoUrl as IGetInterviewVideoUrl).data?.downloadUrl
+              }
+            />
+          )}
+          <CheckBoxWrapper answerId={answerId} />
+        </div>
       </div>
       <div className="rounded-lg bg-[#F2F2F2] px-11 py-9">
         <p className="text-large ">{answerContent}</p>
