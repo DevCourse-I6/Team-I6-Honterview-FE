@@ -1,12 +1,9 @@
+import { cookies } from 'next/headers';
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const getAccessToken = () => {
-  const accessToken = document.cookie
-    .split('; ')
-    .find((row) => row.startsWith('accessToken='))
-    ?.split('=')[1];
-
-  return accessToken || '';
+  return cookies().get('accessToken') || '';
 };
 
 const get = (url: string, options: RequestInit = {}) => {
@@ -74,4 +71,4 @@ const patch = (url: string, options: RequestInit = {}) => {
   });
 };
 
-export const apiClient = { get, post, put, delete: del, patch };
+export const apiServer = { get, post, put, delete: del, patch };
