@@ -17,6 +17,7 @@ import { patchQuestion } from '../../services';
 import { IProps } from './types';
 
 // TODO: input 포커싱 적용하기
+// TODO: question 변경 후 데이터 최신화
 
 const UpdateQuestionModal = ({
   questionId,
@@ -28,10 +29,11 @@ const UpdateQuestionModal = ({
 }: IProps) => {
   const [selectedList, setSelectedList] = useState<AutocompleteDataType[]>(
     categoryNames.map((category, index) => ({
-      id: index,
+      id: index + 1,
       name: category,
     })),
   );
+
   const [titleInput, setTitleInput] = useState(questionTitle);
   const { mutate } = useMutation({
     mutationFn: () =>

@@ -2,6 +2,8 @@ import { apiClient } from '@/utils/apiClient';
 
 import { TMethod } from './types';
 
+// TODO: response에서 아무것도 받지 않을 경우 처리
+
 const fetchAPI = async (
   url: string,
   method: TMethod = 'get',
