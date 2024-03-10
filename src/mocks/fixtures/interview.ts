@@ -1,6 +1,4 @@
-import { IInterview } from '@/types/interview';
-
-export const interviews: IInterview[] = [
+export const interviews = [
   {
     interviewId: '123',
     questionContent: '렌더링 과정을 설명해주세요',

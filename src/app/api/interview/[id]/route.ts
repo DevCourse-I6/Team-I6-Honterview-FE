@@ -10,7 +10,9 @@ export const GET = (
     return new Response(null, { status: 404 });
   }
 
-  const result = interviews.filter(({ interviewId }) => interviewId === id);
+  const result = interviews.filter(
+    ({ interviewId }) => String(interviewId) === id,
+  );
 
   return Response.json({ message: 'ok', data: result[0] }, { status: 200 });
 };
