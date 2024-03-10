@@ -26,8 +26,10 @@ const FirstQuestionScene = () => {
   return (
     <div className="flex h-full flex-col justify-center gap-[5rem]">
       <div>
-        <p className="flex justify-center border border-dashed border-text-40 py-[1rem] text-text-60">
-          선택한 질문과 이에 대한 꼬리 질문들로 면접이 진행됩니다
+        <p className="flex justify-center border border-dashed border-text-40 py-[1rem] text-text-80">
+          <b className="text-black">선택한 질문</b>과 이에 대한
+          <b className="whitespace-pre text-black"> 꼬리 질문</b>들로 면접이
+          진행됩니다
         </p>
       </div>
       <div className="flex flex-col justify-center gap-[5rem]">

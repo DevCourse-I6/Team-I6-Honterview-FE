@@ -55,7 +55,7 @@ const TimePicker = ({
       </div>
       <button
         type="button"
-        className="flex w-[3rem] items-center justify-center"
+        className="flex w-[2.4rem] items-center justify-center"
         onClick={handleDownButton}
         disabled={isDownLimit || isArrowDisabled}
       >

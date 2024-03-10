@@ -40,7 +40,7 @@ const AutocompleteBox = () => {
               <span className="whitespace-pre font-bold text-primaries-primary">
                 {keyword}
               </span>
-              {postWord}
+              <span className="whitespace-pre">{postWord}</span>
             </button>
           );
         })}
