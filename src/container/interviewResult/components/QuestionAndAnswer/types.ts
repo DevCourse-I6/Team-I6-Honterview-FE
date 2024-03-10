@@ -1,6 +1,6 @@
-import { IInterviewAnswer } from '../../types/interviews';
+import { IInterviewAnswer, IInterviewData } from '../../types/interviews';
 
 export interface IProps {
   questionAndAnswerData: IInterviewAnswer;
-  answerType: 'TEXT' | 'RECORD';
+  answerType: Pick<IInterviewData, 'answerType'>['answerType'];
 }
