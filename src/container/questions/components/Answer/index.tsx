@@ -5,8 +5,8 @@ import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { FavoriteIcon } from '@/components/icon';
+import { clickAnswerHeart } from '@/libs/services/answers';
 
-import { clickAnswerHeart } from '../../services';
 import { IProps } from './types';
 
 const Answer = ({

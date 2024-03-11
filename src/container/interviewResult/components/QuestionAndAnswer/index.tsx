@@ -1,7 +1,7 @@
-import { getQuestionById } from '@/container/questions/services';
+import { getInterviewVideoUrl } from '@/libs/services/files';
+import { getQuestionById } from '@/libs/services/questions';
+import { IGetInterviewVideoUrl } from '@/libs/types/response';
 
-import { getInterviewVideoUrl } from '../../services/files';
-import { IGetInterviewVideoUrl } from '../../types/files';
 import CheckBoxWrapper from '../CheckBoxWrapper';
 import DownLoadWrapper from '../DownLoadWrapper';
 import TitleWidthModal from '../TitleWidthModal';

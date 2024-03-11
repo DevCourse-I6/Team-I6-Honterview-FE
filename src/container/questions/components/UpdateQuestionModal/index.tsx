@@ -12,8 +12,8 @@ import Modal from '@/components/modal';
 import Tag from '@/components/tag';
 import { notify } from '@/components/toast';
 import { MAX_TAG_COUNT } from '@/container/presetting/components/sceneSection/components/firstQuestionScene/constants';
+import { patchQuestion } from '@/libs/services/questions';
 
-import { patchQuestion } from '../../services';
 import { IProps } from './types';
 
 // TODO: sangmin // input 포커싱 적용하기
