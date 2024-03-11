@@ -36,12 +36,12 @@ const usePresettingDataStore = create<PresettingDataState>((set) => ({
   },
   setInterviewTypeCamera: () => {
     set(() => ({
-      interviewType: 'camera',
+      interviewType: 'RECORD',
     }));
   },
   setInterviewTypeChatting: () => {
     set(() => ({
-      interviewType: 'chatting',
+      interviewType: 'TEXT',
     }));
   },
   setTimeMinute: (minute) => {
