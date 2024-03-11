@@ -6,6 +6,10 @@ import AnswerList from '@/container/questions/components/AnswerList';
 import { getCategories, getQuestionById } from '@/container/questions/services';
 import { IProps } from '@/container/questions/types';
 
+// TODO: sangmin // 초기 좋아요에 대한 데이터 상태 적용하기
+// TODO: sangmin // 프롭스드릴링 해결, 서버데이터, 클라이언트 상태 리팩토링
+// TODO: sangmin // 꼬리질문 없을 경우 아이콘 추가
+
 const Page = async ({ params }: IProps) => {
   const { questionId } = params;
   const questionIdAsNumber = Number(questionId);

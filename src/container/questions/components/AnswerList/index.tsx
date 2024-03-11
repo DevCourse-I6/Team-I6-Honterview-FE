@@ -10,22 +10,22 @@ import { Answer } from '..';
 import BlurAnswer from '../BlurAnswer';
 import { IProps } from './types';
 
+// TODO: sangmin // getNextPageParam 로직 변경 or 백엔드 api에 맞춰서
+// TODO: sangmin // answer가 modal에서 렌더링 될 경우 경우 css 다르게 처리
+// TODO: sangmin // answerList 전체적으로 css 변경, 짧은 답변에도 적합한 UI로
+
 const AnswerList = ({ initialData, questionId }: IProps) => {
   const [isInvisible, setIsInvisible] = useState(false);
 
   const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery({
-    queryKey: ['answers'],
+    queryKey: ['answers', questionId],
     queryFn: ({ pageParam }) =>
       getQuestionById({ questionId, page: pageParam, size: 5 }),
-    initialPageParam: 2,
+    initialPageParam: 1,
     initialData: { pages: [initialData], pageParams: [] },
     getNextPageParam: (lastPage, allPages) => {
-      // TODO: 백엔드 API에 맞춰서 수정?
       const nextPage = allPages.length + 1;
-      return lastPage.data.answers.data.length <
-        allPages[0].data.answers.data.length
-        ? undefined
-        : nextPage;
+      return lastPage.data.answers.data.length < 5 ? undefined : nextPage;
     },
     select: (selectData) => ({
       pages: selectData.pages.flatMap((page) => page.data.answers.data),

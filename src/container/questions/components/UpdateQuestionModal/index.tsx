@@ -16,6 +16,9 @@ import { MAX_TAG_COUNT } from '@/container/presetting/components/sceneSection/co
 import { patchQuestion } from '../../services';
 import { IProps } from './types';
 
+// TODO: sangmin // input 포커싱 적용하기
+// TODO: sangmin // question 변경 후 데이터 최신화
+
 const UpdateQuestionModal = ({
   questionId,
   questionTitle,
@@ -26,10 +29,11 @@ const UpdateQuestionModal = ({
 }: IProps) => {
   const [selectedList, setSelectedList] = useState<AutocompleteDataType[]>(
     categoryNames.map((category, index) => ({
-      id: index,
+      id: index + 1,
       name: category,
     })),
   );
+
   const [titleInput, setTitleInput] = useState(questionTitle);
   const { mutate } = useMutation({
     mutationFn: () =>

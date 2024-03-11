@@ -1,3 +1,5 @@
+// TODO: sangmin // 도메인별로 타입 정리
+
 export interface IProps {
   params: {
     questionId: string;

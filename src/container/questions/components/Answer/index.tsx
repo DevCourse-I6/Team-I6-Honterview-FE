@@ -18,7 +18,7 @@ const Answer = ({
   heartsCount: initialHeartsCount,
   isHearted: initialIsHearted,
 }: IProps) => {
-  // TODO: 유저 정보 isHearted 적용하기
+  // TODO: sangmin // 유저 정보 isHearted 적용하기
   const [isHearted, setIsHearted] = useState(initialIsHearted);
   const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
 

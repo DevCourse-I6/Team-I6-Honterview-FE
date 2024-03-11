@@ -5,6 +5,8 @@ import { twMerge } from 'tailwind-merge';
 
 import { IProps } from './types';
 
+// TODO: sangmin // 체크 모양 PlaceHolder 추가
+
 const CheckBox = ({ checkId, onChange }: IProps) => {
   const [checked, setChecked] = useState(false);
   const check =
@@ -26,13 +28,13 @@ const CheckBox = ({ checkId, onChange }: IProps) => {
     <div className="relative min-h-[30px] min-w-[79.57px] select-none">
       <input
         type="checkbox"
-        id={checkId}
+        id={checkId.toString()}
         className="hidden"
         checked={checked}
         onChange={handleClick}
       />
       <label
-        htmlFor={checkId}
+        htmlFor={checkId.toString()}
         className={twMerge(
           `absolute w-fit cursor-pointer rounded-3xl bg-[#F2F2F2] py-3 pl-14 pr-4 shadow-sm before:content-[''] after:content-[''] ${circle} ${checked && check}`,
         )}
