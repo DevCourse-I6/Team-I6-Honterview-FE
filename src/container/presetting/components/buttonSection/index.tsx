@@ -5,11 +5,13 @@ import { ButtonType } from '@/components/button/types';
 
 import usePresettingDataStore from '../../stores/usePresettingDataStore';
 import useStepStore from '../../stores/useStepStore';
+import usePresetting from '../../usePresetting';
 
 const PreSettingButtonSection = () => {
   const { totalStep, currentStep, increaseStep, decreaseStep, isNextButtonOn } =
     useStepStore();
-  const { interviewType } = usePresettingDataStore();
+  const { firstQuestion, interviewType } = usePresettingDataStore();
+  const { createFirstQuestion, createNewInterview } = usePresetting();
   const router = useRouter();
 
   const handlePrevButton = () => {
@@ -20,14 +22,28 @@ const PreSettingButtonSection = () => {
     }
   };
 
-  const handleNextButton = () => {
+  const handleNextButton = async () => {
     if (currentStep < totalStep) {
       increaseStep();
-    } else {
-      router.push(
-        interviewType === 'camera' ? '/interview/video' : 'interview/chatting',
-      );
+      return;
     }
+
+    let questionId;
+
+    if (firstQuestion?.id === 'new') {
+      questionId = await createFirstQuestion();
+    } else {
+      questionId = firstQuestion?.id;
+    }
+
+    const interviewId = await createNewInterview(questionId);
+
+    const nextUrl =
+      interviewType === 'RECORD'
+        ? `/interview/video/${interviewId}`
+        : `interview/chat/${interviewId}`;
+
+    router.push(nextUrl);
   };
 
   return (
