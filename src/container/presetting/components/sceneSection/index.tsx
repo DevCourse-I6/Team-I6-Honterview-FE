@@ -1,3 +1,5 @@
+'use client';
+
 import useStepStore from '../../stores/useStepStore';
 import FirstQuestionScene from './components/firstQuestionScene';
 import InterviewSettingScene from './components/interviewSettingScene';
