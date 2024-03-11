@@ -1,12 +1,16 @@
 export interface AutocompleteDataType {
-  id: number | 'new';
+  id: number;
   name: string;
 }
 
+export interface AutocompleteCreatedDataType {
+  id: number | 'new';
+  name: string;
+}
 export interface AutocompleteSearchProps {
   totalDatas: AutocompleteDataType[];
-  onSelectItem: (value: AutocompleteDataType) => void;
+  onSelectItem: (value: AutocompleteCreatedDataType) => void;
   placeholder?: string;
-  selectedList?: AutocompleteDataType[];
+  selectedList?: AutocompleteCreatedDataType[];
   canCreate?: boolean;
 }
