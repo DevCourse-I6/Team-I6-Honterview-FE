@@ -10,7 +10,7 @@ const AnswerTimeProgressGroup = () => {
   const { questionCount, questions } = useInterview();
   const progressArray = Array.from(
     { length: questionCount },
-    (_, index) => questions[index] && questions[index].progressingTime,
+    (_, index) => questions[index] && questions[index].processingTime,
   );
 
   return (

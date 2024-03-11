@@ -1,23 +1,22 @@
-import { apiClient } from '@/utils/apiClient';
+import { IResponseInterview } from '@/types/Response/interview';
+import { apiServer } from '@/utils/apiServer';
 
-export const getInterviewInfo = async (interviewId: string) => {
-  try {
-    const response = await apiClient.get(`api/interview/${interviewId}`, {
-      cache: 'no-store',
-    });
+import { reissueAccessToken } from '../actions/auth';
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+export const getInterviewInfo = async (
+  interviewId: string,
+): Promise<IResponseInterview> => {
+  const response = await apiServer.get(`api/v1/interviews/${interviewId}`, {
+    cache: 'no-store',
+  });
 
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
-
-    throw new Error(String(error));
+  if (response.status === 401) {
+    return reissueAccessToken(() => getInterviewInfo(interviewId));
   }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
 };
