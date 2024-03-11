@@ -1,9 +1,10 @@
-import { cookies } from 'next/headers';
+// eslint-disable-next-line
+const headers = require('next/headers');
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 const getAccessToken = () => {
-  return cookies().get('accessToken') || '';
+  return headers.cookies().get('accessToken') || '';
 };
 
 const get = (url: string, options: RequestInit = {}) => {
