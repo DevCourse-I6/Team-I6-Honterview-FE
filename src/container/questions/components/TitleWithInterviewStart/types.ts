@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { ICategory } from '../../types';
+import { ICategory } from '@/types/categories';
 
 export interface IProps {
   children: ReactNode;

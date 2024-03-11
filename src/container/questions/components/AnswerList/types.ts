@@ -1,4 +1,4 @@
-import { IGetQuestionById } from '@/container/questions/types';
+import { IGetQuestionById } from '@/libs/types/response';
 
 export interface IProps {
   initialData: IGetQuestionById;
