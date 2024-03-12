@@ -8,14 +8,13 @@ import AnswerList from '@/container/questions/components/AnswerList';
 
 import { IProps } from './types';
 
-// TODO: sangmin // Title 다른 질문 존재 조건문 처리
-
 const QuestionWidthModal = ({
   questionContent,
   questionInitialData,
   questionId,
 }: IProps) => {
   const [visible, setVisible] = useState(false);
+  const hasMoreQuestions = questionInitialData.data.answers.data.length >= 2;
 
   const toggleVisible = () => {
     setVisible((prev) => !prev);
@@ -25,8 +24,9 @@ const QuestionWidthModal = ({
     <>
       <button
         type="button"
+        disabled={!hasMoreQuestions}
         onClick={toggleVisible}
-        className="mb-10 inline-block cursor-pointer text-extraLarge font-bold underline decoration-blue-300 hover:decoration-blue-600"
+        className={`mb-10 inline-block text-extraLarge font-bold ${hasMoreQuestions && 'cursor-pointer underline decoration-blue-300 hover:decoration-blue-600'}`}
       >
         {questionContent}
       </button>
@@ -50,6 +50,7 @@ const QuestionWidthModal = ({
           <AnswerList
             initialData={questionInitialData}
             questionId={questionId}
+            isModalLoad={hasMoreQuestions}
           />
         </div>
       </Modal>
