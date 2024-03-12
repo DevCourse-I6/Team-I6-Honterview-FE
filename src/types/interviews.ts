@@ -1,4 +1,4 @@
-// getInterviewResult
+// getInterviewInformation
 export interface IInterview {
   interviewId: number;
   timer: number;
@@ -20,4 +20,10 @@ export interface IQuestionAndAnswer {
 // patchInterviewVisibility
 export interface IInterviewId {
   interviewId: number;
+}
+
+// saveQuestionAndAnswer
+export interface IQuestionAndAnswerId {
+  questionId: number;
+  answerId: number;
 }

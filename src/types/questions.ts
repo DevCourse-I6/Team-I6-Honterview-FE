@@ -36,3 +36,15 @@ export interface IQuestionHeart {
   questionHeartCount: number;
   isHearted: boolean;
 }
+
+// createQuestion
+export interface IQuestionAndCategoryIds {
+  content: string;
+  categoryIds: number[];
+}
+
+// getQuestionsByCategory
+export interface IQuestion {
+  id: number;
+  content: string;
+}
