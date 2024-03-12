@@ -5,7 +5,7 @@ import { apiServer } from '@/utils/apiServer';
 import { reissueAccessToken } from '../actions/auth';
 import { IPatchInterviewVisibilityPayload } from '../types/payload';
 import {
-  IGetInterviewResult,
+  IGetInterviewInformation,
   IPatchInterviewVisibility,
 } from '../types/response';
 
@@ -48,7 +48,7 @@ export const patchInterviewVisibility = async (
 
 export const getInterviewResult = async (
   interviewId: number,
-): Promise<IGetInterviewResult> => {
+): Promise<IGetInterviewInformation> => {
   const response = await apiServer.get(`api/v1/interviews/${interviewId}`, {
     cache: 'no-store',
   });

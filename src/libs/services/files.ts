@@ -1,10 +1,10 @@
 import { apiServer } from '@/utils/apiServer';
 
-import { IGetInterviewVideoUrl } from '../types/response';
+import { IGetVideoDownLoadUrl } from '../types/response';
 
 export const getInterviewVideoUrl = async (
   videoId: number,
-): Promise<IGetInterviewVideoUrl> => {
+): Promise<IGetVideoDownLoadUrl> => {
   const response = await apiServer.get(`api/files/download-url/${videoId}`, {
     cache: 'no-store',
   });
