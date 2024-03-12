@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from 'react';
 
-import Divider from '@/components/divider';
+import DividerHorizontal from '@/components/dividerHorizontal';
 import Loading from '@/components/loading';
 import NotFoundError from '@/components/notFoundError';
 import { getQuestionInfo } from '@/services/presetting';
@@ -48,7 +48,7 @@ const PreSetting = ({ firstQuestionId }: PreSettingProps) => {
   return (
     <div className="flex h-[70rem] w-full max-w-[80rem] flex-col items-center rounded-3xl bg-text-20 bg-opacity-20 text-medium shadow-xl backdrop-blur-xl">
       <StepSection />
-      <Divider className="mt-[2.6rem] w-[75rem]" />
+      <DividerHorizontal className="mt-[2.6rem] w-[75rem]" />
       <PreSettingSceneSection />
       <PreSettingButtonSection fromQuestionPage={!!firstQuestionId} />
     </div>
