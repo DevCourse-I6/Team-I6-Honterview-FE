@@ -6,8 +6,6 @@ import { getInterviewResult } from '@/libs/services/interview';
 
 import { IProps } from './types';
 
-// TODO: sangmin // 서버컴포넌트 api 로직 분리
-// TODO: sangmin // record, text 영상 처리
 // TODO: sangmin // Title => Question 으로 이름 변경
 // TODO: sangmin // 새로고침 메인으로 이동
 

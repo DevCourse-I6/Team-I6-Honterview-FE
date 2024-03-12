@@ -4,7 +4,7 @@ import { IGetVideoDownLoadUrl } from '@/libs/types/response';
 
 import CheckBoxWrapper from '../CheckBoxWrapper';
 import DownLoadWrapper from '../DownLoadWrapper';
-import TitleWidthModal from '../TitleWidthModal';
+import QuestionWidthModal from '../QuestionWidthModal';
 import VideoPlayer from '../VideoPlayer';
 import { IProps } from './types';
 
@@ -34,7 +34,7 @@ const QuestionAndAnswer = async ({
       )}
 
       <div className="flex w-full justify-between">
-        <TitleWidthModal
+        <QuestionWidthModal
           questionContent={questionContent}
           questionInitialData={questionInitialData}
           questionId={questionId}

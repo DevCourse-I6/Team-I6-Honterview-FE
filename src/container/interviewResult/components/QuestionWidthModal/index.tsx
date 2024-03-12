@@ -10,7 +10,7 @@ import { IProps } from './types';
 
 // TODO: sangmin // Title 다른 질문 존재 조건문 처리
 
-const TitleWidthModal = ({
+const QuestionWidthModal = ({
   questionContent,
   questionInitialData,
   questionId,
@@ -57,4 +57,4 @@ const TitleWidthModal = ({
   );
 };
 
-export default TitleWidthModal;
+export default QuestionWidthModal;
