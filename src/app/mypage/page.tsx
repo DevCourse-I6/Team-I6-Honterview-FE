@@ -13,7 +13,9 @@ const MyPage = () => {
           <NavigationSection />
           <DividerHorizontal />
           <DataSection />
-          <LogoutSection />
+          <div className="flex justify-center">
+            <LogoutSection />
+          </div>
         </div>
       </div>
     </>
