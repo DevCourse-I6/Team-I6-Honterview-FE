@@ -28,8 +28,8 @@ const UpdateQuestionModal = ({
   inputElement,
 }: IProps) => {
   const [selectedList, setSelectedList] = useState<AutocompleteDataType[]>(
-    categoryNames.map((category, index) => ({
-      id: index + 1,
+    categoryNames.map((category) => ({
+      id: categories.find(({ name }) => name === category)!.id!,
       name: category,
     })),
   );

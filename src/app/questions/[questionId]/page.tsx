@@ -42,6 +42,7 @@ const Page = async ({ params }: IProps) => {
         <AnswerList
           initialData={questionInitialData}
           questionId={questionIdAsNumber}
+          isModalLoad={false}
         />
       </div>
       <TailQuestions questionId={questionIdAsNumber} />
