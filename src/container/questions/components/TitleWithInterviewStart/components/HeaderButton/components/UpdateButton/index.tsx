@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import UpdateQuestionModal from '@/container/questions/components/UpdateQuestionModal';
 
@@ -13,9 +13,13 @@ const UpdateButton = ({
   categories,
 }: IProps) => {
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
+  const inputElement = useRef<HTMLInputElement>(null);
 
   const toggleUpdateModalVisible = () => {
     setUpdateModalVisible((prev) => !prev);
+    setTimeout(() => {
+      if (inputElement.current) inputElement.current?.focus();
+    }, 300);
   };
   return (
     <>
@@ -33,6 +37,7 @@ const UpdateButton = ({
         updateModalVisible={updateModalVisible}
         toggleUpdateModalVisible={toggleUpdateModalVisible}
         categories={categories}
+        inputElement={inputElement}
       />
     </>
   );
