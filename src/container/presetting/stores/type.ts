@@ -1,7 +1,4 @@
-import {
-  AutocompleteCreatedDataType,
-  AutocompleteDataType,
-} from '../../../components/autocompleteSearch/type';
+import { AutocompleteDataType } from '../../../components/autocompleteSearch/type';
 
 export interface StepState {
   totalStep: number;
@@ -9,6 +6,7 @@ export interface StepState {
   isNextButtonOn: boolean;
   increaseStep: () => void;
   decreaseStep: () => void;
+  setSettingStep: () => void;
   setCameraStep: () => void;
   setChattingStep: () => void;
   setNextButtonOn: () => void;
@@ -17,13 +15,13 @@ export interface StepState {
 
 export interface PresettingDataState {
   firstQuestionTags: AutocompleteDataType[];
-  firstQuestion?: AutocompleteCreatedDataType;
+  firstQuestion?: AutocompleteDataType;
   questionCount: number;
   interviewType?: 'RECORD' | 'TEXT';
   answerTime: { minute: number; second: number };
   addFirstQuestionTag: (tag: AutocompleteDataType) => void;
   removeFirstQuestionTag: (tag: AutocompleteDataType) => void;
-  setFirstQuestion: (question: AutocompleteCreatedDataType | undefined) => void;
+  setFirstQuestion: (question: AutocompleteDataType | undefined) => void;
   setQuestionCount: (count: number) => void;
   setInterviewTypeCamera: () => void;
   setInterviewTypeChatting: () => void;
