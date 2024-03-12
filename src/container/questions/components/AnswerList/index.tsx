@@ -14,7 +14,7 @@ import { IProps } from './types';
 // TODO: sangmin // answer가 modal에서 렌더링 될 경우 경우 css 다르게 처리
 // TODO: sangmin // answerList 전체적으로 css 변경, 짧은 답변에도 적합한 UI로
 
-const AnswerList = ({ initialData, questionId }: IProps) => {
+const AnswerList = ({ initialData, questionId, isModalLoad }: IProps) => {
   const [isInvisible, setIsInvisible] = useState(false);
 
   const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery({
@@ -30,6 +30,7 @@ const AnswerList = ({ initialData, questionId }: IProps) => {
     select: (selectData) => ({
       pages: selectData.pages.flatMap((page) => page.data.answers.data),
     }),
+    staleTime: Infinity,
   });
 
   const { ref, inView } = useInView({ threshold: 0 });
@@ -41,7 +42,7 @@ const AnswerList = ({ initialData, questionId }: IProps) => {
   }, [fetchNextPage, hasNextPage, inView, isLoading]);
 
   useEffect(() => {
-    if (data.pages.length > 3) setIsInvisible(true);
+    if (data.pages.length - (isModalLoad ? 1 : 0) > 3) setIsInvisible(true);
     // eslint-disable-next-line
   }, []);
 
@@ -49,10 +50,15 @@ const AnswerList = ({ initialData, questionId }: IProps) => {
     setIsInvisible(false);
   };
 
+  const startIndex = isModalLoad ? 1 : 0;
+  let endIndex;
+  if (isModalLoad) endIndex = isInvisible ? 4 : data.pages.length;
+  if (!isModalLoad) endIndex = isInvisible ? 3 : data.pages.length;
+
   return (
     <>
       {data.pages
-        .slice(0, isInvisible ? 3 : data.pages.length)
+        .slice(startIndex, endIndex)
         .map(({ nickname, content, id, heartsCount }) => (
           <Answer
             key={uuidv4()}
