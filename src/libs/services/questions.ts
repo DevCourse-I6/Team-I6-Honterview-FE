@@ -111,8 +111,6 @@ export const patchQuestion = async (
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
-
-  return response.json();
 };
 
 export const deleteQuestion = async (questionId: number) => {

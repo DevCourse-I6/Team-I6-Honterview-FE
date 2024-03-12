@@ -44,6 +44,7 @@ const UpdateQuestionModal = ({
       }),
     onSuccess: () => {
       notify('success', '질문 수정 완료');
+      toggleUpdateModalVisible();
     },
     onError: (error) => {
       notify('error', error.message);
