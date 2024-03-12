@@ -6,9 +6,9 @@ import { getCategories } from '@/app/api/questionsList/getCategories';
 import { getQuestionsList } from '@/app/api/questionsList/getQuestionsList';
 import Pagination from '@/components/pagination';
 import { notify } from '@/components/toast';
-import QuestionFilter from '@/container/questions/components/questionFilter';
-import QuestionInput from '@/container/questions/components/questionInput';
-import QuestionList from '@/container/questions/components/questionList';
+import QuestionFilter from '@/container/questionsList/components/questionFilter';
+import QuestionInput from '@/container/questionsList/components/questionInput';
+import QuestionList from '@/container/questionsList/components/questionList';
 
 const QuestionsListPage = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
