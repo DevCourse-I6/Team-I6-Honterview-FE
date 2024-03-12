@@ -2,11 +2,11 @@
 
 import { useEffect, useState } from 'react';
 
-import Pagination from '@/components/pagination';
 import { notify } from '@/components/toast';
 import QuestionFilter from '@/container/questionsList/components/questionFilter';
 import QuestionInput from '@/container/questionsList/components/questionInput';
 import QuestionList from '@/container/questionsList/components/questionList';
+import QuestionPageination from '@/container/questionsList/components/questionList/components/questionPagination';
 import { getCategories, getQuestionsList } from '@/libs/services/questionsList';
 
 const QuestionsListPage = () => {
@@ -33,7 +33,7 @@ const QuestionsListPage = () => {
       setCategories(response.data);
     };
     const questionsListData = async () => {
-      const response = await getQuestionsList();
+      const response = await getQuestionsList(1, 5, '', '', 'recent');
       setQuestionsList(response.data.data);
     };
 
@@ -56,17 +56,7 @@ const QuestionsListPage = () => {
           questionsList={questionsList}
         />
       </div>
-      <Pagination
-        className="justify-center pb-10"
-        defaultPage={1}
-        limit={20}
-        total={423}
-        onPageChange={() => {}}
-      >
-        <Pagination.PrevButton />
-        <Pagination.PageButtons />
-        <Pagination.NextButton />
-      </Pagination>
+      <QuestionPageination />
     </section>
   );
 };
