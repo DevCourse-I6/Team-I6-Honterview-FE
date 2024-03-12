@@ -24,7 +24,6 @@ const TitleWithInterviewStart = async ({
     <div>
       <HeaderButton
         questionId={questionId}
-        isHearted={false}
         questionHeartCount={heartsCount}
         questionTitle={questionTitle}
         categoryNames={categoryNames}

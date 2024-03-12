@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 import UpdateQuestionModal from '../../../UpdateQuestionModal';
+import BookmarkButton from './components/BookmarkButton';
 import HeartButton from './components/HeartButton';
 import { IProps } from './types';
 
@@ -11,7 +12,6 @@ const HeaderButton = ({
   questionTitle,
   categoryNames,
   categories,
-  isHearted,
   questionHeartCount,
 }: IProps) => {
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
@@ -37,11 +37,15 @@ const HeaderButton = ({
           삭제
         </button>
       </div>
-      <div className="flex items-center gap-1">
+      <div className="flex items-center gap-5">
         <HeartButton
           questionId={questionId}
-          isHearted={isHearted}
+          isHearted={false}
           questionHeartCount={questionHeartCount}
+        />
+        <BookmarkButton
+          questionId={questionId}
+          isBookmarked={false}
         />
       </div>
       <UpdateQuestionModal

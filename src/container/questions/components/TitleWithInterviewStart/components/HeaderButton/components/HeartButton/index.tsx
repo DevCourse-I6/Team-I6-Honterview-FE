@@ -20,9 +20,10 @@ const HeartButton = ({
       setHeartsCount(isHearted ? heartsCount - 1 : heartsCount + 1);
     },
   });
+
   return (
-    <>
-      <span className=" text-large">{heartsCount}</span>
+    <div className="flex gap-2">
+      <span className="text-large">{heartsCount}</span>
       <button
         type="button"
         onClick={() => mutate()}
@@ -31,7 +32,7 @@ const HeartButton = ({
           className={`${isHearted ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300'}`}
         />
       </button>
-    </>
+    </div>
   );
 };
 
