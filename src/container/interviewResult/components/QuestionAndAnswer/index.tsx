@@ -1,7 +1,7 @@
-import { getQuestionById } from '@/container/questions/services';
+import { getInterviewVideoUrl } from '@/libs/services/files';
+import { getQuestionById } from '@/libs/services/questions';
+import { IGetVideoDownLoadUrl } from '@/libs/types/response';
 
-import { getInterviewVideoUrl } from '../../services/files';
-import { IGetInterviewVideoUrl } from '../../types/files';
 import CheckBoxWrapper from '../CheckBoxWrapper';
 import DownLoadWrapper from '../DownLoadWrapper';
 import TitleWidthModal from '../TitleWidthModal';
@@ -30,7 +30,7 @@ const QuestionAndAnswer = async ({
       {isRecord && (
         <div className="mb-5 aspect-video rounded bg-slate-50">
           <VideoPlayer
-            src={(interviewVideoUrl as IGetInterviewVideoUrl).data.downloadUrl}
+            src={(interviewVideoUrl as IGetVideoDownLoadUrl).data.downloadUrl}
           />
         </div>
       )}
@@ -45,7 +45,7 @@ const QuestionAndAnswer = async ({
           {!isRecord && (
             <DownLoadWrapper
               interviewVideoUrl={
-                (interviewVideoUrl as IGetInterviewVideoUrl).data?.downloadUrl
+                (interviewVideoUrl as IGetVideoDownLoadUrl).data?.downloadUrl
               }
             />
           )}

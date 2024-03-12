@@ -1,7 +1,7 @@
-import { IPatchInterviewVisibilityRequestBody } from '../types/interviews';
+import { IPatchInterviewVisibilityPayload } from '@/libs/types/payload';
 
 export interface IUseVisibilityCheckStore {
-  answerIdList: IPatchInterviewVisibilityRequestBody[];
+  answerIdList: IPatchInterviewVisibilityPayload[];
   setInitialAnswerList: (answerLength: number) => void;
   setAnswerIdList: (questionId: number) => void;
 }

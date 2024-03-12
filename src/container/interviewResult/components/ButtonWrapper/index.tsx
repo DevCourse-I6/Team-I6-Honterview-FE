@@ -5,8 +5,8 @@ import { useRouter } from 'next/navigation';
 
 import Button from '@/components/button';
 import { notify } from '@/components/toast';
+import { patchInterviewVisibility } from '@/libs/services/interview';
 
-import { patchInterviewVisibility } from '../../services/interviews';
 import { useVisibilityCheckStore } from '../../stores';
 import { IProps } from './types';
 

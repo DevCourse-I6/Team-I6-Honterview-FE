@@ -1,7 +1,8 @@
 import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 
-import { getRandomQuestionsByCategories } from '../../services';
+import { getRandomQuestionsByCategories } from '@/libs/services/questions';
+
 import { IProps } from './types';
 
 const TailQuestions = async ({ questionId }: IProps) => {

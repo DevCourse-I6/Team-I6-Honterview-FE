@@ -5,7 +5,8 @@ import { useEffect, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { v4 as uuidv4 } from 'uuid';
 
-import { getQuestionById } from '../../services';
+import { getQuestionByIdClient } from '@/libs/services/questions';
+
 import { Answer } from '..';
 import BlurAnswer from '../BlurAnswer';
 import { IProps } from './types';
@@ -13,6 +14,7 @@ import { IProps } from './types';
 // TODO: sangmin // getNextPageParam 로직 변경 or 백엔드 api에 맞춰서
 // TODO: sangmin // answer가 modal에서 렌더링 될 경우 경우 css 다르게 처리
 // TODO: sangmin // answerList 전체적으로 css 변경, 짧은 답변에도 적합한 UI로
+// TODO: sangmin // 더보기 갯수 에러 수정
 
 const AnswerList = ({ initialData, questionId }: IProps) => {
   const [isInvisible, setIsInvisible] = useState(false);
@@ -20,7 +22,7 @@ const AnswerList = ({ initialData, questionId }: IProps) => {
   const { data, hasNextPage, fetchNextPage, isLoading } = useInfiniteQuery({
     queryKey: ['answers', questionId],
     queryFn: ({ pageParam }) =>
-      getQuestionById({ questionId, page: pageParam, size: 5 }),
+      getQuestionByIdClient({ questionId, page: pageParam, size: 5 }),
     initialPageParam: 1,
     initialData: { pages: [initialData], pageParams: [] },
     getNextPageParam: (lastPage, allPages) => {

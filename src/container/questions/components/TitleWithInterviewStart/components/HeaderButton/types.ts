@@ -1,4 +1,4 @@
-import { ICategory } from '@/container/questions/types';
+import { ICategory } from '@/types/categories';
 
 export interface IProps {
   questionTitle: string;

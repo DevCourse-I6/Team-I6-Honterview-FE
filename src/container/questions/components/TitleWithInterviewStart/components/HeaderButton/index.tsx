@@ -4,7 +4,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { BookmarkIcon } from '@/components/icon';
-import { clickQuestionHeart } from '@/container/questions/services';
+import { clickQuestionHeart } from '@/libs/services/questions';
 
 import UpdateQuestionModal from '../../../UpdateQuestionModal';
 import { IProps } from './types';

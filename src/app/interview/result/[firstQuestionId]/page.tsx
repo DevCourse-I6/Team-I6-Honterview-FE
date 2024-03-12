@@ -2,7 +2,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import ButtonWrapper from '@/container/interviewResult/components/ButtonWrapper';
 import QuestionAndAnswer from '@/container/interviewResult/components/QuestionAndAnswer';
-import { getInterviewResult } from '@/container/interviewResult/services/interviews';
+import { getInterviewResult } from '@/libs/services/interview';
 
 import { IProps } from './types';
 
