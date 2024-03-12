@@ -28,14 +28,9 @@ const PreSettingButtonSection = () => {
       return;
     }
 
-    let questionId;
+    const isNew = firstQuestion?.id === 'new';
 
-    if (firstQuestion?.id === 'new') {
-      questionId = await createFirstQuestion();
-    } else {
-      questionId = firstQuestion?.id;
-    }
-
+    const questionId = isNew ? await createFirstQuestion() : firstQuestion?.id;
     const interviewId = await createNewInterview(questionId);
 
     const nextUrl =
