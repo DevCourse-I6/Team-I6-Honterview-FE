@@ -15,7 +15,7 @@ import { IProps } from './types';
 const ButtonWrapper = ({ firstQuestionId }: IProps) => {
   const router = useRouter();
   const { answerIdList } = useVisibilityCheckStore();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () => patchInterviewVisibility(firstQuestionId, answerIdList),
     onSuccess: () => {
       notify('success', '답변 공개 여부가 저장되었습니다.');
@@ -28,7 +28,12 @@ const ButtonWrapper = ({ firstQuestionId }: IProps) => {
   return (
     <>
       <Button onClick={() => router.push('/')}>메인으로</Button>
-      <Button onClick={() => mutate()}>저장하기</Button>
+      <Button
+        disabled={isPending}
+        onClick={() => mutate()}
+      >
+        저장하기
+      </Button>
     </>
   );
 };

@@ -35,7 +35,7 @@ const UpdateQuestionModal = ({
   );
   const router = useRouter();
   const [titleInput, setTitleInput] = useState(questionTitle);
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () =>
       patchQuestion(questionId, {
         content: titleInput,
@@ -103,6 +103,7 @@ const UpdateQuestionModal = ({
       <div className="mt-[110px] flex gap-5">
         <Button
           className="w-1/2"
+          disabled={isPending}
           onClick={() => mutate()}
         >
           수정하기

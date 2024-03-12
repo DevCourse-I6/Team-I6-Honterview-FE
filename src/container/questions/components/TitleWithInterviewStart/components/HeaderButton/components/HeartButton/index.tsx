@@ -15,7 +15,7 @@ const HeartButton = ({
 }: IProps) => {
   const [isHearted, setIsHearted] = useState(initialIsHearted);
   const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () => clickQuestionHeart(questionId),
     onSuccess: () => {
       setIsHearted(!isHearted);
@@ -28,6 +28,7 @@ const HeartButton = ({
       <span className="text-large">{heartsCount}</span>
       <button
         type="button"
+        disabled={isPending}
         onClick={() => mutate()}
       >
         <FavoriteIcon

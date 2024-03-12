@@ -8,7 +8,6 @@ import HeaderButton from './components/HeaderButton';
 import { IProps } from './types';
 
 // TODO: sangmin // 수정 삭제에 대한 권한 UI 적용
-// TODO: sangmin // mutate 서버 데이터 (상태) 업데이트 (revalidating)
 
 const TitleWithInterviewStart = async ({
   children,

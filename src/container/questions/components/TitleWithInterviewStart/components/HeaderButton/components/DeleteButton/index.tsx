@@ -10,7 +10,7 @@ import { IProps } from './types';
 
 const DeleteButton = ({ questionId }: IProps) => {
   const router = useRouter();
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () => deleteQuestion(questionId),
     onSuccess: () => {
       notify('success', '질문이 삭제되었습니다.');
@@ -22,6 +22,7 @@ const DeleteButton = ({ questionId }: IProps) => {
   return (
     <button
       onClick={() => mutate()}
+      disabled={isPending}
       type="button"
       className="rounded-3xl bg-slate-100 px-5 py-2"
     >

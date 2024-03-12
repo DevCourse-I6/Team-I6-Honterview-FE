@@ -22,7 +22,7 @@ const Answer = ({
   const [isHearted, setIsHearted] = useState(initialIsHearted);
   const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () => clickAnswerHeart(answerId),
     onSuccess: () => {
       setIsHearted(!isHearted);
@@ -43,6 +43,7 @@ const Answer = ({
         <div>
           <button
             type="button"
+            disabled={isPending}
             onClick={() => mutate()}
           >
             <FavoriteIcon

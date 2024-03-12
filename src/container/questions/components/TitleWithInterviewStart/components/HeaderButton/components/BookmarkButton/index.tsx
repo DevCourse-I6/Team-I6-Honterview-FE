@@ -14,7 +14,7 @@ const BookmarkButton = ({
 }: IProps) => {
   const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () => clickQuestionBookmark(questionId),
     onSuccess: () => setIsBookmarked(!isBookmarked),
   });
@@ -22,6 +22,7 @@ const BookmarkButton = ({
     <>
       <button
         type="button"
+        disabled={isPending}
         onClick={() => mutate()}
       >
         <BookmarkIcon
