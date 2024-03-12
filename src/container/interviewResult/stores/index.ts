@@ -1,9 +1,9 @@
 import { create } from 'zustand';
 
-import { IUseVisibilityCheckStore } from './types';
+import { IUseAnswerVisibilityStatusStore } from './types';
 
-export const useVisibilityCheckStore = create<IUseVisibilityCheckStore>(
-  (set) => ({
+export const useAnswerVisibilityStatusStore =
+  create<IUseAnswerVisibilityStatusStore>((set) => ({
     answerIdList: [],
     setInitialAnswerList: (answerLength) =>
       set(() => ({
@@ -31,5 +31,4 @@ export const useVisibilityCheckStore = create<IUseVisibilityCheckStore>(
 
         return { answerIdList: newAnswerIdList };
       }),
-  }),
-);
+  }));

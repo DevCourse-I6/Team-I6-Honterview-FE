@@ -7,14 +7,12 @@ import Button from '@/components/button';
 import { notify } from '@/components/toast';
 import { patchInterviewVisibility } from '@/libs/services/interview';
 
-import { useVisibilityCheckStore } from '../../stores';
+import { useAnswerVisibilityStatusStore } from '../../stores';
 import { IProps } from './types';
-
-// TODO: sangmin // useVisibilityCheckStore 변수명 변경하기 answerId => {id, visibility}를 나타낼 수 있는 이름으로
 
 const ButtonWrapper = ({ interviewId }: IProps) => {
   const router = useRouter();
-  const { answerIdList } = useVisibilityCheckStore();
+  const { answerIdList } = useAnswerVisibilityStatusStore();
   const { mutate, isPending } = useMutation({
     mutationFn: () => patchInterviewVisibility(interviewId, answerIdList),
     onSuccess: () => {
