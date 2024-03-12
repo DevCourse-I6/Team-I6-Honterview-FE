@@ -29,7 +29,7 @@ const InterviewTypeSection = ({ setNextItemOn }: InterviewTypeSectionProps) => {
       <div className="flex gap-[2rem]">
         <Button
           styleType={
-            interviewType === 'camera' ? ButtonType.Type1 : ButtonType.Type2
+            interviewType === 'RECORD' ? ButtonType.Type1 : ButtonType.Type2
           }
           onClick={handleCameraButton}
           className="h-[4rem] w-[9.5rem] px-[0rem]"
@@ -38,7 +38,7 @@ const InterviewTypeSection = ({ setNextItemOn }: InterviewTypeSectionProps) => {
         </Button>
         <Button
           styleType={
-            interviewType === 'chatting' ? ButtonType.Type1 : ButtonType.Type2
+            interviewType === 'TEXT' ? ButtonType.Type1 : ButtonType.Type2
           }
           onClick={handleChatButton}
           className="h-[4rem] w-[9.5rem] px-[0rem]"

@@ -1,16 +1,44 @@
 import { notify } from '@/components/toast';
+import { apiClient } from '@/utils/apiClient';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
+type PresettingMehodType = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
-export const getAPI = async (url: string, options?: RequestInit) => {
+interface CreateInterviewByChatProps {
+  questionCount: number;
+  firstQuestionId: number;
+}
+
+interface CreateInterviewByVideoProps {
+  questionCount: number;
+  answerTime: { minute: number; second: number };
+  firstQuestionId: number;
+}
+
+export const presettingAPI = async (
+  method: PresettingMehodType,
+  url: string,
+  options?: RequestInit,
+) => {
   try {
-    const response = await fetch(`${API_BASE_URL}${url}`, {
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      ...options,
-      method: 'GET',
-    });
+    let response;
+
+    switch (method) {
+      case 'GET':
+        response = await apiClient.get(url, options);
+        break;
+      case 'POST':
+        response = await apiClient.post(url, options);
+        break;
+      case 'PATCH':
+        response = await apiClient.patch(url, options);
+        break;
+      case 'DELETE':
+        response = await apiClient.delete(url, options);
+        break;
+      default:
+        response = await apiClient.get(url, options);
+        break;
+    }
 
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
@@ -26,6 +54,43 @@ export const getAPI = async (url: string, options?: RequestInit) => {
   }
 };
 
-export const getCategoryList = () => getAPI('api/v1/categories');
+export const getCategoryList = () => presettingAPI('GET', 'api/v1/categories');
 export const getQuestionListByCategories = (categories: string) =>
-  getAPI(`api/v1/questions/by-category?categories=${categories}`);
+  presettingAPI('GET', `api/v1/questions/by-category?categories=${categories}`);
+export const createQuestion = (content: string, categoryIds: number[]) =>
+  presettingAPI('POST', 'api/v1/questions', {
+    body: JSON.stringify({
+      content,
+      categoryIds,
+    }),
+  });
+
+export const createInterviewByChat = ({
+  questionCount,
+  firstQuestionId,
+}: CreateInterviewByChatProps) => {
+  return presettingAPI('POST', 'api/v1/interviews', {
+    body: JSON.stringify({
+      answerType: 'TEXT',
+      questionCount,
+      questionId: firstQuestionId,
+    }),
+  });
+};
+
+export const createInterviewByVideo = ({
+  questionCount,
+  answerTime,
+  firstQuestionId,
+}: CreateInterviewByVideoProps) => {
+  const { minute, second } = answerTime!;
+
+  return presettingAPI('POST', 'api/v1/interviews', {
+    body: JSON.stringify({
+      answerType: 'RECORD',
+      questionCount,
+      timer: minute * 60 + second,
+      questionId: firstQuestionId,
+    }),
+  });
+};

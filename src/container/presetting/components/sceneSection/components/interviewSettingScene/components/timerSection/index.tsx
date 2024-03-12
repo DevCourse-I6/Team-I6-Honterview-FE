@@ -12,7 +12,7 @@ const TimerSection = () => {
     answerTime.minute === minuteData[minuteData.length - 1],
   );
 
-  if (interviewType === 'chatting') {
+  if (interviewType === 'TEXT') {
     return;
   }
 

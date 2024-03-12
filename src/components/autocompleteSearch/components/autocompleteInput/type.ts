@@ -1,7 +1,7 @@
-import { AutocompleteDataType } from '../../type';
+import { AutocompleteCreatedDataType, AutocompleteDataType } from '../../type';
 
 export interface AutocompleteInputProps {
   totalDatas: AutocompleteDataType[];
-  selectedList?: AutocompleteDataType[];
+  selectedList?: AutocompleteCreatedDataType[];
   placeholder?: string;
 }
