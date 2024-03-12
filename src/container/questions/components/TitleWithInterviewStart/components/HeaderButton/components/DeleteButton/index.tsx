@@ -15,6 +15,7 @@ const DeleteButton = ({ questionId }: IProps) => {
     onSuccess: () => {
       notify('success', '질문이 삭제되었습니다.');
       router.back();
+      router.refresh();
     },
     onError: (error) => notify('error', error.message),
   });

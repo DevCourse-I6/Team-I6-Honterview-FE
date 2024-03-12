@@ -1,6 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -17,8 +18,6 @@ import { ICategory } from '@/types/categories';
 
 import { IProps } from './types';
 
-// TODO: sangmin // question 변경 후 데이터 최신화
-
 const UpdateQuestionModal = ({
   questionId,
   questionTitle,
@@ -34,7 +33,7 @@ const UpdateQuestionModal = ({
       name: category,
     })),
   );
-
+  const router = useRouter();
   const [titleInput, setTitleInput] = useState(questionTitle);
   const { mutate } = useMutation({
     mutationFn: () =>
@@ -45,6 +44,7 @@ const UpdateQuestionModal = ({
     onSuccess: () => {
       notify('success', '질문 수정 완료');
       toggleUpdateModalVisible();
+      router.refresh();
     },
     onError: (error) => {
       notify('error', error.message);
