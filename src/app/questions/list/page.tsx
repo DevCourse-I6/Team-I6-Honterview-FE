@@ -2,13 +2,12 @@
 
 import { useEffect, useState } from 'react';
 
-import { getCategories } from '@/app/api/questionsList/getCategories';
-import { getQuestionsList } from '@/app/api/questionsList/getQuestionsList';
 import Pagination from '@/components/pagination';
 import { notify } from '@/components/toast';
 import QuestionFilter from '@/container/questionsList/components/questionFilter';
 import QuestionInput from '@/container/questionsList/components/questionInput';
 import QuestionList from '@/container/questionsList/components/questionList';
+import { getCategories, getQuestionsList } from '@/libs/services/questionsList';
 
 const QuestionsListPage = () => {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
