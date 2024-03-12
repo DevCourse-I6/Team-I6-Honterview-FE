@@ -13,6 +13,7 @@ import Tag from '@/components/tag';
 import { notify } from '@/components/toast';
 import { MAX_TAG_COUNT } from '@/container/presetting/components/sceneSection/components/firstQuestionScene/constants';
 import { patchQuestion } from '@/libs/services/questions';
+import { ICategory } from '@/types/categories';
 
 import { IProps } from './types';
 
@@ -70,7 +71,10 @@ const UpdateQuestionModal = ({
               notify('warning', '제한된 태그 개수를 초과하였습니다');
               return;
             }
-            setSelectedList((prevSelectedList) => [...prevSelectedList, tag]);
+            setSelectedList((prevSelectedList) => [
+              ...prevSelectedList,
+              tag as ICategory,
+            ]);
           }}
           placeholder="예) React"
         />

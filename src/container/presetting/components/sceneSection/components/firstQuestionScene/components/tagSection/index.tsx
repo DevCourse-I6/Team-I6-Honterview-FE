@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import AutocompleteSearch from '@/components/autocompleteSearch';
+import { AutocompleteDataType } from '@/components/autocompleteSearch/type';
 import { XIcon } from '@/components/icon';
 import Loading from '@/components/loading';
 import Tag from '@/components/tag';
@@ -48,7 +49,7 @@ const TagSection = () => {
                 notify('warning', '제한된 태그 개수를 초과하였습니다');
                 return;
               }
-              addFirstQuestionTag(tag);
+              addFirstQuestionTag(tag as AutocompleteDataType);
             }}
             placeholder="예) React"
           />
