@@ -1,6 +1,6 @@
 import { RefObject } from 'react';
 
-import { AutocompleteCreatedDataType, AutocompleteDataType } from '../type';
+import { AutocompleteDataType } from '../type';
 
 export interface AutocompleteContextProps {
   autocompleteRef: RefObject<HTMLDivElement> | null;
@@ -15,9 +15,9 @@ export interface AutocompleteContextProps {
   setAutocompleteList: (datas: AutocompleteDataType[]) => void;
   keyboardIndex: number;
   setKeyboardIndex: (index: number) => void;
-  handleItemClick: (value: AutocompleteCreatedDataType) => void;
+  handleItemClick: (value: AutocompleteDataType) => void;
 }
 
 export interface AutocompleteProviderProps extends React.PropsWithChildren {
-  onSelectItem: (value: AutocompleteCreatedDataType) => void;
+  onSelectItem: (value: AutocompleteDataType) => void;
 }

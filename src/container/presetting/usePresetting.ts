@@ -25,7 +25,7 @@ const usePresetting = () => {
 
     return createQuestion(
       firstQuestion.name,
-      firstQuestionTags.map(({ id }) => id),
+      firstQuestionTags.map(({ id }) => id as number),
     ).then(({ data }) => {
       setFirstQuestion({
         id: data.id,

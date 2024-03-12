@@ -9,7 +9,7 @@ import React, {
 
 import useClickAway from '@/hooks/useClickAway';
 
-import { AutocompleteCreatedDataType, AutocompleteDataType } from '../type';
+import { AutocompleteDataType } from '../type';
 import { AutocompleteContextProps, AutocompleteProviderProps } from './type';
 
 const AutocompleteContext = createContext<AutocompleteContextProps>({
@@ -49,7 +49,7 @@ const AutocompleteProvider = ({
   const autoItemRef = useRef(null);
 
   const value = useMemo(() => {
-    const handleItemClick = (item: AutocompleteCreatedDataType) => {
+    const handleItemClick = (item: AutocompleteDataType) => {
       setInputValue('');
       setIsListVisible(false);
       onSelectItem(item);
