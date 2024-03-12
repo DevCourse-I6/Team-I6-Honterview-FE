@@ -35,16 +35,16 @@ const config: Config = {
         doubleLarge: '3rem',
         tripleLarge: '3.6rem',
       },
-      device: {
-        mobile: { max: '480px' },
-        tablet: { max: '768px' },
-        laptop: { max: '1024px' },
-      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
+    },
+    screens: {
+      mobile: '480px',
+      tablet: '768px',
+      laptop: '1024px',
     },
   },
   plugins: [],
