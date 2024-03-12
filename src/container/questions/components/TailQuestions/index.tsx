@@ -12,7 +12,6 @@ const TailQuestions = async ({ questionId }: IProps) => {
   return (
     <>
       <hr className="my-20" />
-
       <div>
         <h3 className="mb-10 mt-5 text-[2.4rem] font-bold text-[#3C4654]">
           이 질문의 꼬리 질문

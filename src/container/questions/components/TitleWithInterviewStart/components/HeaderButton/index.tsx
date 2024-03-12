@@ -1,12 +1,9 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
-import { BookmarkIcon } from '@/components/icon';
-import { clickQuestionHeart } from '@/libs/services/questions';
-
 import UpdateQuestionModal from '../../../UpdateQuestionModal';
+import HeartButton from './components/HeartButton';
 import { IProps } from './types';
 
 const HeaderButton = ({
@@ -14,20 +11,10 @@ const HeaderButton = ({
   questionTitle,
   categoryNames,
   categories,
-  isHearted: initialIsHearted,
-  questionHeartCount: initialHeartsCount,
+  isHearted,
+  questionHeartCount,
 }: IProps) => {
-  const [isHearted, setIsHearted] = useState(initialIsHearted);
-  const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
   const [updateModalVisible, setUpdateModalVisible] = useState(false);
-
-  const { mutate } = useMutation({
-    mutationFn: () => clickQuestionHeart(questionId),
-    onSuccess: () => {
-      setIsHearted(!isHearted);
-      setHeartsCount(isHearted ? heartsCount - 1 : heartsCount + 1);
-    },
-  });
 
   const toggleUpdateModalVisible = () => {
     setUpdateModalVisible((prev) => !prev);
@@ -51,16 +38,11 @@ const HeaderButton = ({
         </button>
       </div>
       <div className="flex items-center gap-1">
-        <span className=" text-large">{heartsCount}</span>
-
-        <button
-          type="button"
-          onClick={() => mutate()}
-        >
-          <BookmarkIcon
-            className={`${isHearted ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300'}`}
-          />
-        </button>
+        <HeartButton
+          questionId={questionId}
+          isHearted={isHearted}
+          questionHeartCount={questionHeartCount}
+        />
       </div>
       <UpdateQuestionModal
         questionId={questionId}
