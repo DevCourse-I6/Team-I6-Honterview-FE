@@ -6,9 +6,14 @@ const QuestionTitle = ({ content }: QuestionTitleProps) => {
   return (
     <Link
       href="/"
-      className="text-doubleLarge font-semibold"
+      className="mr-[3rem] text-doubleLarge font-semibold"
     >
-      <span className="text-text-40">Q.</span> {content}
+      <div className="flex items-start">
+        <span className="text-text-40">Q.</span>
+        <span className="line-clamp-2 overflow-hidden text-ellipsis break-words px-3">
+          {content}
+        </span>{' '}
+      </div>
     </Link>
   );
 };
