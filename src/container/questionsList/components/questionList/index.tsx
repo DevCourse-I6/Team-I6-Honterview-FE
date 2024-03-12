@@ -1,7 +1,9 @@
+import Link from 'next/link';
 import { v4 as v4uuid } from 'uuid';
 
-import Button from '@/components/button';
+import { FavoriteIcon } from '@/components/icon';
 
+import QuestionInterviewButton from './components/questionInterviewButton';
 import QuestionSort from './components/questionSort';
 import QuestionTag from './components/questionTag';
 import QuestionTitle from './components/questionTitle';
@@ -13,24 +15,30 @@ const QuestionList = ({ handleTagClick, questionsList }: IProps) => {
       <QuestionSort />
 
       <div className="my-[6rem]">
-        {questionsList.map(({ content, categoryNames }) => (
+        {questionsList.map(({ id, content, categoryNames, heartsCount }) => (
           <div
             key={v4uuid()}
             className="rounded-lg px-[2rem] py-[2rem] hover:bg-gray-100"
           >
-            <div className="flex justify-between pb-[2rem]">
-              <QuestionTitle content={content} />
-              <Button className="h-[4rem] flex-none px-6 py-6">
-                모의 면접 시작
-              </Button>
-            </div>
-            {categoryNames.map((tag) => (
-              <QuestionTag
-                key={v4uuid()}
-                handleTagClick={handleTagClick}
-                tag={tag}
-              />
-            ))}
+            <Link href={`/questions/${id}`}>
+              <div className="flex pb-[2rem]">
+                <QuestionTitle content={content} />
+                <QuestionInterviewButton id={id} />
+              </div>
+              <div className="flex">
+                {categoryNames.map((tag) => (
+                  <QuestionTag
+                    key={v4uuid()}
+                    handleTagClick={handleTagClick}
+                    tag={tag}
+                  />
+                ))}
+                <div className="ml-auto flex items-center gap-2 px-[1.5rem] text-extraLarge text-text-60">
+                  <FavoriteIcon className="fill-slate-300" />
+                  {heartsCount}
+                </div>
+              </div>
+            </Link>
           </div>
         ))}
       </div>
