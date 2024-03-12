@@ -1,4 +1,4 @@
-export async function getCategories() {
+export async function GET() {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_BASE_URL}/api/categories`,
     {
