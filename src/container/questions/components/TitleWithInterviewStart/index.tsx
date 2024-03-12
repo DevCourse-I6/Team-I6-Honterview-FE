@@ -7,10 +7,9 @@ import Tag from '@/components/tag';
 import HeaderButton from './components/HeaderButton';
 import { IProps } from './types';
 
-// TODO: sangmin // 북마크 아이콘 하트 아이콘으로 변경 or 추가
 // TODO: sangmin // 수정 삭제에 대한 권한 UI 적용
-// TODO: sangmin // 삭제 구현
 // TODO: sangmin // 수정 성공 후 모달 종료
+// TODO: sangmin // mutate 서버 데이터 (상태) 업데이트 (revalidating)
 
 const TitleWithInterviewStart = async ({
   children,

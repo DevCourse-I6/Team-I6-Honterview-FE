@@ -114,3 +114,13 @@ export const patchQuestion = async (
 
   return response.json();
 };
+
+export const deleteQuestion = async (questionId: number) => {
+  const response = await apiClient.delete(`api/v1/questions/${questionId}`, {
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+};
