@@ -10,6 +10,7 @@ const useStepStore = create<StepState>((set) => ({
     set(({ currentStep }) => ({ currentStep: currentStep + 1 })),
   decreaseStep: () =>
     set(({ currentStep }) => ({ currentStep: currentStep - 1 })),
+  setSettingStep: () => set(() => ({ currentStep: 2 })),
   setCameraStep: () => set(() => ({ totalStep: 4 })),
   setChattingStep: () => set(() => ({ totalStep: 2 })),
   setNextButtonOn: () => set(() => ({ isNextButtonOn: true })),

@@ -1,4 +1,4 @@
-import { notify } from '@/components/toast';
+/* eslint-disable no-console */
 import { apiClient } from '@/utils/apiClient';
 
 type PresettingMehodType = 'GET' | 'POST' | 'PATCH' | 'DELETE';
@@ -47,12 +47,15 @@ export const presettingAPI = async (
     return await response.json();
   } catch (error) {
     if (error instanceof Error) {
-      notify('error', error.message);
+      console.error(error.message);
     } else {
-      notify('error', String(error));
+      console.error(String(error));
     }
   }
 };
+
+export const getQuestionInfo = (questionId: number) =>
+  presettingAPI('GET', `api/v1/questions/${questionId}`);
 
 export const getCategoryList = () => presettingAPI('GET', 'api/v1/categories');
 export const getQuestionListByCategories = (categories: string) =>

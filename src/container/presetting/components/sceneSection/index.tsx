@@ -1,5 +1,3 @@
-'use client';
-
 import useStepStore from '../../stores/useStepStore';
 import FirstQuestionScene from './components/firstQuestionScene';
 import InterviewSettingScene from './components/interviewSettingScene';
@@ -8,6 +6,7 @@ import VideoCheckScene from './components/videoCheckScene';
 
 const PreSettingSceneSection = () => {
   const { currentStep } = useStepStore();
+
   return (
     <div className="h-[50rem]">
       {currentStep === 1 && <FirstQuestionScene />}
