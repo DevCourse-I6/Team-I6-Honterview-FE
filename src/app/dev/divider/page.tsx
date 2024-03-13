@@ -1,13 +1,13 @@
-import Divider from '@/components/divider';
+import DividerHorizontal from '@/components/dividerHorizontal';
 
-const DividerDev = () => {
+const DividerHorizontalDev = () => {
   return (
     <div>
       <p>디바이더 위 텍스트</p>
-      <Divider />
+      <DividerHorizontal />
       <p>디바이더 아래 텍스트</p>
     </div>
   );
 };
 
-export default DividerDev;
+export default DividerHorizontalDev;

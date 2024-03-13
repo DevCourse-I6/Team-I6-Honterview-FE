@@ -10,7 +10,6 @@ import { clickAnswerHeart } from '@/libs/services/answers';
 import { IProps } from './types';
 
 const Answer = ({
-  isBlur,
   nickname,
   content,
   className,
@@ -22,7 +21,7 @@ const Answer = ({
   const [isHearted, setIsHearted] = useState(initialIsHearted);
   const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () => clickAnswerHeart(answerId),
     onSuccess: () => {
       setIsHearted(!isHearted);
@@ -32,9 +31,7 @@ const Answer = ({
 
   return (
     <div
-      className={twMerge(
-        `${isBlur && 'cursor-pointer select-none blur-[5px]'} ${className}`,
-      )}
+      className={twMerge(`rounded-lg border-t-[1px] bg-white p-6 ${className}`)}
     >
       <div className="mb-5 flex justify-between">
         <h4 className="text-[1.8rem] font-semibold text-[#3182F6]">
@@ -43,6 +40,7 @@ const Answer = ({
         <div>
           <button
             type="button"
+            disabled={isPending}
             onClick={() => mutate()}
           >
             <FavoriteIcon

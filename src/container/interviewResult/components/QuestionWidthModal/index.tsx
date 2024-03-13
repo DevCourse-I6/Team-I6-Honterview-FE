@@ -8,14 +8,13 @@ import AnswerList from '@/container/questions/components/AnswerList';
 
 import { IProps } from './types';
 
-// TODO: sangmin // Title 다른 질문 존재 조건문 처리
-
-const TitleWidthModal = ({
+const QuestionWidthModal = ({
   questionContent,
   questionInitialData,
   questionId,
 }: IProps) => {
   const [visible, setVisible] = useState(false);
+  const hasMoreQuestions = questionInitialData.data.answers.data.length >= 2;
 
   const toggleVisible = () => {
     setVisible((prev) => !prev);
@@ -25,8 +24,9 @@ const TitleWidthModal = ({
     <>
       <button
         type="button"
+        disabled={!hasMoreQuestions}
         onClick={toggleVisible}
-        className="mb-10 inline-block cursor-pointer text-extraLarge font-bold underline decoration-blue-300 hover:decoration-blue-600"
+        className={`mb-10 inline-block text-extraLarge font-bold ${hasMoreQuestions && 'cursor-pointer underline decoration-blue-300 hover:decoration-blue-600'}`}
       >
         {questionContent}
       </button>
@@ -34,7 +34,7 @@ const TitleWidthModal = ({
       <Modal
         visible={visible}
         onClose={toggleVisible}
-        className="relative h-[70%] w-[70%] rounded-3xl bg-slate-300 px-16 py-10 shadow-2xl"
+        className="relative h-[70%] w-[70%] rounded-3xl  bg-slate-50 px-16 py-10 shadow-2xl"
       >
         <button
           type="button"
@@ -46,10 +46,11 @@ const TitleWidthModal = ({
         <h1 className="mb-10 text-doubleLarge">
           {questionInitialData.data.content}
         </h1>
-        <div className="h-[calc(100%-2.5rem-90px)] overflow-auto">
+        <div className="flex h-[calc(100%-2.5rem-90px)] flex-col gap-4 overflow-auto">
           <AnswerList
             initialData={questionInitialData}
             questionId={questionId}
+            isModalLoad={hasMoreQuestions}
           />
         </div>
       </Modal>
@@ -57,4 +58,4 @@ const TitleWidthModal = ({
   );
 };
 
-export default TitleWidthModal;
+export default QuestionWidthModal;

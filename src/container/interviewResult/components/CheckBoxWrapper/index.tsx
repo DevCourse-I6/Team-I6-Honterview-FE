@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react';
 
-import { useVisibilityCheckStore } from '../../stores';
+import { useAnswerVisibilityStatusStore } from '../../stores';
 import CheckBox from '../CheckBox';
 import { TToggleChangeEvent } from '../CheckBox/types';
 import { IProps } from './types';
@@ -10,7 +10,8 @@ import { IProps } from './types';
 // TODO: sangmin // 마이페이지에서 결과창으로 다시 접속 시 이전의 공개 여부 체크 여부 결정하기
 
 const CheckBoxWrapper = ({ answerId }: IProps) => {
-  const { setAnswerIdList, setInitialAnswerList } = useVisibilityCheckStore();
+  const { setAnswerIdList, setInitialAnswerList } =
+    useAnswerVisibilityStatusStore();
 
   useEffect(() => {
     setInitialAnswerList(3);

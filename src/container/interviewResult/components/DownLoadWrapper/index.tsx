@@ -5,7 +5,6 @@ import { DownLoadIcon } from '@/components/icon';
 import { IProps } from './types';
 
 // TODO: sangmin // 바로 다운로드 되도록, 인터넷 다운로드 목록에 추가 되게끔
-// TODO: sangmin // mp4로 변환해야될까?
 
 const DownLoadWrapper = ({ interviewVideoUrl }: IProps) => {
   return (

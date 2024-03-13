@@ -4,6 +4,7 @@ import { apiServer } from '@/utils/apiServer';
 import { IGetQuestionByIdParams } from '../types/params';
 import { IPatchQuestionPayload } from '../types/payload';
 import {
+  IClickQuestionBookmark,
   IClickQuestionHeart,
   IGetQuestionById,
   IGetRandomQuestionsByCategories,
@@ -81,6 +82,23 @@ export const clickQuestionHeart = async (
   return response.json();
 };
 
+export const clickQuestionBookmark = async (
+  questionId: number,
+): Promise<IClickQuestionBookmark> => {
+  const response = await apiClient.post(
+    `api/v1/questions/${questionId}/bookmarks`,
+    {
+      cache: 'no-store',
+    },
+  );
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
+
 export const patchQuestion = async (
   questionId: number,
   body: IPatchQuestionPayload,
@@ -93,6 +111,14 @@ export const patchQuestion = async (
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
+};
 
-  return response.json();
+export const deleteQuestion = async (questionId: number) => {
+  const response = await apiClient.delete(`api/v1/questions/${questionId}`, {
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 };

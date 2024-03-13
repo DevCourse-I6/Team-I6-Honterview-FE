@@ -6,8 +6,11 @@ import { ButtonType } from '@/components/button/types';
 import usePresettingDataStore from '../../stores/usePresettingDataStore';
 import useStepStore from '../../stores/useStepStore';
 import usePresetting from '../../usePresetting';
+import { PreSettingButtonSectionProps } from './type';
 
-const PreSettingButtonSection = () => {
+const PreSettingButtonSection = ({
+  fromQuestionPage,
+}: PreSettingButtonSectionProps) => {
   const { totalStep, currentStep, increaseStep, decreaseStep, isNextButtonOn } =
     useStepStore();
   const { firstQuestion, interviewType } = usePresettingDataStore();
@@ -15,11 +18,11 @@ const PreSettingButtonSection = () => {
   const router = useRouter();
 
   const handlePrevButton = () => {
-    if (currentStep > 1) {
-      decreaseStep();
-    } else {
+    if (currentStep <= 1 || (currentStep === 2 && fromQuestionPage)) {
       router.back();
+      return;
     }
+    decreaseStep();
   };
 
   const handleNextButton = async () => {

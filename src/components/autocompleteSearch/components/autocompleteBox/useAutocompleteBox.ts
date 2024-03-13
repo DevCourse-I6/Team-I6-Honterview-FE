@@ -24,12 +24,17 @@ const useAutocompleteBox = () => {
   }, [autoItemRef, keyboardIndex]);
 
   const handleKeywordtHighlight = (name: string) => {
-    const nameArray = Array.from(name);
-    const index = name.toLowerCase().indexOf(inputValue.toLowerCase());
+    const value = name.length > 32 ? `${name.slice(0, 32)}...` : name;
+    const nameArray = Array.from(value);
+    const index = value.toLowerCase().indexOf(inputValue.toLowerCase());
 
-    const prevWord = nameArray.slice(0, index);
-    const keyword = nameArray.slice(index, index + inputValue.length);
-    const postWord = nameArray.slice(index + inputValue.length);
+    if (index === -1) {
+      return { prevWord: value, keyword: null, postWord: null };
+    }
+
+    const prevWord = nameArray.slice(0, index).join('');
+    const keyword = nameArray.slice(index, index + inputValue.length).join('');
+    const postWord = nameArray.slice(index + inputValue.length).join('');
 
     return { prevWord, keyword, postWord };
   };

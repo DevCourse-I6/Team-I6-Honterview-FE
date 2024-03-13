@@ -1,3 +1,5 @@
+import { RefObject } from 'react';
+
 import { ICategory } from '@/types/categories';
 
 export interface IProps {
@@ -6,5 +8,8 @@ export interface IProps {
   categoryNames: string[];
   updateModalVisible: boolean;
   categories: ICategory[];
-  toggleUpdateModalVisible: () => void;
+  toggleUpdateModalVisible: (
+    inputElement?: RefObject<HTMLInputElement>,
+  ) => void;
+  inputElement: RefObject<HTMLInputElement>;
 }
