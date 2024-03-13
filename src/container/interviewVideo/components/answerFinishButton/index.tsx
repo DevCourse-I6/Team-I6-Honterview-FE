@@ -1,15 +1,18 @@
 'use client';
 
 import Button from '@/components/button';
-import useSubmitInterview from '@/hooks/useSubmitInterview';
+import useSubmitInterview from '@/container/interviewVideo/components/answerFinishButton/hooks/useSubmitInterview';
+import { useLoadingStatus, useSubmitStatus } from '@/stores/interviewProgress';
 
 const AnswerFinishButton = () => {
   const { isPending, handleSubmit } = useSubmitInterview();
+  const { isLoading } = useLoadingStatus();
+  const { isSubmit } = useSubmitStatus();
 
   return (
     <Button
       type="submit"
-      disabled={isPending}
+      disabled={isPending || isLoading || isSubmit}
       onClick={handleSubmit}
       className="h-auto w-auto px-[1rem] py-[0.5rem] text-small text-white md:text-medium"
     >

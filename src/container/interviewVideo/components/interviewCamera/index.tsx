@@ -6,19 +6,17 @@ import { useMediaRecorder } from './hooks/useMediaRecorder';
 
 const InterviewCamera = () => {
   const { isSetting, isRecording, videoRef } = useMediaRecorder();
-
-  if (!isSetting || !isRecording) {
-    return (
-      <div className="flex h-1/2 items-center justify-center rounded-2xl bg-background-20 md:h-full md:basis-1/2">
-        <Loading />
-      </div>
-    );
-  }
+  const loadingDisplayStyle =
+    !isSetting && !isRecording ? 'visible' : 'invisible';
+  const videoDisplayStyle = isSetting && isRecording ? 'visible' : 'invisible';
 
   return (
     <div className="relative flex h-1/2 w-full items-center justify-center bg-black md:h-full md:w-1/2">
+      <div className={`${loadingDisplayStyle} h-full w-full`}>
+        <Loading />
+      </div>
       <video
-        className="absolute left-0 top-0 h-full w-full scale-x-[-1] object-fill"
+        className={`${videoDisplayStyle} absolute left-0 top-0 h-full w-full scale-x-[-1] object-fill`}
         ref={videoRef}
         autoPlay
       >

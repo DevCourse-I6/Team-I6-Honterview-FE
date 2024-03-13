@@ -1,49 +1,48 @@
-import { apiClient } from '@/utils/apiClient';
+import { notFound } from 'next/navigation';
 
-export const getInterviewInfo = async (interviewId: string) => {
-  try {
-    const response = await apiClient.get(`api/v1/interviews/${interviewId}`);
+import { IResponseGetInterview } from '@/types/Response/interview';
+import { apiServer } from '@/utils/apiServer';
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+import { reissueAccessToken } from '../actions/auth';
 
-    const data = await response.json();
+export const getInterviewInfo = async (
+  interviewId: string,
+): Promise<IResponseGetInterview> => {
+  const response = await apiServer.get(`api/v1/interviews/${interviewId}`, {
+    cache: 'no-store',
+  });
 
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
-
-    throw new Error(String(error));
+  if (response.status === 404) {
+    notFound();
   }
+
+  if (response.status === 401) {
+    return reissueAccessToken(() => getInterviewInfo(interviewId));
+  }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
 };
 
-export const postUploadMediaBlob = async (
+export const putUploadMediaBlob = async (
   uploadUrl: string,
   mediaBlobUrl: Blob[],
 ) => {
-  try {
-    const videoBlob = new Blob(mediaBlobUrl, { type: 'video/webm' });
-    const formData = new FormData();
+  const videoBlob = new Blob(mediaBlobUrl, { type: 'video/webm' });
+  const formData = new FormData();
 
-    formData.append('video', videoBlob);
+  formData.append('video', videoBlob);
 
-    const response = await fetch(uploadUrl, {
-      body: videoBlob,
-      method: 'PUT',
-      cache: 'no-store',
-    });
+  const response = await fetch(uploadUrl, {
+    body: videoBlob,
+    method: 'PUT',
+    cache: 'no-store',
+  });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
-
-    throw new Error(String(error));
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
 };

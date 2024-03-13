@@ -40,3 +40,21 @@ export interface IQuestionChangeCounterStore {
   increaseQuestionChangeCounter: () => void;
   setQuestionChangeCounter: (value: number) => void;
 }
+
+export interface ITimeoutStore {
+  timeout: boolean;
+  enableTimeout: () => void;
+  disableTimeout: () => void;
+}
+
+export interface ILoadingStatusStore {
+  isLoading: boolean;
+  startLoading: () => void;
+  stopLoading: () => void;
+}
+
+export interface ISubmitStatusStore {
+  isSubmit: boolean;
+  startSubmit: () => void;
+  stopSubmit: () => void;
+}

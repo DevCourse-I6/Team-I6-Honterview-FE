@@ -37,3 +37,5 @@ const InterviewVideoPage = async ({ params }: IProps) => {
 };
 
 export default InterviewVideoPage;
+// 사진 여러개 저장 안댐
+// 쿠키 만료시간 토큰 만료시간이랑 같게

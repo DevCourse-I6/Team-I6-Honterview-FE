@@ -1,21 +1,20 @@
+/* eslint-disable no-console */
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { notify } from '@/components/toast';
-import { useMediaBlobUrl } from '@/stores/interviewProgress';
+import { useLoadingStatus, useMediaBlobUrl } from '@/stores/interviewProgress';
 
 export const useMediaRecorder = () => {
+  const { startLoading, stopLoading } = useLoadingStatus();
   const { appendMediaBlobUrl } = useMediaBlobUrl();
-  const [isLoading, setIsLoading] = useState(false);
   const [isSetting, setIsSetting] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
 
   const getMediaPermission = useCallback(async () => {
+    setIsSetting(false);
     try {
-      setIsSetting(false);
-      setIsLoading(true);
       const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
@@ -48,53 +47,58 @@ export const useMediaRecorder = () => {
         appendMediaBlobUrl(e.data);
       };
 
+      recorder.onstart = () => {
+        notify('success', '녹화 기능 활성화');
+        setIsRecording(true);
+      };
+
+      recorder.onstop = () => {
+        setIsRecording(false);
+      };
+
+      recorder.onerror = () => {
+        notify('error', '녹화 중 오류 발생');
+      };
+
       mediaRecorder.current = recorder;
       setIsSetting(true);
-      setIsLoading(false);
     } catch (error) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      } else {
-        setErrorMessage(String(error));
+      notify('error', '미디어 접근 권한 거부 또는 미디어 장치에서 오류 발생');
+      setIsSetting(false);
+      stopLoading();
+    }
+  }, [appendMediaBlobUrl, stopLoading]);
+
+  useEffect(() => {
+    const initRecorder = async () => {
+      await getMediaPermission();
+      console.log('레코더 설정');
+      mediaRecorder.current?.start();
+      console.log('녹화 시작');
+    };
+
+    initRecorder();
+
+    return () => {
+      if (mediaRecorder.current && mediaRecorder.current.stream) {
+        console.log('녹화 및 레코더 종료');
+        mediaRecorder.current.stream
+          .getTracks()
+          .forEach((track) => track.stop());
+        mediaRecorder.current.stop();
       }
-    }
-  }, [appendMediaBlobUrl]);
-
-  const startRecording = useCallback(() => {
-    mediaRecorder.current?.start(1000);
-    setIsRecording(true);
-  }, []);
-
-  const stopRecording = useCallback(() => {
-    mediaRecorder.current?.stop();
-    setIsRecording(false);
-  }, []);
-
-  useEffect(() => {
-    if (errorMessage) {
-      notify('error', errorMessage);
-    }
-  }, [errorMessage]);
-
-  useEffect(() => {
-    getMediaPermission();
+    };
   }, [getMediaPermission]);
 
   useEffect(() => {
-    if (isSetting && !isRecording) {
-      startRecording();
+    if (!isRecording) {
+      return startLoading();
     }
-
-    return () => {
-      if (isSetting && isRecording) {
-        stopRecording();
-      }
-    };
-  }, [isRecording, isSetting, startRecording, stopRecording]);
+    stopLoading();
+  }, [isRecording, startLoading, stopLoading]);
 
   return {
     isSetting,
-    isLoading,
     isRecording,
     videoRef,
   };
