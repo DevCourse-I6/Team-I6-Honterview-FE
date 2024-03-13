@@ -6,18 +6,15 @@ import { getInterviewResult } from '@/libs/services/interview';
 
 import { IProps } from './types';
 
-// TODO: sangmin // 서버컴포넌트 api 로직 분리
-// TODO: sangmin // record, text 영상 처리
-// TODO: sangmin // Title => Question 으로 이름 변경
 // TODO: sangmin // 새로고침 메인으로 이동
 
 const InterviewResultPage = async ({ params }: IProps) => {
-  const { firstQuestionId } = params;
-  const firstQuestionIdAsNumber = Number(firstQuestionId);
+  const { interviewId } = params;
+  const interviewIdAsNumber = Number(interviewId);
 
   const {
     data: { questionsAndAnswers, answerType },
-  } = await getInterviewResult(firstQuestionIdAsNumber);
+  } = await getInterviewResult(interviewIdAsNumber);
 
   return (
     <div className="m-auto flex max-w-7xl flex-col gap-10">
@@ -29,7 +26,7 @@ const InterviewResultPage = async ({ params }: IProps) => {
         />
       ))}
       <div className="flex justify-center gap-20">
-        <ButtonWrapper firstQuestionId={firstQuestionIdAsNumber} />
+        <ButtonWrapper interviewId={interviewIdAsNumber} />
       </div>
     </div>
   );

@@ -1,6 +1,7 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
+import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -16,9 +17,6 @@ import { patchQuestion } from '@/libs/services/questions';
 
 import { IProps } from './types';
 
-// TODO: sangmin // input 포커싱 적용하기
-// TODO: sangmin // question 변경 후 데이터 최신화
-
 const UpdateQuestionModal = ({
   questionId,
   questionTitle,
@@ -26,16 +24,17 @@ const UpdateQuestionModal = ({
   updateModalVisible,
   toggleUpdateModalVisible,
   categories,
+  inputElement,
 }: IProps) => {
   const [selectedList, setSelectedList] = useState<AutocompleteDataType[]>(
-    categoryNames.map((category, index) => ({
-      id: index + 1,
+    categoryNames.map((category) => ({
+      id: categories.find(({ name }) => name === category)!.id!,
       name: category,
     })),
   );
-
+  const router = useRouter();
   const [titleInput, setTitleInput] = useState(questionTitle);
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: () =>
       patchQuestion(questionId, {
         content: titleInput,
@@ -43,6 +42,8 @@ const UpdateQuestionModal = ({
       }),
     onSuccess: () => {
       notify('success', '질문 수정 완료');
+      toggleUpdateModalVisible();
+      router.refresh();
     },
     onError: (error) => {
       notify('error', error.message);
@@ -58,6 +59,7 @@ const UpdateQuestionModal = ({
       <input
         onChange={(e) => setTitleInput(e.target.value)}
         value={titleInput}
+        ref={inputElement}
         placeholder={questionTitle}
         className=" mb-7 w-full appearance-none border-b-[1px] border-blue-300 bg-transparent px-5 py-2 text-extraLarge focus:border-b-primaries-active focus:outline-none"
       />
@@ -97,12 +99,13 @@ const UpdateQuestionModal = ({
       <div className="mt-[110px] flex gap-5">
         <Button
           className="w-1/2"
+          disabled={isPending}
           onClick={() => mutate()}
         >
           수정하기
         </Button>
         <Button
-          onClick={toggleUpdateModalVisible}
+          onClick={() => toggleUpdateModalVisible()}
           styleType={ButtonType.Type2}
           className="w-1/2"
         >

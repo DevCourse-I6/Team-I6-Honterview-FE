@@ -8,23 +8,27 @@ import { IProps } from './types';
 const TailQuestions = async ({ questionId }: IProps) => {
   const { data } = await getRandomQuestionsByCategories(questionId);
 
+  if (data.length === 0) return <></>;
   return (
-    <div>
-      <h3 className="mb-10 mt-5 text-[2.4rem] font-bold text-[#3C4654]">
-        이 질문의 꼬리 질문
-      </h3>
-      <ul className="flex flex-col gap-3 text-[1.8rem] font-light text-[#4e5968]">
-        {data.map(({ content, id }) => (
-          <li
-            key={uuidv4()}
-            className="w-fit cursor-pointer hover:font-medium"
-          >
-            <span className="mr-4 font-bold text-gray-950 opacity-30">Q</span>
-            <Link href={`/questions/${id}`}>{content}</Link>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <hr className="my-20" />
+      <div>
+        <h3 className="mb-10 mt-5 text-[2.4rem] font-bold text-[#3C4654]">
+          이 질문의 꼬리 질문
+        </h3>
+        <ul className="flex flex-col gap-3 text-[1.8rem] font-light text-[#4e5968]">
+          {data.map(({ content, id }) => (
+            <li
+              key={uuidv4()}
+              className="w-fit cursor-pointer hover:font-medium"
+            >
+              <span className="mr-4 font-bold text-gray-950 opacity-30">Q</span>
+              <Link href={`/questions/${id}`}>{content}</Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

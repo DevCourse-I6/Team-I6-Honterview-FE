@@ -1,5 +1,5 @@
 export interface IProps {
   params: {
-    firstQuestionId: string;
+    interviewId: string;
   };
 }
