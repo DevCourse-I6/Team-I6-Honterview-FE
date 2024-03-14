@@ -4,13 +4,13 @@ import { notify } from '@/components/toast';
 import { postTailQuestion, rePostTailQuestion } from '@/libs/actions/question';
 import {
   useInterview,
-  useLoadingStatus,
   useQuestionChangeCounter,
   useQuestionContent,
+  useSubmitStatus,
 } from '@/stores/interviewProgress';
 
 const useQuestionChange = () => {
-  const { startLoading, stopLoading } = useLoadingStatus();
+  const { startSubmit, stopSubmit } = useSubmitStatus();
   const { id, currentQuestionIndex, questionsAndAnswers } = useInterview();
   const { questionContent, setQuestionContent } = useQuestionContent();
   const [isPending, startTransition] = useTransition();
@@ -67,11 +67,11 @@ const useQuestionChange = () => {
 
   useEffect(() => {
     if (isPending) {
-      return startLoading();
+      return startSubmit();
     }
 
-    stopLoading();
-  }, [isPending, startLoading, stopLoading]);
+    stopSubmit();
+  }, [isPending, startSubmit, stopSubmit]);
 
   return { isPending, handleChangeQuestion };
 };

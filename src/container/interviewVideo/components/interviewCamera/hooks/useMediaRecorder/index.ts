@@ -4,15 +4,15 @@ import { notify } from '@/components/toast';
 import { useLoadingStatus, useMediaBlobUrl } from '@/stores/interviewProgress';
 
 export const useMediaRecorder = () => {
+  const [blob, setBlob] = useState<Blob[]>([]);
   const { startLoading, stopLoading } = useLoadingStatus();
-  const { appendMediaBlobUrl } = useMediaBlobUrl();
+  const { setMediaBlobUrl } = useMediaBlobUrl();
   const [isSetting, setIsSetting] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
 
   const getMediaPermission = useCallback(async () => {
-    setIsSetting(false);
     try {
       const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: true,
@@ -43,7 +43,7 @@ export const useMediaRecorder = () => {
           return;
         }
 
-        appendMediaBlobUrl(e.data);
+        setBlob((prev) => [...prev, e.data]);
       };
 
       recorder.onstart = () => {
@@ -53,10 +53,9 @@ export const useMediaRecorder = () => {
       mediaRecorder.current = recorder;
       setIsSetting(true);
     } catch (error) {
-      notify('error', '미디어 접근 권한 거부 또는 미디어 장치에서 오류 발생');
-      setIsSetting(false);
+      notify('error', '미디어 장치 권한 허용하여 다시 시도해주세요');
     }
-  }, [appendMediaBlobUrl]);
+  }, []);
 
   useEffect(() => {
     getMediaPermission();
@@ -72,7 +71,7 @@ export const useMediaRecorder = () => {
 
   useEffect(() => {
     if (isSetting && !isRecording) {
-      mediaRecorder.current?.start(100);
+      mediaRecorder.current?.start(500);
       setIsRecording(true);
     }
 
@@ -91,6 +90,10 @@ export const useMediaRecorder = () => {
 
     stopLoading();
   }, [isRecording, startLoading, stopLoading]);
+
+  useEffect(() => {
+    setMediaBlobUrl(blob);
+  }, [blob, setMediaBlobUrl]);
 
   return {
     isRecording,

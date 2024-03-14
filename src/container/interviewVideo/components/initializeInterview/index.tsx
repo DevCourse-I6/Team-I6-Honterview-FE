@@ -8,7 +8,6 @@ import {
   useAnswerContent,
   useInterview,
   useLoadingStatus,
-  useMediaBlobUrl,
   useQuestionChangeCounter,
   useQuestionContent,
   useSubmitStatus,
@@ -19,7 +18,6 @@ import { IProps } from './types';
 
 const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
   const { timer, questionCount, questionsAndAnswers, status } = interviewData;
-  const { setMediaBlobUrl } = useMediaBlobUrl();
   const { setInterview } = useInterview();
   const { stopSubmit } = useSubmitStatus();
   const { stopLoading } = useLoadingStatus();
@@ -60,8 +58,6 @@ const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
     });
     stopLoading();
     stopSubmit();
-    disableTimeout();
-    setMediaBlobUrl([]);
     stopLoading();
     stopSubmit();
     disableTimeout();
@@ -73,7 +69,6 @@ const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
     questionCount,
     questionsAndAnswers,
     timer,
-    setMediaBlobUrl,
     stopSubmit,
     stopLoading,
     disableTimeout,

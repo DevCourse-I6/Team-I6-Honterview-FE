@@ -9,7 +9,7 @@ const LoadingWrapper = () => {
   const { isSubmit } = useSubmitStatus();
 
   return (
-    <Modal visible={!isLoading || !isSubmit}>
+    <Modal visible={isLoading || isSubmit}>
       <div className="fit-wrap">
         <Loading />
       </div>
