@@ -58,6 +58,9 @@ const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
       questionsAndAnswers,
       currentQuestionIndex: currentIndex,
     });
+    stopLoading();
+    stopSubmit();
+    disableTimeout();
     setMediaBlobUrl([]);
     stopLoading();
     stopSubmit();
