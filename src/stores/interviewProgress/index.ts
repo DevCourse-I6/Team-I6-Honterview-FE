@@ -3,10 +3,13 @@ import { create } from 'zustand';
 import {
   IAnswerContentStore,
   IInterviewStore,
+  ILoadingStatusStore,
   IMediaBlobUrlStore,
   IProgressingTimeStore,
   IQuestionChangeCounterStore,
   IQuestionContentStore,
+  ISubmitStatusStore,
+  ITimeoutStore,
 } from './types';
 
 const useInterview = create<IInterviewStore>((set) => ({
@@ -54,11 +57,32 @@ const useQuestionChangeCounter = create<IQuestionChangeCounterStore>((set) => ({
     set(() => ({ questionChangeCounter: value })),
 }));
 
+const useTimeout = create<ITimeoutStore>((set) => ({
+  timeout: false,
+  enableTimeout: () => set({ timeout: true }),
+  disableTimeout: () => set({ timeout: false }),
+}));
+
+const useLoadingStatus = create<ILoadingStatusStore>((set) => ({
+  isLoading: false,
+  startLoading: () => set({ isLoading: true }),
+  stopLoading: () => set({ isLoading: false }),
+}));
+
+const useSubmitStatus = create<ISubmitStatusStore>((set) => ({
+  isSubmit: false,
+  startSubmit: () => set({ isSubmit: true }),
+  stopSubmit: () => set({ isSubmit: false }),
+}));
+
 export {
   useAnswerContent,
   useInterview,
+  useLoadingStatus,
   useMediaBlobUrl,
   useProgressingTime,
   useQuestionChangeCounter,
   useQuestionContent,
+  useSubmitStatus,
+  useTimeout,
 };
