@@ -8,7 +8,9 @@ import DataSection from './components/dataSection';
 import NavigationSection from './components/navigationSection';
 
 const ContentSection = () => {
-  const [activeMenu, setActiveMenu] = useState<'result' | 'bookmark'>('result');
+  const [activeMenu, setActiveMenu] = useState<'result' | 'bookmark'>(
+    'bookmark',
+  );
   const [currentPage, setCurrentPage] = useState(1);
   const [itemCount, setItemCount] = useState(10);
 

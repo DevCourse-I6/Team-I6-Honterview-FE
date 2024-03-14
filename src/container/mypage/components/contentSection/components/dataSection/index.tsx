@@ -35,11 +35,11 @@ const DataSection = ({ activeMenu }: DataSectionProps) => {
   }, [activeMenu]);
 
   return (
-    <div className="flex w-full flex-1 flex-col items-center gap-[1rem] p-[1rem] pb-[3rem] tablet:w-[50rem]">
+    <div className="flex w-full flex-1 flex-col items-center gap-[2rem] p-[1rem] pb-[3rem] tablet:w-[50rem]">
       {contents?.map((content) => {
         return (
           <div
-            className="flex w-full flex-col gap-[1rem] rounded-xl border border-dotted"
+            className={`flex w-full flex-col gap-[1rem] rounded-xl border border-gray-300 ${activeMenu === 'result' ? `border-dashed` : 'border-dotted'}`}
             key={uuidv4()}
           >
             {activeMenu === 'result' ? (

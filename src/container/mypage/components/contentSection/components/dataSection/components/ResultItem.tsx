@@ -10,7 +10,7 @@ const ResultItem = ({ id, title, categoryList, createdDate }: ContentType) => {
       className="flex flex-col p-[1rem]"
     >
       {createdDate && (
-        <div className="mb-[1rem] flex gap-[0.4rem] text-[1.8rem] laptop:text-[2rem]">
+        <div className="mb-[1rem] flex gap-[0.3rem] text-[1.8rem] laptop:text-[1.8rem]">
           <span className="font-semibold">
             {createdDate.slice(0, 4)}년 {createdDate.slice(5, 7)}월{' '}
             {createdDate.slice(8, 10)}일 {createdDate.slice(11, 16)}
