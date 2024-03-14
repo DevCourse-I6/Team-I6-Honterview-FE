@@ -1,0 +1,18 @@
+import { IResponseGetUserAuth } from '@/types/Response/auth';
+import { apiServer } from '@/utils/apiServer';
+
+import { reissueAccessToken } from '../actions/auth';
+
+export const getUserAuth = async (): Promise<IResponseGetUserAuth> => {
+  const response = await apiServer.get('api/v1/auth/me');
+
+  if (response.status === 401) {
+    return reissueAccessToken(() => getUserAuth());
+  }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
