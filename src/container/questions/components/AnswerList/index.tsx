@@ -22,7 +22,7 @@ const AnswerList = ({ initialData, questionId, isModalLoad }: IProps) => {
     initialData: { pages: [initialData], pageParams: [] },
     getNextPageParam: (lastPage, allPages) => {
       const nextPage = allPages.length + 1;
-      return lastPage.data.answers.hasNextPage ? undefined : nextPage;
+      return lastPage.data.answers.hasNextPage ? nextPage : undefined;
     },
     select: (selectData) => ({
       pages: selectData.pages.flatMap((page) => page.data.answers.data),
