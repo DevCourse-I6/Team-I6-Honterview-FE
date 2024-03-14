@@ -1,55 +1,61 @@
 'use server';
 
 import { IRequestInterviewForm } from '@/types/interview';
-import { apiClient } from '@/utils/apiClient';
+import {
+  IResponseGetUploadUrl,
+  IResponsePostInterview,
+} from '@/types/Response/interview';
+import { apiServer } from '@/utils/apiServer';
 
-export const getUploadUrl = async (interviewId: number) => {
-  try {
-    const response = await apiClient.get(
-      `api/v1/files/upload-url?interviewId=${interviewId}`,
-      {
-        cache: 'no-store',
-      },
-    );
+import { reissueAccessToken } from './auth';
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+export const getUploadUrl = async (
+  interviewId: number,
+): Promise<IResponseGetUploadUrl> => {
+  const response = await apiServer.get(
+    `api/v1/files/upload-url?interviewId=${interviewId}`,
+  );
 
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
-
-    throw new Error(String(error));
+  if (response.status === 401) {
+    return reissueAccessToken(() => getUploadUrl(interviewId));
   }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
 };
 
 export const postInterview = async (
   interviewId: number,
   interviewForm: IRequestInterviewForm,
-) => {
-  try {
-    const response = await apiClient.post(`api/v1/interviews/${interviewId}`, {
-      body: JSON.stringify(interviewForm),
-      cache: 'no-store',
-    });
+): Promise<IResponsePostInterview> => {
+  const response = await apiServer.post(`api/v1/interviews/${interviewId}`, {
+    body: JSON.stringify(interviewForm),
+  });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+  if (response.status === 401) {
+    return reissueAccessToken(() => postInterview(interviewId, interviewForm));
+  }
 
-    const data = await response.json();
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
+  return response.json();
+};
 
-    throw new Error(String(error));
+export const patchInterviewStatus = async (
+  interviewId: number,
+): Promise<void> => {
+  const response = await apiServer.patch(`api/v1/interviews/${interviewId}`);
+
+  if (response.status === 401) {
+    return reissueAccessToken(() => patchInterviewStatus(interviewId));
+  }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
 };
