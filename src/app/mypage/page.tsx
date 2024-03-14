@@ -5,9 +5,9 @@ import NickNameSection from '@/container/mypage/components/nickNameSection';
 const MyPage = () => {
   return (
     <>
-      <div className="wrap flex flex-col">
+      <div className="wrap flex flex-col items-center pt-[1rem]">
         <NickNameSection />
-        <div className="flex h-full flex-1 flex-col">
+        <div className="flex h-full flex-1 flex-col items-center">
           <ContentSection />
           <div className="flex justify-center">
             <LogoutSection />
