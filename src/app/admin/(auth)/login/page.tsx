@@ -7,19 +7,19 @@ import { useFormState, useFormStatus } from 'react-dom';
 import Button from '@/components/button';
 import Input from '@/components/input';
 import { notify } from '@/components/toast';
-import { signUpAdmin } from '@/libs/actions/auth';
+import { logInAdmin } from '@/libs/actions/auth';
 
-const AdminSignUpPage = () => {
+const AdminLogInPage = () => {
   const router = useRouter();
   const { pending } = useFormStatus();
-  const [state, formAction] = useFormState(signUpAdmin, {
+  const [state, formAction] = useFormState(logInAdmin, {
     status: 0,
     message: '',
   });
 
   useEffect(() => {
     if (state.status === 0) return;
-    if (state.status === 'ok') router.push('/login');
+    if (state.status === 'ok') router.push('/');
     else {
       notify('info', state.message);
     }
@@ -30,22 +30,6 @@ const AdminSignUpPage = () => {
         className="space-y-6"
         action={formAction}
       >
-        <div>
-          <label
-            htmlFor="username"
-            className=" text-medium font-medium text-gray-700"
-          >
-            Username
-          </label>
-          <Input className="w-full">
-            <Input.Text
-              type="text"
-              name="username"
-              id="username"
-              required
-            />
-          </Input>
-        </div>
         <div>
           <label
             htmlFor="email"
@@ -84,7 +68,7 @@ const AdminSignUpPage = () => {
             aria-disabled={pending}
             className="w-full"
           >
-            관리자 회원가입
+            관리자 로그인
           </Button>
         </div>
       </form>
@@ -92,4 +76,4 @@ const AdminSignUpPage = () => {
   );
 };
 
-export default AdminSignUpPage;
+export default AdminLogInPage;

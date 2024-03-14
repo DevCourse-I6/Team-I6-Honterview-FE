@@ -44,3 +44,28 @@ export const signUpAdmin = async (_: IAdminAuthState, formData: FormData) => {
     message: data.data,
   };
 };
+
+export const logInAdmin = async (_: IAdminAuthState, formData: FormData) => {
+  const logInData = {
+    email: formData.get('email'),
+    password: formData.get('password'),
+  };
+
+  const response = await apiServer.post('api/v1/auth/admin/login', {
+    body: JSON.stringify(logInData),
+  });
+
+  const data = await response.json();
+
+  if (!response.ok) {
+    return {
+      status: response.status,
+      message: data.errorMessage,
+    };
+  }
+
+  return {
+    status: 'ok',
+    message: data.data,
+  };
+};
