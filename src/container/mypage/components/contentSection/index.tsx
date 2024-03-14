@@ -2,23 +2,38 @@
 
 import { useState } from 'react';
 
-import DividerHorizontal from '@/components/dividerHorizontal';
+import Pagination from '@/components/pagination';
 
+import DataSection from './components/dataSection';
 import NavigationSection from './components/navigationSection';
 
 const ContentSection = () => {
   const [activeMenu, setActiveMenu] = useState<'result' | 'bookmark'>('result');
-  //   const [currentPage, setCurrentPage] = useState(1);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemCount, setItemCount] = useState(10);
 
   return (
-    <>
+    <div className="flex flex-col items-center pb-[3rem]">
       <NavigationSection
         activeMenu={activeMenu}
-        onClick={(menu) => setActiveMenu(menu)}
+        onClick={setActiveMenu}
       />
-      <DividerHorizontal />
-      {/* <Pagination /> */}
-    </>
+      <DataSection
+        activeMenu={activeMenu}
+        onFetchData={setItemCount}
+        currentPage={currentPage}
+      />
+      <Pagination
+        defaultPage={1}
+        limit={5}
+        total={itemCount}
+        onPageChange={setCurrentPage}
+      >
+        <Pagination.PrevButton className="w-[1rem]" />
+        <Pagination.PageButtons className="h-[3rem] min-w-[3rem] py-0" />
+        <Pagination.NextButton />
+      </Pagination>
+    </div>
   );
 };
 
