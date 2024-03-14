@@ -1,21 +1,19 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { notify } from '@/components/toast';
-import { useMediaBlobUrl } from '@/stores/interviewProgress';
+import { useLoadingStatus, useMediaBlobUrl } from '@/stores/interviewProgress';
 
 export const useMediaRecorder = () => {
+  const { startLoading, stopLoading } = useLoadingStatus();
   const { appendMediaBlobUrl } = useMediaBlobUrl();
-  const [isLoading, setIsLoading] = useState(false);
   const [isSetting, setIsSetting] = useState(false);
   const [isRecording, setIsRecording] = useState(false);
-  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
   const mediaRecorder = useRef<MediaRecorder | null>(null);
 
   const getMediaPermission = useCallback(async () => {
+    setIsSetting(false);
     try {
-      setIsSetting(false);
-      setIsLoading(true);
       const audioStream = await navigator.mediaDevices.getUserMedia({
         audio: true,
       });
@@ -48,53 +46,53 @@ export const useMediaRecorder = () => {
         appendMediaBlobUrl(e.data);
       };
 
+      recorder.onstart = () => {
+        notify('success', '녹화 기능 활성화');
+      };
+
       mediaRecorder.current = recorder;
       setIsSetting(true);
-      setIsLoading(false);
     } catch (error) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message);
-      } else {
-        setErrorMessage(String(error));
-      }
+      notify('error', '미디어 접근 권한 거부 또는 미디어 장치에서 오류 발생');
+      setIsSetting(false);
     }
   }, [appendMediaBlobUrl]);
 
-  const startRecording = useCallback(() => {
-    mediaRecorder.current?.start(1000);
-    setIsRecording(true);
-  }, []);
-
-  const stopRecording = useCallback(() => {
-    mediaRecorder.current?.stop();
-    setIsRecording(false);
-  }, []);
-
-  useEffect(() => {
-    if (errorMessage) {
-      notify('error', errorMessage);
-    }
-  }, [errorMessage]);
-
   useEffect(() => {
     getMediaPermission();
+
+    return () => {
+      if (mediaRecorder.current && mediaRecorder.current.stream) {
+        mediaRecorder.current.stream
+          .getTracks()
+          .forEach((track) => track.stop());
+      }
+    };
   }, [getMediaPermission]);
 
   useEffect(() => {
     if (isSetting && !isRecording) {
-      startRecording();
+      mediaRecorder.current?.start(100);
+      setIsRecording(true);
     }
 
     return () => {
       if (isSetting && isRecording) {
-        stopRecording();
+        mediaRecorder.current?.stop();
+        setIsRecording(false);
       }
     };
-  }, [isRecording, isSetting, startRecording, stopRecording]);
+  }, [isSetting, isRecording]);
+
+  useEffect(() => {
+    if (!isRecording) {
+      return startLoading();
+    }
+
+    stopLoading();
+  }, [isRecording, startLoading, stopLoading]);
 
   return {
-    isSetting,
-    isLoading,
     isRecording,
     videoRef,
   };
