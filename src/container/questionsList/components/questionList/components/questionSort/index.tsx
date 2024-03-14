@@ -1,9 +1,8 @@
-import { useState } from 'react';
-
 import Select from '@/components/select';
 
-const QuestionSort = () => {
-  const [listSort, setListSort] = useState('최신순');
+import { QuestionSortProps } from '../../types';
+
+const QuestionSort = ({ listSort, setListSort }: QuestionSortProps) => {
   return (
     <div className="flex justify-end">
       <Select
