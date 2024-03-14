@@ -4,12 +4,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { getMyBookmarkQuestions } from '@/services/mypage';
 
 import BookmarkItem from './components/BookmarkItem';
+import { MyPageBookmarkDataSectionProps, MyPageBookmarkDataType } from './type';
 
 const BookmarkSection = ({
   setItemCount,
   currentPage,
   isVisible,
-}: DataSectionProps) => {
+}: MyPageBookmarkDataSectionProps) => {
   const [bookmarkDatas, setBookmarkDatas] = useState<
     MyPageBookmarkDataType[] | null
   >(null);
