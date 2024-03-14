@@ -15,7 +15,7 @@ const ContentSection = () => {
   const [itemCount, setItemCount] = useState(10);
 
   return (
-    <div className="flex flex-col items-center pb-[3rem]">
+    <div className="flex flex-col items-center">
       <NavigationSection
         activeMenu={activeMenu}
         onClick={setActiveMenu}

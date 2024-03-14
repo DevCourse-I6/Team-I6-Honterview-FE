@@ -7,9 +7,9 @@ const MyPage = () => {
     <>
       <div className="wrap flex flex-col items-center pt-[1rem]">
         <NickNameSection />
-        <div className="flex h-full flex-1 flex-col items-center">
+        <div className="flex h-full flex-1 flex-col items-center gap-[4rem]">
           <ContentSection />
-          <div className="flex justify-center">
+          <div className="mb-[2rem] flex justify-center">
             <LogoutSection />
           </div>
         </div>
