@@ -10,6 +10,12 @@ const useSpeechToText = () => {
   const [speechRecognition, setSpeechRecognition] =
     useState<SpeechRecognition | null>(null);
 
+  const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+
+    setAnswerContent(value);
+  };
+
   const startListening = useCallback(() => {
     if (speechRecognition && !listening) {
       setTranscript('');
@@ -23,12 +29,6 @@ const useSpeechToText = () => {
       speechRecognition.stop();
     }
   }, [speechRecognition, listening]);
-
-  const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
-    const { value } = e.target;
-
-    setAnswerContent(value);
-  };
 
   useEffect(() => {
     if (!('webkitSpeechRecognition' in window)) {
@@ -79,6 +79,12 @@ const useSpeechToText = () => {
       stopListening();
     };
   }, [startListening, stopListening]);
+
+  useEffect(() => {
+    if (speechRecognition) {
+      notify('success', '음성 인식 활성화');
+    }
+  }, [speechRecognition]);
 
   return { answerContent, listening, handleTextChange };
 };
