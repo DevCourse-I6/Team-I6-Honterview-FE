@@ -7,6 +7,7 @@ export { default as ArrowUpPrimaryIcon } from './svg/ArrowUpPrimary.svg';
 export { default as ArrowUpSecondaryIcon } from './svg/ArrowUpSecondary.svg';
 export { default as SearchIcon } from './svg/AutocompleteSearch.svg';
 export { default as BookmarkIcon } from './svg/Bookmark.svg';
+export { default as BookmarkSimpleIcon } from './svg/BookmarkSimple.svg';
 export { default as DisabledCamera } from './svg/disabledCamera.svg';
 export { default as DownLoadIcon } from './svg/DownLoad.svg';
 export { default as ErrorIcon } from './svg/Error.svg';
