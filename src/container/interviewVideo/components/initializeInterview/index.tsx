@@ -1,38 +1,45 @@
 'use client';
 
+import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
+import { notify } from '@/components/toast';
 import {
   useAnswerContent,
   useInterview,
+  useLoadingStatus,
   useMediaBlobUrl,
   useQuestionChangeCounter,
   useQuestionContent,
+  useSubmitStatus,
+  useTimeout,
 } from '@/stores/interviewProgress';
 
 import { IProps } from './types';
 
 const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
-  const { timer, questionCount, questionsAndAnswers } = interviewData;
+  const { timer, questionCount, questionsAndAnswers, status } = interviewData;
+  const { setMediaBlobUrl } = useMediaBlobUrl();
   const { setInterview } = useInterview();
+  const { stopSubmit } = useSubmitStatus();
+  const { stopLoading } = useLoadingStatus();
+  const { disableTimeout } = useTimeout();
   const { setQuestionContent } = useQuestionContent();
   const { setAnswerContent } = useAnswerContent();
-  const { setMediaBlobUrl } = useMediaBlobUrl();
   const { setQuestionChangeCounter } = useQuestionChangeCounter();
+  const router = useRouter();
 
   useEffect(() => {
     const { length } = questionsAndAnswers;
-    const lastQuestion =
-      questionsAndAnswers[length - 1].questionContent ?? undefined;
-    const lastAnswer =
-      questionsAndAnswers[length - 1].answerContent ?? undefined;
+    const lastQuestion = questionsAndAnswers[length - 1].questionContent;
+    const lastAnswer = questionsAndAnswers[length - 1].answerContent;
     let currentIndex = 0;
 
-    if (lastQuestion && !lastAnswer) {
+    if (lastQuestion && lastAnswer === null) {
       currentIndex = length - 1;
     }
 
-    if (lastQuestion && lastAnswer) {
+    if (lastQuestion && lastAnswer !== null) {
       if (length + 1 <= questionCount) {
         currentIndex = length;
       }
@@ -52,6 +59,9 @@ const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
       currentQuestionIndex: currentIndex,
     });
     setMediaBlobUrl([]);
+    stopLoading();
+    stopSubmit();
+    disableTimeout();
     setQuestionChangeCounter(0);
     setQuestionContent(question);
     setAnswerContent(answer);
@@ -59,13 +69,23 @@ const InitializeInterview = ({ interviewId, interviewData }: IProps) => {
     interviewId,
     questionCount,
     questionsAndAnswers,
+    timer,
+    setMediaBlobUrl,
+    stopSubmit,
+    stopLoading,
+    disableTimeout,
     setAnswerContent,
     setInterview,
-    setMediaBlobUrl,
     setQuestionChangeCounter,
     setQuestionContent,
-    timer,
   ]);
+
+  useEffect(() => {
+    if (status === 'COMPLETED') {
+      notify('info', '이미 종료된 면접 입니다');
+      router.back();
+    }
+  }, [router, status]);
 
   return null;
 };
