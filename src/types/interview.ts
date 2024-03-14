@@ -5,13 +5,14 @@ export interface IInterview {
   timer: number;
   answerType: string;
   questionCount: number;
+  videoId: number;
   questionsAndAnswers: IQuestion[];
-  categories: string[];
+  status: string;
+  categoryNames: string[];
 }
 
 export interface IRequestInterviewForm {
   questionContent: string;
   answerContent: string;
-  videoId: number;
   processingTime: number;
 }

@@ -3,5 +3,5 @@ export interface IQuestion {
   questionContent: string;
   answerId: number;
   answerContent: string;
-  progressingTime: number;
+  processingTime: number;
 }
