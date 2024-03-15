@@ -3,16 +3,21 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { BookmarkSimpleIcon } from '@/components/icon';
+import { clickQuestionBookmark } from '@/libs/services/questions';
 
-import { ContentType } from '../type';
+import { MyPageBookmarkDataType } from '../type';
 
-const BookmarkItem = ({ id, title, categoryList }: ContentType) => {
+const BookmarkItem = ({
+  id,
+  content: title,
+  categoryNames: categoryList,
+}: MyPageBookmarkDataType) => {
   const [isBookmarked, setIsBookmarked] = useState(true);
   const route = useRouter();
-
   const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsBookmarked((state) => !state);
+    clickQuestionBookmark(id);
   };
 
   return (
@@ -23,7 +28,7 @@ const BookmarkItem = ({ id, title, categoryList }: ContentType) => {
     >
       <div className="flex flex-col gap-[0.8rem] rounded-lg">
         <div className="flex gap-[1rem]">
-          {categoryList.map((category) => (
+          {categoryList?.map((category) => (
             <div
               key={uuidv4()}
               className="inline-flex items-center justify-center gap-1 rounded-lg bg-background-20 px-[1rem] py-[0.5rem] text-[1rem] text-black tablet:text-[1.2rem]"

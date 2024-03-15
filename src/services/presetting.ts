@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import { apiClient } from '@/utils/apiClient';
 
-type PresettingMehodType = 'GET' | 'POST' | 'PATCH' | 'DELETE';
+type MethodType = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 interface CreateInterviewByChatProps {
   questionCount: number;
@@ -15,7 +15,7 @@ interface CreateInterviewByVideoProps {
 }
 
 export const presettingAPI = async (
-  method: PresettingMehodType,
+  method: MethodType,
   url: string,
   options?: RequestInit,
 ) => {

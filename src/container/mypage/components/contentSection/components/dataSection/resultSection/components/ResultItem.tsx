@@ -1,9 +1,14 @@
 import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 
-import { ContentType } from '../type';
+import { MyPageResultDataType } from '../type';
 
-const ResultItem = ({ id, title, categoryList, createdDate }: ContentType) => {
+const ResultItem = ({
+  interviewId: id,
+  firstQuestionContent: title,
+  categoryNames: categoryList,
+  createdAt: createdDate,
+}: MyPageResultDataType) => {
   return (
     <Link
       href={`/interview/result/${id}`}
@@ -20,7 +25,7 @@ const ResultItem = ({ id, title, categoryList, createdDate }: ContentType) => {
       )}
       <div className="flex flex-col gap-[0.8rem] rounded-lg bg-slate-50 p-[1rem]">
         <div className="flex gap-[1rem]">
-          {categoryList.map((category) => (
+          {categoryList?.map((category) => (
             <div
               key={uuidv4()}
               className="inline-flex items-center justify-center gap-1 rounded-lg bg-background-20 px-[1rem] py-[0.5rem] text-[1rem] text-black tablet:text-[1.2rem]"

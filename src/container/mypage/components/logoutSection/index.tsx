@@ -1,8 +1,13 @@
+'use client';
+
+import { logoutAPI } from '@/services/mypage';
+
 const LogoutSection = () => {
   return (
     <button
       type="button"
-      className="mb-[1rem] text-[1.5rem] text-text-40"
+      className="text-[1.5rem] text-text-40"
+      onClick={() => logoutAPI()}
     >
       로그아웃
     </button>
