@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import { BookmarkSimpleIcon } from '@/components/icon';
-import { toggleBookmarkQuestion } from '@/services/mypage';
+import { clickQuestionBookmark } from '@/libs/services/questions';
 
 import { MyPageBookmarkDataType } from '../type';
 
@@ -17,7 +17,7 @@ const BookmarkItem = ({
   const handleBookmarkClick = (e: React.MouseEvent<HTMLButtonElement>) => {
     e.stopPropagation();
     setIsBookmarked((state) => !state);
-    toggleBookmarkQuestion(id);
+    clickQuestionBookmark(id);
   };
 
   return (
