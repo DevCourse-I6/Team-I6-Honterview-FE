@@ -38,7 +38,7 @@ const ContentSection = () => {
           limit={10}
           total={bookmarkItemCount}
           onPageChange={setCurrentBookmarkPage}
-          className={`${(!isBookmarkOn || !bookmarkItemCount) && 'hidden'} `}
+          className={`${(!isBookmarkOn || !bookmarkItemCount) && 'hidden'} gap-[1rem] tablet:gap-6`}
         >
           <Pagination.PrevButton className="w-[1rem]" />
           <Pagination.PageButtons className="h-[3rem] min-w-[3rem] py-0" />
@@ -53,10 +53,10 @@ const ContentSection = () => {
         />
         <Pagination
           defaultPage={currentResultPage}
-          limit={5}
+          limit={10}
           total={resultItemCount}
           onPageChange={setCurrentResultPage}
-          className={`${(!isResultOn || !resultItemCount) && 'hidden'}`}
+          className={`${(!isResultOn || !resultItemCount) && 'hidden'} gap-[0.5rem] tablet:gap-6`}
         >
           <Pagination.PrevButton className="w-[1rem]" />
           <Pagination.PageButtons className="h-[3rem] min-w-[3rem] py-0" />

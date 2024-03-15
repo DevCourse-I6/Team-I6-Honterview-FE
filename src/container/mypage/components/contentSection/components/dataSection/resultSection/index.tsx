@@ -24,7 +24,7 @@ const ResultSection = ({
 
   return (
     <div
-      className={`flex w-full flex-1 flex-col items-center gap-[2rem] p-[1rem] pb-[3rem] tablet:w-[50rem] ${!isVisible && 'hidden'}`}
+      className={`flex w-screen flex-1 flex-col items-center gap-[2rem] p-[1rem] pb-[3rem] tablet:w-[50rem] ${!isVisible && 'hidden'}`}
     >
       {resultDatas?.map((content) => (
         <div
