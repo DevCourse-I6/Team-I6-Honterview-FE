@@ -14,12 +14,12 @@ const ContentSection = () => {
   );
   const [currentBookmarkPage, setCurrentBookmarkPage] = useState(1);
   const [currentResultPage, setCurrentResultPage] = useState(1);
+
   const [bookmarkItemCount, setBookmarkItemCount] = useState(0);
   const [resultItemCount, setResultItemCount] = useState(0);
 
-  const isPaginationVisible =
-    (activeMenu === 'bookmark' && bookmarkItemCount) ||
-    (activeMenu === 'result' && resultItemCount);
+  const isBookmarkOn = activeMenu === 'bookmark';
+  const isResultOn = activeMenu === 'result';
 
   return (
     <div className="flex flex-col items-center">
@@ -27,35 +27,42 @@ const ContentSection = () => {
         activeMenu={activeMenu}
         onClick={setActiveMenu}
       />
-
-      <BookmarkSection
-        setItemCount={setBookmarkItemCount}
-        currentPage={currentBookmarkPage}
-        isVisible={activeMenu === 'bookmark'}
-      />
-      <ResultSection
-        setItemCount={setResultItemCount}
-        currentPage={currentResultPage}
-        isVisible={activeMenu === 'result'}
-      />
-      {isPaginationVisible && (
+      <>
+        <BookmarkSection
+          setItemCount={setBookmarkItemCount}
+          currentPage={currentBookmarkPage}
+          isVisible={isBookmarkOn}
+        />
         <Pagination
-          defaultPage={1}
-          limit={activeMenu === 'bookmark' ? 10 : 5}
-          total={
-            activeMenu === 'bookmark' ? bookmarkItemCount : resultItemCount
-          }
-          onPageChange={
-            activeMenu === 'bookmark'
-              ? setCurrentBookmarkPage
-              : setCurrentResultPage
-          }
+          defaultPage={currentBookmarkPage}
+          limit={10}
+          total={bookmarkItemCount}
+          onPageChange={setCurrentBookmarkPage}
+          className={`${(!isBookmarkOn || !bookmarkItemCount) && 'hidden'} `}
         >
           <Pagination.PrevButton className="w-[1rem]" />
           <Pagination.PageButtons className="h-[3rem] min-w-[3rem] py-0" />
           <Pagination.NextButton />
         </Pagination>
-      )}
+      </>
+      <>
+        <ResultSection
+          setItemCount={setResultItemCount}
+          currentPage={currentResultPage}
+          isVisible={isResultOn}
+        />
+        <Pagination
+          defaultPage={currentResultPage}
+          limit={5}
+          total={resultItemCount}
+          onPageChange={setCurrentResultPage}
+          className={`${(!isResultOn || !resultItemCount) && 'hidden'}`}
+        >
+          <Pagination.PrevButton className="w-[1rem]" />
+          <Pagination.PageButtons className="h-[3rem] min-w-[3rem] py-0" />
+          <Pagination.NextButton />
+        </Pagination>
+      </>
     </div>
   );
 };
