@@ -1,35 +1,10 @@
-'use client';
-
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
-import { useFormState, useFormStatus } from 'react-dom';
-
-import Button from '@/components/button';
 import Input from '@/components/input';
-import { notify } from '@/components/toast';
-import { signUpAdmin } from '@/libs/actions/auth';
+import SubmitButton from '@/container/admin/SubmitButton';
 
 const AdminSignUpPage = () => {
-  const router = useRouter();
-  const { pending } = useFormStatus();
-  const [state, formAction] = useFormState(signUpAdmin, {
-    status: 0,
-    message: '',
-  });
-
-  useEffect(() => {
-    if (state.status === 0) return;
-    if (state.status === 'ok') router.push('/login');
-    else {
-      notify('info', state.message);
-    }
-  }, [state, router]);
   return (
     <div className="w-[500px]">
-      <form
-        className="space-y-6"
-        action={formAction}
-      >
+      <form className="space-y-6">
         <div>
           <label
             htmlFor="username"
@@ -79,13 +54,7 @@ const AdminSignUpPage = () => {
           </Input>
         </div>
         <div>
-          <Button
-            type="submit"
-            aria-disabled={pending}
-            className="w-full"
-          >
-            관리자 회원가입
-          </Button>
+          <SubmitButton authType="signup" />
         </div>
       </form>
     </div>
