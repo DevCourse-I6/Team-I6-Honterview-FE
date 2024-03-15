@@ -13,3 +13,12 @@ export interface QuestionTagProps {
 export interface QuestionTitleProps {
   content: string;
 }
+export interface QuestionSortProps {
+  listSort: string;
+  setListSort: (listSort: string) => void;
+}
+export interface QuestionPageinationProps {
+  totalSize: number;
+  nowPage: number;
+  setNowPage: (page: number) => void;
+}

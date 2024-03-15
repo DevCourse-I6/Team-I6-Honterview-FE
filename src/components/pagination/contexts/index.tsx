@@ -2,7 +2,7 @@
 
 'use client';
 
-import { createContext, useState } from 'react';
+import { createContext, useEffect, useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { IPaginationContext, IPaginationProviderProps } from './types';
@@ -25,6 +25,10 @@ export const PaginationProvider = ({
 }: IPaginationProviderProps) => {
   const [currentPage, setCurrentPage] = useState(defaultPage);
   const totalPages = Math.ceil(total / limit);
+
+  useEffect(() => {
+    setCurrentPage(defaultPage);
+  }, [defaultPage]);
 
   const handleSelectPage = (newPage: number) => {
     onPageChange(newPage);

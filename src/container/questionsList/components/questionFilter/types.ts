@@ -13,7 +13,7 @@ export interface FilterInputProps {
   handleTagClick: (tag: string) => void;
   filteredData: {
     name: string;
-    id: string;
+    id: number;
   }[];
 }
 
@@ -25,7 +25,7 @@ export interface ToggleProps {
 export interface UnSelectedTagsProps {
   filteredData: {
     name: string;
-    id: string;
+    id: number;
   }[];
   handleTagClick: (name: string) => void;
 }

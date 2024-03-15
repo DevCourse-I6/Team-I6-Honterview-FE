@@ -4,6 +4,6 @@ export interface ICategories {
 }
 
 export interface ICategorie {
-  id: string;
+  id: number;
   name: string;
 }
