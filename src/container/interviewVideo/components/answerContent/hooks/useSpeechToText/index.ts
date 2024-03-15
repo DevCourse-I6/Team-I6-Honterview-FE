@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { ChangeEvent, useCallback, useEffect, useState } from 'react';
 
 import { notify } from '@/components/toast';
 import { useAnswerContent } from '@/stores/interviewProgress';
@@ -9,6 +9,12 @@ const useSpeechToText = () => {
   const [listening, setListening] = useState(false);
   const [speechRecognition, setSpeechRecognition] =
     useState<SpeechRecognition | null>(null);
+
+  const handleTextChange = (e: ChangeEvent<HTMLTextAreaElement>) => {
+    const { value } = e.target;
+
+    setAnswerContent(value);
+  };
 
   const startListening = useCallback(() => {
     if (speechRecognition && !listening) {
@@ -74,7 +80,13 @@ const useSpeechToText = () => {
     };
   }, [startListening, stopListening]);
 
-  return { answerContent, listening };
+  useEffect(() => {
+    if (speechRecognition) {
+      notify('success', '음성 인식 활성화');
+    }
+  }, [speechRecognition]);
+
+  return { answerContent, listening, handleTextChange };
 };
 
 export default useSpeechToText;

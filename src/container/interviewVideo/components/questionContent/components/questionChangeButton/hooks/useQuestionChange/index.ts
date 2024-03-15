@@ -1,53 +1,77 @@
-import { useCallback, useEffect, useState, useTransition } from 'react';
+import { useCallback, useEffect, useTransition } from 'react';
 
 import { notify } from '@/components/toast';
+import { postTailQuestion, rePostTailQuestion } from '@/libs/actions/question';
 import {
-  changeQuestionByAnswer,
-  changeQuestionByCategories,
-} from '@/libs/actions/question';
-import { useInterview, useQuestionContent } from '@/stores/interviewProgress';
+  useInterview,
+  useQuestionChangeCounter,
+  useQuestionContent,
+  useSubmitStatus,
+} from '@/stores/interviewProgress';
 
 const useQuestionChange = () => {
-  const { questions, categories } = useInterview();
+  const { startSubmit, stopSubmit } = useSubmitStatus();
+  const { id, currentQuestionIndex, questionsAndAnswers } = useInterview();
   const { questionContent, setQuestionContent } = useQuestionContent();
   const [isPending, startTransition] = useTransition();
-  const [changeCounter, setChangeCounter] = useState(-1);
+  const { questionChangeCounter, increaseQuestionChangeCounter } =
+    useQuestionChangeCounter();
 
   const handleChangeQuestion = useCallback(() => {
-    if (questions.length === 0) {
+    if (currentQuestionIndex === 0) {
       return notify('warning', '첫 질문은 변경이 불가능 합니다');
     }
 
-    if (changeCounter >= 1) {
+    if (questionChangeCounter >= 1) {
       return notify('warning', '질문 변경은 최대 1회 입니다.');
     }
 
-    const { answerContent } = questions[questions.length - 1];
+    const { questionContent: prevQuestion, answerContent: prevAnswer } =
+      questionsAndAnswers[currentQuestionIndex - 1];
 
-    if (answerContent) {
+    if (questionContent !== '') {
       startTransition(async () => {
-        const { data } = await changeQuestionByAnswer(answerContent);
+        const { data } = await rePostTailQuestion(id, prevQuestion);
 
-        setQuestionContent(data.questionContent);
-        setChangeCounter((prev) => prev + 1);
+        increaseQuestionChangeCounter();
+        setQuestionContent(data.tailQuestionContent);
       });
     }
 
-    if (!answerContent) {
+    if (questionContent === '') {
       startTransition(async () => {
-        const { data } = await changeQuestionByCategories(categories);
+        const { data } = await postTailQuestion(
+          id,
+          prevQuestion,
+          prevAnswer || prevQuestion,
+        );
 
-        setQuestionContent(data.questionContent);
-        setChangeCounter((prev) => prev + 1);
+        setQuestionContent(data.tailQuestionContent);
       });
     }
-  }, [categories, changeCounter, questions, setQuestionContent]);
+  }, [
+    currentQuestionIndex,
+    id,
+    increaseQuestionChangeCounter,
+    questionChangeCounter,
+    questionContent,
+    questionsAndAnswers,
+    setQuestionContent,
+  ]);
 
   useEffect(() => {
-    if (questions.length !== 0 && !questionContent) {
+    if (questionContent === '') {
       handleChangeQuestion();
     }
-  }, [handleChangeQuestion, questionContent, questions.length]);
+  }, [questionContent, handleChangeQuestion]);
+
+  useEffect(() => {
+    if (isPending) {
+      return startSubmit();
+    }
+
+    stopSubmit();
+  }, [isPending, startSubmit, stopSubmit]);
 
   return { isPending, handleChangeQuestion };
 };

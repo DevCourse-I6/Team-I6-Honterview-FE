@@ -25,7 +25,7 @@ const Modal = ({
     const { target, currentTarget } = e;
 
     if (target === currentTarget) {
-      onClose();
+      onClose && onClose();
     }
   };
 
@@ -38,7 +38,7 @@ const Modal = ({
       const { key } = e;
 
       if (key === 'Escape') {
-        onClose();
+        onClose && onClose();
       }
     };
 

@@ -4,5 +4,4 @@ export interface IQuestion {
   answerId: number;
   answerContent: string;
   processingTime: number;
-  videoId: number;
 }

@@ -1,11 +1,11 @@
 import { IQuestion } from '@/types/question';
 
 export interface IInterviewStore {
-  id: string;
+  id: number;
   questionCount: number;
   limitTimer: number;
-  questions: IQuestion[];
-  categories: string[];
+  questionsAndAnswers: IQuestion[];
+  currentQuestionIndex: number;
   setInterview: (partial: Partial<IInterviewStore>) => void;
 }
 
@@ -20,16 +20,41 @@ export interface IProgressingTimeStore {
 }
 
 export interface IQuestionContentStore {
-  questionContent: string;
+  questionContent: string | null;
   setQuestionContent: (content: string) => void;
 }
 
 export interface IAnswerContentStore {
-  answerContent: string;
+  answerContent: string | null;
   setAnswerContent: (content: string) => void;
 }
 
 export interface IMediaBlobUrlStore {
-  mediaBlobUrl: string;
-  setMediaBlobUrl: (url: string) => void;
+  mediaBlobUrl: Blob[];
+  setMediaBlobUrl: (videoChunks: Blob[]) => void;
+  appendMediaBlobUrl: (newVideoChunk: Blob) => void;
+}
+
+export interface IQuestionChangeCounterStore {
+  questionChangeCounter: number;
+  increaseQuestionChangeCounter: () => void;
+  setQuestionChangeCounter: (value: number) => void;
+}
+
+export interface ITimeoutStore {
+  timeout: boolean;
+  enableTimeout: () => void;
+  disableTimeout: () => void;
+}
+
+export interface ILoadingStatusStore {
+  isLoading: boolean;
+  startLoading: () => void;
+  stopLoading: () => void;
+}
+
+export interface ISubmitStatusStore {
+  isSubmit: boolean;
+  startSubmit: () => void;
+  stopSubmit: () => void;
 }

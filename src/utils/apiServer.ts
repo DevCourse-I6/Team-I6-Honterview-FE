@@ -1,9 +1,9 @@
-// eslint-disable-next-line
+// eslint-disable-next-line @typescript-eslint/no-var-requires
 const headers = require('next/headers');
 
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-const getAccessToken = () => {
+export const getAccessToken = () => {
   return headers.cookies().get('accessToken') || '';
 };
 

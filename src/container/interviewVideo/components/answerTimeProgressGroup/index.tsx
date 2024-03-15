@@ -2,28 +2,41 @@
 
 import { v4 as uuidv4 } from 'uuid';
 
-import { useInterview } from '@/stores/interviewProgress';
+import {
+  useInterview,
+  useLoadingStatus,
+  useSubmitStatus,
+} from '@/stores/interviewProgress';
 
 import AnswerTimeProgress from './components/answerTimeProgress';
 
 const AnswerTimeProgressGroup = () => {
-  const { questionCount, questions } = useInterview();
+  const {
+    currentQuestionIndex,
+    questionCount,
+    questionsAndAnswers,
+    limitTimer,
+  } = useInterview();
+  const { isLoading } = useLoadingStatus();
+  const { isSubmit } = useSubmitStatus();
   const progressArray = Array.from(
     { length: questionCount },
-    (_, index) => questions[index] && questions[index].processingTime,
+    (_, index) =>
+      questionsAndAnswers[index] && questionsAndAnswers[index].processingTime,
   );
 
   return (
     <ul className="flex h-[1rem] gap-1">
-      {progressArray.map((progressingTime, index) => {
-        const defaultTime = progressingTime || 0;
-        const enabled = questions.length === index;
+      {progressArray.map((processingTime, index) => {
+        const defaultTime = processingTime || 0;
+        const enabled =
+          currentQuestionIndex === index && processingTime !== limitTimer;
 
         return (
           <AnswerTimeProgress
             key={uuidv4()}
             defaultTime={defaultTime}
-            enabled={enabled}
+            enabled={enabled && !isLoading && !isSubmit}
           />
         );
       })}

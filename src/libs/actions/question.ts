@@ -1,49 +1,54 @@
 'use server';
 
-import { apiClient } from '@/utils/apiClient';
+import {
+  IResponsePostTailQuestion,
+  IResponseRePostTailQuestion,
+} from '@/types/Response/questions';
+import { apiServer } from '@/utils/apiServer';
 
-export const changeQuestionByAnswer = async (answerContent: string) => {
-  try {
-    const response = await apiClient.post(`api/question/answer`, {
-      body: JSON.stringify({ answerContent }),
-      cache: 'no-store',
-    });
+import { reissueAccessToken } from './auth';
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
+export const postTailQuestion = async (
+  interviewId: number,
+  prevQuestion: string,
+  prevAnswer: string,
+): Promise<IResponsePostTailQuestion> => {
+  const response = await apiServer.post(`api/v1/gpt/${interviewId}`, {
+    body: JSON.stringify({ prevQuestion, prevAnswer }),
+    cache: 'no-store',
+  });
 
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
-
-    throw new Error(String(error));
+  if (response.status === 401) {
+    return reissueAccessToken(() =>
+      postTailQuestion(interviewId, prevQuestion, prevAnswer),
+    );
   }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
 };
 
-export const changeQuestionByCategories = async (categories: string[]) => {
-  try {
-    const response = await apiClient.post(`api/question/category`, {
-      body: JSON.stringify({ categories }),
-      cache: 'no-store',
-    });
+export const rePostTailQuestion = async (
+  interviewId: number,
+  prevQuestion: string,
+): Promise<IResponseRePostTailQuestion> => {
+  const response = await apiServer.post(`api/v1/gpt/${interviewId}/new`, {
+    body: JSON.stringify({ prevQuestion }),
+    cache: 'no-store',
+  });
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-
-    const data = await response.json();
-
-    return data;
-  } catch (error) {
-    if (error instanceof Error) {
-      throw new Error(error.message);
-    }
-
-    throw new Error(String(error));
+  if (response.status === 401) {
+    return reissueAccessToken(() =>
+      rePostTailQuestion(interviewId, prevQuestion),
+    );
   }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
 };

@@ -1,6 +1,6 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
-const getAccessToken = () => {
+export const getAccessToken = () => {
   const accessToken = document.cookie
     .split('; ')
     .find((row) => row.startsWith('accessToken='))

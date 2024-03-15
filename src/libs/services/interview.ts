@@ -1,4 +1,6 @@
-import { IResponseInterview } from '@/types/Response/interview';
+import { notFound } from 'next/navigation';
+
+import { IResponseGetInterview } from '@/types/Response/interview';
 import { apiClient } from '@/utils/apiClient';
 import { apiServer } from '@/utils/apiServer';
 
@@ -11,13 +13,46 @@ import {
 
 export const getInterviewInfo = async (
   interviewId: string,
-): Promise<IResponseInterview> => {
+): Promise<IResponseGetInterview> => {
   const response = await apiServer.get(`api/v1/interviews/${interviewId}`, {
     cache: 'no-store',
   });
 
+  if (response.status === 404) {
+    notFound();
+  }
+
   if (response.status === 401) {
     return reissueAccessToken(() => getInterviewInfo(interviewId));
+  }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
+
+export const putUploadMediaBlob = async (
+  uploadUrl: string,
+  mediaBlobUrl: Blob[],
+) => {
+  const videoFile = new File(mediaBlobUrl, 'video.webm', {
+    type: 'video/webm',
+    lastModified: new Date().getTime(),
+  });
+
+  const response = await fetch(uploadUrl, {
+    body: videoFile,
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'video/webm',
+    },
+    cache: 'no-store',
+  });
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
   }
 
   if (!response.ok) {

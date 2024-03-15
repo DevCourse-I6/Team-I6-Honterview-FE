@@ -1,14 +1,23 @@
-import { type NextRequest } from 'next/server';
+import { cookies } from 'next/headers';
+import { type NextRequest, NextResponse } from 'next/server';
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
+  const refreshToken = cookies().get('refreshToken');
 
   if (pathname.startsWith('/auth/login')) {
-    // 서버에 인증 확인 후 redirect 처리
-    // return NextResponse.redirect(new URL('/', request.url));
+    if (refreshToken) {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+  }
+
+  if (pathname.startsWith('/interview/video')) {
+    if (!refreshToken) {
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+    }
   }
 };
 
 export const config = {
-  matcher: ['/auth/login'],
+  matcher: ['/auth/login', '/interview/video/:interviewId*'],
 };
