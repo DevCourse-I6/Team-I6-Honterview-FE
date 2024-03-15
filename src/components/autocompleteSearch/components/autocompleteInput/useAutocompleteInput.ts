@@ -14,15 +14,23 @@ const useAutocompleteInput = ({
     keyboardIndex,
     setKeyboardIndex,
     setAutocompleteList,
+    setIsCreateVisible,
   } = useAutocomplete();
 
   const handleInputClick = () => {
-    !!autocompleteList.length && inputValue && setIsListVisible(true);
+    if (!inputValue) {
+      return;
+    }
+    if (autocompleteList.length > 0) {
+      setIsListVisible(true);
+    }
+    setIsCreateVisible(true);
   };
 
   const handleChangeInput = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setInputValue(value);
+    setIsCreateVisible(true);
 
     if (!value) {
       setIsListVisible(false);

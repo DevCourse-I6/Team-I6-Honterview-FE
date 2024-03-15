@@ -13,11 +13,11 @@ const StepSection = () => {
   const { interviewType } = usePresettingDataStore();
 
   useEffect(() => {
-    if (interviewType === 'camera' || interviewType === undefined) {
-      setCameraStep();
+    if (interviewType === 'TEXT') {
+      setChattingStep();
       return;
     }
-    setChattingStep();
+    setCameraStep();
   }, [interviewType, setCameraStep, setChattingStep]);
 
   return (

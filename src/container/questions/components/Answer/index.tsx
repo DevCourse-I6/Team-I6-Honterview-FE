@@ -1,28 +1,56 @@
+'use client';
+
+import { useMutation } from '@tanstack/react-query';
+import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { FavoriteIcon } from '@/components/icon';
+import { clickAnswerHeart } from '@/libs/services/answers';
 
 import { IProps } from './types';
 
-const Answer = ({ isBlur, className }: IProps) => {
+const Answer = ({
+  nickname,
+  content,
+  className,
+  answerId,
+  heartsCount: initialHeartsCount,
+  isHearted: initialIsHearted,
+}: IProps) => {
+  // TODO: sangmin // 유저 정보 isHearted 적용하기
+  const [isHearted, setIsHearted] = useState(initialIsHearted);
+  const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => clickAnswerHeart(answerId),
+    onSuccess: () => {
+      setIsHearted(!isHearted);
+      setHeartsCount(isHearted ? heartsCount - 1 : heartsCount + 1);
+    },
+  });
+
   return (
     <div
-      className={twMerge(
-        `${isBlur && 'cursor-pointer select-none blur-[5px]'} ${className}`,
-      )}
+      className={twMerge(`rounded-lg border-t-[1px] bg-white p-6 ${className}`)}
     >
       <div className="mb-5 flex justify-between">
         <h4 className="text-[1.8rem] font-semibold text-[#3182F6]">
-          토스페이먼츠소속 | 기술면접마스터
+          {nickname}
         </h4>
-        <FavoriteIcon />
+        <div>
+          <button
+            type="button"
+            disabled={isPending}
+            onClick={() => mutate()}
+          >
+            <FavoriteIcon
+              className={`${isHearted ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300 '} `}
+            />
+          </button>
+          <span>{heartsCount}</span>
+        </div>
       </div>
-      <p className="pl-14 text-[1.8rem] font-light text-[#4e5968]">
-        저는 React를 선호합니다. 이유는 React가 사용자 인터페이스 구축과 관리를
-        쉽게 할 수 있는 사용자 측 라이브러리이기 때문입니다. 또한, 리액트
-        컴포넌트는 모듈화를 통해서 개발 생산성을 높이고, 코드 유지 보수성을 높일
-        수 있습니다.
-      </p>
+      <p className="pl-14 text-[1.8rem] font-light text-[#4e5968]">{content}</p>
     </div>
   );
 };

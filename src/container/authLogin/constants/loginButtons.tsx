@@ -1,9 +1,4 @@
-import {
-  GithubIcon,
-  GoogleIcon,
-  KakaoIcon,
-  NaverIcon,
-} from '@/components/icon';
+import { GithubIcon, GoogleIcon, KakaoIcon } from '@/components/icon';
 
 export const LOGIN_BUTTONS = [
   {
@@ -20,13 +15,13 @@ export const LOGIN_BUTTONS = [
     backgroundColor: 'bg-[#ffffff]',
     textColor: 'text-text-100',
   },
-  {
-    provider: 'naver',
-    name: '네이버 로그인',
-    icon: <NaverIcon />,
-    backgroundColor: 'bg-[#03C75A]',
-    textColor: 'text-text-20',
-  },
+  // {
+  //   provider: 'naver',
+  //   name: '네이버 로그인',
+  //   icon: <NaverIcon />,
+  //   backgroundColor: 'bg-[#03C75A]',
+  //   textColor: 'text-text-20',
+  // },
   {
     provider: 'kakao',
     name: '카카오 로그인',

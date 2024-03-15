@@ -7,6 +7,7 @@ import useAutocompleteInput from './useAutocompleteInput';
 const AutocompleteInput = ({
   totalDatas,
   selectedList,
+  placeholder,
 }: AutocompleteInputProps) => {
   const {
     handleChangeInput,
@@ -36,7 +37,7 @@ const AutocompleteInput = ({
             onChange={handleChangeInput}
             value={inputValue}
             onClick={handleInputClick}
-            placeholder="검색어를 입력하세요"
+            placeholder={placeholder ?? '검색어를 입력하세요'}
           />
         </div>
         {!isListVisible && <SearchIcon />}

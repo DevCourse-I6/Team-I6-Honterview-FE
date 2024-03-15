@@ -4,9 +4,9 @@ import { useAutocomplete } from '../../contexts';
 import { QUESTION_MIN_LENGTH } from '../constants';
 
 const AutocompleteCreateItem = () => {
-  const { inputValue, handleItemClick } = useAutocomplete();
+  const { inputValue, handleItemClick, isCreateVisible } = useAutocomplete();
 
-  if (!inputValue) {
+  if (!inputValue || !isCreateVisible) {
     return;
   }
 
@@ -28,8 +28,8 @@ const AutocompleteCreateItem = () => {
         });
       }}
     >
-      <p className="create-item-input flex w-fit max-w-[25rem] items-center whitespace-pre">
-        {`'${inputValue}' `}
+      <p className="auto-text flex w-fit max-w-[25rem] items-center font-semibold text-primaries-primary">
+        {inputValue}
       </p>
       (으)로 질문 생성하기
     </button>

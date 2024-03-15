@@ -28,10 +28,10 @@ const InterviewVideoPage = async ({ params }: IProps) => {
             <QuestionContent />
             <AnswerContent />
           </div>
-        </div>
-        <div className="flex justify-center gap-8">
-          <AnswerFinishButton />
-          <InterviewEndedButton />
+          <div className="flex justify-center gap-8">
+            <AnswerFinishButton />
+            <InterviewEndedButton />
+          </div>
         </div>
       </form>
     </section>

@@ -1,3 +1,5 @@
+'use client';
+
 import { useEffect } from 'react';
 
 import useStepStore from '@/container/presetting/stores/useStepStore';

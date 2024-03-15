@@ -18,7 +18,7 @@ const usePresettingDataStore = create<PresettingDataState>((set) => ({
   },
   removeFirstQuestionTag: (tag) => {
     set(({ firstQuestionTags }) => {
-      firstQuestionTags.splice(firstQuestionTags.indexOf(tag));
+      firstQuestionTags.splice(firstQuestionTags.indexOf(tag), 1);
       return {
         firstQuestionTags,
       };
@@ -36,12 +36,12 @@ const usePresettingDataStore = create<PresettingDataState>((set) => ({
   },
   setInterviewTypeCamera: () => {
     set(() => ({
-      interviewType: 'camera',
+      interviewType: 'RECORD',
     }));
   },
   setInterviewTypeChatting: () => {
     set(() => ({
-      interviewType: 'chatting',
+      interviewType: 'TEXT',
     }));
   },
   setTimeMinute: (minute) => {

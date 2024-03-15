@@ -10,7 +10,7 @@ const navigation = [
     scroll: false,
   },
   {
-    title: '면접연습',
+    title: '모의면접',
     url: '/interview/presetting',
     replace: false,
     scroll: false,
@@ -38,18 +38,14 @@ const Header = () => {
         </ul>
       </nav>
       <div className="flex items-center justify-end gap-6 text-medium">
-        <Link href="/">
-          <Button style={{ width: '10rem', height: '4rem', padding: '0 1rem' }}>
-            로그아웃
-          </Button>
+        <Link href="/auth/login">
+          <Button className="h-[4rem] px-[2rem] py-0 ">로그인</Button>
         </Link>
-        <Link href="/">
-          <Button
-            style={{ width: '10rem', height: '4rem', padding: '0 1rem' }}
-            className="border-none bg-slate-400 px-4 hover:bg-slate-500"
-          >
-            로그인
-          </Button>
+        <Link
+          href="/mypage"
+          className="font-medium"
+        >
+          마이페이지
         </Link>
       </div>
     </header>

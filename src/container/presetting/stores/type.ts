@@ -6,6 +6,7 @@ export interface StepState {
   isNextButtonOn: boolean;
   increaseStep: () => void;
   decreaseStep: () => void;
+  setSettingStep: () => void;
   setCameraStep: () => void;
   setChattingStep: () => void;
   setNextButtonOn: () => void;
@@ -16,11 +17,11 @@ export interface PresettingDataState {
   firstQuestionTags: AutocompleteDataType[];
   firstQuestion?: AutocompleteDataType;
   questionCount: number;
-  interviewType?: 'camera' | 'chatting';
+  interviewType?: 'RECORD' | 'TEXT';
   answerTime: { minute: number; second: number };
   addFirstQuestionTag: (tag: AutocompleteDataType) => void;
   removeFirstQuestionTag: (tag: AutocompleteDataType) => void;
-  setFirstQuestion: (question: AutocompleteDataType) => void;
+  setFirstQuestion: (question: AutocompleteDataType | undefined) => void;
   setQuestionCount: (count: number) => void;
   setInterviewTypeCamera: () => void;
   setInterviewTypeChatting: () => void;

@@ -1,17 +1,37 @@
+import Link from 'next/link';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from '@/components/button';
 import Tag from '@/components/tag';
 
-const TitleWithInterviewStart = () => {
+import HeaderButton from './components/HeaderButton';
+import { IProps } from './types';
+
+// TODO: sangmin // 수정 삭제에 대한 권한 UI 적용
+
+const TitleWithInterviewStart = async ({
+  children,
+  questionTitle,
+  categoryNames,
+  questionId,
+  heartsCount,
+  categories,
+}: IProps) => {
   return (
     <div>
+      <HeaderButton
+        questionId={questionId}
+        questionHeartCount={heartsCount}
+        questionTitle={questionTitle}
+        categoryNames={categoryNames}
+        categories={categories}
+      />
       <div className="relative flex flex-col gap-7">
         <h1 className="text-[3.2rem] font-medium leading-tight text-[#3C4654]">
-          어떤 프레임워크를 사용하여 개발했나요? 왜 그 프레임워크를 선택했나요?
+          {children}
         </h1>
         <ul className="flex w-1/2 flex-wrap gap-4">
-          {['JavaScript', 'React', 'JavaScript', 'React'].map((tag) => (
+          {categoryNames.map((category) => (
             <li key={uuidv4()}>
               <Tag
                 style={{
@@ -21,17 +41,17 @@ const TitleWithInterviewStart = () => {
                   fontWeight: '600',
                 }}
               >
-                {tag}
+                {category}
               </Tag>
             </li>
           ))}
         </ul>
-        <Button
-          className="bottom-0 right-0 text-xl"
-          style={{ position: 'absolute', fontSize: '1.5rem' }}
+        <Link
+          className="absolute bottom-0 right-0 text-[1.5rem] text-xl"
+          href={`/interview/presetting/${questionId}`}
         >
-          모의 면접 시작
-        </Button>
+          <Button>모의 면접 시작</Button>
+        </Link>
       </div>
     </div>
   );

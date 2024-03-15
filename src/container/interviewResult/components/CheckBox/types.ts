@@ -1,6 +1,6 @@
 export type TToggleChangeEvent = { checked: boolean; id: string };
 
 export interface IProps {
-  checkId: string;
+  checkId: number;
   onChange?: ({ checked, id }: TToggleChangeEvent) => void;
 }

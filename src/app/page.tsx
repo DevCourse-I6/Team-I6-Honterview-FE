@@ -1,5 +1,7 @@
+import Main from '@/container/main';
+
 const Home = () => {
-  return <></>;
+  return <Main />;
 };
 
 export default Home;

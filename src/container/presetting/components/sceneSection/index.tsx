@@ -6,6 +6,7 @@ import VideoCheckScene from './components/videoCheckScene';
 
 const PreSettingSceneSection = () => {
   const { currentStep } = useStepStore();
+
   return (
     <div className="h-[50rem]">
       {currentStep === 1 && <FirstQuestionScene />}
