@@ -17,7 +17,7 @@ const QuestionList = ({ handleTagClick, questionsList }: IProps) => {
             key={v4uuid()}
             className="rounded-lg px-[2rem] py-[2rem] hover:bg-gray-100"
           >
-            <div className="flex justify-between pb-[2rem]">
+            <div className="flex flex-grow justify-between pb-[2rem] text-[2.5rem] font-semibold">
               <Link href={`/questions/${id}`}>
                 <QuestionTitle content={content} />
               </Link>
