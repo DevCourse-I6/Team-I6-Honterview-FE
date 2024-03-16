@@ -1,6 +1,9 @@
+import '../style.css';
+
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { notify } from '@/components/toast';
 import { getMyBookmarkQuestions } from '@/services/mypage';
 
 import BookmarkItem from './components/BookmarkItem';
@@ -16,10 +19,12 @@ const BookmarkSection = ({
   >(null);
 
   useEffect(() => {
-    getMyBookmarkQuestions(currentPage).then(({ data }) => {
-      setBookmarkDatas(data.data);
-      setItemCount(data.totalElements);
-    });
+    getMyBookmarkQuestions(currentPage)
+      .then(({ data }) => {
+        setBookmarkDatas(data.data);
+        setItemCount(data.totalElements);
+      })
+      .catch((e) => notify('error', e.message));
   }, [currentPage, setItemCount]);
 
   return (
@@ -28,7 +33,7 @@ const BookmarkSection = ({
     >
       {bookmarkDatas?.map((content) => (
         <div
-          className="flex w-full flex-col gap-[1rem] rounded-xl border border-dotted border-gray-300"
+          className="mypage_card_item flex w-full flex-col gap-[1rem] rounded-xl border border-dotted border-gray-300"
           key={uuidv4()}
         >
           <BookmarkItem
