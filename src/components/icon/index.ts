@@ -15,6 +15,7 @@ export { default as ExampleIcon } from './svg/example.svg';
 export { default as FavoriteIcon } from './svg/Favorite.svg';
 export { default as GithubIcon } from './svg/Github.svg';
 export { default as GoogleIcon } from './svg/Google.svg';
+export { default as HamburgerIcon } from './svg/Hamburger.svg';
 export { default as KakaoIcon } from './svg/Kakao.svg';
 export { default as NaverIcon } from './svg/Naver.svg';
 export { default as Reset } from './svg/Reset.svg';

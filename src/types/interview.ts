@@ -1,9 +1,11 @@
 import { IQuestion } from './question';
 
+export type TAnswerType = 'IN_PROGRESS' | 'COMPLETED';
+
 export interface IInterview {
   interviewId: number;
   timer: number;
-  answerType: string;
+  answerType: TAnswerType;
   questionCount: number;
   videoId: number;
   questionsAndAnswers: IQuestion[];
