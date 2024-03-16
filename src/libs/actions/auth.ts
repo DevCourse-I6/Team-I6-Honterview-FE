@@ -1,15 +1,20 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
 import { IAdminAuthState } from '@/app/admin/(auth)/types';
 import { apiServer } from '@/utils/apiServer';
 
-export const reissueAccessToken = async <T>(callback: () => Promise<T>) => {
+export const reissueAccessToken = async <T, F>(
+  callback: () => T,
+  onFail: () => F,
+) => {
   const response = await apiServer.post('api/v1/auth/reissue');
 
   if (response.status === 401) {
-    return redirect('/auth/login');
+    return onFail();
+  }
+
+  if (response.status === 500) {
+    return onFail();
   }
 
   if (!response.ok) {

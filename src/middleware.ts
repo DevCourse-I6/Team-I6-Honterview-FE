@@ -3,7 +3,7 @@ import { type NextRequest, NextResponse } from 'next/server';
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
-  const refreshToken = cookies().get('refreshToken');
+  const refreshToken = cookies().get('refreshToken')?.value;
 
   if (pathname.startsWith('/auth/login')) {
     if (refreshToken) {
