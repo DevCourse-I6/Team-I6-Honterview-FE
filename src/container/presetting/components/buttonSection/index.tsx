@@ -36,10 +36,14 @@ const PreSettingButtonSection = ({
     const questionId = isNew ? await createFirstQuestion() : firstQuestion?.id;
     const interviewId = await createNewInterview(questionId);
 
+    if (!interviewId) {
+      return;
+    }
+
     const nextUrl =
       interviewType === 'RECORD'
         ? `/interview/video/${interviewId}`
-        : `interview/chat/${interviewId}`;
+        : `/interview/chat/${interviewId}`;
 
     router.push(nextUrl);
   };
