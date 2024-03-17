@@ -1,6 +1,6 @@
 'use server';
 
-import { revalidatePath } from 'next/cache';
+import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { IAdminAuthState } from '@/app/admin/(auth)/types';
@@ -17,7 +17,7 @@ export const reissueAccessToken = async <T, F>(
       return onFail();
     }
 
-    revalidatePath('/', 'layout');
+    revalidateTag('userAuth');
     redirect('/auth/login');
   }
 
@@ -83,12 +83,12 @@ export const logOut = async () => {
   const { status, ok } = await apiServer.post('api/v1/auth/logout');
 
   if (status === 400) {
-    return revalidatePath('/', 'layout');
+    return revalidateTag('userAuth');
   }
 
   if (status === 401) {
     return reissueAccessToken<Promise<void>, void>(logOut, () =>
-      revalidatePath('/', 'layout'),
+      revalidateTag('userAuth'),
     );
   }
 
@@ -96,5 +96,5 @@ export const logOut = async () => {
     throw new Error(`HTTP error! status: ${status}`);
   }
 
-  return revalidatePath('/', 'layout');
+  return revalidateTag('userAuth');
 };

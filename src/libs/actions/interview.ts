@@ -1,7 +1,5 @@
 'use server';
 
-import { redirect } from 'next/navigation';
-
 import { IRequestInterviewForm } from '@/types/interview';
 import {
   IResponseGetUploadUrl,
@@ -19,10 +17,7 @@ export const getUploadUrl = async (
   );
 
   if (response.status === 401) {
-    return reissueAccessToken(
-      () => getUploadUrl(interviewId),
-      redirect('/auth/login'),
-    );
+    return reissueAccessToken(() => getUploadUrl(interviewId));
   }
 
   if (!response.ok) {
