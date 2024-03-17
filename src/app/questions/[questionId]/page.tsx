@@ -26,7 +26,7 @@ const Page = async ({ params }: IProps) => {
   } = questionInitialData;
 
   return (
-    <div className="m-auto max-w-[800px]">
+    <>
       <div className=" mb-20">
         <TitleWithInterviewStart
           questionTitle={questionTitle}
@@ -38,7 +38,7 @@ const Page = async ({ params }: IProps) => {
           {questionTitle}
         </TitleWithInterviewStart>
       </div>
-      <div className="flex flex-col gap-16">
+      <div className="flex flex-col gap-8">
         <AnswerList
           initialData={questionInitialData}
           questionId={questionIdAsNumber}
@@ -46,7 +46,7 @@ const Page = async ({ params }: IProps) => {
         />
       </div>
       <TailQuestions questionId={questionIdAsNumber} />
-    </div>
+    </>
   );
 };
 
