@@ -12,7 +12,7 @@ const PreSettingSceneSection = () => {
       {currentStep === 1 && <FirstQuestionScene />}
       {currentStep === 2 && <InterviewSettingScene />}
       {currentStep === 3 && <TermsScene />}
-      {currentStep === 4 && <VideoCheckScene />}
+      <VideoCheckScene />
     </div>
   );
 };
