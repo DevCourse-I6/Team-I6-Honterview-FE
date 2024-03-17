@@ -12,6 +12,8 @@ const HeaderButton = ({
   categoryNames,
   categories,
   questionHeartCount,
+  isHearted,
+  isBookmarked,
 }: IProps) => {
   return (
     <div className="flex justify-between">
@@ -27,12 +29,12 @@ const HeaderButton = ({
       <div className="flex items-center gap-3">
         <HeartButton
           questionId={questionId}
-          isHearted={false}
+          isHearted={isHearted}
           questionHeartCount={questionHeartCount}
         />
         <BookmarkButton
           questionId={questionId}
-          isBookmarked={false}
+          isBookmarked={isBookmarked}
         />
       </div>
     </div>

@@ -16,6 +16,8 @@ const TitleWithInterviewStart = async ({
   questionId,
   heartsCount,
   categories,
+  isHearted,
+  isBookmarked,
 }: IProps) => {
   return (
     <div>
@@ -25,6 +27,8 @@ const TitleWithInterviewStart = async ({
         questionTitle={questionTitle}
         categoryNames={categoryNames}
         categories={categories}
+        isHearted={isHearted}
+        isBookmarked={isBookmarked}
       />
       <div className="relative flex flex-col gap-7">
         <h1 className="text-[3.2rem] font-medium leading-tight text-[#3C4654]">

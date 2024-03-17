@@ -7,9 +7,6 @@ import { IProps } from '@/container/questions/types';
 import { getCategories } from '@/libs/services/categories';
 import { getQuestionById } from '@/libs/services/questions';
 
-// TODO: sangmin // 초기 좋아요에 대한 데이터 상태 적용하기
-// TODO: sangmin // 프롭스드릴링 해결, 서버데이터, 클라이언트 상태 리팩토링
-
 const Page = async ({ params }: IProps) => {
   const { questionId } = params;
   const questionIdAsNumber = Number(questionId);
@@ -22,7 +19,13 @@ const Page = async ({ params }: IProps) => {
   });
 
   const {
-    data: { content: questionTitle, categoryNames, heartsCount },
+    data: {
+      content: questionTitle,
+      categoryNames,
+      heartsCount,
+      isHearted,
+      isBookmarked,
+    },
   } = questionInitialData;
 
   return (
@@ -34,6 +37,8 @@ const Page = async ({ params }: IProps) => {
           questionId={questionIdAsNumber}
           heartsCount={heartsCount}
           categories={categories}
+          isHearted={isHearted}
+          isBookmarked={isBookmarked}
         >
           {questionTitle}
         </TitleWithInterviewStart>
