@@ -6,15 +6,10 @@ import TimePicker from './components/timePicker';
 import { minuteData, secondData } from './constants';
 
 const TimerSection = () => {
-  const { setTimeMinute, setTimeSecond, interviewType, answerTime } =
-    usePresettingDataStore();
+  const { setTimeMinute, setTimeSecond, answerTime } = usePresettingDataStore();
   const [isSecondDisabled, setIsSecondDisabled] = useState(
     answerTime.minute === minuteData[minuteData.length - 1],
   );
-
-  if (interviewType === 'TEXT') {
-    return;
-  }
 
   const handleMinuteChange = (newMinute: number) => {
     setTimeMinute(newMinute);
