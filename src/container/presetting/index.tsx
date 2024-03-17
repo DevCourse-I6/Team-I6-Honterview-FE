@@ -17,8 +17,14 @@ import { PreSettingProps } from './type';
 const PreSetting = ({ firstQuestionId }: PreSettingProps) => {
   const [isLoading, setIsLoading] = useState(true);
   const [isQuestionError, setIsQuestionError] = useState(false);
-  const { setFirstQuestion } = usePresettingDataStore();
-  const { setSettingStep } = useStepStore();
+  const { setFirstQuestion, resetAllPresettingDatas } =
+    usePresettingDataStore();
+  const { setSettingStep, resetAllStepDatas } = useStepStore();
+
+  useEffect(() => {
+    resetAllStepDatas();
+    resetAllPresettingDatas();
+  }, [resetAllStepDatas, resetAllPresettingDatas]);
 
   useEffect(() => {
     setIsLoading(true);
@@ -46,9 +52,9 @@ const PreSetting = ({ firstQuestionId }: PreSettingProps) => {
   }
 
   return (
-    <div className="flex h-[70rem] w-full max-w-[80rem] flex-col items-center rounded-3xl bg-text-20 bg-opacity-20 text-medium shadow-xl backdrop-blur-xl">
+    <div className="relative flex h-[70rem] max-h-full w-full flex-col items-center rounded-3xl bg-text-20 bg-opacity-20 p-[2rem] text-[1.6rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] tablet:h-[70rem] tablet:max-w-[80rem]">
       <StepSection />
-      <DividerHorizontal className="mt-[2.6rem] w-[75rem]" />
+      <DividerHorizontal className="mx-[1rem] mt-[1rem] w-full" />
       <PreSettingSceneSection />
       <PreSettingButtonSection fromQuestionPage={!!firstQuestionId} />
     </div>

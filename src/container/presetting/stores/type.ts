@@ -11,6 +11,7 @@ export interface StepState {
   setChattingStep: () => void;
   setNextButtonOn: () => void;
   setNextButtonOff: () => void;
+  resetAllStepDatas: () => void;
 }
 
 export interface PresettingDataState {
@@ -27,4 +28,5 @@ export interface PresettingDataState {
   setInterviewTypeChatting: () => void;
   setTimeMinute: (minute: number) => void;
   setTimeSecond: (second: number) => void;
+  resetAllPresettingDatas: () => void;
 }

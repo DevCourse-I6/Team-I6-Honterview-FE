@@ -54,6 +54,15 @@ const usePresettingDataStore = create<PresettingDataState>((set) => ({
       answerTime: { ...answerTime, second },
     }));
   },
+  resetAllPresettingDatas: () => {
+    set(() => ({
+      firstQuestionTags: [],
+      firstQuestion: undefined,
+      questionCount: 0,
+      interviewType: undefined,
+      answerTime: { minute: 0, second: 0 },
+    }));
+  },
 }));
 
 export default usePresettingDataStore;
