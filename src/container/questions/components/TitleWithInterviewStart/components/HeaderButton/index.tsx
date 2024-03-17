@@ -24,7 +24,7 @@ const HeaderButton = ({
         />
         <DeleteButton questionId={questionId} />
       </div>
-      <div className="flex items-center gap-5">
+      <div className="flex items-center gap-3">
         <HeartButton
           questionId={questionId}
           isHearted={false}
