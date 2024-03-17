@@ -8,7 +8,7 @@ const PreSettingSceneSection = () => {
   const { currentStep } = useStepStore();
 
   return (
-    <div className="h-[50rem]">
+    <div className="flex h-[calc(100%-11.5rem)] w-full items-center justify-center tablet:h-[calc(100%-18rem)]">
       {currentStep === 1 && <FirstQuestionScene />}
       {currentStep === 2 && <InterviewSettingScene />}
       {currentStep === 3 && <TermsScene />}

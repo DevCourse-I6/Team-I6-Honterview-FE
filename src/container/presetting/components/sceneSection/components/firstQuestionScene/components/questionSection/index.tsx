@@ -31,10 +31,8 @@ const QuestionSection = () => {
   }, [firstQuestionTags, firstQuestionTags.length]);
 
   return (
-    <div className="flex w-[40rem] flex-col gap-[1rem]">
-      <div>
-        <h2 className="text-large font-semibold">질문 선택</h2>
-      </div>
+    <div className="flex max-w-[40rem] flex-col gap-[1rem]">
+      <h2 className="text-large font-semibold">질문 선택</h2>
       <div className="h-[4rem] w-full">
         {isLoading ? (
           <Loading />
@@ -50,22 +48,21 @@ const QuestionSection = () => {
           />
         )}
       </div>
-
-      <div className="flex min-h-[2em] w-full gap-[1rem]">
-        {firstQuestion && (
-          <Tag className="border border-primaries-primary bg-white text-primaries-primary hover:bg-white active:bg-white">
+      {firstQuestion && (
+        <Tag className="auto-tag relative w-fit max-w-[35rem] overflow-y-scroll border border-primaries-primary bg-white py-[0.5rem] text-primaries-primary hover:bg-white active:bg-white tablet:max-h-[11rem] tablet:max-w-full">
+          <span className="max-h-[8rem] tablet:max-h-[11rem]">
             {firstQuestion.name}
-            <button
-              type="button"
-              onClick={() => {
-                setFirstQuestion(undefined);
-              }}
-            >
-              <XIcon className="h-[1.5rem] stroke-primaries-primary" />
-            </button>
-          </Tag>
-        )}
-      </div>
+          </span>
+          <button
+            type="button"
+            onClick={() => {
+              setFirstQuestion(undefined);
+            }}
+          >
+            <XIcon className="h-[1.5rem] stroke-primaries-primary" />
+          </button>
+        </Tag>
+      )}
     </div>
   );
 };
