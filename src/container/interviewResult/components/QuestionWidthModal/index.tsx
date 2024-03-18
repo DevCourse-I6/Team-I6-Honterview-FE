@@ -34,7 +34,7 @@ const QuestionWidthModal = ({
       <Modal
         visible={visible}
         onClose={toggleVisible}
-        className="relative h-[70%] w-[70%] rounded-3xl  bg-white px-16 py-10 shadow-2xl"
+        className=" relative h-fit max-h-[50rem] w-[50%] rounded-3xl  bg-white px-16 py-10 shadow-2xl "
       >
         <button
           type="button"
@@ -46,7 +46,7 @@ const QuestionWidthModal = ({
         <h1 className="mb-10 text-doubleLarge">
           {questionInitialData.data.content}
         </h1>
-        <div className="flex h-[calc(100%-2.5rem-90px)] flex-col gap-4 overflow-auto">
+        <div className="flex max-h-[310px] flex-col gap-4 overflow-auto">
           <AnswerList
             initialData={questionInitialData}
             questionId={questionId}
