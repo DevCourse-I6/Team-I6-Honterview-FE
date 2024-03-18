@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+import { v4 as uuidv4 } from 'uuid';
 
 import usePresettingDataStore from '../../stores/usePresettingDataStore';
 import useStepStore from '../../stores/useStepStore';
@@ -21,19 +22,25 @@ const StepSection = () => {
   }, [interviewType, setCameraStep, setChattingStep]);
 
   return (
-    <div className="relative flex h-[10rem] items-center justify-between gap-[3rem] px-[7rem] font-semibold">
+    <div className="relative flex w-full justify-center text-[1.4rem] font-semibold tablet:h-[12rem] tablet:items-center tablet:px-[3rem] tablet:text-[1.6rem]">
       {Array.from({ length: totalStep }, (_, i) => i + 1).map((step) => (
         <div
-          key={`step-div-${step}`}
-          className="flex flex-row items-center gap-[3rem]"
+          className="flex items-center justify-center"
+          key={uuidv4()}
         >
-          <StepCircle
-            key={`step-circle-${step}`}
-            number={step}
-            isPassed={currentStep >= step}
-            title={TITLE_LIST[step as StepNumber]}
-            isCurrent={currentStep === step}
-          />
+          <div className="flex flex-col items-center justify-center gap-[0.5rem]">
+            <StepCircle
+              number={step}
+              isPassed={currentStep >= step}
+            />
+            <span
+              className={`flex w-[9.5rem] items-center justify-center 
+              ${currentStep === step ? 'text-primaries-primary' : 'text-text-80'}
+            `}
+            >
+              {TITLE_LIST[step as StepNumber]}
+            </span>
+          </div>
           {step !== totalStep && (
             <StepBar
               key={`step-bar-${step}`}
