@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 
 import { notify } from '@/components/toast';
-import { deleteQuestion } from '@/libs/actions/question';
+import { deleteQuestion } from '@/libs/actions/admin';
 import getErrorMessage from '@/utils/getErrorMessage';
 
 import { IProps } from './types';

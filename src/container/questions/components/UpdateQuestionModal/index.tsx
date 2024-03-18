@@ -12,7 +12,7 @@ import Modal from '@/components/modal';
 import Tag from '@/components/tag';
 import { notify } from '@/components/toast';
 import { MAX_TAG_COUNT } from '@/container/presetting/components/sceneSection/components/firstQuestionScene/constants';
-import { patchQuestion } from '@/libs/actions/question';
+import { patchQuestion } from '@/libs/actions/admin';
 import getErrorMessage from '@/utils/getErrorMessage';
 
 import { IProps } from './types';
