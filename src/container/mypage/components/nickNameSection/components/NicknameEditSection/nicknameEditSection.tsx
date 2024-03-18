@@ -63,7 +63,7 @@ const NicknameEditSection = ({
               onClick={() => setNickname('')}
             >
               <XIcon
-                className={`stroke-black ${!nickname && 'hidden'}`}
+                className={`stroke-black ${!nickname && 'invisible'}`}
                 width="1.5rem"
               />
             </button>
