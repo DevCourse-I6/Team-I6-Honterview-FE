@@ -79,7 +79,7 @@ export const clickQuestionHeartAction = async (
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  revalidatePath('/questions/[questionId]', 'page');
+  revalidatePath(`/questions/${questionId}`, 'page');
   return response.json();
 };
 
@@ -105,6 +105,6 @@ export const clickQuestionBookmarkAction = async (
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  revalidatePath('/questions/[questionId]', 'page');
+  revalidatePath(`/questions/${questionId}`, 'page');
   return response.json();
 };

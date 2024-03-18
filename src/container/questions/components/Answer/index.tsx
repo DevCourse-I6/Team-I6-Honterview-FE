@@ -1,5 +1,6 @@
 'use client';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
@@ -15,10 +16,12 @@ const Answer = ({
   content,
   className,
   answerId,
+  questionId,
   isHearted: initialIsHearted,
 }: IProps) => {
   const [isHeart, setIsHeart] = useState(initialIsHearted);
   const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
 
   const handleHeartClick = async () => {
     setIsLoading(true);
@@ -27,6 +30,7 @@ const Answer = ({
         data: { isHearted },
       } = await clickAnswerHeart(answerId);
       setIsHeart(isHearted);
+      queryClient.invalidateQueries({ queryKey: ['answers', questionId] });
     } catch (error) {
       notify('error', getErrorMessage());
     } finally {

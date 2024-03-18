@@ -32,7 +32,7 @@ export const patchQuestion = async (
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  revalidatePath('/questions/[questionId]', 'page');
+  revalidatePath(`/questions/${questionId}`, 'page');
 };
 
 export const deleteQuestion = async (questionId: number): Promise<unknown> => {

@@ -60,6 +60,7 @@ const AnswerList = ({ initialData, questionId, isModalLoad }: IProps) => {
           <Answer
             key={uuidv4()}
             answerId={id}
+            questionId={questionId}
             nickname={nickname}
             content={content}
             heartsCount={heartsCount}
