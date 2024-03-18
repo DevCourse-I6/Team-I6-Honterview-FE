@@ -1,6 +1,6 @@
 import { PropsWithChildren } from 'react';
 
 export interface ChatBubbleProps extends PropsWithChildren {
-  className: string;
+  className?: string;
   isAnswer?: boolean;
 }
