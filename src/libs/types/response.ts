@@ -12,6 +12,7 @@ import {
   IQuestion,
   IQuestionAndAnswers,
   IQuestionAndCategoryIds,
+  IQuestionBookmark,
   IQuestionHeart,
   ITailQuestion,
 } from '@/types/questions';
@@ -39,6 +40,7 @@ export interface IGetQuestionsByCategory {
 
 export interface IClickQuestionBookmark {
   message: string;
+  data: IQuestionBookmark;
 }
 export interface IClickQuestionHeart {
   message: string;

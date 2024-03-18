@@ -1,10 +1,10 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { BookmarkSimpleIcon } from '@/components/icon';
-import { clickQuestionBookmark } from '@/libs/services/questions';
+import { notify } from '@/components/toast';
+import { clickQuestionBookmarkAction } from '@/libs/actions/question';
 
 import { IProps } from './types';
 
@@ -12,21 +12,34 @@ const BookmarkButton = ({
   questionId,
   isBookmarked: initialIsBookmarked,
 }: IProps) => {
-  const [isBookmarked, setIsBookmarked] = useState(initialIsBookmarked);
+  const [isBookmark, setIsBookmark] = useState(initialIsBookmarked);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: () => clickQuestionBookmark(questionId),
-    onSuccess: () => setIsBookmarked(!isBookmarked),
-  });
+  const handleBookmarkClick = async () => {
+    setIsLoading(true);
+    try {
+      const {
+        data: { isBookmarked },
+      } = await clickQuestionBookmarkAction(questionId);
+      setIsBookmark(isBookmarked);
+    } catch (error) {
+      if (typeof error === 'string') {
+        notify('error', error);
+      }
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <>
       <button
         type="button"
-        disabled={isPending}
-        onClick={() => mutate()}
+        disabled={isLoading}
+        onClick={handleBookmarkClick}
       >
         <BookmarkSimpleIcon
-          className={` w-[27px] ${isBookmarked ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300'}`}
+          className={` w-[27px] ${isBookmark ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300'}`}
         />
       </button>
     </>

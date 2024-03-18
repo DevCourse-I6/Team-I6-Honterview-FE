@@ -39,6 +39,11 @@ export interface IQuestionHeart {
   isHearted: boolean;
 }
 
+// clickQuestionBookmark
+export interface IQuestionBookmark {
+  isBookmarked: boolean;
+}
+
 // createQuestion
 export interface IQuestionAndCategoryIds {
   content: string;
