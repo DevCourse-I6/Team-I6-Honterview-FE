@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
 import { apiServer } from '@/utils/apiServer';
@@ -30,6 +31,8 @@ export const patchQuestion = async (
     });
     throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  revalidatePath('/questions/[questionId]', 'page');
 };
 
 export const deleteQuestion = async (questionId: number): Promise<unknown> => {
@@ -51,4 +54,6 @@ export const deleteQuestion = async (questionId: number): Promise<unknown> => {
     });
     throw new Error(`HTTP error! status: ${response.status}`);
   }
+
+  revalidatePath('/questions', 'page');
 };

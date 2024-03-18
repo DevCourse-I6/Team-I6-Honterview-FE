@@ -1,5 +1,6 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
 import { cookies } from 'next/headers';
 
 import { apiServer } from '@/utils/apiServer';
@@ -26,5 +27,6 @@ export const clickAnswerHeart = async (
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
+  revalidatePath('/questions/[questionId]', 'page');
   return response.json();
 };
