@@ -16,6 +16,7 @@ export const metadata: Metadata = {
       '혼터뷰에서 제공하는 면접 준비 도구를 통해 면접 첫 질문, 타이머, 꼬리 질문 개수, 면접 카테고리, 면접 연습 방식을 설정하세요.',
   },
 };
+
 const PresettingLayout = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
