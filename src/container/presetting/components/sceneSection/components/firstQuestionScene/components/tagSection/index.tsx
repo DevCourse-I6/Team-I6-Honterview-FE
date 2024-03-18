@@ -24,9 +24,11 @@ const TagSection = () => {
 
   useEffect(() => {
     setIsLoading(true);
-    getCategoryList().then(({ data }) => {
-      setCategoryList(data);
-    });
+    getCategoryList()
+      .then(({ data }) => {
+        setCategoryList(data);
+      })
+      .catch((e) => notify('error', e.message));
     setIsLoading(false);
   }, []);
 

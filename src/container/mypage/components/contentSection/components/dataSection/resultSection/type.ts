@@ -4,6 +4,7 @@ export interface MyPageResultDataType {
   categoryNames: string[];
   createdAt: string;
   status?: string;
+  answerType: 'TEXT' | 'RECORD';
 }
 
 export interface MyPageResultDataSectionProps {

@@ -5,6 +5,7 @@ import { AutocompleteDataType } from '@/components/autocompleteSearch/type';
 import { XIcon } from '@/components/icon';
 import Loading from '@/components/loading';
 import Tag from '@/components/tag';
+import { notify } from '@/components/toast';
 import usePresettingDataStore from '@/container/presetting/stores/usePresettingDataStore';
 import { getQuestionListByCategories } from '@/services/presetting';
 
@@ -20,13 +21,15 @@ const QuestionSection = () => {
     setIsLoading(true);
     const categories = firstQuestionTags.map(({ name }) => name).join(',');
 
-    getQuestionListByCategories(categories).then(({ data }) => {
-      const questions = data.map((item: QuestionAPIType) => ({
-        id: item.id,
-        name: item.content,
-      }));
-      setQuestionList(questions);
-    });
+    getQuestionListByCategories(categories)
+      .then(({ data }) => {
+        const questions = data.map((item: QuestionAPIType) => ({
+          id: item.id,
+          name: item.content,
+        }));
+        setQuestionList(questions);
+      })
+      .catch((e) => notify('error', e.message));
     setIsLoading(false);
   }, [firstQuestionTags, firstQuestionTags.length]);
 

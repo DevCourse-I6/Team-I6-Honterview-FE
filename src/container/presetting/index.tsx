@@ -2,9 +2,10 @@
 
 import { useEffect, useState } from 'react';
 
+import NotFound from '@/app/not-found';
 import DividerHorizontal from '@/components/dividerHorizontal';
 import Loading from '@/components/loading';
-import NotFoundError from '@/components/notFoundError';
+import { notify } from '@/components/toast';
 import { getQuestionInfo } from '@/services/presetting';
 
 import PreSettingButtonSection from './components/buttonSection';
@@ -23,11 +24,13 @@ const PreSetting = ({ firstQuestionId }: PreSettingProps) => {
   useEffect(() => {
     setIsLoading(true);
     if (firstQuestionId) {
-      getQuestionInfo(firstQuestionId).then((res) => {
-        if (!res) {
-          setIsQuestionError(true);
-        }
-      });
+      getQuestionInfo(firstQuestionId)
+        .then((res) => {
+          if (!res) {
+            setIsQuestionError(true);
+          }
+        })
+        .catch((e) => notify('error', e.message));
       setSettingStep();
       setFirstQuestion({
         name: '',
@@ -42,7 +45,7 @@ const PreSetting = ({ firstQuestionId }: PreSettingProps) => {
   }
 
   if (isQuestionError) {
-    return <NotFoundError />;
+    return <NotFound />;
   }
 
   return (

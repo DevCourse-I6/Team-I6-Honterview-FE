@@ -1,0 +1,7 @@
+.mypage_card_item {
+  transition: all 0.1s linear;
+}
+
+.mypage_card_item:hover {
+  transform: scale(1.04);
+}

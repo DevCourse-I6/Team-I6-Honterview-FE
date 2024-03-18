@@ -47,4 +47,3 @@ export const getMyInterview = (page: number) =>
   mypageAPI('GET', `api/v1/mypage/interviews?page=${page}&size=10`);
 export const getMyBookmarkQuestions = (page: number) =>
   mypageAPI('GET', `api/v1/mypage/bookmarks?page=${page}&size=10`);
-export const logoutAPI = () => mypageAPI('POST', 'api/v1/auth/logout');

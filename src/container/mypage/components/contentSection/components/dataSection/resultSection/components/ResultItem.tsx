@@ -8,6 +8,7 @@ const ResultItem = ({
   firstQuestionContent: title,
   categoryNames: categoryList,
   createdAt: createdDate,
+  answerType,
 }: MyPageResultDataType) => {
   return (
     <Link
@@ -15,12 +16,23 @@ const ResultItem = ({
       className="flex flex-col p-[1rem]"
     >
       {createdDate && (
-        <div className="mb-[1rem] flex gap-[0.3rem] text-[1.8rem] laptop:text-[1.8rem]">
-          <span className="font-semibold">
-            {createdDate.slice(0, 4)}년 {createdDate.slice(5, 7)}월{' '}
-            {createdDate.slice(8, 10)}일 {createdDate.slice(11, 16)}
-          </span>
-          의 기록
+        <div className="mb-[1rem] flex items-center gap-[0.4rem] text-[1.8rem] laptop:text-[1.8rem]">
+          <div className="flex items-center gap-[0.3rem]">
+            <span className="font-semibold">
+              {createdDate.slice(0, 4)}년 {createdDate.slice(5, 7)}월{' '}
+              {createdDate.slice(8, 10)}일 {createdDate.slice(11, 16)}
+            </span>
+            의 기록
+          </div>
+          {answerType === 'RECORD' ? (
+            <div className="mb-[0.1rem] ml-[0.3rem] inline-flex items-center justify-center rounded-lg border border-primaries-primary px-[0.5rem] text-[1rem] font-semibold text-primaries-primary tablet:text-[1.2rem]">
+              화상
+            </div>
+          ) : (
+            <div className="mb-[0.1rem] ml-[0.3rem] inline-flex items-center justify-center rounded-lg border border-green-600 px-[0.5rem] text-[1rem] font-semibold text-green-600 tablet:text-[1.2rem]">
+              채팅
+            </div>
+          )}
         </div>
       )}
       <div className="flex flex-col gap-[0.8rem] rounded-lg bg-slate-50 p-[1rem]">
