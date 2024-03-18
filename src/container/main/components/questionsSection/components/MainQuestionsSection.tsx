@@ -12,7 +12,7 @@ const MainQuestionsSection = ({
 }: MainQuestionsSectionProps) => {
   return (
     <>
-      <div className="flex h-full flex-col items-center justify-center gap-[3rem] p-[2rem] text-[3rem] laptop:hidden laptop:p-0">
+      <div className="flex h-full flex-col items-center justify-center gap-[3rem] p-[2rem] text-[3rem] xl:hidden xl:p-0">
         <div className="flex flex-col gap-[0.5rem]">
           <p className="text-[1rem] text-text-60">{imageTitle}</p>
           <Image
@@ -30,7 +30,7 @@ const MainQuestionsSection = ({
         </div>
       </div>
 
-      <div className="relative hidden h-full items-center justify-center gap-[5rem] laptop:flex">
+      <div className="relative hidden h-full items-center justify-center gap-[5rem] xl:flex">
         {chatBubbleChildren}
         <div>
           <h2 className="text-[5rem] font-bold">{title1}</h2>

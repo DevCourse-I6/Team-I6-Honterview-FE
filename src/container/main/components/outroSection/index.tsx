@@ -21,7 +21,7 @@ const navigation = [
 
 const MainOutroSection = () => {
   return (
-    <div className="flex h-screen flex-col items-center justify-center p-[2rem] laptop:p-0">
+    <div className="flex h-screen flex-col items-center justify-center p-[2rem] xl:p-0">
       <h2 className="font-mono text-[2rem]">everything is possible,</h2>
       <p
         className={`text-[8rem] tablet:text-[10rem] ${goldenPlainsFont.className}`}

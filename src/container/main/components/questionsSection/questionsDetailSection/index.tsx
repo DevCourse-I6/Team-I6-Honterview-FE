@@ -13,7 +13,7 @@ const MainQuestionDetailSection = () => {
         imageTitle="면접 질문 상세"
         title1Detail="* 좋아요를 많이 받은 다른 사용자의 답변"
       >
-        <ul className="chatbubble-infinite-scroll flex justify-items-center gap-[0.5rem] laptop:hidden">
+        <ul className="chatbubble-infinite-scroll flex justify-items-center gap-[0.5rem] xl:hidden">
           <ChatBubble isAnswer>
             호이스팅이란 변수 및 함수 선언문이 스코프 내의 최상단으로
             끌어올려지는 현상을 말합니다
@@ -31,7 +31,7 @@ const MainQuestionDetailSection = () => {
           </ChatBubble>
         </ul>
         <ul
-          className="chatbubble-infinite-scroll flex justify-items-center gap-[0.5rem] laptop:hidden"
+          className="chatbubble-infinite-scroll flex justify-items-center gap-[0.5rem] xl:hidden"
           aria-hidden
         >
           <ChatBubble isAnswer>
@@ -51,7 +51,7 @@ const MainQuestionDetailSection = () => {
           </ChatBubble>
         </ul>
 
-        <div className="hidden laptop:flex">
+        <div className="hidden xl:flex">
           <ChatBubble
             className="chat_bubble1 left-[15rem] top-[5rem]"
             isAnswer

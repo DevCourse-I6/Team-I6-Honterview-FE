@@ -14,7 +14,7 @@ const MainQuestionListSection = () => {
         title2="면접 질문을 한눈에"
         imageTitle="면접 질문"
       >
-        <ul className="chatbubble-infinite-scroll flex justify-items-center gap-[0.5rem] laptop:hidden">
+        <ul className="chatbubble-infinite-scroll flex justify-items-center gap-[0.5rem] xl:hidden">
           <ChatBubble>호이스팅(hoisting)에 대해서 설명해주세요</ChatBubble>
           <ChatBubble>네트워크에서 OSI 7계층이란 무엇인가요?</ChatBubble>
           <ChatBubble>
@@ -26,7 +26,7 @@ const MainQuestionListSection = () => {
           <ChatBubble>Swift에서 Class와 Struct의 차이는 무엇인가요?</ChatBubble>
         </ul>
         <ul
-          className="chatbubble-infinite-scroll flex justify-items-center gap-[0.5rem] laptop:hidden"
+          className="chatbubble-infinite-scroll flex justify-items-center gap-[0.5rem] xl:hidden"
           aria-hidden
         >
           <ChatBubble>호이스팅(hoisting)에 대해서 설명해주세요</ChatBubble>
@@ -40,7 +40,7 @@ const MainQuestionListSection = () => {
           <ChatBubble>Swift에서 Class와 Struct의 차이는 무엇인가요?</ChatBubble>
         </ul>
 
-        <ul className="hidden laptop:flex">
+        <ul className="hidden xl:flex">
           <ChatBubble className="chat_bubble1 left-[15rem] top-[5rem]">
             호이스팅(hoisting)에 대해서 설명해주세요
           </ChatBubble>

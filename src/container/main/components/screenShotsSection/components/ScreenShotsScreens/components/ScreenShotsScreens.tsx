@@ -8,7 +8,7 @@ const ScreenShotsScreens = ({
   children: titleChildren,
 }: ScreenShotsScreensProps) => {
   return (
-    <div className="tems-center flex h-screen w-full flex-col items-center justify-center gap-[5rem] laptop:flex-row laptop:gap-[3rem]">
+    <div className="tems-center flex h-screen w-full flex-col items-center justify-center gap-[5rem] xl:flex-row xl:gap-[3rem]">
       <div className="flex flex-col gap-[0.5rem]">
         <p className="text-[1rem] text-text-60 tablet:text-[1.4rem]">
           {imageTitle}
@@ -16,7 +16,7 @@ const ScreenShotsScreens = ({
         <Image
           src={imageSrc}
           alt=""
-          className="w-[35rem] tablet:w-[60rem] laptop:w-[70rem]"
+          className="w-[35rem] tablet:w-[60rem] xl:w-[70rem]"
         />
       </div>
       <div className="flex flex-col text-[3rem] font-bold tablet:text-[4rem]">
