@@ -4,6 +4,8 @@ export interface IQuestionAndAnswers {
   content: string;
   categoryNames: string[];
   heartsCount: number;
+  isHearted: boolean;
+  isBookmarked: boolean;
   answers: IAnswersPage;
 }
 

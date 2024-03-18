@@ -34,14 +34,14 @@ const QuestionWidthModal = ({
       <Modal
         visible={visible}
         onClose={toggleVisible}
-        className="relative h-[70%] w-[70%] rounded-3xl  bg-slate-50 px-16 py-10 shadow-2xl"
+        className="relative h-[70%] w-[70%] rounded-3xl  bg-white px-16 py-10 shadow-2xl"
       >
         <button
           type="button"
           onClick={toggleVisible}
           className="absolute right-0 top-0 rounded-full p-2 transition-all hover:bg-primaries-hover"
         >
-          <XIcon className="h-[30px] w-[30px] stroke-white" />
+          <XIcon className="h-[30px] w-[30px] stroke-black" />
         </button>
         <h1 className="mb-10 text-doubleLarge">
           {questionInitialData.data.content}

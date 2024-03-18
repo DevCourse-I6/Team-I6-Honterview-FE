@@ -13,7 +13,7 @@ export const getUploadUrl = async (
   interviewId: number,
 ): Promise<IResponseGetUploadUrl> => {
   const response = await apiServer.get(
-    `api/v1/files/upload-url?interviewId=${interviewId}`,
+    `api/v1/videos/upload-url?interviewId=${interviewId}`,
   );
 
   if (response.status === 401) {
@@ -49,13 +49,15 @@ export const postInterview = async (
 export const patchInterviewStatus = async (
   interviewId: number,
 ): Promise<void> => {
-  const response = await apiServer.patch(`api/v1/interviews/${interviewId}`);
+  const { status, ok } = await apiServer.patch(
+    `api/v1/interviews/${interviewId}`,
+  );
 
-  if (response.status === 401) {
+  if (status === 401) {
     return reissueAccessToken(() => patchInterviewStatus(interviewId));
   }
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+  if (!ok) {
+    throw new Error(`HTTP error! status: ${status}`);
   }
 };

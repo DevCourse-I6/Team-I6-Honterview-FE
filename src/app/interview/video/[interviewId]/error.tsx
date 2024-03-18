@@ -1,6 +1,5 @@
 'use client';
 
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 
@@ -28,11 +27,6 @@ const Error = ({ error, reset }: IErrorPageProps) => {
       />
       <h1 className="text-center text-tripleLarge">인터뷰 페이지 오류 발생</h1>
       <div className="flex items-center gap-16">
-        <Link href="/">
-          <Button className="h-auto w-auto px-[1rem] py-[0.5rem] text-small text-white md:text-medium">
-            메인 페이지
-          </Button>
-        </Link>
         <Button
           onClick={handlePrevPage}
           className="h-auto w-auto px-[1rem] py-[0.5rem] text-small text-white md:text-medium"

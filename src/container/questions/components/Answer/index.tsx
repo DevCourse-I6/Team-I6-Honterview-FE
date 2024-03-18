@@ -31,7 +31,9 @@ const Answer = ({
 
   return (
     <div
-      className={twMerge(`rounded-lg border-t-[1px] bg-white p-6 ${className}`)}
+      className={twMerge(
+        `rounded-lg border-[1px] border-dashed border-slate-300 bg-white p-6 ${className}`,
+      )}
     >
       <div className="mb-5 flex justify-between">
         <h4 className="text-[1.8rem] font-semibold text-[#3182F6]">
@@ -50,7 +52,7 @@ const Answer = ({
           <span>{heartsCount}</span>
         </div>
       </div>
-      <p className="pl-14 text-[1.8rem] font-light text-[#4e5968]">{content}</p>
+      <p className="text-[1.8rem] font-light text-[#4e5968]">{content}</p>
     </div>
   );
 };

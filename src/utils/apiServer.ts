@@ -4,7 +4,7 @@ const headers = require('next/headers');
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export const getAccessToken = () => {
-  return headers.cookies().get('accessToken') || '';
+  return headers.cookies().get('accessToken')?.value || '';
 };
 
 const get = (url: string, options: RequestInit = {}) => {
