@@ -1,28 +1,36 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { useState } from 'react';
 
 import { notify } from '@/components/toast';
-import { deleteQuestion } from '@/libs/services/questions';
+import { deleteQuestion } from '@/libs/actions/question';
+import getErrorMessage from '@/utils/getErrorMessage';
 
 import { IProps } from './types';
 
 const DeleteButton = ({ questionId }: IProps) => {
   const router = useRouter();
-  const { mutate, isPending } = useMutation({
-    mutationFn: () => deleteQuestion(questionId),
-    onSuccess: () => {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleDeleteClick = async () => {
+    setIsLoading(true);
+    try {
+      await deleteQuestion(questionId);
       notify('success', '질문이 삭제되었습니다.');
       router.back();
       router.refresh();
-    },
-    onError: (error) => notify('error', error.message),
-  });
+    } catch (error) {
+      notify('error', `Error: ${getErrorMessage()}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <button
-      onClick={() => mutate()}
-      disabled={isPending}
+      onClick={handleDeleteClick}
+      disabled={isLoading}
       type="button"
       className="rounded-3xl bg-slate-100 px-5 py-2"
     >
