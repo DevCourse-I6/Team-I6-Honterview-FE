@@ -127,3 +127,8 @@ export interface IGetVideoUploadUrl {
   message: string;
   data: IUploadUrl;
 }
+
+export interface IErrorResponse {
+  errorCode: string;
+  errorMessage: string;
+}

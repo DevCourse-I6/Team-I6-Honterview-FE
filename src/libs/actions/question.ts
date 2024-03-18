@@ -1,11 +1,14 @@
 'use server';
 
+import { cookies } from 'next/headers';
+
 import {
   IResponsePostTailQuestion,
   IResponseRePostTailQuestion,
 } from '@/types/Response/questions';
 import { apiServer } from '@/utils/apiServer';
 
+import { IPatchQuestionPayload } from '../types/payload';
 import { IClickQuestionBookmark, IClickQuestionHeart } from '../types/response';
 import { reissueAccessToken } from './auth';
 
@@ -94,4 +97,29 @@ export const clickQuestionBookmarkAction = async (
   }
 
   return response.json();
+};
+
+export const patchQuestion = async (
+  questionId: number,
+  body: IPatchQuestionPayload,
+): Promise<unknown> => {
+  const response = await apiServer.patch(
+    `api/v1/admin/questions/${questionId}`,
+    {
+      body: JSON.stringify(body),
+      cache: 'no-store',
+    },
+  );
+
+  if (response.status === 401) {
+    return reissueAccessToken(() => patchQuestion(questionId, body));
+  }
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    cookies().set('errorMessage', errorData.errorMessage, {
+      maxAge: 5,
+    });
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
 };

@@ -2,7 +2,6 @@ import { apiClient } from '@/utils/apiClient';
 import { apiServer } from '@/utils/apiServer';
 
 import { IGetQuestionByIdParams } from '../types/params';
-import { IPatchQuestionPayload } from '../types/payload';
 import {
   IClickQuestionBookmark,
   IClickQuestionHeart,
@@ -97,20 +96,6 @@ export const clickQuestionBookmark = async (
   }
 
   return response.json();
-};
-
-export const patchQuestion = async (
-  questionId: number,
-  body: IPatchQuestionPayload,
-) => {
-  const response = await apiClient.patch(`api/v1/questions/${questionId}`, {
-    body: JSON.stringify(body),
-    cache: 'no-store',
-  });
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
 };
 
 export const deleteQuestion = async (questionId: number) => {
