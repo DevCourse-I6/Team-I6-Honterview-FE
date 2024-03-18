@@ -11,7 +11,7 @@ const MobileNavigation = () => {
 
   return (
     <nav>
-      <ul className="flex flex-col justify-center">
+      <ul className="flex flex-col items-center justify-center">
         {navigationItems.map(({ url, replace, scroll, title }) => {
           const enabledStyle = pathname === url ? 'text-primaries-primary' : '';
 

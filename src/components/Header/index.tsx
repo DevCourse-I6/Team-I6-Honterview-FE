@@ -13,7 +13,7 @@ const Header = async () => {
       <Navigation />
       <LinkButtons />
       <HamburgerMenu>
-        <div className="absolute right-0 top-[7rem] z-10 flex flex-col border text-medium font-medium md:hidden">
+        <div className="absolute right-0 top-[7rem] z-10 flex flex-col border bg-white text-medium font-medium md:hidden">
           <MobileNavigation />
           <DividerHorizontal />
           <MobileLinkButtons />
