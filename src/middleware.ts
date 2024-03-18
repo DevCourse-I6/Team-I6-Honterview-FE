@@ -17,8 +17,14 @@ export const middleware = async (request: NextRequest) => {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }
+
+  if (pathname.startsWith('/dev/')) {
+    if (process.env.NODE_ENV === 'production') {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+  }
 };
 
 export const config = {
-  matcher: ['/auth/login', '/interview/video/:interviewId*'],
+  matcher: ['/auth/login', '/interview/video/:interviewId*', '/dev/:path*'],
 };
