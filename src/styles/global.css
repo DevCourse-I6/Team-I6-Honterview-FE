@@ -11,11 +11,11 @@ body {
 }
 
 .wrap {
-  min-height: calc(100vh - 7rem - 9rem);
+  min-height: calc(100vh - 7rem);
 }
 
 .fit-wrap {
-  height: calc(100vh - 7rem - 9rem);
+  height: calc(100vh - 7rem);
 }
 
 ::-webkit-scrollbar {

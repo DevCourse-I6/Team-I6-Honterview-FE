@@ -1,19 +1,28 @@
 'use server';
 
+import { revalidateTag } from 'next/cache';
 import { redirect } from 'next/navigation';
 
 import { IAdminAuthState } from '@/app/admin/(auth)/types';
 import { apiServer } from '@/utils/apiServer';
 
-export const reissueAccessToken = async <T>(callback: () => Promise<T>) => {
-  const response = await apiServer.post('api/v1/auth/reissue');
+export const reissueAccessToken = async <T, F>(
+  callback: () => T,
+  onFail?: () => F,
+) => {
+  const { status, ok } = await apiServer.post('api/v1/auth/reissue');
 
-  if (response.status === 401) {
-    return redirect('/auth/login');
+  if (status === 400 || status === 401) {
+    if (onFail) {
+      return onFail();
+    }
+
+    revalidateTag('userAuth');
+    redirect('/auth/login');
   }
 
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
+  if (!ok) {
+    throw new Error(`HTTP error! status: ${status}`);
   }
 
   return callback();
@@ -68,4 +77,24 @@ export const logInAdmin = async (_: IAdminAuthState, formData: FormData) => {
     status: 'ok',
     message: data.data,
   };
+};
+
+export const logOut = async () => {
+  const { status, ok } = await apiServer.post('api/v1/auth/logout');
+
+  if (status === 400) {
+    return revalidateTag('userAuth');
+  }
+
+  if (status === 401) {
+    return reissueAccessToken<Promise<void>, void>(logOut, () =>
+      revalidateTag('userAuth'),
+    );
+  }
+
+  if (!ok) {
+    throw new Error(`HTTP error! status: ${status}`);
+  }
+
+  return revalidateTag('userAuth');
 };

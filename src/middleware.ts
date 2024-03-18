@@ -1,18 +1,19 @@
-import { cookies } from 'next/headers';
 import { type NextRequest, NextResponse } from 'next/server';
+
+import { getUserAuth } from './libs/services/auth';
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
-  const refreshToken = cookies().get('refreshToken');
+  const loginData = await getUserAuth();
 
   if (pathname.startsWith('/auth/login')) {
-    if (refreshToken) {
+    if (loginData) {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
 
   if (pathname.startsWith('/interview/video')) {
-    if (!refreshToken) {
+    if (!loginData) {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }

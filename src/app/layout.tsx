@@ -4,7 +4,7 @@ import type { Metadata } from 'next';
 import localFont from 'next/font/local';
 import { ToastContainer } from 'react-toastify';
 
-import { Footer, Header } from '@/components/layout';
+import Header from '@/components/Header';
 import MswProvider from '@/mocks/mswProvider';
 import ReactQueryProvider from '@/utils/ReactQueryProvider';
 
@@ -84,7 +84,6 @@ const RootLayout = ({ children }: Readonly<{ children: React.ReactNode }>) => {
             <ToastContainer />
             <Header />
             <main>{children}</main>
-            <Footer />
           </MswProvider>
         </body>
       </html>
