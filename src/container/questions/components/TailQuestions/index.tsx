@@ -20,7 +20,7 @@ const TailQuestions = async ({ questionId }: IProps) => {
           {data.map(({ content, id }) => (
             <li
               key={uuidv4()}
-              className="w-fit cursor-pointer hover:font-medium"
+              className="w-fit cursor-pointer hover:text-black"
             >
               <span className="mr-4 font-bold text-gray-950 opacity-30">Q</span>
               <Link href={`/questions/${id}`}>{content}</Link>

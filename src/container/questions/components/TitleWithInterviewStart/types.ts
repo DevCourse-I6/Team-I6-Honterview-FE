@@ -8,5 +8,7 @@ export interface IProps {
   categoryNames: string[];
   questionId: number;
   heartsCount: number;
+  isHearted: boolean;
+  isBookmarked: boolean;
   categories: ICategory[];
 }
