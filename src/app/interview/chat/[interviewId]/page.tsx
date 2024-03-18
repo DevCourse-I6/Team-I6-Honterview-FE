@@ -1,29 +1,23 @@
-'use client';
-
-import Button from '@/components/button';
-import Input from '@/components/input';
 import InterviewCamera from '@/container/interviewChat/components/interviewCamera';
-import QuestionContent from '@/container/interviewChat/components/questionContent';
+import QuestionChat from '@/container/interviewChat/components/questionChat';
+import QuestionEndButton from '@/container/interviewChat/components/questionChat/components/qeustionEndButton';
 
-const InterviewChatPage = () => {
+import { IProps } from './types';
+
+const InterviewChatPage = ({ params }: IProps) => {
   return (
-    <section className="flex h-[80rem] min-w-[40rem] flex-col gap-8  px-20 py-8">
-      <div className="flex grow flex-col items-center gap-4 px-5 py-8">
-        <InterviewCamera />
-        <QuestionContent />
-        <div className="w-full items-center rounded-2xl md:w-1/2">
-          <Input className="w-full gap-[1rem] bg-white ">
-            <Input.Text
-              className="py-0"
-              placeholder="궁금한 점을 검색해보세요."
-            />
-            <Button className="w-[8rem] px-4 py-2">보내기</Button>
-          </Input>
+    <section>
+      <form className="fit-wrap flex min-w-[30rem] gap-8 px-10 py-8 md:px-[25%]">
+        <div className="flex grow flex-col items-center gap-4 bg-white">
+          <InterviewCamera />
+          <div className="flex w-[90%] basis-4/6 flex-col gap-4 overflow-y-scroll">
+            <QuestionChat interviewId={params.interviewId} />
+          </div>
+          <div className="flex justify-center gap-8">
+            <QuestionEndButton interviewId={params.interviewId} />
+          </div>
         </div>
-        <div className="flex justify-center gap-8">
-          <Button className="px-4 py-2">면접 종료</Button>
-        </div>
-      </div>
+      </form>
     </section>
   );
 };
