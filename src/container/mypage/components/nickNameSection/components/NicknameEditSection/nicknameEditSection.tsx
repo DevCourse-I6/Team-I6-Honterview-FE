@@ -77,6 +77,7 @@ const NicknameEditSection = ({
             <Button
               styleType={ButtonType.Type3}
               className="h-[3rem] w-[7rem] px-0 text-[1.3rem]"
+              onClick={closeModal}
             >
               취소
             </Button>
