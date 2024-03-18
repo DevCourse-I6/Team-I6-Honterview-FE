@@ -36,25 +36,29 @@ const PreSettingButtonSection = ({
     const questionId = isNew ? await createFirstQuestion() : firstQuestion?.id;
     const interviewId = await createNewInterview(questionId);
 
+    if (!interviewId) {
+      return;
+    }
+
     const nextUrl =
       interviewType === 'RECORD'
         ? `/interview/video/${interviewId}`
-        : `interview/chat/${interviewId}`;
+        : `/interview/chat/${interviewId}`;
 
     router.push(nextUrl);
   };
 
   return (
-    <div className="absolute bottom-0 flex gap-[1rem]">
+    <div className="absolute bottom-[2rem] flex gap-[1rem] tablet:bottom-[3rem]">
       <Button
         styleType={ButtonType.Type3}
-        className="mb-[3rem] h-[4rem] w-[9rem] px-[0rem]"
+        className="h-[4rem] w-[9rem] px-[0rem]"
         onClick={handlePrevButton}
       >
         이전
       </Button>
       <Button
-        className="mb-[3rem] h-[4rem] w-[9rem] px-[0rem]"
+        className="h-[4rem] w-[9rem] px-[0rem]"
         onClick={handleNextButton}
         disabled={!isNextButtonOn}
       >

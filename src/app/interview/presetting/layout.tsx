@@ -2,7 +2,7 @@ const PresettingLayout = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {
   return (
-    <div className="wrap flex items-center justify-center bg-opacity-10">
+    <div className="flex h-[calc(100vh-7rem)] items-center justify-center bg-opacity-10">
       {children}
     </div>
   );

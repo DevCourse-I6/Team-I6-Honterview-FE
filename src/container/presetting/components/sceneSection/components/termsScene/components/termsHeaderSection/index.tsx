@@ -6,10 +6,9 @@ const TermsHeaderSection = () => {
       <h1 className="mb-[1rem] flex w-full justify-center text-extraLarge font-bold">
         {TERMS_HEADER}
       </h1>
-      <div className="mb-[5rem] w-full flex-col">
-        <p className="flex justify-center ">{TERMS_DESCRIPTION[0]}</p>
-        <p className="flex justify-center">{TERMS_DESCRIPTION[1]}</p>
-      </div>
+      <p className="mb-[3rem] flex w-full justify-center tablet:mb-[5rem]">
+        {TERMS_DESCRIPTION}
+      </p>
     </>
   );
 };

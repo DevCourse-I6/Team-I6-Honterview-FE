@@ -6,11 +6,12 @@ const VideoCheckScene = () => {
   const { previewStream, isLoading, error } = useVideoCheckScene();
 
   return (
-    <div className="mt-[1rem] h-full w-full">
+    <div className="mt-[1rem] flex items-center justify-center">
       <MirrorView
         stream={previewStream}
         isLoading={isLoading}
         error={error}
+        className="h-[45rem]"
       />
     </div>
   );

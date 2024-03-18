@@ -24,7 +24,7 @@ const useAutocompleteBox = () => {
   }, [autoItemRef, keyboardIndex]);
 
   const handleKeywordtHighlight = (name: string) => {
-    const value = name.length > 32 ? `${name.slice(0, 32)}...` : name;
+    const value = name.length > 30 ? `${name.slice(0, 30)}...` : name;
     const nameArray = Array.from(value);
     const index = value.toLowerCase().indexOf(inputValue.toLowerCase());
 

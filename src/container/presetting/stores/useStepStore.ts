@@ -15,6 +15,12 @@ const useStepStore = create<StepState>((set) => ({
   setChattingStep: () => set(() => ({ totalStep: 2 })),
   setNextButtonOn: () => set(() => ({ isNextButtonOn: true })),
   setNextButtonOff: () => set(() => ({ isNextButtonOn: false })),
+  resetAllStepDatas: () =>
+    set(() => ({
+      totalStep: 4,
+      currentStep: 1,
+      isNextButtonOn: false,
+    })),
 }));
 
 export default useStepStore;
