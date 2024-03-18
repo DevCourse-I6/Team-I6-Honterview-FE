@@ -5,12 +5,12 @@ import { IUseAnswerVisibilityStatusStore } from './types';
 export const useAnswerVisibilityStatusStore =
   create<IUseAnswerVisibilityStatusStore>((set) => ({
     answerIdList: [],
-    setInitialAnswerList: (answerLength) =>
-      set(() => ({
-        answerIdList: Array.from({ length: answerLength }, (_, i) => ({
-          answerId: i + 1,
-          visibility: 'PRIVATE',
-        })),
+    setInitialAnswerList: (answerId) =>
+      set((state) => ({
+        answerIdList: [
+          ...state.answerIdList,
+          { answerId, visibility: 'PRIVATE' },
+        ],
       })),
     setAnswerIdList: (answerId) =>
       set((state) => {
@@ -31,4 +31,9 @@ export const useAnswerVisibilityStatusStore =
 
         return { answerIdList: newAnswerIdList };
       }),
+
+    clearAnswerIdList: () =>
+      set(() => ({
+        answerIdList: [],
+      })),
   }));
