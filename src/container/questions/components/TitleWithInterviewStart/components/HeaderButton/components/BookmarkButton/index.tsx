@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { BookmarkSimpleIcon } from '@/components/icon';
 import { notify } from '@/components/toast';
 import { clickQuestionBookmarkAction } from '@/libs/actions/question';
+import getErrorMessage from '@/utils/getErrorMessage';
 
 import { IProps } from './types';
 
@@ -23,9 +24,7 @@ const BookmarkButton = ({
       } = await clickQuestionBookmarkAction(questionId);
       setIsBookmark(isBookmarked);
     } catch (error) {
-      if (typeof error === 'string') {
-        notify('error', error);
-      }
+      notify('error', getErrorMessage());
     } finally {
       setIsLoading(false);
     }

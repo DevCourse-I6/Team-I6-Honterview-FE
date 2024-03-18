@@ -5,6 +5,7 @@ import { useState } from 'react';
 import { FavoriteIcon } from '@/components/icon';
 import { notify } from '@/components/toast';
 import { clickQuestionHeartAction } from '@/libs/actions/question';
+import getErrorMessage from '@/utils/getErrorMessage';
 
 import { IProps } from './types';
 
@@ -26,9 +27,7 @@ const HeartButton = ({
       setIsHeart(isHearted);
       setHeartsCount(questionHeartCount);
     } catch (error) {
-      if (typeof error === 'string') {
-        notify('error', error);
-      }
+      notify('error', getErrorMessage());
     } finally {
       setIsLoading(false);
     }

@@ -1,5 +1,7 @@
 'use server';
 
+import { cookies } from 'next/headers';
+
 import {
   IResponsePostTailQuestion,
   IResponseRePostTailQuestion,
@@ -69,6 +71,10 @@ export const clickQuestionHeartAction = async (
   }
 
   if (!response.ok) {
+    const errorData = await response.json();
+    cookies().set('errorMessage', errorData.errorMessage, {
+      maxAge: 5,
+    });
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
@@ -90,6 +96,10 @@ export const clickQuestionBookmarkAction = async (
   }
 
   if (!response.ok) {
+    const errorData = await response.json();
+    cookies().set('errorMessage', errorData.errorMessage, {
+      maxAge: 5,
+    });
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
