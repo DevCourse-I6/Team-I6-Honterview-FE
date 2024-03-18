@@ -35,7 +35,7 @@ const ContentSection = () => {
         />
         <Pagination
           defaultPage={currentBookmarkPage}
-          limit={10}
+          limit={5}
           total={bookmarkItemCount}
           onPageChange={setCurrentBookmarkPage}
           className={`${(!isBookmarkOn || !bookmarkItemCount) && 'hidden'} gap-[1rem] tablet:gap-6`}
@@ -46,7 +46,7 @@ const ContentSection = () => {
             <span className="w-[3rem]" />
           )}
           <Pagination.PageButtons className="h-[3rem] min-w-[3rem] py-0" />
-          {currentBookmarkPage < Math.ceil(bookmarkItemCount / 10) ? (
+          {currentBookmarkPage < Math.ceil(bookmarkItemCount / 5) ? (
             <Pagination.NextButton className="flex w-[3rem] items-center justify-start" />
           ) : (
             <span className="w-[3rem]" />
