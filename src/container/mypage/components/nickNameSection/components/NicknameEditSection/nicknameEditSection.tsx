@@ -14,6 +14,7 @@ const NicknameEditSection = ({
   onChangeNickname,
 }: NicknameEditSectionProps) => {
   const [nickname, setNickname] = useState(currentNickname);
+
   const onSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
     e.preventDefault();
     const regex = /^[가-힣a-zA-Z0-9\\s]{2,20}$/;
@@ -22,7 +23,10 @@ const NicknameEditSection = ({
       return;
     }
     if (!regex.test(nickname)) {
-      notify('warning', '닉네임은 한글, 숫자, 영문으로만 이루어져야 합니다');
+      notify(
+        'warning',
+        '닉네임은 한글(자음+모음), 숫자, 영문으로만 이루어져야 합니다',
+      );
       return;
     }
     if (nickname === currentNickname) {
@@ -34,6 +38,7 @@ const NicknameEditSection = ({
     onChangeNickname(nickname);
     closeModal();
   };
+
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = e.target;
     setNickname(value);
@@ -46,7 +51,7 @@ const NicknameEditSection = ({
       </h2>
       <div className="flex flex-col gap-[0.5rem]">
         <div className="w-full text-[1rem] text-text-40">
-          한글, 영문, 숫자 입력 가능 (2~20자)
+          한글(자음+모음), 영문, 숫자 입력 가능 (2~20자)
         </div>
         <form
           className="flex justify-center gap-[0.7rem]"
