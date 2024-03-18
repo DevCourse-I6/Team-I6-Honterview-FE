@@ -6,6 +6,7 @@ import {
 } from '@/types/Response/questions';
 import { apiServer } from '@/utils/apiServer';
 
+import { IClickQuestionHeart } from '../types/response';
 import { reissueAccessToken } from './auth';
 
 export const postTailQuestion = async (
@@ -44,6 +45,27 @@ export const rePostTailQuestion = async (
     return reissueAccessToken(() =>
       rePostTailQuestion(interviewId, prevQuestion),
     );
+  }
+
+  if (!response.ok) {
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  return response.json();
+};
+
+export const clickQuestionHeartAction = async (
+  questionId: number,
+): Promise<IClickQuestionHeart> => {
+  const response = await apiServer.post(
+    `api/v1/questions/${questionId}/hearts`,
+    {
+      cache: 'no-store',
+    },
+  );
+
+  if (response.status === 401) {
+    return reissueAccessToken(() => clickQuestionHeartAction(questionId));
   }
 
   if (!response.ok) {
