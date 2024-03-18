@@ -6,8 +6,6 @@ import { getInterviewResult } from '@/libs/services/interview';
 
 import { IProps } from './types';
 
-// TODO: sangmin // 새로고침 메인으로 이동
-
 const InterviewResultPage = async ({ params }: IProps) => {
   const { interviewId } = params;
   const interviewIdAsNumber = Number(interviewId);
