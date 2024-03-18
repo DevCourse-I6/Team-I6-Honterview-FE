@@ -24,7 +24,7 @@ const QuestionAndAnswer = async ({
   const interviewVideoUrl = isRecord && (await getInterviewVideoUrl(videoId!));
 
   return (
-    <div>
+    <div className="rounded-lg border-[1px] border-dashed border-gray-300 p-5">
       {isRecord && (
         <div className="mb-5 aspect-video rounded bg-slate-50">
           <VideoPlayer
@@ -50,7 +50,7 @@ const QuestionAndAnswer = async ({
           <CheckBoxWrapper answerId={answerId} />
         </div>
       </div>
-      <div className="rounded-lg bg-[#F2F2F2] px-11 py-9">
+      <div className="rounded-lg bg-slate-50 px-11 py-9">
         <p className="text-large ">{answerContent}</p>
       </div>
     </div>

@@ -26,7 +26,7 @@ const QuestionWidthModal = ({
         type="button"
         disabled={!hasMoreQuestions}
         onClick={toggleVisible}
-        className={`mb-10 inline-block text-extraLarge font-bold ${hasMoreQuestions && 'cursor-pointer underline decoration-blue-300 hover:decoration-blue-600'}`}
+        className={`mb-10 inline-block text-left text-extraLarge font-bold ${hasMoreQuestions && 'cursor-pointer underline decoration-blue-300 hover:decoration-blue-600'}`}
       >
         {questionContent}
       </button>

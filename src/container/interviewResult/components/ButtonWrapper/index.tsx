@@ -1,7 +1,6 @@
 'use client';
 
 import { useMutation } from '@tanstack/react-query';
-import { useRouter } from 'next/navigation';
 
 import Button from '@/components/button';
 import { notify } from '@/components/toast';
@@ -11,7 +10,6 @@ import { useAnswerVisibilityStatusStore } from '../../stores';
 import { IProps } from './types';
 
 const ButtonWrapper = ({ interviewId }: IProps) => {
-  const router = useRouter();
   const { answerIdList } = useAnswerVisibilityStatusStore();
   const { mutate, isPending } = useMutation({
     mutationFn: () => patchInterviewVisibility(interviewId, answerIdList),
@@ -24,15 +22,13 @@ const ButtonWrapper = ({ interviewId }: IProps) => {
   });
 
   return (
-    <>
-      <Button onClick={() => router.push('/')}>메인으로</Button>
-      <Button
-        disabled={isPending}
-        onClick={() => mutate()}
-      >
-        저장하기
-      </Button>
-    </>
+    <Button
+      className="w-full"
+      disabled={isPending}
+      onClick={() => mutate()}
+    >
+      저장하기
+    </Button>
   );
 };
 

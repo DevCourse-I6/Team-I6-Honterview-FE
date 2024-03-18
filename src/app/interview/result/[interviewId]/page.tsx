@@ -17,18 +17,23 @@ const InterviewResultPage = async ({ params }: IProps) => {
   } = await getInterviewResult(interviewIdAsNumber);
 
   return (
-    <div className="m-auto flex max-w-7xl flex-col gap-10">
-      {questionsAndAnswers.map((questionAndAnswerData) => (
-        <QuestionAndAnswer
-          key={uuidv4()}
-          questionAndAnswerData={questionAndAnswerData}
-          answerType={answerType}
-        />
-      ))}
-      <div className="flex justify-center gap-20">
-        <ButtonWrapper interviewId={interviewIdAsNumber} />
+    <>
+      <div className="mb-20 flex items-center gap-5">
+        <h1 className=" text-tripleLarge font-semibold">면접 결과</h1>
       </div>
-    </div>
+      <div className="flex max-w-7xl flex-col gap-10">
+        {questionsAndAnswers.map((questionAndAnswerData) => (
+          <QuestionAndAnswer
+            key={uuidv4()}
+            questionAndAnswerData={questionAndAnswerData}
+            answerType={answerType}
+          />
+        ))}
+        <div className="flex justify-center gap-20">
+          <ButtonWrapper interviewId={interviewIdAsNumber} />
+        </div>
+      </div>
+    </>
   );
 };
 
