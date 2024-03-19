@@ -9,9 +9,9 @@ const LinkButtons = async () => {
   const loginData = await getUserAuth();
 
   return (
-    <div className="hidden items-center justify-end gap-6 text-medium md:flex">
+    <div className="hidden min-w-[10%] items-center justify-end gap-6 md:flex">
       {loginData ? (
-        <div className="flex items-center justify-end gap-6 text-medium">
+        <div className="flex items-center justify-end gap-6">
           <Link href="/mypage">마이페이지</Link>
           <DividerVertical />
           <LogoutButton />
