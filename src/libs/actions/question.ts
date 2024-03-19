@@ -17,10 +17,13 @@ export const postTailQuestion = async (
   prevQuestion: string,
   prevAnswer: string,
 ): Promise<IResponsePostTailQuestion> => {
-  const response = await apiServer.post(`api/v1/gpt/${interviewId}`, {
-    body: JSON.stringify({ prevQuestion, prevAnswer }),
-    cache: 'no-store',
-  });
+  const response = await apiServer.post(
+    `api/v1/interviews/gpt/${interviewId}`,
+    {
+      body: JSON.stringify({ prevQuestion, prevAnswer }),
+      cache: 'no-store',
+    },
+  );
 
   if (response.status === 401) {
     return reissueAccessToken(() =>
@@ -39,10 +42,13 @@ export const rePostTailQuestion = async (
   interviewId: number,
   prevQuestion: string,
 ): Promise<IResponseRePostTailQuestion> => {
-  const response = await apiServer.post(`api/v1/gpt/${interviewId}/new`, {
-    body: JSON.stringify({ prevQuestion }),
-    cache: 'no-store',
-  });
+  const response = await apiServer.post(
+    `api/v1/interviews/gpt/${interviewId}/new`,
+    {
+      body: JSON.stringify({ prevQuestion }),
+      cache: 'no-store',
+    },
+  );
 
   if (response.status === 401) {
     return reissueAccessToken(() =>
