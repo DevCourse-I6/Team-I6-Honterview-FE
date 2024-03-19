@@ -5,7 +5,7 @@ const StepBar = ({ isPassed }: StepBarProps) => {
 
   return (
     <div
-      className={`inline-flex ${bgColor} h-[0.8rem] w-[11rem] rounded-3xl`}
+      className={`mb-[2.5rem] hidden tablet:inline-flex ${bgColor} h-[0.8rem] w-[11rem] rounded-3xl`}
     />
   );
 };

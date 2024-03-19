@@ -44,7 +44,13 @@ export const mypageAPI = async (
 };
 
 export const getMyInterview = (page: number) =>
-  mypageAPI('GET', `api/v1/mypage/interviews?page=${page}&size=10`);
+  mypageAPI('GET', `api/v1/mypage/interviews?page=${page}`);
 export const getMyBookmarkQuestions = (page: number) =>
-  mypageAPI('GET', `api/v1/mypage/bookmarks?page=${page}&size=10`);
-export const logoutAPI = () => mypageAPI('POST', 'api/v1/auth/logout');
+  mypageAPI('GET', `api/v1/mypage/bookmarks?page=${page}`);
+export const getMyInfo = () => mypageAPI('GET', 'api/v1/mypage/me');
+export const editMyNickname = (nickname: string) =>
+  mypageAPI('PATCH', 'api/v1/mypage/me', {
+    body: JSON.stringify({
+      nickname,
+    }),
+  });

@@ -26,13 +26,15 @@ const usePresetting = () => {
     return createQuestion(
       firstQuestion.name,
       firstQuestionTags.map(({ id }) => id as number),
-    ).then(({ data }) => {
-      setFirstQuestion({
-        id: data.id,
-        name: data.content,
-      });
-      return data.id;
-    });
+    )
+      .then(({ data }) => {
+        setFirstQuestion({
+          id: data.id,
+          name: data.content,
+        });
+        return data.id;
+      })
+      .catch((e) => notify('error', e.message));
   };
 
   const createNewInterview = async (firstQuestionId: number) => {
@@ -45,18 +47,22 @@ const usePresetting = () => {
       return createInterviewByChat({
         questionCount,
         firstQuestionId,
-      }).then(({ data }) => {
-        return data;
-      });
+      })
+        .then((res) => {
+          return res.data;
+        })
+        .catch((e) => notify('error', e.message));
     }
 
     return createInterviewByVideo({
       questionCount,
       answerTime,
       firstQuestionId,
-    }).then(({ data }) => {
-      return data;
-    });
+    })
+      .then(({ data }) => {
+        return data;
+      })
+      .catch((e) => notify('error', e.message));
   };
 
   return { createFirstQuestion, createNewInterview };

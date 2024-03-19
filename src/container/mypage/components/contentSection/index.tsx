@@ -35,14 +35,22 @@ const ContentSection = () => {
         />
         <Pagination
           defaultPage={currentBookmarkPage}
-          limit={10}
+          limit={5}
           total={bookmarkItemCount}
           onPageChange={setCurrentBookmarkPage}
           className={`${(!isBookmarkOn || !bookmarkItemCount) && 'hidden'} gap-[1rem] tablet:gap-6`}
         >
-          <Pagination.PrevButton className="w-[1rem]" />
+          {currentBookmarkPage > 1 ? (
+            <Pagination.PrevButton className="w-[1rem]" />
+          ) : (
+            <span className="w-[3rem]" />
+          )}
           <Pagination.PageButtons className="h-[3rem] min-w-[3rem] py-0" />
-          <Pagination.NextButton />
+          {currentBookmarkPage < Math.ceil(bookmarkItemCount / 5) ? (
+            <Pagination.NextButton className="flex w-[3rem] items-center justify-start" />
+          ) : (
+            <span className="w-[3rem]" />
+          )}
         </Pagination>
       </>
       <>
@@ -56,11 +64,19 @@ const ContentSection = () => {
           limit={10}
           total={resultItemCount}
           onPageChange={setCurrentResultPage}
-          className={`${(!isResultOn || !resultItemCount) && 'hidden'} gap-[0.5rem] tablet:gap-6`}
+          className={`${(!isResultOn || !resultItemCount) && 'hidden'} gap-[0.4rem] text-medium tablet:gap-6 tablet:text-large`}
         >
-          <Pagination.PrevButton className="w-[1rem]" />
-          <Pagination.PageButtons className="h-[3rem] min-w-[3rem] py-0" />
-          <Pagination.NextButton />
+          {currentResultPage > 1 ? (
+            <Pagination.PrevButton className="flex w-[3rem] items-center justify-end" />
+          ) : (
+            <span className="w-[3rem]" />
+          )}
+          <Pagination.PageButtons className="flex h-[3rem] min-w-[3rem] items-center justify-center py-0 " />
+          {currentResultPage < Math.ceil(resultItemCount / 10) ? (
+            <Pagination.NextButton className="flex w-[3rem] items-center justify-start" />
+          ) : (
+            <span className="w-[3rem]" />
+          )}
         </Pagination>
       </>
     </div>

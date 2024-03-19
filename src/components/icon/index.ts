@@ -22,4 +22,5 @@ export { default as Reset } from './svg/Reset.svg';
 export { default as Search } from './svg/Search.svg';
 export { default as SpinnerIcon } from './svg/Spinner.svg';
 export { default as SuccessIcon } from './svg/Success.svg';
+export { default as ThreeDotsIcon } from './svg/ThreeDots.svg';
 export { default as XIcon } from './svg/X.svg';

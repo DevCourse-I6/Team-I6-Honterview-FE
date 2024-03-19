@@ -14,29 +14,26 @@ const TermsDescriptionSection = () => {
     <>
       <p className="mb-[1rem] font-semibold">{TERMS_TITLE}</p>
       <div className="mb-[1rem] flex">
-        <div className="w-[23rem] border border-r-0">
-          <div className="bg-background-20 py-[1rem] pl-[1rem]">
+        <div className="w-[25rem] border border-r-0">
+          <div className="flex h-[6.5rem] items-center bg-background-20 p-[1rem] tablet:h-fit">
             {TERMS_GOAL_TITLE}
           </div>
-          <div className="h-[5rem] py-[1rem] pl-[1rem]">{TERMS_GOAL_TEXT}</div>
+          <div className="h-[5rem] p-[1rem]">{TERMS_GOAL_TEXT}</div>
         </div>
-        <div className="w-[32rem] border border-r-0">
-          <div className="bg-background-20 py-[1rem] pl-[1rem]">
+        <div className="w-[33rem] border border-r-0">
+          <div className="flex h-[6.5rem] items-center bg-background-20 p-[1rem] tablet:h-fit">
             {TERMS_TARGET_TITLE}
           </div>
-          <div className="py-[1rem] pl-[1rem]">{TERMS_TARGET_TEXT}</div>
+          <div className="p-[1rem]">{TERMS_TARGET_TEXT}</div>
         </div>
-        <div className="w-[20rem] border">
-          <div className="bg-background-20 py-[1rem] pl-[1rem]">
+        <div className="w-[18rem] border">
+          <div className="bg-background-20 p-[1rem]">
             {TERMS_DURATION_TITLE}
           </div>
-          <ul className="py-[1rem] pl-[1rem]">
-            <li>{TERMS_DURATION_TEXT[0]}</li>
-            <li>{TERMS_DURATION_TEXT[1]}</li>
-          </ul>
+          <span className="flex p-[1rem]">{TERMS_DURATION_TEXT}</span>
         </div>
       </div>
-      <div className="mb-[5rem]">{TERMS_DENY_TEXT}</div>
+      <div className="mb-[2rem] tablet:mb-[5rem]">{TERMS_DENY_TEXT}</div>
     </>
   );
 };

@@ -13,22 +13,25 @@ const useVideoCheckScene = () => {
     previewStream,
     error,
     pauseRecording,
+    stopRecording,
   } = useCamera();
 
-  const { setNextButtonOn, setNextButtonOff } = useStepStore();
+  const { setNextButtonOn, setNextButtonOff, currentStep } = useStepStore();
 
   useEffect(() => {
+    if (currentStep !== 4) {
+      stopRecording();
+      return;
+    }
     startRecording();
-  }, []);
+    pauseRecording();
 
-  useEffect(() => {
     if (isRecording || status === 'paused') {
       setNextButtonOn();
-      pauseRecording();
     } else {
       setNextButtonOff();
     }
-  }, [isRecording]);
+  }, [isRecording, currentStep]);
 
   return {
     previewStream,

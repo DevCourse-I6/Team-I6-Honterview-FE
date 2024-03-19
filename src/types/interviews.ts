@@ -4,6 +4,7 @@ export interface IInterview {
   timer: number;
   answerType: 'TEXT' | 'RECORD';
   questionCount: number;
+  status: 'IN_PROGRESS' | 'COMPLETED';
   questionsAndAnswers: IQuestionAndAnswer[];
   categoryNames: string[];
 }

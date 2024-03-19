@@ -1,6 +1,9 @@
+import '../style.css';
+
 import { useEffect, useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
+import { notify } from '@/components/toast';
 import { getMyInterview } from '@/services/mypage';
 
 import ResultItem from './components/ResultItem';
@@ -16,10 +19,12 @@ const ResultSection = ({
   );
 
   useEffect(() => {
-    getMyInterview(currentPage).then(({ data }) => {
-      setResultDatas(data.data);
-      setItemCount(data.totalElements);
-    });
+    getMyInterview(currentPage)
+      .then(({ data }) => {
+        setResultDatas(data.data);
+        setItemCount(data.totalElements);
+      })
+      .catch((e) => notify('error', e.message));
   }, [currentPage, setItemCount]);
 
   return (
@@ -28,7 +33,7 @@ const ResultSection = ({
     >
       {resultDatas?.map((content) => (
         <div
-          className="flex w-full flex-col gap-[1rem] rounded-xl border border-dashed border-gray-300"
+          className="mypage_card_item flex w-full flex-col gap-[1rem] rounded-xl border border-dashed border-gray-300"
           key={uuidv4()}
         >
           <ResultItem
@@ -36,6 +41,7 @@ const ResultSection = ({
             firstQuestionContent={content.firstQuestionContent}
             categoryNames={content.categoryNames}
             createdAt={content.createdAt}
+            answerType={content.answerType}
           />
         </div>
       ))}

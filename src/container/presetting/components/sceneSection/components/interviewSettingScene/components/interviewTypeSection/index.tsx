@@ -10,12 +10,12 @@ const InterviewTypeSection = ({ setNextItemOn }: InterviewTypeSectionProps) => {
   const { setNextButtonOn } = useStepStore();
 
   const handleCameraButton = () => {
-    setNextItemOn();
+    setNextItemOn(true);
     setInterviewTypeCamera();
   };
 
   const handleChatButton = () => {
-    setNextItemOn();
+    setNextItemOn(false);
     setInterviewTypeChatting();
     setNextButtonOn();
   };

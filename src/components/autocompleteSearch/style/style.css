@@ -1,5 +1,6 @@
 .autoInput::-webkit-scrollbar,
-.autobox ::-webkit-scrollbar {
+.autobox::-webkit-scrollbar,
+.auto-tag::-webkit-scrollbar {
   display: none;
 }
 

@@ -1,26 +1,40 @@
 'use client';
 
-import { MirrorView, useCamera } from '@/components/camera';
+import React, { useState } from 'react';
+
+import MirrorView from '@/components/camera/components/MirrorView';
 import { DisabledCamera } from '@/components/icon';
+import Toggle from '@/components/toggle';
+import useVideoCheckScene from '@/container/presetting/components/sceneSection/components/videoCheckScene/useVideoCheckScene';
 
 const InterviewCamera = () => {
-  const { isLoading, isRecording, previewStream } = useCamera();
-
-  // TODO: 반드시 카메라를 켜야 진행이 된다
-  if (!isLoading && !isRecording) {
-    return (
-      <div className="center flex h-1/3 w-full items-center justify-center rounded-2xl bg-background-20 md:h-1/3 md:w-2/5 ">
-        <DisabledCamera className="h-[5rem] w-[5rem]" />
-      </div>
-    );
-  }
+  const { previewStream, isLoading, error } = useVideoCheckScene();
+  const [camerraToggle, setCamerraToggle] = useState(true);
 
   return (
-    <MirrorView
-      stream={previewStream}
-      className="h-full w-full"
-      isLoading={false}
-    />
+    <div className="relative h-[20rem] w-[40rem] rounded-2xl bg-background-20">
+      {!isLoading && camerraToggle ? (
+        <div className="flex h-full w-full flex-col items-center justify-center">
+          <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+            <DisabledCamera className="h-[5rem] w-[5rem]" />
+          </div>
+          <div className="absolute bottom-0 right-0 m-2">
+            <Toggle onChange={() => setCamerraToggle(!camerraToggle)} />
+          </div>
+        </div>
+      ) : (
+        <>
+          <MirrorView
+            stream={previewStream}
+            isLoading={isLoading}
+            error={error}
+          />
+          <div className="absolute bottom-0 right-0 m-2">
+            <Toggle onChange={() => setCamerraToggle(!camerraToggle)} />
+          </div>
+        </>
+      )}
+    </div>
   );
 };
 

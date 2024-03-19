@@ -23,8 +23,19 @@ export const middleware = async (request: NextRequest) => {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
+
+  if (pathname.startsWith('/interview/chat')) {
+    if (!loginData) {
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+    }
+  }
 };
 
 export const config = {
-  matcher: ['/auth/login', '/interview/video/:interviewId*', '/dev/:path*'],
+  matcher: [
+    '/auth/login',
+    '/interview/video/:interviewId*',
+    '/dev/:path*',
+    '/interview/chat/:interviewId*',
+  ],
 };
