@@ -6,6 +6,8 @@ const useAutocompleteInput = ({
   selectedList,
 }: AutocompleteInputProps) => {
   const {
+    autoBoxRef,
+    autoItemRef,
     isListVisible,
     setIsListVisible,
     setInputValue,
@@ -15,13 +17,14 @@ const useAutocompleteInput = ({
     setKeyboardIndex,
     setAutocompleteList,
     setIsCreateVisible,
+    handleItemClick,
   } = useAutocomplete();
 
   const handleInputClick = () => {
     if (!inputValue) {
-      return;
+      setAutocompleteList(totalDatas);
     }
-    if (autocompleteList.length > 0) {
+    if (autocompleteList.length > 0 || !inputValue) {
       setIsListVisible(true);
     }
     setIsCreateVisible(true);
@@ -47,17 +50,63 @@ const useAutocompleteInput = ({
             return data.id === id;
           }).length),
     );
-    setAutocompleteList(newList.slice(0, 5));
+    setAutocompleteList(newList);
     newList.length > 0 ? setIsListVisible(true) : setIsListVisible(false);
   };
 
+  const handleKeyEvent = (key: string) => {
+    if (keyboardIndex === -1 && key === 'ArrowDown') {
+      setKeyboardIndex(0);
+    }
+    if (!isListVisible || !autoBoxRef?.current || !autoItemRef?.current) {
+      return;
+    }
+    switch (key) {
+      case 'ArrowUp':
+        if (keyboardIndex === 0) {
+          setKeyboardIndex(autocompleteList.length - 1);
+          autoBoxRef.current.scrollTop = autoBoxRef.current.scrollHeight;
+          break;
+        }
+        setKeyboardIndex(keyboardIndex - 1);
+
+        if (keyboardIndex - 1 < autocompleteList.length - 5) {
+          autoBoxRef.current.scrollTop -= autoItemRef.current.scrollHeight;
+        }
+        break;
+      case 'ArrowDown':
+        if (keyboardIndex === autocompleteList.length - 1) {
+          setKeyboardIndex(0);
+          autoBoxRef.current.scrollTop = 0;
+          break;
+        }
+
+        setKeyboardIndex(keyboardIndex + 1);
+        if (keyboardIndex + 1 >= 5) {
+          autoBoxRef.current.scrollTop += autoItemRef.current.offsetHeight;
+        }
+
+        break;
+      case 'Enter':
+        if (keyboardIndex < 0) {
+          return;
+        }
+        handleItemClick(autocompleteList[keyboardIndex]);
+        break;
+      default:
+        break;
+    }
+  };
+
   return {
+    handleKeyEvent,
     handleChangeInput,
     handleInputClick,
     isListVisible,
     inputValue,
     keyboardIndex,
     setKeyboardIndex,
+    lastKeyboardIndex: autocompleteList.length - 1,
   };
 };
 

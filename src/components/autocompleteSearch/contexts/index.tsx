@@ -15,6 +15,7 @@ import { AutocompleteContextProps, AutocompleteProviderProps } from './type';
 const AutocompleteContext = createContext<AutocompleteContextProps>({
   autocompleteRef: null,
   autoItemRef: null,
+  autoBoxRef: null,
   isListVisible: false,
   isCreateVisible: false,
   setIsCreateVisible: () => {},
@@ -47,6 +48,7 @@ const AutocompleteProvider = ({
   }) as RefObject<HTMLDivElement>;
 
   const autoItemRef = useRef(null);
+  const autoBoxRef = useRef(null);
 
   const value = useMemo(() => {
     const handleItemClick = (item: AutocompleteDataType) => {
@@ -57,6 +59,7 @@ const AutocompleteProvider = ({
     return {
       autocompleteRef,
       autoItemRef,
+      autoBoxRef,
       isListVisible,
       setIsListVisible,
       inputValue,
