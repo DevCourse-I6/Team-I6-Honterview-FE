@@ -4,8 +4,8 @@ import './style.css';
 
 import MainIntroSection from './components/introSection';
 import MainOutroSection from './components/outroSection';
-import MainQuestionListSection from './components/questionListSection';
-import MainQuestionDetailSection from './components/questionsDetailSection';
+import MainQuestionListSection from './components/questionsSection/questionListSection';
+import MainQuestionDetailSection from './components/questionsSection/questionsDetailSection';
 import MainScreenShotsSection from './components/screenShotsSection';
 
 const Main = () => {
