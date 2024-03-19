@@ -1,18 +1,11 @@
-import { getInterviewVideoUrl } from '@/libs/services/files';
 import { getQuestionById } from '@/libs/services/questions';
-import { IGetVideoDownLoadUrl } from '@/libs/types/response';
 
 import CheckBoxWrapper from '../CheckBoxWrapper';
-import DownLoadWrapper from '../DownLoadWrapper';
 import QuestionWidthModal from '../QuestionWidthModal';
-import VideoPlayer from '../VideoPlayer';
 import { IProps } from './types';
 
-const QuestionAndAnswer = async ({
-  questionAndAnswerData,
-  answerType,
-}: IProps) => {
-  const { videoId, questionContent, questionId, answerId, answerContent } =
+const QuestionAndAnswer = async ({ questionAndAnswerData }: IProps) => {
+  const { questionContent, questionId, answerId, answerContent } =
     questionAndAnswerData;
   const questionInitialData = await getQuestionById({
     questionId,
@@ -20,19 +13,8 @@ const QuestionAndAnswer = async ({
     size: 5,
   });
 
-  const isRecord = answerType === 'RECORD';
-  const interviewVideoUrl = isRecord && (await getInterviewVideoUrl(videoId!));
-
   return (
     <div className="rounded-lg border-[1px] border-dashed border-gray-300 p-5">
-      {isRecord && (
-        <div className="mb-5 aspect-video rounded bg-slate-50">
-          <VideoPlayer
-            src={(interviewVideoUrl as IGetVideoDownLoadUrl).data.downloadUrl}
-          />
-        </div>
-      )}
-
       <div className="flex w-full justify-between">
         <QuestionWidthModal
           questionContent={questionContent}
@@ -40,13 +22,6 @@ const QuestionAndAnswer = async ({
           questionId={questionId}
         />
         <div className="flex gap-4">
-          {!isRecord && (
-            <DownLoadWrapper
-              interviewVideoUrl={
-                (interviewVideoUrl as IGetVideoDownLoadUrl).data?.downloadUrl
-              }
-            />
-          )}
           <CheckBoxWrapper answerId={answerId} />
         </div>
       </div>
