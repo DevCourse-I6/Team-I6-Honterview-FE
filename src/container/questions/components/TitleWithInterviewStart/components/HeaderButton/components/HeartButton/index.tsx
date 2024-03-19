@@ -1,10 +1,11 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 
 import { FavoriteIcon } from '@/components/icon';
-import { clickQuestionHeart } from '@/libs/services/questions';
+import { notify } from '@/components/toast';
+import { clickQuestionHeartAction } from '@/libs/actions/question';
+import getErrorMessage from '@/utils/getErrorMessage';
 
 import { IProps } from './types';
 
@@ -13,26 +14,35 @@ const HeartButton = ({
   isHearted: initialIsHearted,
   questionHeartCount: initialHeartsCount,
 }: IProps) => {
-  const [isHearted, setIsHearted] = useState(initialIsHearted);
+  const [isHeart, setIsHeart] = useState(initialIsHearted);
   const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
-  const { mutate, isPending } = useMutation({
-    mutationFn: () => clickQuestionHeart(questionId),
-    onSuccess: () => {
-      setIsHearted(!isHearted);
-      setHeartsCount(isHearted ? heartsCount - 1 : heartsCount + 1);
-    },
-  });
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleHeartClick = async () => {
+    setIsLoading(true);
+    try {
+      const {
+        data: { isHearted, questionHeartCount },
+      } = await clickQuestionHeartAction(questionId);
+      setIsHeart(isHearted);
+      setHeartsCount(questionHeartCount);
+    } catch (error) {
+      notify('error', getErrorMessage());
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div className="flex gap-2">
       <span className="text-large">{heartsCount}</span>
       <button
         type="button"
-        disabled={isPending}
-        onClick={() => mutate()}
+        disabled={isLoading}
+        onClick={handleHeartClick}
       >
         <FavoriteIcon
-          className={`${isHearted ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300'}`}
+          className={`${isHeart ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300'}`}
         />
       </button>
     </div>

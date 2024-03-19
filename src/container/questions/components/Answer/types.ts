@@ -6,4 +6,5 @@ export interface IProps {
   answerId: number;
   isHearted: boolean;
   heartsCount: number;
+  questionId: number;
 }

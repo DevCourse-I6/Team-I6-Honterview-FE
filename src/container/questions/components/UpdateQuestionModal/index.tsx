@@ -1,6 +1,5 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -13,7 +12,8 @@ import Modal from '@/components/modal';
 import Tag from '@/components/tag';
 import { notify } from '@/components/toast';
 import { MAX_TAG_COUNT } from '@/container/presetting/components/sceneSection/components/firstQuestionScene/constants';
-import { patchQuestion } from '@/libs/services/questions';
+import { patchQuestion } from '@/libs/actions/admin';
+import getErrorMessage from '@/utils/getErrorMessage';
 
 import { IProps } from './types';
 
@@ -34,21 +34,24 @@ const UpdateQuestionModal = ({
   );
   const router = useRouter();
   const [titleInput, setTitleInput] = useState(questionTitle);
-  const { mutate, isPending } = useMutation({
-    mutationFn: () =>
-      patchQuestion(questionId, {
+  const [isLoading, setIsLoading] = useState(false);
+
+  const handleUpdateClick = async () => {
+    setIsLoading(true);
+    try {
+      await patchQuestion(questionId, {
         content: titleInput,
         categoryIds: selectedList.map((category) => category.id as number),
-      }),
-    onSuccess: () => {
+      });
       notify('success', '질문 수정 완료');
       toggleUpdateModalVisible();
       router.refresh();
-    },
-    onError: (error) => {
-      notify('error', error.message);
-    },
-  });
+    } catch (error) {
+      notify('error', `Error: ${getErrorMessage()}`);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Modal
@@ -99,8 +102,8 @@ const UpdateQuestionModal = ({
       <div className="mt-[110px] flex gap-5">
         <Button
           className="w-1/2"
-          disabled={isPending}
-          onClick={() => mutate()}
+          disabled={isLoading}
+          onClick={handleUpdateClick}
         >
           수정하기
         </Button>

@@ -1,11 +1,13 @@
 'use client';
 
-import { useMutation } from '@tanstack/react-query';
+import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 import { FavoriteIcon } from '@/components/icon';
-import { clickAnswerHeart } from '@/libs/services/answers';
+import { notify } from '@/components/toast';
+import { clickAnswerHeart } from '@/libs/actions/answers';
+import getErrorMessage from '@/utils/getErrorMessage';
 
 import { IProps } from './types';
 
@@ -14,20 +16,27 @@ const Answer = ({
   content,
   className,
   answerId,
-  heartsCount: initialHeartsCount,
+  questionId,
   isHearted: initialIsHearted,
 }: IProps) => {
-  // TODO: sangmin // 유저 정보 isHearted 적용하기
-  const [isHearted, setIsHearted] = useState(initialIsHearted);
-  const [heartsCount, setHeartsCount] = useState(initialHeartsCount);
+  const [isHeart, setIsHeart] = useState(initialIsHearted);
+  const [isLoading, setIsLoading] = useState(false);
+  const queryClient = useQueryClient();
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: () => clickAnswerHeart(answerId),
-    onSuccess: () => {
-      setIsHearted(!isHearted);
-      setHeartsCount(isHearted ? heartsCount - 1 : heartsCount + 1);
-    },
-  });
+  const handleHeartClick = async () => {
+    setIsLoading(true);
+    try {
+      const {
+        data: { isHearted },
+      } = await clickAnswerHeart(answerId);
+      setIsHeart(isHearted);
+      queryClient.invalidateQueries({ queryKey: ['answers', questionId] });
+    } catch (error) {
+      notify('error', getErrorMessage());
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <div
@@ -42,14 +51,13 @@ const Answer = ({
         <div>
           <button
             type="button"
-            disabled={isPending}
-            onClick={() => mutate()}
+            disabled={isLoading}
+            onClick={handleHeartClick}
           >
             <FavoriteIcon
-              className={`${isHearted ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300 '} `}
+              className={`${isHeart ? 'fill-primaries-active' : 'fill-slate-300 hover:fill-blue-300 '} `}
             />
           </button>
-          <span>{heartsCount}</span>
         </div>
       </div>
       <p className="text-[1.8rem] font-light text-[#4e5968]">{content}</p>

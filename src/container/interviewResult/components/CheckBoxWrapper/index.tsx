@@ -10,12 +10,14 @@ import { IProps } from './types';
 // TODO: sangmin // 마이페이지에서 결과창으로 다시 접속 시 이전의 공개 여부 체크 여부 결정하기
 
 const CheckBoxWrapper = ({ answerId }: IProps) => {
-  const { setAnswerIdList, setInitialAnswerList } =
+  const { setAnswerIdList, setInitialAnswerList, clearAnswerIdList } =
     useAnswerVisibilityStatusStore();
 
   useEffect(() => {
-    setInitialAnswerList(3);
-  }, [setInitialAnswerList]);
+    setInitialAnswerList(answerId);
+
+    return () => clearAnswerIdList();
+  }, [setInitialAnswerList, answerId, clearAnswerIdList]);
 
   const onChange = (e: TToggleChangeEvent) => {
     setAnswerIdList(Number(e.id));

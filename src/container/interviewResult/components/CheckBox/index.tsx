@@ -28,13 +28,13 @@ const CheckBox = ({ checkId, onChange }: IProps) => {
     <div className="relative min-h-[30px] min-w-[79.57px] select-none">
       <input
         type="checkbox"
-        id={checkId.toString()}
+        id={checkId?.toString()}
         className="hidden"
         checked={checked}
         onChange={handleClick}
       />
       <label
-        htmlFor={checkId.toString()}
+        htmlFor={checkId?.toString()}
         className={twMerge(
           `absolute w-fit cursor-pointer rounded-3xl bg-[#F2F2F2] py-3 pl-14 pr-4 shadow-sm before:content-[''] after:content-[''] ${placeHolderCheck} ${circle} ${checked && check}`,
         )}

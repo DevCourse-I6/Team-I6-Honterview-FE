@@ -1,11 +1,15 @@
 'use server';
 
+import { revalidatePath } from 'next/cache';
+import { cookies } from 'next/headers';
+
 import {
   IResponsePostTailQuestion,
   IResponseRePostTailQuestion,
 } from '@/types/Response/questions';
 import { apiServer } from '@/utils/apiServer';
 
+import { IClickQuestionBookmark, IClickQuestionHeart } from '../types/response';
 import { reissueAccessToken } from './auth';
 
 export const postTailQuestion = async (
@@ -50,5 +54,57 @@ export const rePostTailQuestion = async (
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
+  return response.json();
+};
+
+export const clickQuestionHeartAction = async (
+  questionId: number,
+): Promise<IClickQuestionHeart> => {
+  const response = await apiServer.post(
+    `api/v1/questions/${questionId}/hearts`,
+    {
+      cache: 'no-store',
+    },
+  );
+
+  if (response.status === 401) {
+    return reissueAccessToken(() => clickQuestionHeartAction(questionId));
+  }
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    cookies().set('errorMessage', errorData.errorMessage, {
+      maxAge: 5,
+    });
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  revalidatePath(`/questions/${questionId}`, 'page');
+  return response.json();
+};
+
+export const clickQuestionBookmarkAction = async (
+  questionId: number,
+): Promise<IClickQuestionBookmark> => {
+  const response = await apiServer.post(
+    `api/v1/questions/${questionId}/bookmarks`,
+    {
+      cache: 'no-store',
+    },
+  );
+
+  if (response.status === 401) {
+    return reissueAccessToken(() => clickQuestionBookmarkAction(questionId));
+  }
+
+  if (!response.ok) {
+    const errorData = await response.json();
+    cookies().set('errorMessage', errorData.errorMessage, {
+      maxAge: 5,
+    });
+    throw new Error(`HTTP error! status: ${response.status}`);
+  }
+
+  revalidatePath(`/questions/${questionId}`, 'page');
   return response.json();
 };
