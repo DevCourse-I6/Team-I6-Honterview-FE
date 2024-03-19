@@ -17,6 +17,12 @@ export const middleware = async (request: NextRequest) => {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }
+
+  if (pathname.startsWith('/interview/chat')) {
+    if (!loginData) {
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+    }
+  }
 };
 
 export const config = {
