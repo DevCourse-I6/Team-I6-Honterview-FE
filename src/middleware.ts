@@ -29,6 +29,18 @@ export const middleware = async (request: NextRequest) => {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }
+
+  if (pathname.startsWith('/interview/presetting')) {
+    if (!loginData) {
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+    }
+  }
+
+  if (pathname.startsWith('/mypage')) {
+    if (!loginData) {
+      return NextResponse.redirect(new URL('/auth/login', request.url));
+    }
+  }
 };
 
 export const config = {
@@ -37,5 +49,7 @@ export const config = {
     '/interview/video/:interviewId*',
     '/dev/:path*',
     '/interview/chat/:interviewId*',
+    '/interview/presetting/:firstQuestionId',
+    '/mypage',
   ],
 };
