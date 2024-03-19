@@ -18,6 +18,12 @@ export const middleware = async (request: NextRequest) => {
     }
   }
 
+  if (pathname.startsWith('/dev/')) {
+    if (process.env.NODE_ENV === 'production') {
+      return NextResponse.redirect(new URL('/', request.url));
+    }
+  }
+
   if (pathname.startsWith('/interview/chat')) {
     if (!loginData) {
       return NextResponse.redirect(new URL('/auth/login', request.url));
@@ -26,5 +32,10 @@ export const middleware = async (request: NextRequest) => {
 };
 
 export const config = {
-  matcher: ['/auth/login', '/interview/video/:interviewId*'],
+  matcher: [
+    '/auth/login',
+    '/interview/video/:interviewId*',
+    '/dev/:path*',
+    '/interview/chat/:interviewId*',
+  ],
 };

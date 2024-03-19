@@ -1,6 +1,7 @@
 import { IQuestion } from './question';
 
-export type TAnswerType = 'IN_PROGRESS' | 'COMPLETED';
+export type TStatus = 'IN_PROGRESS' | 'COMPLETED';
+export type TAnswerType = 'TEXT' | 'RECORD';
 
 export interface IInterview {
   interviewId: number;
@@ -9,7 +10,7 @@ export interface IInterview {
   questionCount: number;
   videoId: number;
   questionsAndAnswers: IQuestion[];
-  status: string;
+  status: TStatus;
   categoryNames: string[];
 }
 

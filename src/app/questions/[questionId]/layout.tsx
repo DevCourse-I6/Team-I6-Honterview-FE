@@ -1,3 +1,37 @@
+import type { Metadata } from 'next';
+
+import { getQuestionById } from '@/libs/services/questions';
+
+export const generateMetadata = async ({
+  params,
+}: {
+  params: { questionId: string };
+}): Promise<Metadata> => {
+  const { questionId } = params;
+  const data = await getQuestionById({
+    questionId: Number(questionId),
+    page: 1,
+    size: 5,
+  });
+  const { content } = data.data;
+  const title = `혼터뷰 - ${content}`;
+  const description = `${content}에 대한 답변을 찾아보세요. 면접 준비에 도움이 되는 다양한 정보와 팁을 혼터뷰에서 제공합니다.`;
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      url: `http://honterview.site/interview/question/${questionId}`,
+    },
+    twitter: {
+      title,
+      description,
+    },
+  };
+};
+
 const QuestionDetailLayout = ({
   children,
 }: Readonly<{ children: React.ReactNode }>) => {

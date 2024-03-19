@@ -9,9 +9,9 @@ const Title = () => {
         width={50}
         height={50}
       />
-      <h1 className="text-doubleLarge font-bold">
-        <Link href="/">Honterview</Link>
-      </h1>
+      <Link href="/">
+        <h1 className="text-doubleLarge font-bold">Honterview</h1>
+      </Link>
     </div>
   );
 };
