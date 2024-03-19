@@ -13,8 +13,8 @@ const QuestionInput = ({ setQuestionsAndAnswers }: IProps) => {
 
   const handleSubmit = async () => {
     const inputLength = questionInput.trim().length;
-    if (inputLength < 2 && inputLength > 100) {
-      return notify('warning', '2자 이상, 100자 이하 입력 부탁드립니다.');
+    if (inputLength === 0) {
+      return notify('warning', '입력 부탁드립니다.');
     }
 
     setQuestionsAndAnswers((prevState) => {
