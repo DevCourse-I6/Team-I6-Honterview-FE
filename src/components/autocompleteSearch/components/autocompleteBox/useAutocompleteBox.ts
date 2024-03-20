@@ -12,14 +12,12 @@ const useAutocompleteBox = () => {
   } = useAutocomplete();
 
   const handleKeywordtHighlight = (name: string) => {
-    const value =
-      name.length > 30 ? `${name.trim().slice(0, 30)}...` : name.trim();
     const inputValueTrim = inputValue.trim();
-    const nameArray = Array.from(value);
-    const index = value.toLowerCase().indexOf(inputValueTrim.toLowerCase());
+    const nameArray = Array.from(name);
+    const index = name.toLowerCase().indexOf(inputValueTrim.toLowerCase());
 
     if (index === -1) {
-      return { prevWord: value, keyword: null, postWord: null };
+      return { prevWord: name, keyword: null, postWord: null };
     }
 
     const prevWord = nameArray.slice(0, index).join('');

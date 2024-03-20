@@ -25,14 +25,15 @@ const AutocompleteBox = () => {
       >
         {autocompleteList.map((value, index) => {
           const { prevWord, keyword, postWord } = handleKeywordtHighlight(
-            value.name,
+            value.name.trim(),
           );
 
           return (
             <button
               ref={index === keyboardIndex ? autoItemRef : null}
               type="button"
-              className={`flex h-[3rem] w-full items-center pl-[0.5rem] hover:bg-slate-100 focus:outline-none ${keyboardIndex === index && 'bg-slate-100'}`}
+              className={`flex h-[3rem] items-center pl-[0.5rem] hover:bg-slate-100 focus:outline-none ${keyboardIndex === index && 'bg-slate-100'}`}
+              style={{ width: autoBoxRef?.current?.scrollWidth }}
               key={uuid()}
               onClick={() => handleItemClick(value)}
             >
