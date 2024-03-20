@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import { useAutocomplete } from '../../contexts';
 
 const useAutocompleteBox = () => {
@@ -7,19 +5,15 @@ const useAutocompleteBox = () => {
     autocompleteList,
     isListVisible,
     keyboardIndex,
-    setKeyboardIndex,
     inputValue,
     handleItemClick,
     autoItemRef,
     autoBoxRef,
   } = useAutocomplete();
 
-  useEffect(() => {
-    setKeyboardIndex(-1);
-  }, [setKeyboardIndex, inputValue, isListVisible]);
-
   const handleKeywordtHighlight = (name: string) => {
-    const value = name.length > 30 ? `${name.slice(0, 30)}...` : name;
+    const value =
+      name.length > 30 ? `${name.trim().slice(0, 30)}...` : name.trim();
     const nameArray = Array.from(value);
     const index = value.toLowerCase().indexOf(inputValue.toLowerCase());
 
