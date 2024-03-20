@@ -91,7 +91,7 @@ export const patchCategoryAdmin = async (
   categoryId: number,
   body: IPatchCategoryPayload,
 ): Promise<IPatchCategory> => {
-  const response = await apiClient.delete(
+  const response = await apiClient.patch(
     `api/v1/admin/categories/${categoryId}`,
     {
       body: JSON.stringify(body),

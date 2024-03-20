@@ -8,10 +8,12 @@ import { createCategoryAdmin } from '@/libs/services/admin';
 const CreateCategoryInput = () => {
   const [value, setValue] = useState('');
   const queryClient = useQueryClient();
-  const { mutate } = useMutation({
-    mutationFn: () => createCategoryAdmin({ categoryName: value }),
-    onSuccess: () =>
-      queryClient.invalidateQueries({ queryKey: ['admin', 'categories'] }),
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => createCategoryAdmin({ categoryName: value.trim() }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['admin', 'categories'] });
+      setValue('');
+    },
     onError: (error) => notify('error', error.message),
   });
 
@@ -29,6 +31,7 @@ const CreateCategoryInput = () => {
       </Input>
       <button
         onClick={() => mutate()}
+        disabled={isPending}
         type="button"
         className="rounded-xl border-[1px] px-6 py-2"
       >
