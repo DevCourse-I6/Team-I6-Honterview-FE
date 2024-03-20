@@ -55,11 +55,13 @@ const PreSetting = ({ firstQuestionId }: PreSettingProps) => {
   }
 
   return (
-    <div className="relative flex h-[70rem] max-h-full w-full flex-col items-center rounded-3xl bg-text-20 bg-opacity-20 p-[2rem] text-[1.6rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] tablet:h-[70rem] tablet:max-w-[80rem]">
+    <div className=" flex h-[70rem] max-h-full w-full flex-col items-center rounded-3xl bg-text-20 bg-opacity-20 p-[2rem] text-[1.6rem] shadow-[0_8px_30px_rgb(0,0,0,0.12)] tablet:h-[70rem] tablet:max-w-[80rem]">
       <StepSection />
       <DividerHorizontal className="mx-[1rem] mt-[1rem] w-full" />
-      <PreSettingSceneSection />
-      <PreSettingButtonSection fromQuestionPage={!!firstQuestionId} />
+      <div className="flex h-full flex-col items-center">
+        <PreSettingSceneSection />
+        <PreSettingButtonSection fromQuestionPage={!!firstQuestionId} />
+      </div>
     </div>
   );
 };
