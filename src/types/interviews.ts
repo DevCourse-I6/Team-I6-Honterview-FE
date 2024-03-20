@@ -5,6 +5,7 @@ export interface IInterview {
   answerType: 'TEXT' | 'RECORD';
   questionCount: number;
   status: 'IN_PROGRESS' | 'COMPLETED';
+  videoId?: number;
   questionsAndAnswers: IQuestionAndAnswer[];
   categoryNames: string[];
 }
@@ -15,7 +16,6 @@ export interface IQuestionAndAnswer {
   answerId: number;
   answerContent: string;
   processingTime: number;
-  videoId?: number;
 }
 
 // patchInterviewVisibility

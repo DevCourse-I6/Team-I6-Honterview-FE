@@ -2,19 +2,20 @@
 
 import { DownLoadIcon } from '@/components/icon';
 
+import useCreateVideoDownloadUrl from '../../hooks/useCreateVideoDownloadUrl';
 import { IProps } from './types';
 
-// TODO: sangmin // 바로 다운로드 되도록, 인터넷 다운로드 목록에 추가 되게끔
-
 const DownLoadWrapper = ({ interviewVideoUrl }: IProps) => {
+  const downloadUrl = useCreateVideoDownloadUrl(interviewVideoUrl);
+
   return (
-    <button
-      onClick={() => window.open(interviewVideoUrl)}
-      type="button"
-      className="mt-[1px] h-[30px] w-[18px] cursor-pointer"
+    <a
+      href={downloadUrl}
+      download="interview_video.webm"
+      className="mt-[1px] block h-[30px] w-[18px] cursor-pointer "
     >
       <DownLoadIcon className="fill-slate-500" />
-    </button>
+    </a>
   );
 };
 
