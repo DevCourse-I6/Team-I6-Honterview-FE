@@ -4,8 +4,9 @@ import usePresettingDataStore from '@/container/presetting/stores/usePresettingD
 
 import TimePicker from './components/timePicker';
 import { minuteData, secondData } from './constants';
+import { TimerSectionProps } from './type';
 
-const TimerSection = () => {
+const TimerSection = ({ isVisible }: TimerSectionProps) => {
   const { setTimeMinute, setTimeSecond, answerTime } = usePresettingDataStore();
   const [isSecondDisabled, setIsSecondDisabled] = useState(
     answerTime.minute === minuteData[minuteData.length - 1],
@@ -22,7 +23,7 @@ const TimerSection = () => {
   };
 
   return (
-    <div>
+    <div className={`${!isVisible && 'invisible'}`}>
       <h1 className="text-large font-semibold">질문당 답변 시간</h1>
       <p className="mb-[1rem] w-[30rem] text-extraSmall text-text-60">
         한 질문당 답변 제한 시간을 선택해주세요 (최대 10분)

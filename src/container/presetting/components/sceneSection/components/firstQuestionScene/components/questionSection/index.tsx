@@ -34,7 +34,7 @@ const QuestionSection = () => {
   }, [firstQuestionTags, firstQuestionTags.length]);
 
   return (
-    <div className="flex max-w-[40rem] flex-col gap-[1rem]">
+    <div className="flex w-full flex-col gap-[1rem]">
       <h2 className="text-large font-semibold">질문 선택</h2>
       <div className="h-[4rem] w-full">
         {isLoading ? (
@@ -52,7 +52,7 @@ const QuestionSection = () => {
         )}
       </div>
       {firstQuestion && (
-        <Tag className="auto-tag relative w-fit max-w-[35rem] overflow-y-scroll border border-primaries-primary bg-white py-[0.5rem] text-primaries-primary hover:bg-white active:bg-white tablet:max-h-[11rem] tablet:max-w-full">
+        <Tag className="auto-tag w-fit overflow-y-scroll border border-primaries-primary bg-white py-[0.5rem] text-primaries-primary hover:bg-white active:bg-white tablet:max-h-[11rem] tablet:max-w-full">
           <span className="max-h-[8rem] tablet:max-h-[11rem]">
             {firstQuestion.name}
           </span>

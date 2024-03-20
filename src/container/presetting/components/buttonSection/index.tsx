@@ -49,7 +49,7 @@ const PreSettingButtonSection = ({
   };
 
   return (
-    <div className="flex flex-1 items-end gap-[1rem] tablet:bottom-[3rem]">
+    <div className="flex items-end gap-[1rem] tablet:bottom-[3rem]">
       <Button
         styleType={ButtonType.Type3}
         className="h-[4rem] w-[9rem] px-[0rem]"
