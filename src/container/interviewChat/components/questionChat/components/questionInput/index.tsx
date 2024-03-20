@@ -13,8 +13,8 @@ const QuestionInput = ({ setQuestionsAndAnswers }: IProps) => {
 
   const handleSubmit = async () => {
     const inputLength = questionInput.trim().length;
-    if (inputLength < 2 && inputLength > 100) {
-      return notify('warning', '2자 이상, 100자 이하 입력 부탁드립니다.');
+    if (inputLength === 0) {
+      return notify('warning', '입력 부탁드립니다.');
     }
 
     setQuestionsAndAnswers((prevState) => {
@@ -29,11 +29,19 @@ const QuestionInput = ({ setQuestionsAndAnswers }: IProps) => {
     setQuestionInput('');
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="flex w-full gap-[1rem]">
       <TextareaAutosize
         value={questionInput}
         onChange={(e) => setQuestionInput(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="flex-grow resize-none items-center justify-center rounded-lg border px-[1rem] py-[1rem] text-[1.6rem] focus-within:border-primaries-primary"
         placeholder="답변을 입력해주세요."
         maxRows={5}

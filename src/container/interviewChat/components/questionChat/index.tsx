@@ -6,42 +6,33 @@ import { useEffect, useState } from 'react';
 import { notify } from '@/components/toast';
 import { postInterview } from '@/libs/actions/interview';
 import { postTailQuestion } from '@/libs/actions/question';
-import { getInterviewResult } from '@/libs/services/interview';
 
 import QuestionContent from './components/questionContent';
 import QuestionInput from './components/questionInput';
 import { IProps, IQuestionAndAnswer } from './type';
 
-const QuestionChat = ({ interviewId }: IProps) => {
+const QuestionChat = ({ interviewId, interviewData }: IProps) => {
   const [questionCount, setQuestionCount] = useState<number>(0);
   const [questionsAndAnswers, setQuestionsAndAnswers] = useState<
     IQuestionAndAnswer[]
   >([]);
   const [reQuestionCount, setReQuestionCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    if (interviewData.status === 'COMPLETED') {
+      notify('info', '이미 종료된 면접입니다');
+      return router.push(`/interview/result/${interviewId}`);
+    }
+
+    setQuestionsAndAnswers(interviewData.questionsAndAnswers);
+    setQuestionCount(interviewData.questionCount);
+  }, [interviewData, interviewId, router]);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        // 최초 값 저장
-        if (questionCount === 0) {
-          const { data } = await getInterviewResult(interviewId);
-          if (data.status === 'COMPLETED') {
-            notify('info', '이미 종료된 면접입니다');
-            return router.push(`/interview/result/${interviewId}`);
-          }
-          setQuestionsAndAnswers(data.questionsAndAnswers);
-          setQuestionCount(data.questionCount);
-        }
-
-        // 모든 질문에 대한 답변 완료 후 결과 페이지로 이동
-        if (
-          questionCount !== 0 &&
-          questionCount === questionsAndAnswers.length - 1
-        ) {
-          return router.push(`/interview/result/${interviewId}`);
-        }
-
         // 마지막 질문
         const lastQuestion =
           questionsAndAnswers.length > 0
@@ -49,20 +40,22 @@ const QuestionChat = ({ interviewId }: IProps) => {
             : null;
 
         if (lastQuestion) {
-          const maxQuestion =
-            lastQuestion.questionContent?.substring(0, 99) || 'test';
-          const maxAnswer =
-            lastQuestion.answerContent?.substring(0, 99) || 'test';
+          const question = lastQuestion.questionContent || '';
+          const answer = lastQuestion.answerContent || '';
 
           // 꼬리질문
           if (
             lastQuestion.answerId !== null &&
             questionCount !== questionsAndAnswers.length - 1
           ) {
+            if (questionCount === questionsAndAnswers.length) {
+              return router.push(`/interview/result/${interviewId}`);
+            }
+            setIsLoading(true);
             const { data } = await postTailQuestion(
               interviewId,
-              maxQuestion,
-              maxAnswer,
+              question,
+              answer,
             );
             const { tailQuestionContent } = data;
             setQuestionsAndAnswers((prevState) => [
@@ -74,6 +67,8 @@ const QuestionChat = ({ interviewId }: IProps) => {
                 answerId: null,
               },
             ]);
+
+            setIsLoading(false);
           }
 
           // 답변
@@ -82,8 +77,8 @@ const QuestionChat = ({ interviewId }: IProps) => {
             lastQuestion.answerId === null
           ) {
             const { data } = await postInterview(interviewId, {
-              questionContent: maxQuestion,
-              answerContent: maxAnswer,
+              questionContent: question,
+              answerContent: answer,
               processingTime: 0,
             });
             const { answerId, questionId } = data;
@@ -91,6 +86,7 @@ const QuestionChat = ({ interviewId }: IProps) => {
               const updatedLastItem = { ...lastQuestion, answerId, questionId };
               return [...prevState.slice(0, -1), updatedLastItem];
             });
+
             setReQuestionCount(0);
           }
         }
@@ -100,7 +96,13 @@ const QuestionChat = ({ interviewId }: IProps) => {
     };
 
     fetchData();
-  }, [interviewId, questionCount, questionsAndAnswers, router]);
+  }, [
+    interviewId,
+    questionCount,
+    questionsAndAnswers,
+    reQuestionCount,
+    router,
+  ]);
 
   return (
     <>
@@ -110,6 +112,8 @@ const QuestionChat = ({ interviewId }: IProps) => {
         setQuestionsAndAnswers={setQuestionsAndAnswers}
         reQuestionCount={reQuestionCount}
         setReQuestionCount={setReQuestionCount}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
       />
       <QuestionInput setQuestionsAndAnswers={setQuestionsAndAnswers} />
     </>

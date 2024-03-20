@@ -1,5 +1,8 @@
+import { IInterview } from '@/types/interviews';
+
 export interface IProps {
   interviewId: number;
+  interviewData: IInterview;
 }
 
 export interface IQuestionAndAnswer {
