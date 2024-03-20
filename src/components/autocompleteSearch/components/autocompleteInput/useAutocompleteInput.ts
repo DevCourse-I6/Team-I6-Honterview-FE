@@ -50,7 +50,7 @@ const useAutocompleteInput = ({
       return;
     }
 
-    const lowerValue = value.toLowerCase();
+    const lowerValue = value.trim().toLowerCase();
 
     const newList = totalDatas.filter(
       (data) =>
