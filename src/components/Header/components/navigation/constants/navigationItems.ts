@@ -11,10 +11,4 @@ export const navigationItems = [
     replace: false,
     scroll: false,
   },
-  {
-    title: '관리자',
-    url: '/admin',
-    replace: false,
-    scroll: false,
-  },
 ];
