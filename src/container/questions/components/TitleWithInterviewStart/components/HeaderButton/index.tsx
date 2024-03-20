@@ -16,7 +16,7 @@ const HeaderButton = async ({
   isBookmarked,
 }: IProps) => {
   const userAuth = await getUserAuth();
-  const isAdmin = userAuth?.data?.role === 'ROLE_ADMIN';
+  const isAdmin = userAuth?.data?.role[0].authority === 'ROLE_ADMIN';
 
   return (
     <div className={`flex ${isAdmin ? 'justify-between' : 'justify-end'}`}>
