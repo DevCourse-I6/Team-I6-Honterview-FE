@@ -36,19 +36,16 @@ export const putUploadMediaBlob = async (
     type: 'video/webm',
     lastModified: new Date().getTime(),
   });
+  const formData = new FormData();
 
-  const response = await fetch(uploadUrl, {
-    body: videoFile,
+  formData.append('videoFile', videoFile);
+  formData.append('uploadUrl', uploadUrl);
+
+  const response = await fetch('http://localhost:3000/api/v1/upload/video', {
+    body: formData,
     method: 'PUT',
-    headers: {
-      'Content-Type': 'video/webm',
-    },
     cache: 'no-store',
   });
-
-  if (!response.ok) {
-    throw new Error(`HTTP error! status: ${response.status}`);
-  }
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
