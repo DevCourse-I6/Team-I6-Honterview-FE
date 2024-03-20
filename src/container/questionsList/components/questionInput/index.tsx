@@ -33,7 +33,7 @@ const QuestionInput = ({ setQuestionsInput }: QuestionInputProps) => {
           onChange={(e) => setSearchInput(e.target.value)}
           onBlur={handleBlur}
         />
-        <div className="flex h-[40px] w-[40px] flex-none cursor-pointer items-center justify-center rounded-full bg-primaries-primary">
+        <div className="flex h-[40px] w-[40px] flex-none cursor-pointer items-center justify-center rounded-full bg-primaries-primary pr-[1px] pt-[2px]">
           <Search
             onClick={handleSearchClick}
             className="text-white"
