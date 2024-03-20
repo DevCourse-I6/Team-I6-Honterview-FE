@@ -29,11 +29,19 @@ const QuestionInput = ({ setQuestionsAndAnswers }: IProps) => {
     setQuestionInput('');
   };
 
+  const handleKeyDown = (event: React.KeyboardEvent<HTMLTextAreaElement>) => {
+    if (event.key === 'Enter' && !event.shiftKey) {
+      event.preventDefault();
+      handleSubmit();
+    }
+  };
+
   return (
     <div className="flex w-full gap-[1rem]">
       <TextareaAutosize
         value={questionInput}
         onChange={(e) => setQuestionInput(e.target.value)}
+        onKeyDown={handleKeyDown}
         className="flex-grow resize-none items-center justify-center rounded-lg border px-[1rem] py-[1rem] text-[1.6rem] focus-within:border-primaries-primary"
         placeholder="답변을 입력해주세요."
         maxRows={5}
