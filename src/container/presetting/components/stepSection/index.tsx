@@ -35,7 +35,7 @@ const StepSection = () => {
               number={step}
               isPassed={currentStep >= step}
             />
-            <div className="relative flex w-[8rem] items-center justify-center gap-[0.3rem] tablet:w-[9.5rem]">
+            <div className="relative flex w-[8rem] items-center justify-center gap-[0.2rem] tablet:w-[9.5rem] tablet:gap-[0.3rem]">
               <span
                 className={`flex items-center justify-center 
               ${currentStep === step ? 'text-primaries-primary' : 'text-text-80'}
