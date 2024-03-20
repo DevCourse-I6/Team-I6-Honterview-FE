@@ -4,6 +4,11 @@ export interface IPatchQuestionPayload {
   categoryIds: number[];
 }
 
+export interface ICreateQuestionPayload {
+  content: string;
+  categoryIds: number[];
+}
+
 // interviews
 export interface ICreateInterviewPayload {
   answerType: 'TEXT' | 'RECORD';
