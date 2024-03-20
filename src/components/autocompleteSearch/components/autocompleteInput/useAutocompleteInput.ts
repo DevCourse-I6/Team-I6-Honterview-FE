@@ -32,7 +32,11 @@ const useAutocompleteInput = ({
 
   const handleInputClick = () => {
     if (!inputValue) {
-      setAutocompleteList(totalDatas);
+      setAutocompleteList(
+        totalDatas.filter(
+          (data) => !selectedList?.some(({ id }) => data.id === id),
+        ),
+      );
     }
     if (autocompleteList.length > 0 || (!inputValue && totalDatas.length)) {
       setIsListVisible(true);
@@ -55,10 +59,7 @@ const useAutocompleteInput = ({
     const newList = totalDatas.filter(
       (data) =>
         data.name.toLocaleLowerCase().includes(lowerValue) &&
-        (!selectedList?.length ||
-          !selectedList?.filter(({ id }) => {
-            return data.id === id;
-          }).length),
+        !selectedList?.some(({ id }) => data.id === id),
     );
     setAutocompleteList(newList);
     newList.length > 0 ? setIsListVisible(true) : setIsListVisible(false);
