@@ -1,4 +1,6 @@
-const Category = ({ name }: { name: string }) => {
+import { IProps } from './types';
+
+const Category = ({ name, id }: IProps) => {
   return (
     <div className="flex items-center gap-5 rounded-md border-2 border-dashed border-blue-200 px-5 py-3">
       <span className="text-medium">
@@ -6,7 +8,7 @@ const Category = ({ name }: { name: string }) => {
           value={name}
           className="w-[8rem]"
         />
-        : 1
+        : {id}
       </span>
       <button type="button">수정</button>
       <button type="button">삭제</button>
