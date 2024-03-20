@@ -33,7 +33,7 @@ const Category = ({ name, id }: IProps) => {
   };
 
   return (
-    <div className="flex items-center gap-5 rounded-md border-2 border-dashed border-blue-200 px-5 py-3">
+    <div className="flex items-center gap-5 rounded-md border-2 border-dashed border-blue-200 px-5 py-3 transition-all hover:border-blue-400">
       <span className="text-medium">
         <input
           onChange={handleChange}

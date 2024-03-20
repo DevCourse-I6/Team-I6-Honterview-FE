@@ -41,6 +41,22 @@ export const middleware = async (request: NextRequest) => {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }
+
+  if (
+    pathname.startsWith('/admin/login') ||
+    pathname.startsWith('/admin/signup')
+  ) {
+    if (loginData && loginData.data?.role[0].authority === 'ROLE_ADMIN') {
+      return NextResponse.redirect(new URL('/admin', request.url));
+    }
+  }
+
+  if (pathname === '/admin') {
+    if (!loginData || loginData.data?.role[0].authority !== 'ROLE_ADMIN') {
+      const targetURL = !loginData ? '/admin/login' : '/';
+      return NextResponse.redirect(new URL(targetURL, request.url));
+    }
+  }
 };
 
 export const config = {
@@ -51,5 +67,6 @@ export const config = {
     '/interview/chat/:interviewId*',
     '/interview/presetting/:firstQuestionId',
     '/mypage',
+    '/admin/:path*',
   ],
 };
