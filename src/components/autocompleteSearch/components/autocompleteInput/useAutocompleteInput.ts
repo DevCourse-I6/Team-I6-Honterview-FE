@@ -34,7 +34,7 @@ const useAutocompleteInput = ({
     if (!inputValue) {
       setAutocompleteList(totalDatas);
     }
-    if (autocompleteList.length > 0 || !inputValue) {
+    if (autocompleteList.length > 0 || (!inputValue && totalDatas.length)) {
       setIsListVisible(true);
     }
     setIsCreateVisible(true);
