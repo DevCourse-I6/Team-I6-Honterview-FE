@@ -7,6 +7,10 @@ export const getAccessToken = () => {
   return headers.cookies().get('accessToken')?.value || '';
 };
 
+export const getRefreshToken = () => {
+  return headers.cookies().get('refreshToken')?.value || '';
+};
+
 const get = (url: string, options: RequestInit = {}) => {
   return fetch(`${API_BASE_URL}${url}`, {
     ...options,
@@ -15,6 +19,7 @@ const get = (url: string, options: RequestInit = {}) => {
       'Content-Type': 'application/json',
       ...options.headers,
       Authorization: `Bearer ${getAccessToken()}`,
+      Cookie: `accessToken=${getAccessToken()}; refreshToken=${getRefreshToken()}`,
     },
     credentials: 'include',
   });
@@ -28,6 +33,7 @@ const post = (url: string, options: RequestInit = {}) => {
       'Content-Type': 'application/json',
       ...options.headers,
       Authorization: `Bearer ${getAccessToken()}`,
+      Cookie: `accessToken=${getAccessToken()}; refreshToken=${getRefreshToken()}`,
     },
     credentials: 'include',
   });
@@ -41,6 +47,7 @@ const put = (url: string, options: RequestInit = {}) => {
       'Content-Type': 'application/json',
       ...options.headers,
       Authorization: `Bearer ${getAccessToken()}`,
+      Cookie: `accessToken=${getAccessToken()}; refreshToken=${getRefreshToken()}`,
     },
     credentials: 'include',
   });
@@ -54,6 +61,7 @@ const del = (url: string, options: RequestInit = {}) => {
       'Content-Type': 'application/json',
       ...options.headers,
       Authorization: `Bearer ${getAccessToken()}`,
+      Cookie: `accessToken=${getAccessToken()}; refreshToken=${getRefreshToken()}`,
     },
     credentials: 'include',
   });
@@ -67,6 +75,7 @@ const patch = (url: string, options: RequestInit = {}) => {
       'Content-Type': 'application/json',
       ...options.headers,
       Authorization: `Bearer ${getAccessToken()}`,
+      Cookie: `accessToken=${getAccessToken()}; refreshToken=${getRefreshToken()}`,
     },
     credentials: 'include',
   });
