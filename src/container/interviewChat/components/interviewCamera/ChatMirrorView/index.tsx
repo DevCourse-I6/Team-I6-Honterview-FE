@@ -38,7 +38,7 @@ const ChatMirrorView = ({ camerraToggle }: IProps) => {
   }, [camerraToggle]);
 
   return (
-    <div className="w-[24rem]">
+    <div className="w-[25rem]">
       <video
         ref={videoRef}
         autoPlay
