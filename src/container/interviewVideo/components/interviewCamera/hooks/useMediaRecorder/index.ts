@@ -53,7 +53,7 @@ export const useMediaRecorder = () => {
       mediaRecorder.current = recorder;
       setIsSetting(true);
     } catch (error) {
-      notify('error', '미디어 장치 권한 허용하여 다시 시도해주세요');
+      notify('error', '미디어 장치 권한을 확인하고 설정에서 허용해주세요');
     }
   }, []);
 
@@ -61,10 +61,11 @@ export const useMediaRecorder = () => {
     getMediaPermission();
 
     return () => {
-      if (mediaRecorder.current && mediaRecorder.current.stream) {
-        mediaRecorder.current.stream
-          .getTracks()
-          .forEach((track) => track.stop());
+      if (mediaRecorder.current?.stream) {
+        mediaRecorder.current.stream.getTracks().forEach((track) => {
+          mediaRecorder.current?.stream.removeTrack(track);
+          track.stop();
+        });
       }
     };
   }, [getMediaPermission]);
