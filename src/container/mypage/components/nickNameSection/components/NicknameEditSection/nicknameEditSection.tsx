@@ -49,7 +49,7 @@ const NicknameEditSection = ({
       <h2 className="flex select-none text-[2rem] font-semibold">
         닉네임 변경
       </h2>
-      <div className="flex flex-col gap-[0.5rem]">
+      <div className="flex max-w-full flex-col gap-[0.5rem]">
         <div className="w-full text-[1rem] text-text-40">
           한글(자음+모음), 영문, 숫자 입력 가능 (2~20자)
         </div>

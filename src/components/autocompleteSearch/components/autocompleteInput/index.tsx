@@ -4,6 +4,8 @@ import Input from '@/components/input';
 import { AutocompleteInputProps } from './type';
 import useAutocompleteInput from './useAutocompleteInput';
 
+const KEY_LIST = ['ArrowDown', 'ArrowUp', 'Enter'];
+
 const AutocompleteInput = ({
   totalDatas,
   selectedList,
@@ -14,22 +16,23 @@ const AutocompleteInput = ({
     handleInputClick,
     isListVisible,
     inputValue,
-    setKeyboardIndex,
-    keyboardIndex,
+    handleKeyEvent,
   } = useAutocompleteInput({
     totalDatas,
     selectedList,
   });
 
+  const onKeyDown = (e: React.KeyboardEvent<HTMLDivElement>) => {
+    if (KEY_LIST.includes(e.key) && !e.nativeEvent.isComposing) {
+      handleKeyEvent(e.key);
+    }
+  };
+
   return (
     <div className="flex items-center">
       <Input
         className="flex h-[3.5rem] w-full gap-[1rem] pl-[0.5rem] outline-none"
-        onKeyDown={(e) => {
-          if (e.key === 'ArrowDown' && !e.nativeEvent.isComposing) {
-            setKeyboardIndex(keyboardIndex + 1);
-          }
-        }}
+        onKeyDown={onKeyDown}
       >
         <div className="autoInput flex w-full gap-[0.5rem] overflow-x-scroll">
           <Input.Text

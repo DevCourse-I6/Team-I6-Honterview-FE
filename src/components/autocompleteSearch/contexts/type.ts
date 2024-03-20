@@ -5,6 +5,7 @@ import { AutocompleteDataType } from '../type';
 export interface AutocompleteContextProps {
   autocompleteRef: RefObject<HTMLDivElement> | null;
   autoItemRef: RefObject<HTMLButtonElement> | null;
+  autoBoxRef: RefObject<HTMLDivElement> | null;
   isListVisible: boolean;
   isCreateVisible: boolean;
   setIsCreateVisible: (visible: boolean) => void;
