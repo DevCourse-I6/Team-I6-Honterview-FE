@@ -12,7 +12,7 @@ const InterviewChatPage = async ({ params }: IProps) => {
   return (
     <section>
       <form className="fit-wrap flex min-w-[30rem] gap-8 px-10 py-8 md:px-[25%]">
-        <div className="flex grow flex-col items-center gap-4 bg-white">
+        <div className="flex grow flex-col items-center gap-4 rounded-3xl bg-text-20 bg-opacity-20 shadow-[0_8px_30px_rgb(0,0,0,0.12)]">
           <InterviewCamera />
           <div className="flex w-[90%] basis-4/6 flex-col gap-4 overflow-y-scroll">
             <QuestionChat

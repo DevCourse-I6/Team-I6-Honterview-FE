@@ -11,7 +11,7 @@ const InterviewCamera = () => {
   const [camerraToggle, setCamerraToggle] = useState(false);
 
   return (
-    <div className="relative h-[20rem] w-[35rem] rounded-2xl bg-background-20">
+    <div className="relative mb-[2rem] mt-4 h-[15rem] w-[25rem] rounded-2xl bg-background-20">
       <div className="flex h-full w-full flex-col items-center justify-center">
         <div className="absolute">
           {camerraToggle ? (
