@@ -1,3 +1,5 @@
+import { useEffect, useRef } from 'react';
+
 import { useAutocomplete } from '../../contexts';
 import { AutocompleteInputProps } from './type';
 
@@ -19,6 +21,14 @@ const useAutocompleteInput = ({
     setIsCreateVisible,
     handleItemClick,
   } = useAutocomplete();
+
+  useEffect(() => {
+    setKeyboardIndex(-1);
+    if (!autoBoxRef?.current) {
+      return;
+    }
+    autoBoxRef.current.scrollTop = 0;
+  }, [setKeyboardIndex, inputValue, isListVisible, autoBoxRef]);
 
   const handleInputClick = () => {
     if (!inputValue) {
@@ -54,8 +64,11 @@ const useAutocompleteInput = ({
     newList.length > 0 ? setIsListVisible(true) : setIsListVisible(false);
   };
 
+  const focusIndexInBox = useRef(0);
+
   const handleKeyEvent = (key: string) => {
     if (keyboardIndex === -1 && key === 'ArrowDown') {
+      focusIndexInBox.current = 0;
       setKeyboardIndex(0);
     }
     if (!isListVisible || !autoBoxRef?.current || !autoItemRef?.current) {
@@ -63,27 +76,34 @@ const useAutocompleteInput = ({
     }
     switch (key) {
       case 'ArrowUp':
-        if (keyboardIndex === 0) {
-          setKeyboardIndex(autocompleteList.length - 1);
-          autoBoxRef.current.scrollTop = autoBoxRef.current.scrollHeight;
-          break;
-        }
-        setKeyboardIndex(keyboardIndex - 1);
-
-        if (keyboardIndex - 1 < autocompleteList.length - 5) {
+        if (focusIndexInBox.current - 1 >= 0) {
+          focusIndexInBox.current -= 1;
+        } else {
           autoBoxRef.current.scrollTop -= autoItemRef.current.scrollHeight;
         }
-        break;
-      case 'ArrowDown':
-        if (keyboardIndex === autocompleteList.length - 1) {
-          setKeyboardIndex(0);
-          autoBoxRef.current.scrollTop = 0;
-          break;
+
+        if (keyboardIndex === 0) {
+          setKeyboardIndex(autocompleteList.length - 1);
+          focusIndexInBox.current = 4;
+          autoBoxRef.current.scrollTop = autoBoxRef.current.scrollHeight;
+        } else {
+          setKeyboardIndex(keyboardIndex - 1);
         }
 
-        setKeyboardIndex(keyboardIndex + 1);
-        if (keyboardIndex + 1 >= 5) {
+        break;
+      case 'ArrowDown':
+        if (focusIndexInBox.current + 1 <= 4) {
+          focusIndexInBox.current += 1;
+        } else {
           autoBoxRef.current.scrollTop += autoItemRef.current.offsetHeight;
+        }
+
+        if (keyboardIndex === autocompleteList.length - 1) {
+          setKeyboardIndex(0);
+          focusIndexInBox.current = 0;
+          autoBoxRef.current.scrollTop = 0;
+        } else {
+          setKeyboardIndex(keyboardIndex + 1);
         }
 
         break;
