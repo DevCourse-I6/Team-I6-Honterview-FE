@@ -61,7 +61,6 @@ const NicknameEditSection = ({
             <Input.Text
               value={nickname}
               onChange={onChange}
-              className="w-full"
             />
             <button
               type="button"
