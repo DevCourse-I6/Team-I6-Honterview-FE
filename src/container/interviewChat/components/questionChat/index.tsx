@@ -17,6 +17,7 @@ const QuestionChat = ({ interviewId, interviewData }: IProps) => {
     IQuestionAndAnswer[]
   >([]);
   const [reQuestionCount, setReQuestionCount] = useState(0);
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -50,6 +51,7 @@ const QuestionChat = ({ interviewId, interviewData }: IProps) => {
             if (questionCount === questionsAndAnswers.length) {
               return router.push(`/interview/result/${interviewId}`);
             }
+            setIsLoading(true);
             const { data } = await postTailQuestion(
               interviewId,
               question,
@@ -65,6 +67,8 @@ const QuestionChat = ({ interviewId, interviewData }: IProps) => {
                 answerId: null,
               },
             ]);
+
+            setIsLoading(false);
           }
 
           // 답변
@@ -108,6 +112,8 @@ const QuestionChat = ({ interviewId, interviewData }: IProps) => {
         setQuestionsAndAnswers={setQuestionsAndAnswers}
         reQuestionCount={reQuestionCount}
         setReQuestionCount={setReQuestionCount}
+        isLoading={isLoading}
+        setIsLoading={setIsLoading}
       />
       <QuestionInput setQuestionsAndAnswers={setQuestionsAndAnswers} />
     </>

@@ -10,4 +10,6 @@ export interface IProps {
   reQuestionCount: number;
   // setReQuestionCount: (value: number) => void;
   setReQuestionCount: (value: React.SetStateAction<number>) => void;
+  isLoading: boolean;
+  setIsLoading: (value: boolean) => void;
 }

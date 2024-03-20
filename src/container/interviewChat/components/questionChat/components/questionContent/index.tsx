@@ -2,6 +2,7 @@ import React from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import Button from '@/components/button';
+import Loading from '@/components/loading';
 import { notify } from '@/components/toast';
 import { rePostTailQuestion } from '@/libs/actions/question';
 
@@ -13,10 +14,14 @@ const QuestionContent = ({
   setQuestionsAndAnswers,
   reQuestionCount,
   setReQuestionCount,
+  isLoading,
+  setIsLoading,
 }: IProps) => {
   const lastQuestion = questionsAndAnswers[questionsAndAnswers.length - 1];
 
   const handleTailContentChange = async () => {
+    setIsLoading(true);
+
     if (questionsAndAnswers.length === 1) {
       return notify('warning', '첫 질문은 변경이 불가능 합니다.');
     }
@@ -55,6 +60,13 @@ const QuestionContent = ({
         </React.Fragment>
       ))}
 
+      {isLoading ? (
+        <div className="w-[30px]">
+          <Loading />
+        </div>
+      ) : (
+        ''
+      )}
       {lastQuestion && lastQuestion.answerId === null && (
         <Button
           onClick={handleTailContentChange}
