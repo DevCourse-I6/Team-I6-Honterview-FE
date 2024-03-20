@@ -15,19 +15,19 @@ const TermsDescriptionSection = () => {
       <p className="mb-[1rem] font-semibold">{TERMS_TITLE}</p>
       <div className="mb-[1rem] flex">
         <div className="w-[25rem] border border-r-0">
-          <div className="flex h-[6.5rem] items-center bg-background-20 p-[1rem] tablet:h-fit">
+          <div className="flex h-[8rem] items-center bg-background-20 p-[1rem] tablet:h-fit">
             {TERMS_GOAL_TITLE}
           </div>
           <div className="h-[5rem] p-[1rem]">{TERMS_GOAL_TEXT}</div>
         </div>
         <div className="w-[33rem] border border-r-0">
-          <div className="flex h-[6.5rem] items-center bg-background-20 p-[1rem] tablet:h-fit">
+          <div className="flex h-[8rem] items-center bg-background-20 p-[1rem] tablet:h-fit">
             {TERMS_TARGET_TITLE}
           </div>
           <div className="p-[1rem]">{TERMS_TARGET_TEXT}</div>
         </div>
         <div className="w-[18rem] border">
-          <div className="bg-background-20 p-[1rem]">
+          <div className="flex h-[8rem] items-center bg-background-20 p-[1rem] tablet:h-fit">
             {TERMS_DURATION_TITLE}
           </div>
           <span className="flex p-[1rem]">{TERMS_DURATION_TEXT}</span>
