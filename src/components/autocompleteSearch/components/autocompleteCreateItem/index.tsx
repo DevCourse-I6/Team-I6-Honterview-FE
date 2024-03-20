@@ -28,7 +28,7 @@ const AutocompleteCreateItem = () => {
         });
       }}
     >
-      <p className="auto-text flex w-fit max-w-[22rem] items-center font-semibold text-primaries-primary">
+      <p className="max-w-[26rem] overflow-hidden overflow-ellipsis whitespace-nowrap font-semibold text-primaries-primary">
         {inputValue}
       </p>
       (으)로 질문 생성하기
