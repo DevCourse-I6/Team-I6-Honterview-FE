@@ -5,8 +5,8 @@ import { twMerge } from 'tailwind-merge';
 
 import { IProps } from './types';
 
-const CheckBox = ({ checkId, onChange }: IProps) => {
-  const [checked, setChecked] = useState(false);
+const CheckBox = ({ checkId, onChange, initialChecked }: IProps) => {
+  const [checked, setChecked] = useState(initialChecked);
   const placeHolderCheck =
     'after:absolute after:h-[7px] after:w-[10px] after:rotate-[-45deg] after:border-[2px] after:border-r-0 after:border-t-0 after:border-gray after:left-[11px] after:bottom-[13px]';
   const check =

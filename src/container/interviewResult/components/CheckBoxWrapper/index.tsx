@@ -7,17 +7,20 @@ import CheckBox from '../CheckBox';
 import { TToggleChangeEvent } from '../CheckBox/types';
 import { IProps } from './types';
 
-// TODO: sangmin // 마이페이지에서 결과창으로 다시 접속 시 이전의 공개 여부 체크 여부 결정하기
+const visibilityMap = {
+  PUBLIC: true,
+  PRIVATE: false,
+};
 
-const CheckBoxWrapper = ({ answerId }: IProps) => {
+const CheckBoxWrapper = ({ answerId, visibility }: IProps) => {
   const { setAnswerIdList, setInitialAnswerList, clearAnswerIdList } =
     useAnswerVisibilityStatusStore();
 
   useEffect(() => {
-    setInitialAnswerList(answerId);
+    setInitialAnswerList(answerId, visibility);
 
     return () => clearAnswerIdList();
-  }, [setInitialAnswerList, answerId, clearAnswerIdList]);
+  }, [setInitialAnswerList, answerId, clearAnswerIdList, visibility]);
 
   const onChange = (e: TToggleChangeEvent) => {
     setAnswerIdList(Number(e.id));
@@ -27,6 +30,7 @@ const CheckBoxWrapper = ({ answerId }: IProps) => {
     <CheckBox
       checkId={answerId}
       onChange={onChange}
+      initialChecked={visibilityMap[visibility]}
     />
   );
 };

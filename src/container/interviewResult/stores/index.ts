@@ -5,12 +5,9 @@ import { IUseAnswerVisibilityStatusStore } from './types';
 export const useAnswerVisibilityStatusStore =
   create<IUseAnswerVisibilityStatusStore>((set) => ({
     answerIdList: [],
-    setInitialAnswerList: (answerId) =>
+    setInitialAnswerList: (answerId, visibility) =>
       set((state) => ({
-        answerIdList: [
-          ...state.answerIdList,
-          { answerId, visibility: 'PRIVATE' },
-        ],
+        answerIdList: [...state.answerIdList, { answerId, visibility }],
       })),
     setAnswerIdList: (answerId) =>
       set((state) => {

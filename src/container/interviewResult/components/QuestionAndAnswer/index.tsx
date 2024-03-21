@@ -7,7 +7,7 @@ import QuestionWidthModal from '../QuestionWidthModal';
 import { IProps } from './types';
 
 const QuestionAndAnswer = async ({ questionAndAnswerData }: IProps) => {
-  const { questionContent, questionId, answerId, answerContent } =
+  const { questionContent, questionId, answerId, answerContent, visibility } =
     questionAndAnswerData;
   const questionInitialData = await getQuestionById({
     questionId,
@@ -24,7 +24,10 @@ const QuestionAndAnswer = async ({ questionAndAnswerData }: IProps) => {
           questionId={questionId}
         />
         <div className="flex gap-4">
-          <CheckBoxWrapper answerId={answerId} />
+          <CheckBoxWrapper
+            answerId={answerId}
+            visibility={visibility}
+          />
         </div>
       </div>
       <div className="rounded-lg bg-slate-50 px-11 py-9">
