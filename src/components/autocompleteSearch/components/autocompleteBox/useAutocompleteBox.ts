@@ -35,6 +35,7 @@ const useAutocompleteBox = () => {
     autocompleteList,
     isListVisible,
     keyboardIndex,
+    inputValue,
     handleKeywordtHighlight,
     handleItemClick,
   };

@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import useAutocompleteBox from './useAutocompleteBox';
@@ -7,11 +8,22 @@ const AutocompleteBox = () => {
     autoBoxRef,
     autoItemRef,
     isListVisible,
+    inputValue,
     autocompleteList,
     keyboardIndex,
     handleKeywordtHighlight,
     handleItemClick,
   } = useAutocompleteBox();
+
+  const [autoItemWidth, setAutoItemWidth] = useState<number | undefined>(0);
+
+  useEffect(() => {
+    setAutoItemWidth(0);
+  }, [inputValue]);
+
+  useEffect(() => {
+    setAutoItemWidth(autoBoxRef?.current?.scrollWidth);
+  }, [setAutoItemWidth, autoBoxRef, isListVisible, autoItemWidth]);
 
   if (!isListVisible) {
     return;
@@ -32,8 +44,8 @@ const AutocompleteBox = () => {
             <button
               ref={index === keyboardIndex ? autoItemRef : null}
               type="button"
-              className={`flex h-[3rem] items-center pl-[0.5rem] hover:bg-slate-100 focus:outline-none ${keyboardIndex === index && 'bg-slate-100'}`}
-              style={{ width: autoBoxRef?.current?.scrollWidth }}
+              className={`flex h-[3rem] min-w-full items-center pl-[0.5rem] hover:bg-slate-100 focus:outline-none ${keyboardIndex === index && 'bg-slate-100'}`}
+              style={{ width: autoItemWidth }}
               key={uuid()}
               onClick={() => handleItemClick(value)}
             >
