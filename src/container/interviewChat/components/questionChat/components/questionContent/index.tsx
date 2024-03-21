@@ -20,8 +20,6 @@ const QuestionContent = ({
   const lastQuestion = questionsAndAnswers[questionsAndAnswers.length - 1];
 
   const handleTailContentChange = async () => {
-    setIsLoading(true);
-
     if (questionsAndAnswers.length === 1) {
       return notify('warning', '첫 질문은 변경이 불가능 합니다.');
     }
@@ -29,6 +27,8 @@ const QuestionContent = ({
     if (reQuestionCount >= 1) {
       return notify('warning', '질문 변경은 최대 1회 입니다.');
     }
+    setIsLoading(true);
+
     const { data } = await rePostTailQuestion(
       interviewId,
       lastQuestion.questionContent || '',
@@ -43,6 +43,8 @@ const QuestionContent = ({
     });
 
     setReQuestionCount((prevCount) => prevCount + 1);
+
+    setIsLoading(false);
   };
 
   return (
@@ -65,15 +67,17 @@ const QuestionContent = ({
           <Loading />
         </div>
       ) : (
-        ''
-      )}
-      {lastQuestion && lastQuestion.answerId === null && (
-        <Button
-          onClick={handleTailContentChange}
-          className="w-fit px-4 py-2"
-        >
-          현재 꼬리 질문 변경
-        </Button>
+        questionsAndAnswers.length > 1 &&
+        lastQuestion &&
+        lastQuestion.answerId === null &&
+        reQuestionCount === 0 && (
+          <Button
+            onClick={handleTailContentChange}
+            className="w-fit px-4 py-2"
+          >
+            현재 꼬리 질문 변경
+          </Button>
+        )
       )}
     </div>
   );

@@ -25,9 +25,10 @@ const QuestionChat = ({ interviewId, interviewData }: IProps) => {
       notify('info', '이미 종료된 면접입니다');
       return router.push(`/interview/result/${interviewId}`);
     }
-
+    setIsLoading(true);
     setQuestionsAndAnswers(interviewData.questionsAndAnswers);
     setQuestionCount(interviewData.questionCount);
+    setIsLoading(false);
   }, [interviewData, interviewId, router]);
 
   useEffect(() => {
