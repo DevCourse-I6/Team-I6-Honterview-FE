@@ -4,7 +4,10 @@ import useStepStore from '@/container/presetting/stores/useStepStore';
 
 import { InterviewTypeSectionProps } from './type';
 
-const InterviewTypeSection = ({ setNextItemOn }: InterviewTypeSectionProps) => {
+const InterviewTypeSection = ({
+  setNextItemOn,
+  isVisible,
+}: InterviewTypeSectionProps) => {
   const { setInterviewTypeCamera, setInterviewTypeChatting, interviewType } =
     usePresettingDataStore();
   const { setNextButtonOn } = useStepStore();
@@ -21,7 +24,7 @@ const InterviewTypeSection = ({ setNextItemOn }: InterviewTypeSectionProps) => {
   };
 
   return (
-    <div>
+    <div className={`${!isVisible && 'invisible'}`}>
       <h1 className="text-large font-semibold">면접 모드</h1>
       <p className="mb-[1rem] text-extraSmall text-text-60">
         연습 진행 방식을 선택해주세요

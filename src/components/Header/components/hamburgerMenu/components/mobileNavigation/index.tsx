@@ -17,7 +17,7 @@ const MobileNavigation = () => {
 
           return (
             <li
-              className={`${enabledStyle} cursor-pointer px-10 py-4 hover:bg-background-20`}
+              className={`${enabledStyle} w-full cursor-pointer px-10 py-4 text-center hover:bg-background-20`}
               key={v4uuid()}
             >
               <Link

@@ -24,15 +24,10 @@ const FirstQuestionScene = () => {
   ]);
 
   return (
-    <div className="flex h-full w-full flex-col items-center gap-[4.5rem]">
-      <p className="flex justify-center pt-[3rem] text-[1.4rem] text-text-80 underline decoration-primaries-primary underline-offset-[1rem] tablet:text-[1.6rem]">
-        <b className="text-black">선택한 질문</b>과 이에 대한
-        <b className="whitespace-pre text-black"> 꼬리 질문</b>들로 면접이
-        진행됩니다
-      </p>
-      <div className="flex w-full max-w-[35.9rem] flex-col justify-center gap-[3rem] tablet:gap-[5rem]">
+    <div className="flex h-full w-[40rem] flex-col items-center justify-center gap-[4.5rem]">
+      <div className="flex w-full flex-col items-center justify-center gap-[5rem] tablet:gap-[5rem]">
         <TagSection />
-        <div className="h-[14rem]">
+        <div className="h-[14rem] w-full">
           {firstQuestionTags.length > 0 && <QuestionSection />}
         </div>
       </div>

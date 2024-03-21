@@ -33,7 +33,7 @@ const TagSection = () => {
   }, []);
 
   return (
-    <div className="flex max-w-[40rem] flex-col gap-[1rem]">
+    <div className="flex w-full flex-col gap-[1rem]">
       <div className="flex gap-[0.5rem]">
         <h2 className="text-large font-semibold">카테고리 선택</h2>
         <p className="flex items-end text-extraSmall text-text-60">최대 3개</p>

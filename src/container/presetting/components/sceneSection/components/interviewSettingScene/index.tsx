@@ -32,16 +32,13 @@ const InterviewSettingScene = () => {
   ]);
 
   return (
-    <div className="relative flex h-full w-[19rem] flex-col justify-center gap-[4rem]">
+    <div className="flex h-full w-[19rem] flex-col justify-center gap-[4rem]">
       <CountSection setNextItemOn={() => setIsTypeVisible(true)} />
-      {isTypeVisible ? (
-        <InterviewTypeSection
-          setNextItemOn={(value) => setIsTimeVisible(value)}
-        />
-      ) : (
-        <div className="h-[9.5rem]" />
-      )}
-      {isTimeVisible ? <TimerSection /> : <div className="h-[14.7rem]" />}
+      <InterviewTypeSection
+        isVisible={isTypeVisible}
+        setNextItemOn={(value) => setIsTimeVisible(value)}
+      />
+      <TimerSection isVisible={isTimeVisible} />
     </div>
   );
 };
