@@ -16,6 +16,7 @@ export interface IQuestionAndAnswer {
   answerId: number;
   answerContent: string;
   processingTime: number;
+  visibility: 'PRIVATE' | 'PUBLIC';
 }
 
 // patchInterviewVisibility
