@@ -82,23 +82,3 @@ export const logInAdmin = async (_: IAdminAuthState, formData: FormData) => {
     message: '로그인 성공',
   };
 };
-
-export const logOut = async () => {
-  const { status, ok } = await apiServer.post('api/v1/auth/logout');
-
-  if (status === 400) {
-    return revalidateTag('userAuth');
-  }
-
-  if (status === 401) {
-    return reissueAccessToken<Promise<void>, void>(logOut, () =>
-      revalidateTag('userAuth'),
-    );
-  }
-
-  if (!ok) {
-    throw new Error(`HTTP error! status: ${status}`);
-  }
-
-  return revalidateTag('userAuth');
-};
