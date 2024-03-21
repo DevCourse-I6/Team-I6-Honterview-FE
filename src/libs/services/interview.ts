@@ -36,14 +36,14 @@ export const putUploadMediaBlob = async (
     type: 'video/webm',
     lastModified: new Date().getTime(),
   });
-  const formData = new FormData();
 
-  formData.append('videoFile', videoFile);
-  formData.append('uploadUrl', uploadUrl);
-
-  const response = await fetch('http://localhost:80/api/v1/upload/video', {
-    body: formData,
+  const response = await fetch(uploadUrl, {
+    body: videoFile,
     method: 'PUT',
+    headers: {
+      'Content-Type': 'video/webm',
+      'Cache-Control': 'no-cache',
+    },
     cache: 'no-store',
   });
 
