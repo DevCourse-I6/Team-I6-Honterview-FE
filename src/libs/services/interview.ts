@@ -41,7 +41,7 @@ export const putUploadMediaBlob = async (
   formData.append('videoFile', videoFile);
   formData.append('uploadUrl', uploadUrl);
 
-  const response = await fetch('http://localhost:3000/api/v1/upload/video', {
+  const response = await fetch('http://localhost:80/api/v1/upload/video', {
     body: formData,
     method: 'PUT',
     cache: 'no-store',
