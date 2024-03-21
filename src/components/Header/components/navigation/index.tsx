@@ -5,8 +5,9 @@ import { usePathname } from 'next/navigation';
 import { v4 as v4uuid } from 'uuid';
 
 import { navigationItems } from './constants/navigationItems';
+import { IProps } from './types';
 
-const Navigation = () => {
+const Navigation = ({ isAdmin }: IProps) => {
   const pathname = usePathname();
 
   return (
@@ -27,6 +28,16 @@ const Navigation = () => {
             </Link>
           );
         })}
+        {isAdmin && (
+          <Link
+            href="/admin"
+            replace={false}
+            scroll={false}
+            className={`${pathname === '/admin' ? 'text-primaries-primary' : ''}`}
+          >
+            관리자
+          </Link>
+        )}
       </ul>
     </nav>
   );
