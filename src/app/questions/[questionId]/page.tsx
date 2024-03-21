@@ -45,7 +45,7 @@ const Page = async ({ params }: IProps) => {
           {questionTitle}
         </TitleWithInterviewStart>
       </div>
-      {AnswerList.length === 0 ? (
+      {questionInitialData.data.answers.data.length === 0 ? (
         <div className="flex flex-col items-center gap-5 opacity-10">
           <Image
             quality={100}
