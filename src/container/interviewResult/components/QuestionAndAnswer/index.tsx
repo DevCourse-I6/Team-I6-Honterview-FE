@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { getQuestionById } from '@/libs/services/questions';
 
 import CheckBoxWrapper from '../CheckBoxWrapper';
@@ -26,7 +28,17 @@ const QuestionAndAnswer = async ({ questionAndAnswerData }: IProps) => {
         </div>
       </div>
       <div className="rounded-lg bg-slate-50 px-11 py-9">
-        <p className="text-large ">{answerContent}</p>
+        <p className="text-large ">
+          {answerContent || (
+            <Image
+              src="/images/logo-removebg.png"
+              width={80}
+              height={80}
+              alt="혼터뷰 로고"
+              className="m-auto opacity-10"
+            />
+          )}
+        </p>
       </div>
     </div>
   );

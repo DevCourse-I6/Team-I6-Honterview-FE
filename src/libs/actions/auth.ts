@@ -1,6 +1,7 @@
 'use server';
 
 import { revalidateTag } from 'next/cache';
+import { cookies } from 'next/headers';
 import { redirect } from 'next/navigation';
 
 import { IAdminAuthState } from '@/app/admin/(auth)/types';
@@ -73,9 +74,12 @@ export const logInAdmin = async (_: IAdminAuthState, formData: FormData) => {
     };
   }
 
+  cookies().set('accessToken', data.data.accessToken);
+  cookies().set('refreshToken', data.data.refreshToken);
+
   return {
     status: 'ok',
-    message: data.data,
+    message: '로그인 성공',
   };
 };
 

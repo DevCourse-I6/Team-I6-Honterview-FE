@@ -1,6 +1,6 @@
 'use client';
 
-import { useRouter } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { useEffect } from 'react';
 import { useFormState, useFormStatus } from 'react-dom';
 
@@ -11,6 +11,8 @@ import { logInAdmin, signUpAdmin } from '@/libs/actions/auth';
 import { IProps } from './types';
 
 const SubmitButton = ({ authType }: IProps) => {
+  const currentPath = usePathname().split('/')[2];
+
   const authAction = {
     login: logInAdmin,
     signup: signUpAdmin,
@@ -30,11 +32,12 @@ const SubmitButton = ({ authType }: IProps) => {
 
   useEffect(() => {
     if (state.status === 0) return;
-    if (state.status === 'ok') router.push('/');
+    if (state.status === 'ok')
+      router.push(`${currentPath === 'signup' ? '/admin/login' : '/admin'}`);
     else {
       notify('info', state.message);
     }
-  }, [state, router]);
+  }, [state, router, currentPath]);
 
   return (
     <Button
