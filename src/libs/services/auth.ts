@@ -1,4 +1,5 @@
 import { IResponseGetUserAuth } from '@/types/Response/auth';
+import { apiClient } from '@/utils/apiClient';
 import { apiServer } from '@/utils/apiServer';
 
 import { reissueAccessToken } from '../actions/auth';
@@ -21,4 +22,22 @@ export const getUserAuth = async (): Promise<IResponseGetUserAuth | null> => {
   }
 
   return response.json();
+};
+
+export const logOut = async () => {
+  const { status, ok } = await apiClient.post('api/v1/auth/logout');
+
+  if (status === 400) {
+    return;
+  }
+
+  // if (status === 401) {
+  //   return reissueAccessToken<Promise<void>, void>(logOut, () =>
+  //     revalidateTag('userAuth'),
+  //   );
+  // }
+
+  if (!ok) {
+    throw new Error(`HTTP error! status: ${status}`);
+  }
 };
