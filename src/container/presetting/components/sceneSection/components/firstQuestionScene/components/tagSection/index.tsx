@@ -9,6 +9,7 @@ import { notify } from '@/components/toast';
 import usePresettingDataStore from '@/container/presetting/stores/usePresettingDataStore';
 import { getCategoryList } from '@/services/presetting';
 
+import SectionAnimationWrapper from '../../../AnimationWrapper/SectionAnimationWrapper';
 import { MAX_TAG_COUNT } from '../../constants';
 
 const TagSection = () => {
@@ -33,7 +34,7 @@ const TagSection = () => {
   }, []);
 
   return (
-    <div className="flex w-full flex-col gap-[1rem]">
+    <SectionAnimationWrapper className="flex w-full flex-col gap-[1rem]">
       <div className="flex gap-[0.5rem]">
         <h2 className="text-large font-semibold">카테고리 선택</h2>
         <p className="flex items-end text-extraSmall text-text-60">최대 3개</p>
@@ -73,7 +74,7 @@ const TagSection = () => {
           </Tag>
         ))}
       </div>
-    </div>
+    </SectionAnimationWrapper>
   );
 };
 

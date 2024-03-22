@@ -4,7 +4,7 @@ import MainResultScreenSection from './components/ScreenShotsScreens/resultScree
 
 const MainScreenShotsSection = () => {
   return (
-    <div className="flex w-full flex-col bg-gradient-to-b from-blue-100 via-blue-50 to-white to-95% p-[2rem] xl:p-0">
+    <div className="w-full bg-blue-50 p-[2rem] xl:p-0">
       <MainCamerScreenSection />
       <MainChattingScreenSection />
       <MainResultScreenSection />

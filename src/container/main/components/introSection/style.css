@@ -1,5 +1,6 @@
 .arrow_down {
   animation: arrowdown 2s infinite linear;
+  animation-delay: 3s;
 }
 
 @keyframes arrowdown {

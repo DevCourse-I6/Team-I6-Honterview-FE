@@ -2,6 +2,7 @@ import Button, { ButtonType } from '@/components/button';
 import usePresettingDataStore from '@/container/presetting/stores/usePresettingDataStore';
 import useStepStore from '@/container/presetting/stores/useStepStore';
 
+import SectionAnimationWrapper from '../../../AnimationWrapper/SectionAnimationWrapper';
 import { InterviewTypeSectionProps } from './type';
 
 const InterviewTypeSection = ({
@@ -23,8 +24,12 @@ const InterviewTypeSection = ({
     setNextButtonOn();
   };
 
+  if (!isVisible) {
+    return;
+  }
+
   return (
-    <div className={`${!isVisible && 'invisible'}`}>
+    <SectionAnimationWrapper>
       <h1 className="text-large font-semibold">면접 모드</h1>
       <p className="mb-[1rem] text-extraSmall text-text-60">
         연습 진행 방식을 선택해주세요
@@ -49,7 +54,7 @@ const InterviewTypeSection = ({
           채팅
         </Button>
       </div>
-    </div>
+    </SectionAnimationWrapper>
   );
 };
 

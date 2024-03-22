@@ -1,3 +1,5 @@
+import './style.css';
+
 import { useRouter } from 'next/navigation';
 
 import Button from '@/components/button';
@@ -58,7 +60,7 @@ const PreSettingButtonSection = ({
         이전
       </Button>
       <Button
-        className="h-[4rem] w-[9rem] px-[0rem]"
+        className={`h-[4rem] w-[9rem] px-[0rem] ${currentStep === totalStep && isNextButtonOn && 'start-button'}`}
         onClick={handleNextButton}
         disabled={!isNextButtonOn}
       >

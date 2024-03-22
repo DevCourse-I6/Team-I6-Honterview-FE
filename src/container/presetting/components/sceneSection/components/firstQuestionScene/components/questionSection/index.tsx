@@ -9,6 +9,7 @@ import { notify } from '@/components/toast';
 import usePresettingDataStore from '@/container/presetting/stores/usePresettingDataStore';
 import { getQuestionListByCategories } from '@/services/presetting';
 
+import SectionAnimationWrapper from '../../../AnimationWrapper/SectionAnimationWrapper';
 import { QuestionAPIType } from './type';
 
 const QuestionSection = () => {
@@ -34,7 +35,7 @@ const QuestionSection = () => {
   }, [firstQuestionTags, firstQuestionTags.length]);
 
   return (
-    <div className="flex w-full flex-col gap-[1rem]">
+    <SectionAnimationWrapper className="flex w-full flex-col gap-[1rem]">
       <h2 className="text-large font-semibold">질문 선택</h2>
       <div className="h-[4rem] w-full">
         {isLoading ? (
@@ -66,7 +67,7 @@ const QuestionSection = () => {
           </button>
         </Tag>
       )}
-    </div>
+    </SectionAnimationWrapper>
   );
 };
 

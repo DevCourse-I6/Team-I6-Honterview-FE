@@ -10,7 +10,7 @@ import MainScreenShotsSection from './components/screenShotsSection';
 
 const Main = () => {
   return (
-    <div className="text-gray-800">
+    <div className="h-full text-gray-800">
       <MainIntroSection />
       <MainQuestionListSection />
       <MainQuestionDetailSection />

@@ -11,7 +11,9 @@ const InterviewSettingScene = () => {
   const { setNextButtonOn, setNextButtonOff } = useStepStore();
   const { questionCount, answerTime, interviewType } = usePresettingDataStore();
   const [isTypeVisible, setIsTypeVisible] = useState(!!questionCount);
-  const [isTimeVisible, setIsTimeVisible] = useState(!!interviewType);
+  const [isTimeVisible, setIsTimeVisible] = useState(
+    interviewType === 'RECORD',
+  );
 
   useEffect(() => {
     const { minute, second } = answerTime;
@@ -33,12 +35,18 @@ const InterviewSettingScene = () => {
 
   return (
     <div className="flex h-full w-[19rem] flex-col justify-center gap-[4rem]">
-      <CountSection setNextItemOn={() => setIsTypeVisible(true)} />
-      <InterviewTypeSection
-        isVisible={isTypeVisible}
-        setNextItemOn={(value) => setIsTimeVisible(value)}
-      />
-      <TimerSection isVisible={isTimeVisible} />
+      <div className="h-[8.8]">
+        <CountSection setNextItemOn={() => setIsTypeVisible(true)} />
+      </div>
+      <div className="h-[9.5rem]">
+        <InterviewTypeSection
+          isVisible={isTypeVisible}
+          setNextItemOn={(value) => setIsTimeVisible(value)}
+        />
+      </div>
+      <div className="h-[14.7rem]">
+        <TimerSection isVisible={isTimeVisible} />
+      </div>
     </div>
   );
 };
