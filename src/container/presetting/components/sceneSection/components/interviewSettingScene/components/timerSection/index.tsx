@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import usePresettingDataStore from '@/container/presetting/stores/usePresettingDataStore';
 
+import SectionAnimationWrapper from '../../../AnimationWrapper/SectionAnimationWrapper';
 import TimePicker from './components/timePicker';
 import { minuteData, secondData } from './constants';
 import { TimerSectionProps } from './type';
@@ -22,8 +23,12 @@ const TimerSection = ({ isVisible }: TimerSectionProps) => {
     setIsSecondDisabled(false);
   };
 
+  if (!isVisible) {
+    return;
+  }
+
   return (
-    <div className={`${!isVisible && 'invisible'}`}>
+    <SectionAnimationWrapper>
       <h1 className="text-large font-semibold">질문당 답변 시간</h1>
       <p className="mb-[1rem] w-[30rem] text-extraSmall text-text-60">
         한 질문당 답변 제한 시간을 선택해주세요 (최대 10분)
@@ -44,7 +49,7 @@ const TimerSection = ({ isVisible }: TimerSectionProps) => {
           isArrowDisabled={isSecondDisabled}
         />
       </div>
-    </div>
+    </SectionAnimationWrapper>
   );
 };
 
