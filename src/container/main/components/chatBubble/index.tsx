@@ -8,10 +8,12 @@ const ChatBubble = ({ children, className, isAnswer }: ChatBubbleProps) => {
   return (
     <li
       className={twMerge(
-        `leading-1.5 static z-10 h-[13rem] w-[20rem] rounded-[3rem] tablet:h-[14rem] tablet:w-[25rem] xl:absolute xl:block xl:h-[15rem] xl:w-[30rem] xl:rounded-ss-[0rem] ${isAnswer ? 'bg-pink-600' : 'bg-primaries-primary'}  ${className}`,
+        `leading-1.5 absolute z-10 h-[10rem] w-[15rem] list-none rounded-[3rem] text-[1rem] md:h-[14rem] md:w-[25rem] md:rounded-ss-[0rem] xl:block xl:h-[15rem] xl:w-[30rem] ${isAnswer ? 'bg-pink-600' : 'bg-primaries-primary'}  ${className}`,
       )}
     >
-      <div className="flex flex-col gap-[1rem] p-[2rem] text-[1.2rem] text-white tablet:text-[1.5rem] xl:text-[1.8rem]">
+      <div
+        className={`flex flex-col ${isAnswer ? 'gap-[0.5rem] p-[1.5rem]' : 'gap-[1rem] p-[2rem]'} text-[1rem] text-white tablet:text-[1.5rem] xl:text-[1.8rem]`}
+      >
         <p>{isAnswer ? 'A' : 'Q'}.</p>
         <p>{children}</p>
       </div>

@@ -8,7 +8,7 @@ const ScreenShotsScreens = ({
   children: titleChildren,
 }: ScreenShotsScreensProps) => {
   return (
-    <div className="tems-center flex h-screen w-full flex-col items-center justify-center gap-[5rem] xl:flex-row xl:gap-[3rem]">
+    <div className="main-section flex h-screen w-screen flex-col items-center justify-center gap-[5rem] xl:flex-row xl:gap-[3rem]">
       <div className="flex flex-col gap-[0.5rem]">
         <p className="text-[1rem] text-text-60 tablet:text-[1.4rem]">
           {imageTitle}
