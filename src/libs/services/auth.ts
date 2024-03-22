@@ -1,27 +1,23 @@
-import { IResponseGetUserAuth } from '@/types/Response/auth';
 import { apiClient } from '@/utils/apiClient';
 import { apiServer } from '@/utils/apiServer';
 
-import { reissueAccessToken } from '../actions/auth';
-
-export const getUserAuth = async (): Promise<IResponseGetUserAuth | null> => {
+export const getUserAuth = async () => {
   const response = await apiServer.get('api/v1/auth/me', {
     cache: 'no-store',
     next: { tags: ['userAuth'] },
   });
 
   if (response.status === 401) {
-    return reissueAccessToken<Promise<IResponseGetUserAuth | null>, null>(
-      getUserAuth,
-      () => null,
-    );
+    return { status: 401, data: null };
   }
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  return response.json();
+  const data = await response.json();
+
+  return { status: 200, data };
 };
 
 export const logOut = async () => {

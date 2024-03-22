@@ -1,16 +1,31 @@
+import { revalidateTag } from 'next/cache';
 import Link from 'next/link';
 
 import DividerVertical from '@/components/dividerVertical';
+import ReissueAccessTokenComponent from '@/components/reissueAccessTokenComponent';
 import { getUserAuth } from '@/libs/services/auth';
 
 import LogoutButton from './components/logoutButton';
 
 const LinkButtons = async () => {
-  const loginData = await getUserAuth();
+  const { status, data: auth } = await getUserAuth();
 
   return (
     <div className="hidden min-w-[10%] items-center justify-end gap-6 md:flex">
-      {loginData ? (
+      <ReissueAccessTokenComponent<Promise<void>, Promise<void>>
+        status={status}
+        callback={async () => {
+          'use server';
+
+          revalidateTag('userAuth');
+        }}
+        onFail={async () => {
+          'use server';
+
+          null;
+        }}
+      />
+      {auth ? (
         <div className="flex items-center justify-end gap-6">
           <Link href="/mypage">마이페이지</Link>
           <DividerVertical />

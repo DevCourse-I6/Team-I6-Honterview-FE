@@ -1,3 +1,6 @@
+import { revalidateTag } from 'next/cache';
+
+import ReissueAccessTokenComponent from '@/components/reissueAccessTokenComponent';
 import AnswerContent from '@/container/interviewVideo/components/answerContent';
 import AnswerFinishButton from '@/container/interviewVideo/components/answerFinishButton';
 import AnswerTimeProgressGroup from '@/container/interviewVideo/components/answerTimeProgressGroup';
@@ -11,7 +14,23 @@ import { getInterviewInfo } from '@/libs/services/interview';
 
 const InterviewVideoPage = async ({ params }: IProps) => {
   const { interviewId } = params;
-  const { data } = await getInterviewInfo(interviewId);
+  const {
+    status,
+    data: { data },
+  } = await getInterviewInfo(interviewId);
+
+  if (status === 401) {
+    return (
+      <ReissueAccessTokenComponent<Promise<void>, Promise<void>>
+        status={status}
+        callback={async () => {
+          'use server';
+
+          revalidateTag('interviewInfo');
+        }}
+      />
+    );
+  }
 
   return (
     <section>

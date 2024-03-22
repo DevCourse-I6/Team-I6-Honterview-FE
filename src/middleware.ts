@@ -1,19 +1,20 @@
+import { cookies } from 'next/headers';
 import { type NextRequest, NextResponse } from 'next/server';
 
 import { getUserAuth } from './libs/services/auth';
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
-  const loginData = await getUserAuth();
+  const refreshToken = cookies().get('refreshToken');
 
   if (pathname.startsWith('/auth/login')) {
-    if (loginData) {
+    if (refreshToken) {
       return NextResponse.redirect(new URL('/', request.url));
     }
   }
 
   if (pathname.startsWith('/interview/video')) {
-    if (!loginData) {
+    if (!refreshToken) {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }
@@ -25,19 +26,19 @@ export const middleware = async (request: NextRequest) => {
   }
 
   if (pathname.startsWith('/interview/chat')) {
-    if (!loginData) {
+    if (!refreshToken) {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }
 
   if (pathname.startsWith('/interview/presetting')) {
-    if (!loginData) {
+    if (!refreshToken) {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }
 
   if (pathname.startsWith('/mypage')) {
-    if (!loginData) {
+    if (!refreshToken) {
       return NextResponse.redirect(new URL('/auth/login', request.url));
     }
   }
@@ -46,14 +47,18 @@ export const middleware = async (request: NextRequest) => {
     pathname.startsWith('/admin/login') ||
     pathname.startsWith('/admin/signup')
   ) {
-    if (loginData && loginData.data?.role[0].authority === 'ROLE_ADMIN') {
+    const { data: auth } = await getUserAuth();
+
+    if (refreshToken && auth?.data?.role[0].authority === 'ROLE_ADMIN') {
       return NextResponse.redirect(new URL('/admin', request.url));
     }
   }
 
   if (pathname === '/admin') {
-    if (!loginData || loginData.data?.role[0].authority !== 'ROLE_ADMIN') {
-      const targetURL = !loginData ? '/admin/login' : '/';
+    const { data: auth } = await getUserAuth();
+
+    if (!refreshToken || auth?.data?.role[0].authority !== 'ROLE_ADMIN') {
+      const targetURL = !auth ? '/admin/login' : '/';
       return NextResponse.redirect(new URL(targetURL, request.url));
     }
   }

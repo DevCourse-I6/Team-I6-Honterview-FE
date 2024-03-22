@@ -1,16 +1,13 @@
 import { notFound } from 'next/navigation';
 
-import { IResponseGetInterview } from '@/types/Response/interview';
 import { apiServer } from '@/utils/apiServer';
 
-import { reissueAccessToken } from '../actions/auth';
 import { IGetInterviewInformation } from '../types/response';
 
-export const getInterviewInfo = async (
-  interviewId: string,
-): Promise<IResponseGetInterview> => {
+export const getInterviewInfo = async (interviewId: string) => {
   const response = await apiServer.get(`api/v1/interviews/${interviewId}`, {
     cache: 'no-store',
+    next: { tags: ['interviewInfo'] },
   });
 
   if (response.status === 404) {
@@ -18,14 +15,16 @@ export const getInterviewInfo = async (
   }
 
   if (response.status === 401) {
-    return reissueAccessToken(() => getInterviewInfo(interviewId));
+    return { status: 401, data: null };
   }
 
   if (!response.ok) {
     throw new Error(`HTTP error! status: ${response.status}`);
   }
 
-  return response.json();
+  const data = await response.json();
+
+  return { status: 200, data };
 };
 
 export const putUploadMediaBlob = async (
