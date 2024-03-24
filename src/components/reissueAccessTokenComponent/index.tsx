@@ -15,11 +15,21 @@ const ReissueAccessTokenComponent = <T, F>({
   const onFailRef = useRef(onFail);
 
   useEffect(() => {
+    const issueToken = async () => {
+      if (onFailRef.current) {
+        await reissueAccessTokenServer<T, F>(
+          callbackRef.current,
+          onFailRef.current,
+        );
+      } else {
+        await reissueAccessTokenServer<T, F>(callbackRef.current);
+      }
+    };
+
     if (status === 401) {
-      reissueAccessTokenServer<T, F>(callbackRef.current, onFailRef.current);
+      issueToken();
     }
   }, [status]);
-
   return null;
 };
 

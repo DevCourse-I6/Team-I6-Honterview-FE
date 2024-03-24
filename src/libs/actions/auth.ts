@@ -16,7 +16,9 @@ export const reissueAccessTokenServer = async <T, F>(
 
   if (status === 400 || status === 401) {
     if (onFail) {
-      return onFail();
+      const result = await onFail();
+
+      return result;
     }
 
     revalidateTag('userAuth');
@@ -48,7 +50,9 @@ export const reissueAccessTokenServer = async <T, F>(
     });
   }
 
-  return callback();
+  const result = await callback();
+
+  return result;
 };
 
 export const reissueAccessToken = async <T, F>(
