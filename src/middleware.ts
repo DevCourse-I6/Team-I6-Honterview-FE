@@ -70,7 +70,7 @@ export const config = {
     '/interview/video/:interviewId*',
     '/dev/:path*',
     '/interview/chat/:interviewId*',
-    '/interview/presetting/:firstQuestionId',
+    '/interview/presetting/:firstQuestionId*',
     '/mypage',
     '/admin/:path*',
   ],
