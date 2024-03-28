@@ -5,11 +5,11 @@ import { getUserAuth } from '@/libs/services/auth';
 import MobileLogoutButton from '../mobileLogOutButton';
 
 const MobileLinkButtons = async () => {
-  const loginData = await getUserAuth();
+  const { data: auth } = await getUserAuth();
 
   return (
-    <ul className="flex flex-col items-center">
-      {loginData ? (
+    <div className="flex flex-col items-center">
+      {auth ? (
         <>
           <Link
             href="/mypage"
@@ -27,7 +27,7 @@ const MobileLinkButtons = async () => {
           로그인
         </Link>
       )}
-    </ul>
+    </div>
   );
 };
 

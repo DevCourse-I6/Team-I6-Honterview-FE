@@ -5,7 +5,7 @@ import { getUserAuth } from './libs/services/auth';
 
 export const middleware = async (request: NextRequest) => {
   const { pathname } = request.nextUrl;
-  const refreshToken = cookies().get('refreshToken');
+  const refreshToken = cookies().get('refreshToken')?.value || null;
 
   if (pathname.startsWith('/auth/login')) {
     if (refreshToken) {

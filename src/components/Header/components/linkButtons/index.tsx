@@ -21,8 +21,6 @@ const LinkButtons = async () => {
         }}
         onFail={async () => {
           'use server';
-
-          null;
         }}
       />
       {auth ? (
