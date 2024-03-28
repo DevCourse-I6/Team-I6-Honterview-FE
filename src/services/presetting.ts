@@ -1,4 +1,5 @@
-/* eslint-disable no-console */
+import { notify } from '@/components/toast';
+import { reissueAccessToken } from '@/libs/actions/auth';
 import { apiClient } from '@/utils/apiClient';
 
 type MethodType = 'GET' | 'POST' | 'PATCH' | 'DELETE';
@@ -40,6 +41,10 @@ export const presettingAPI = async (
         break;
     }
 
+    if (response.status === 401) {
+      reissueAccessToken(() => presettingAPI(method, url, options));
+    }
+
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
@@ -47,9 +52,9 @@ export const presettingAPI = async (
     return await response.json();
   } catch (error) {
     if (error instanceof Error) {
-      console.error(error.message);
+      notify('error', error.message);
     } else {
-      console.error(String(error));
+      notify('error', String(error));
     }
   }
 };

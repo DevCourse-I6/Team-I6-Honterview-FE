@@ -1,4 +1,5 @@
 import { notify } from '@/components/toast';
+import { reissueAccessToken } from '@/libs/actions/auth';
 import { apiClient } from '@/utils/apiClient';
 
 type MethodType = 'GET' | 'POST' | 'PATCH' | 'DELETE';
@@ -27,6 +28,10 @@ export const mypageAPI = async (
       default:
         response = await apiClient.get(url, options);
         break;
+    }
+
+    if (response.status === 401) {
+      reissueAccessToken(() => mypageAPI(method, url, options));
     }
 
     if (!response.ok) {
